@@ -50,6 +50,45 @@ providers: [provideStreamlineIcons({ 'home-duotone': MI_SVG })];
 <sirem-streamline-icon name="home-duotone" [size]="24" />
 ```
 
+## Notificaciones Dynamic Toast
+
+Las notificaciones usan [`ngx-dynamic-toast`](https://github.com/ederjavs/ngx-dynamic-toast),
+una librería Angular MIT con animaciones spring, Dynamic Island y soporte de
+`promise`. El paquete requiere `motion` como peer dependency.
+
+```ts
+import { DynamicToastService } from 'ngx-dynamic-toast';
+
+private readonly toast = inject(DynamicToastService);
+
+save() {
+  this.toast.success('Cambios guardados', {
+    description: 'La historia clínica se actualizó.',
+  });
+}
+```
+
+```ts
+// app.config.ts
+import { provideDynamicToast } from 'ngx-dynamic-toast';
+
+providers: [
+  provideDynamicToast({
+    theme: 'dark',
+    position: 'top-right',
+    offset: { top: 16, right: 16 },
+  }),
+];
+```
+
+```html
+<!-- Una vez en el layout raíz -->
+<dt-viewport theme="dark" position="top-right" />
+```
+
+La librería está inspirada en [Sileo](https://sileo.aaryan.design), proyecto MIT
+de Aryan Hia.
+
 Guía de desarrollo: ver `AGENTS.md` en la raíz del repo.
 Flujo Streamline Pro: ver `docs/STREAMLINE.md`.
 

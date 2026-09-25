@@ -19,8 +19,10 @@ describe('SiremMultiSelect', () => {
   });
 
   it('should toggle values on option change', () => {
-    const first = (fixture.nativeElement as HTMLElement).querySelector('.sirem-multi__check');
-    first?.dispatchEvent(new Event('click'));
+    const first = (fixture.nativeElement as HTMLElement).querySelector<HTMLInputElement>(
+      '.sirem-multi__check',
+    );
+    first?.click();
     expect(fixture.componentInstance.value()).toEqual(['crear']);
   });
 });

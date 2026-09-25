@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   OnChanges,
+  OnDestroy,
   SimpleChanges,
   ViewEncapsulation,
   effect,
@@ -32,10 +33,12 @@ import { themeMode } from '../theme/theme';
   standalone: true,
   encapsulation: ViewEncapsulation.None,
   template: `
-    <div class="cm-host">
+    <div class="cm-host" [class.cm-host--fill]="fill()">
       <div class="cm-bar">
         <span class="cm-lang">{{ language() }}</span>
-        <button type="button" class="cm-copy" (click)="copy()">{{ copied() ? 'Copiado ✓' : 'Copiar' }}</button>
+        <button type="button" class="cm-copy" (click)="copy()">
+          {{ copied() ? 'Copiado ✓' : 'Copiar' }}
+        </button>
       </div>
       <div #editor class="cm-editor"></div>
     </div>
@@ -47,6 +50,21 @@ import { themeMode } from '../theme/theme';
         border-radius: 0.6rem;
         overflow: hidden;
         background: #ffffff;
+      }
+      .cm-host--fill {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        border: 0;
+        border-radius: 0;
+      }
+      .cm-host--fill .cm-editor {
+        min-height: 0;
+        flex: 1;
+      }
+      .cm-host--fill .cm-editor .cm-scroller {
+        height: 100%;
+        max-height: none;
       }
       .cm-bar {
         display: flex;
@@ -105,9 +123,11 @@ import { themeMode } from '../theme/theme';
     `,
   ],
 })
-export class CodeViewer implements AfterViewInit, OnChanges {
+export class CodeViewer implements AfterViewInit, OnChanges, OnDestroy {
   readonly code = input<string>('');
   readonly language = input<'html' | 'typescript' | 'json'>('html');
+  /** Ocupa toda la altura del contenedor, útil dentro del modal IDE. */
+  readonly fill = input(false);
 
   private readonly editorRef = viewChild<ElementRef<HTMLDivElement>>('editor');
   private view: EditorView | null = null;
@@ -150,6 +170,11 @@ export class CodeViewer implements AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (!this.view) return;
     if (changes['code'] || changes['language']) this.build();
+  }
+
+  ngOnDestroy(): void {
+    this.view?.destroy();
+    this.view = null;
   }
 
   async copy() {

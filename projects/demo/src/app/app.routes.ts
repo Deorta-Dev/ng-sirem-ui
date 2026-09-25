@@ -51,8 +51,10 @@ import { PhoneDemoPage } from './pages/phone-demo/phone-demo-page';
 import { AgeDemoPage } from './pages/age-demo/age-demo-page';
 import { InterceptorsDemoPage } from './pages/interceptors-demo/interceptors-demo-page';
 import { PageLoginDemoPage } from './pages/page-login-demo/page-login-demo-page';
+import { PageAdminDemoPage } from './pages/page-admin-demo/page-admin-demo-page';
 import { PageListadoDemoPage } from './pages/page-listado-demo/page-listado-demo-page';
 import { PageDetalleDemoPage } from './pages/page-detalle-demo/page-detalle-demo-page';
+import { ToastDemoPage } from './pages/toast-demo/toast-demo-page';
 
 export const routes: Routes = [
   { path: '', component: HomePage },
@@ -106,7 +108,9 @@ export const routes: Routes = [
   { path: 'demo/age', component: AgeDemoPage },
   { path: 'demo/interceptors', component: InterceptorsDemoPage },
   { path: 'demo/page-login', component: PageLoginDemoPage },
+  { path: 'demo/page-admin', component: PageAdminDemoPage },
   { path: 'demo/page-listado', component: PageListadoDemoPage },
   { path: 'demo/page-detalle', component: PageDetalleDemoPage },
+  { path: 'demo/toast', component: ToastDemoPage },
   { path: '**', redirectTo: '' },
 ];

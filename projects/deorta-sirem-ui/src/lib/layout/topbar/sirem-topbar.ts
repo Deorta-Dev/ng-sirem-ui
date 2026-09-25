@@ -1,8 +1,8 @@
 import { Component, input, output } from '@angular/core';
 
 /**
- * Barra superior: hamburguesa (móvil), buscador global (Ctrl+K),
- * selector de sucursal/espacio y pantalla completa.
+ * Barra superior: hamburguesa (móvil), workspace a la izquierda,
+ * buscador global (Ctrl+K), acciones especiales y pantalla completa.
  * El menú de usuario se proyecta en `slot="user"`.
  *
  * Uso:
@@ -39,15 +39,25 @@ import { Component, input, output } from '@angular/core';
 
       <button
         type="button"
+        (click)="spacePressed.emit()"
+        class="sirem-topbar__space"
+        aria-label="Cambiar de workspace"
+        title="Cambiar de workspace"
+      >
+        <span aria-hidden="true" class="sirem-topbar__space-dot">◉</span>
+        <span class="sirem-topbar__space-label">{{ spaceLabel() }}</span>
+        <span aria-hidden="true" class="sirem-topbar__space-chev">▾</span>
+      </button>
+
+      <button
+        type="button"
         (click)="searchPressed.emit()"
         class="sirem-topbar__search"
         aria-label="Búsqueda global (Ctrl+K)"
       >
         <span aria-hidden="true">⌕</span>
         <span class="sirem-topbar__search-text">Buscar pacientes, facturas, placas…</span>
-        <kbd class="sirem-topbar__kbd">
-          Ctrl K
-        </kbd>
+        <kbd class="sirem-topbar__kbd"> Ctrl K </kbd>
       </button>
       <button
         type="button"
@@ -59,18 +69,6 @@ import { Component, input, output } from '@angular/core';
       </button>
 
       <div class="sirem-topbar__right">
-        <button
-          type="button"
-          (click)="spacePressed.emit()"
-          class="sirem-topbar__space"
-          aria-label="Cambiar de sucursal"
-          title="Cambiar de sucursal"
-        >
-          <span aria-hidden="true" class="sirem-topbar__space-dot">◉</span>
-          <span class="sirem-topbar__space-label">{{ spaceLabel() }}</span>
-          <span aria-hidden="true" class="sirem-topbar__space-chev">▾</span>
-        </button>
-
         <button
           type="button"
           (click)="fullscreenPressed.emit()"
@@ -88,7 +86,7 @@ import { Component, input, output } from '@angular/core';
   `,
 })
 export class SiremTopbar {
-  /** Sucursal / espacio actual. Dispara `spacePressed` (diálogo de sucursales). */
+  /** Workspace o sede actual. Dispara `spacePressed` para abrir su selector. */
   readonly spaceLabel = input('Mi espacio');
   /** Fija la barra al hacer scroll (`position: sticky`). */
   readonly fixed = input(false);

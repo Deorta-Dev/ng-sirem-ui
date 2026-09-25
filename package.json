@@ -34,6 +34,8 @@
     "@tailwindcss/postcss": "^4.3.3",
     "codemirror": "^6.0.2",
     "echarts": "^6.1.0",
+    "motion": "^12.43.0",
+    "ngx-dynamic-toast": "^0.0.16",
     "postcss": "^8.5.28",
     "rxjs": "~7.8.0",
     "tailwindcss": "^4.3.3",

@@ -24,7 +24,10 @@ import { Component, input } from '@angular/core';
       <div [class]="'sirem-card__body ' + bodyClass()">
         <ng-content />
       </div>
-      <ng-content select="[slot='footer']" />
+
+      <div [class]="'sirem-card__footer ' + bodyClass()">
+        <ng-content select="[slot='footer']" />
+      </div>
     </article>
   `,
 })
