@@ -1,0 +1,63 @@
+/**
+ * Tema SIREM: fuente única de verdad de los tokens.
+ *
+ * - Paleta de marca (`--color-sirem-*`, vía `@theme` de Tailwind).
+ * - Tokens semánticos de superficie/texto/borde (`--sirem-*`) con valores
+ *   light + override en `:root[data-theme='dark']`. TODOS los `.scss` de la
+ *   librería usan estos tokens (nunca literales) para soportar modo oscuro.
+ *   Cambia el tema con `document.documentElement.dataset.theme = 'dark'`.
+ * - La demo y las apps consumidoras lo importan una vez en su CSS global.
+ */
+@theme {
+  --color-sirem-50: #eef6ff;
+  --color-sirem-100: #d9eaff;
+  --color-sirem-200: #bcdcff;
+  --color-sirem-300: #8ec5ff;
+  --color-sirem-400: #59a5ff;
+  --color-sirem-500: #3384fc;
+  --color-sirem-600: #1d64f1;
+  --color-sirem-700: #174fe1;
+  --color-sirem-800: #1943b4;
+  --color-sirem-900: #1a3c8b;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --sirem-surface: #ffffff;
+  --sirem-surface-alt: #f8fafc;
+  --sirem-surface-hover: #f1f5f9;
+  --sirem-text: #0f172a;
+  --sirem-text-soft: #334155;
+  --sirem-text-muted: #64748b;
+  --sirem-text-faint: #94a3b8;
+  --sirem-border: #e2e8f0;
+  --sirem-border-soft: #f1f5f9;
+  --sirem-border-strong: #cbd5e1;
+  --sirem-input-disabled: #f1f5f9;
+  --sirem-tint-bg: #eef6ff;
+  --sirem-tint-text: #174fe1;
+  --sirem-tint-strong-bg: #d9eaff;
+  --sirem-tint-strong-text: #1a3c8b;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --sirem-surface: #0f172a;
+  --sirem-surface-alt: #1e293b;
+  --sirem-surface-hover: #243247;
+  --sirem-text: #f8fafc;
+  --sirem-text-soft: #cbd5e1;
+  --sirem-text-muted: #94a3b8;
+  --sirem-text-faint: #64748b;
+  --sirem-border: #334155;
+  --sirem-border-soft: #1e293b;
+  --sirem-border-strong: #475569;
+  --sirem-input-disabled: #1e293b;
+  --sirem-tint-bg: rgb(29 100 241 / 0.18);
+  --sirem-tint-text: #8ec5ff;
+  --sirem-tint-strong-bg: rgb(29 100 241 / 0.3);
+  --sirem-tint-strong-text: #bcdcff;
+}

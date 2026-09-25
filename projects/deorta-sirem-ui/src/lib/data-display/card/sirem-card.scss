@@ -1,0 +1,46 @@
+/* Estilos de sirem-card: contenedor genérico con encabezado opcional. */
+.sirem-card {
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  box-shadow:
+    0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.sirem-card__header {
+  border-bottom: 1px solid var(--sirem-border-soft);
+  padding: 0.75rem 1rem;
+}
+
+.sirem-card__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sirem-text);
+}
+
+.sirem-card__subtitle {
+  margin-top: 0.125rem;
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-card__body {
+  padding: 1rem;
+}
+
+.sirem-card__body--none {
+  padding: 0;
+}
+
+.sirem-card__body--sm {
+  padding: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .sirem-card__header,
+  .sirem-card__body {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}

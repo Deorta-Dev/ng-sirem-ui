@@ -1,0 +1,66 @@
+/* Estilos de sirem-code-editor: marco + barra de lenguaje. */
+.sirem-codeed {
+  width: 100%;
+}
+
+.sirem-codeed__label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sirem-text);
+}
+
+.sirem-codeed__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  border: 1px solid var(--sirem-border-strong);
+  border-bottom: 0;
+  border-radius: 0.625rem 0.625rem 0 0;
+  background: var(--sirem-surface-alt);
+  padding: 0.5rem 0.75rem;
+}
+
+.sirem-codeed__dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 9999px;
+  background: var(--sirem-border-strong);
+}
+
+.sirem-codeed__lang {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-codeed__editor {
+  overflow: hidden;
+  border: 1px solid var(--sirem-border-strong);
+  border-radius: 0 0 0.625rem 0.625rem;
+  background: #fff;
+}
+
+:root[data-theme='dark'] .sirem-codeed__editor {
+  background: #0f172a;
+}
+
+.sirem-codeed__editor .cm-editor {
+  height: 100%;
+  font-size: 0.8125rem;
+}
+
+.sirem-codeed__editor .cm-scroller {
+  overflow: auto;
+}
+
+.sirem-codeed__hint {
+  display: block;
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}

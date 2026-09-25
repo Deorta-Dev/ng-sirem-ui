@@ -1,0 +1,10 @@
+/* Estilos de sirem-fi-icon. Las clases fi-* las pone el icon font externo. */
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fi {
+  line-height: 1;
+}

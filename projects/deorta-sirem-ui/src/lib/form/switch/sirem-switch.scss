@@ -1,0 +1,62 @@
+/* Estilos de sirem-switch-field: interruptor booleano. */
+.sirem-switch {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.sirem-switch__track {
+  position: relative;
+  margin-top: 0.125rem;
+  height: 1.5rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--sirem-border-strong);
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+}
+
+.sirem-switch__track:focus-visible {
+  outline: 2px solid var(--color-sirem-600);
+  outline-offset: 2px;
+}
+
+.sirem-switch__track:disabled {
+  opacity: 0.5;
+}
+
+.sirem-switch__track--on {
+  background: var(--color-sirem-600);
+}
+
+.sirem-switch__thumb {
+  position: absolute;
+  top: 0.125rem;
+  left: 0.125rem;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 9999px;
+  background: var(--sirem-surface);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+  transition: left 0.15s ease;
+}
+
+.sirem-switch__track--on .sirem-switch__thumb {
+  left: 1.375rem;
+}
+
+.sirem-switch__label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sirem-text-soft);
+}
+
+.sirem-switch__description {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}

@@ -1,0 +1,39 @@
+/* Estilos de sirem-chart: contenedor + capa de carga. */
+:host {
+  display: block;
+  width: 100%;
+}
+
+.sirem-chart {
+  position: relative;
+  width: 100%;
+}
+
+.sirem-chart__box {
+  width: 100%;
+  height: 100%;
+}
+
+.sirem-chart__loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--sirem-surface, #fff) 70%, transparent);
+}
+
+.sirem-chart__spinner {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 3px solid var(--sirem-border-strong);
+  border-top-color: var(--color-sirem-600);
+  animation: sirem-chart-spin 0.9s linear infinite;
+}
+
+@keyframes sirem-chart-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

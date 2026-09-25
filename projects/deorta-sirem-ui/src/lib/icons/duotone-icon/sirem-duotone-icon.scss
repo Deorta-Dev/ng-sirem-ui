@@ -1,0 +1,16 @@
+/* Estilos de sirem-duotone-icon. */
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sirem-duotone {
+  display: inline-flex;
+}
+
+.sirem-duotone svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

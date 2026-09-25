@@ -1,0 +1,112 @@
+import { Routes } from '@angular/router';
+
+import { HomePage } from './pages/home-page/home-page';
+import { ButtonDemoPage } from './pages/button-demo/button-demo-page';
+import { FiIconDemoPage } from './pages/fi-icon-demo/fi-icon-demo-page';
+import { DuotoneIconDemoPage } from './pages/duotone-icon-demo/duotone-icon-demo-page';
+import { StreamlineIconDemoPage } from './pages/streamline-icon-demo/streamline-icon-demo-page';
+import { SidebarDemoPage } from './pages/sidebar-demo/sidebar-demo-page';
+import { TopbarDemoPage } from './pages/topbar-demo/topbar-demo-page';
+import { BreadcrumbsDemoPage } from './pages/breadcrumbs-demo/breadcrumbs-demo-page';
+import { UserMenuDemoPage } from './pages/user-menu-demo/user-menu-demo-page';
+import { SearchPaletteDemoPage } from './pages/search-palette-demo/search-palette-demo-page';
+import { NavbarDemoPage } from './pages/navbar-demo/navbar-demo-page';
+import { PageHeaderDemoPage } from './pages/page-header-demo/page-header-demo-page';
+import { ViewToggleDemoPage } from './pages/view-toggle-demo/view-toggle-demo-page';
+import { DataTableDemoPage } from './pages/data-table-demo/data-table-demo-page';
+import { CardDemoPage } from './pages/card-demo/card-demo-page';
+import { AvatarDemoPage } from './pages/avatar-demo/avatar-demo-page';
+import { BadgeDemoPage } from './pages/badge-demo/badge-demo-page';
+import { StatCardDemoPage } from './pages/stat-card-demo/stat-card-demo-page';
+import { TimelineDemoPage } from './pages/timeline-demo/timeline-demo-page';
+import { EmptyStateDemoPage } from './pages/empty-state-demo/empty-state-demo-page';
+import { ListDemoPage } from './pages/list-demo/list-demo-page';
+import { CardListDemoPage } from './pages/card-list-demo/card-list-demo-page';
+import { ChartDemoPage } from './pages/chart-demo/chart-demo-page';
+import { InputDemoPage } from './pages/input-demo/input-demo-page';
+import { TextareaDemoPage } from './pages/textarea-demo/textarea-demo-page';
+import { SelectDemoPage } from './pages/select-demo/select-demo-page';
+import { DatepickerDemoPage } from './pages/datepicker-demo/datepicker-demo-page';
+import { DateDemoPage } from './pages/date-demo/date-demo-page';
+import { SwitchDemoPage } from './pages/switch-demo/switch-demo-page';
+import { CheckboxDemoPage } from './pages/checkbox-demo/checkbox-demo-page';
+import { RadioGroupDemoPage } from './pages/radio-group-demo/radio-group-demo-page';
+import { SearchFieldDemoPage } from './pages/search-field-demo/search-field-demo-page';
+import { ImageUploadDemoPage } from './pages/image-upload-demo/image-upload-demo-page';
+import { FieldGroupDemoPage } from './pages/field-group-demo/field-group-demo-page';
+import { MultiSelectDemoPage } from './pages/multi-select-demo/multi-select-demo-page';
+import { CodeEditorDemoPage } from './pages/code-editor-demo/code-editor-demo-page';
+import { RichTextDemoPage } from './pages/rich-text-demo/rich-text-demo-page';
+import { DynamicFormDemoPage } from './pages/dynamic-form-demo/dynamic-form-demo-page';
+import { ModalDemoPage } from './pages/modal-demo/modal-demo-page';
+import { ConfirmDialogDemoPage } from './pages/confirm-dialog-demo/confirm-dialog-demo-page';
+import { DrawerDemoPage } from './pages/drawer-demo/drawer-demo-page';
+import { PopupCardDemoPage } from './pages/popup-card-demo/popup-card-demo-page';
+import { CalendarDemoPage } from './pages/calendar-demo/calendar-demo-page';
+import { AutofocusDemoPage } from './pages/autofocus-demo/autofocus-demo-page';
+import { ClickOutsideDemoPage } from './pages/click-outside-demo/click-outside-demo-page';
+import { NumbersOnlyDemoPage } from './pages/numbers-only-demo/numbers-only-demo-page';
+import { MoneyDemoPage } from './pages/money-demo/money-demo-page';
+import { PhoneDemoPage } from './pages/phone-demo/phone-demo-page';
+import { AgeDemoPage } from './pages/age-demo/age-demo-page';
+import { InterceptorsDemoPage } from './pages/interceptors-demo/interceptors-demo-page';
+import { PageLoginDemoPage } from './pages/page-login-demo/page-login-demo-page';
+import { PageListadoDemoPage } from './pages/page-listado-demo/page-listado-demo-page';
+import { PageDetalleDemoPage } from './pages/page-detalle-demo/page-detalle-demo-page';
+
+export const routes: Routes = [
+  { path: '', component: HomePage },
+  { path: 'demo/button', component: ButtonDemoPage },
+  { path: 'demo/fi-icon', component: FiIconDemoPage },
+  { path: 'demo/duotone-icon', component: DuotoneIconDemoPage },
+  { path: 'demo/streamline-icon', component: StreamlineIconDemoPage },
+  { path: 'demo/sidebar', component: SidebarDemoPage },
+  { path: 'demo/topbar', component: TopbarDemoPage },
+  { path: 'demo/breadcrumbs', component: BreadcrumbsDemoPage },
+  { path: 'demo/user-menu', component: UserMenuDemoPage },
+  { path: 'demo/search-palette', component: SearchPaletteDemoPage },
+  { path: 'demo/navbar', component: NavbarDemoPage },
+  { path: 'demo/page-header', component: PageHeaderDemoPage },
+  { path: 'demo/view-toggle', component: ViewToggleDemoPage },
+  { path: 'demo/data-table', component: DataTableDemoPage },
+  { path: 'demo/card', component: CardDemoPage },
+  { path: 'demo/avatar', component: AvatarDemoPage },
+  { path: 'demo/badge', component: BadgeDemoPage },
+  { path: 'demo/stat-card', component: StatCardDemoPage },
+  { path: 'demo/timeline', component: TimelineDemoPage },
+  { path: 'demo/empty-state', component: EmptyStateDemoPage },
+  { path: 'demo/list', component: ListDemoPage },
+  { path: 'demo/card-list', component: CardListDemoPage },
+  { path: 'demo/chart', component: ChartDemoPage },
+  { path: 'demo/input', component: InputDemoPage },
+  { path: 'demo/textarea', component: TextareaDemoPage },
+  { path: 'demo/select', component: SelectDemoPage },
+  { path: 'demo/datepicker', component: DatepickerDemoPage },
+  { path: 'demo/date', component: DateDemoPage },
+  { path: 'demo/switch', component: SwitchDemoPage },
+  { path: 'demo/checkbox', component: CheckboxDemoPage },
+  { path: 'demo/radio-group', component: RadioGroupDemoPage },
+  { path: 'demo/search-field', component: SearchFieldDemoPage },
+  { path: 'demo/image-upload', component: ImageUploadDemoPage },
+  { path: 'demo/field-group', component: FieldGroupDemoPage },
+  { path: 'demo/multi-select', component: MultiSelectDemoPage },
+  { path: 'demo/code-editor', component: CodeEditorDemoPage },
+  { path: 'demo/rich-text', component: RichTextDemoPage },
+  { path: 'demo/dynamic-form', component: DynamicFormDemoPage },
+  { path: 'demo/modal', component: ModalDemoPage },
+  { path: 'demo/confirm-dialog', component: ConfirmDialogDemoPage },
+  { path: 'demo/drawer', component: DrawerDemoPage },
+  { path: 'demo/popup-card', component: PopupCardDemoPage },
+  { path: 'demo/calendar', component: CalendarDemoPage },
+  { path: 'demo/autofocus', component: AutofocusDemoPage },
+  { path: 'demo/click-outside', component: ClickOutsideDemoPage },
+  { path: 'demo/numbers-only', component: NumbersOnlyDemoPage },
+  { path: 'demo/money', component: MoneyDemoPage },
+  { path: 'demo/phone', component: PhoneDemoPage },
+  { path: 'demo/age', component: AgeDemoPage },
+  { path: 'demo/interceptors', component: InterceptorsDemoPage },
+  { path: 'demo/page-login', component: PageLoginDemoPage },
+  { path: 'demo/page-listado', component: PageListadoDemoPage },
+  { path: 'demo/page-detalle', component: PageDetalleDemoPage },
+  { path: '**', redirectTo: '' },
+];

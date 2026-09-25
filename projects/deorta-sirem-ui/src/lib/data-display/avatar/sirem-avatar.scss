@@ -1,0 +1,83 @@
+/* Estilos de sirem-avatar: círculo con imagen o iniciales + punto de presencia. */
+:host {
+  display: inline-flex;
+}
+
+.sirem-avatar {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.sirem-avatar__box {
+  display: flex;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 9999px;
+}
+
+.sirem-avatar__box--xs {
+  height: 1.5rem;
+  width: 1.5rem;
+  font-size: 10px;
+}
+
+.sirem-avatar__box--sm {
+  height: 2rem;
+  width: 2rem;
+  font-size: 0.75rem;
+}
+
+.sirem-avatar__box--md {
+  height: 2.5rem;
+  width: 2.5rem;
+  font-size: 0.875rem;
+}
+
+.sirem-avatar__box--lg {
+  height: 3.5rem;
+  width: 3.5rem;
+  font-size: 1.125rem;
+}
+
+.sirem-avatar__initials {
+  align-items: center;
+  justify-content: center;
+  background: var(--sirem-tint-strong-bg);
+  color: var(--sirem-tint-text);
+  font-weight: 700;
+}
+
+.sirem-avatar__dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 9999px;
+  border: 2px solid var(--sirem-surface);
+}
+
+.sirem-avatar__dot--sm {
+  height: 0.625rem;
+  width: 0.625rem;
+}
+
+.sirem-avatar__dot--lg {
+  height: 1rem;
+  width: 1rem;
+}
+
+.sirem-avatar__dot--success {
+  background: var(--color-emerald-500, #10b981);
+}
+
+.sirem-avatar__dot--warning {
+  background: var(--color-amber-500, #f59e0b);
+}
+
+.sirem-avatar__dot--danger {
+  background: var(--color-red-500, #ef4444);
+}
+
+.sirem-avatar__dot--neutral {
+  background: var(--sirem-text-faint);
+}

@@ -1,0 +1,109 @@
+/* Estilos de sirem-card-list: grilla de tarjetas como alternativa a tablas. */
+:host {
+  display: block;
+  width: 100%;
+}
+
+.sirem-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--sirem-cards-min, 17rem), 1fr));
+  gap: 1rem;
+}
+
+.sirem-cards__card {
+  border-radius: 0.75rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  padding: 1rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.sirem-cards__card--clickable {
+  cursor: pointer;
+}
+
+.sirem-cards__card--clickable:hover {
+  border-color: var(--sirem-border-strong);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.sirem-cards__card--clickable:focus-visible {
+  outline: 2px solid var(--color-sirem-600);
+}
+
+.sirem-cards__card--selected {
+  border-color: var(--color-sirem-500);
+  box-shadow: 0 0 0 1px var(--color-sirem-500);
+}
+
+.sirem-cards__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sirem-cards__titles {
+  flex: 1;
+  min-width: 0;
+}
+
+.sirem-cards__title {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--sirem-text);
+}
+
+.sirem-cards__subtitle {
+  margin: 0.125rem 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-cards__fields {
+  margin: 0.75rem 0 0;
+  padding: 0.75rem 0 0;
+  border-top: 1px solid var(--sirem-border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.sirem-cards__field {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.sirem-cards__field-icon {
+  color: var(--sirem-text-faint);
+}
+
+.sirem-cards__field-label {
+  color: var(--sirem-text-muted);
+}
+
+.sirem-cards__field-value {
+  margin: 0 0 0 auto;
+  font-weight: 500;
+  color: var(--sirem-text-soft);
+  text-align: right;
+}
+
+.sirem-cards__empty {
+  grid-column: 1 / -1;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--sirem-text-muted);
+}

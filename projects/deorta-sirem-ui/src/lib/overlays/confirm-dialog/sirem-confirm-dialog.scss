@@ -1,0 +1,21 @@
+/* Estilos de sirem-confirm-dialog: mensaje + pie de acciones. */
+.sirem-confirm__message {
+  font-size: 0.875rem;
+  color: var(--sirem-text-soft);
+  margin: 0;
+}
+
+.sirem-confirm__detail {
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--sirem-surface-alt);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--sirem-text-soft);
+}
+
+.sirem-confirm__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

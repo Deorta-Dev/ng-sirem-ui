@@ -1,0 +1,74 @@
+/*
+ * Estilos de sirem-badge: pastilla de estado con 5 tonos + punto opcional.
+ * Paleta: slate (neutral), sirem (info), emerald, amber, red.
+ */
+:host {
+  display: inline-flex;
+}
+
+.sirem-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.sirem-badge--neutral {
+  background: var(--sirem-surface-hover);
+  color: var(--sirem-text-soft);
+  border-color: var(--sirem-border);
+}
+
+.sirem-badge--info {
+  background: var(--sirem-tint-bg);
+  color: var(--sirem-tint-text);
+  border-color: var(--color-sirem-200);
+}
+
+.sirem-badge--success {
+  background: light-dark(var(--color-emerald-50, #ecfdf5), rgb(16 185 129 / 0.16));
+  color: light-dark(var(--color-emerald-700, #047857), #6ee7b7);
+  border-color: light-dark(var(--color-emerald-200, #a7f3d0), rgb(110 231 183 / 0.3));
+}
+
+.sirem-badge--warning {
+  background: light-dark(var(--color-amber-50, #fffbeb), rgb(245 158 11 / 0.16));
+  color: light-dark(var(--color-amber-800, #92400e), #fcd34d);
+  border-color: light-dark(var(--color-amber-200, #fde68a), rgb(252 211 77 / 0.3));
+}
+
+.sirem-badge--danger {
+  background: light-dark(var(--color-red-50, #fef2f2), rgb(239 68 68 / 0.16));
+  color: light-dark(var(--color-red-700, #b91c1c), #fca5a5);
+  border-color: light-dark(var(--color-red-200, #fecaca), rgb(252 165 165 / 0.3));
+}
+
+.sirem-badge__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+}
+
+.sirem-badge__dot--neutral {
+  background: var(--sirem-text-muted);
+}
+
+.sirem-badge__dot--info {
+  background: var(--color-sirem-500);
+}
+
+.sirem-badge__dot--success {
+  background: var(--color-emerald-500, #10b981);
+}
+
+.sirem-badge__dot--warning {
+  background: var(--color-amber-500, #f59e0b);
+}
+
+.sirem-badge__dot--danger {
+  background: var(--color-red-500, #ef4444);
+}

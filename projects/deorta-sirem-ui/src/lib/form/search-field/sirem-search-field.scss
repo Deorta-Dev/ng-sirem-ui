@@ -1,0 +1,38 @@
+@use '../fields' as *;
+
+.sirem-search {
+  height: 2.5rem;
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+}
+
+.sirem-search__wrap {
+  position: relative;
+  display: block;
+}
+
+.sirem-search__icon {
+  pointer-events: none;
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--sirem-text-faint);
+}
+
+.sirem-search__clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: none;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  color: var(--sirem-text-faint);
+  cursor: pointer;
+}
+
+.sirem-search__clear:hover {
+  color: var(--sirem-text-soft);
+}

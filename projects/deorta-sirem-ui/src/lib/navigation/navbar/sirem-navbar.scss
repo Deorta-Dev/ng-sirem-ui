@@ -1,0 +1,236 @@
+/* Estilos de sirem-navbar: vertical, horizontal, minibar y flotante. */
+:host {
+  display: block;
+}
+
+.sirem-navbar {
+  background: var(--sirem-surface);
+}
+
+.sirem-navbar--vertical {
+  border-radius: 0.75rem;
+  border: 1px solid var(--sirem-border);
+  padding: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.sirem-navbar--floating {
+  border-radius: 1rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  padding: 0.75rem;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.sirem-navbar--horizontal {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--sirem-border);
+  padding: 0.5rem 1rem;
+  overflow-x: auto;
+}
+
+.sirem-navbar--minibar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 4rem;
+  border-right: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  padding: 0.75rem 0;
+}
+
+.sirem-navbar__link {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.625rem;
+  border: 0;
+  background: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sirem-text-soft);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sirem-navbar__link:hover {
+  background: var(--sirem-surface-hover);
+}
+
+.sirem-navbar__link--active,
+.sirem-navbar__link--open {
+  background: var(--sirem-tint-bg);
+  color: var(--sirem-tint-text);
+}
+
+.sirem-navbar__icon {
+  font-size: 1.125rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-navbar__link--active .sirem-navbar__icon {
+  color: var(--sirem-tint-text);
+}
+
+.sirem-navbar__text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.sirem-navbar__badge {
+  border-radius: 9999px;
+  background: var(--sirem-tint-strong-bg);
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--sirem-tint-text);
+}
+
+.sirem-navbar__chev {
+  font-size: 0.75rem;
+  color: var(--sirem-text-faint);
+}
+
+.sirem-navbar__children {
+  margin-left: 1rem;
+  border-left: 1px solid var(--sirem-border);
+  padding-left: 0.5rem;
+}
+
+.sirem-navbar__hitem {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.sirem-navbar__hitem .sirem-navbar__link {
+  width: auto;
+}
+
+.sirem-navbar__drop {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 30;
+  margin-top: 0.25rem;
+  min-width: 12rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  padding: 0.375rem;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.sirem-navbar__rail-item {
+  position: relative;
+}
+
+.sirem-navbar__rail-btn {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: none;
+  border-radius: 0.75rem;
+  color: var(--sirem-text-muted);
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.sirem-navbar__rail-btn:hover {
+  background: var(--sirem-surface-hover);
+}
+
+.sirem-navbar__rail-btn.sirem-navbar__link--active {
+  background: var(--color-sirem-600);
+  color: #fff;
+}
+
+.sirem-navbar__rail-btn.sirem-navbar__link--active .sirem-navbar__rail-icon {
+  color: #fff;
+}
+
+.sirem-navbar__rail-icon {
+  font-size: 1.25rem;
+}
+
+.sirem-navbar__flyout {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  z-index: 30;
+  margin-left: 0.5rem;
+  min-width: 12rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  padding: 0.375rem;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.sirem-navbar__flyout-title {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--sirem-text-faint);
+  margin: 0;
+}
+
+/* Icono SVG inline (duotone / streamline): hereda currentColor. */
+.sirem-navbar__svgicon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-navbar__svgicon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.sirem-navbar__link--active .sirem-navbar__svgicon,
+.sirem-navbar__link--open .sirem-navbar__svgicon {
+  color: var(--sirem-tint-text);
+}
+
+.sirem-navbar__rail-btn .sirem-navbar__svgicon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.sirem-navbar__rail-btn.sirem-navbar__link--active .sirem-navbar__svgicon {
+  color: #fff;
+}
+
+/* Fija la barra al hacer scroll. */
+.sirem-navbar--fixed {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+/* Fondo translúcido con desenfoque. */
+.sirem-navbar--blur {
+  background: color-mix(in srgb, var(--sirem-surface, #fff) 82%, transparent);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+}

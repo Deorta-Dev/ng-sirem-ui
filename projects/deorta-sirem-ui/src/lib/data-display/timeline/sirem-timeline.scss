@@ -1,0 +1,69 @@
+/* Estilos de sirem-timeline: línea de tiempo vertical con 5 tonos. */
+.sirem-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border-left: 2px solid var(--sirem-border);
+  padding-left: 1.25rem;
+  margin: 0;
+  list-style: none;
+}
+
+.sirem-timeline__item {
+  position: relative;
+}
+
+.sirem-timeline__dot {
+  position: absolute;
+  left: -27px;
+  top: 4px;
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 4px var(--sirem-surface);
+}
+
+.sirem-timeline__dot--neutral {
+  background: var(--sirem-text-faint);
+}
+
+.sirem-timeline__dot--info {
+  background: var(--color-sirem-500);
+}
+
+.sirem-timeline__dot--success {
+  background: var(--color-emerald-500, #10b981);
+}
+
+.sirem-timeline__dot--warning {
+  background: var(--color-amber-500, #f59e0b);
+}
+
+.sirem-timeline__dot--danger {
+  background: var(--color-red-500, #ef4444);
+}
+
+.sirem-timeline__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sirem-text);
+  margin: 0;
+}
+
+.sirem-timeline__time {
+  font-size: 0.75rem;
+  color: var(--sirem-text-faint);
+  margin: 0;
+}
+
+.sirem-timeline__description {
+  margin: 0.125rem 0 0;
+  font-size: 0.875rem;
+  color: var(--sirem-text-soft);
+}
+
+.sirem-timeline__empty {
+  font-size: 0.875rem;
+  color: var(--sirem-text-muted);
+}

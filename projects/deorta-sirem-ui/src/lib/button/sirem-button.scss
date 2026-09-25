@@ -1,0 +1,193 @@
+/*
+ * Estilos del botón SIREM (ver sirem-button.ts).
+ * CSS vainilla con tokens del tema (var(--color-sirem-*)) para que el
+ * paquete publicado funcione sin Tailwind. El template solo usa
+ * estas clases semánticas.
+ */
+
+@keyframes sirem-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sirem-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.sirem-btn:focus-visible {
+  outline: 2px solid var(--color-sirem-600);
+  outline-offset: 2px;
+}
+
+.sirem-btn:active {
+  transform: scale(0.98);
+}
+
+.sirem-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.sirem-btn__spinner {
+  width: 1.15em;
+  height: 1.15em;
+  animation: sirem-spin 1s linear infinite;
+}
+
+.sirem-btn--primary {
+  background: var(--color-sirem-600);
+  color: #fff;
+  box-shadow:
+    0 4px 6px -1px color-mix(in srgb, var(--color-sirem-600) 30%, transparent),
+    0 2px 4px -2px color-mix(in srgb, var(--color-sirem-600) 30%, transparent);
+}
+
+.sirem-btn--primary:hover {
+  background: var(--color-sirem-700);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.sirem-btn--primary:active {
+  background: var(--color-sirem-800);
+}
+
+.sirem-btn--secondary {
+  background: var(--sirem-surface);
+  color: var(--sirem-text-soft);
+  border: 1px solid var(--sirem-border-strong);
+  box-shadow:
+    0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.sirem-btn--secondary:hover {
+  background: var(--sirem-surface-alt);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.sirem-btn--secondary:active {
+  background: var(--sirem-surface-hover);
+}
+
+.sirem-btn--success {
+  background: var(--color-emerald-600, #059669);
+  color: #fff;
+  box-shadow:
+    0 4px 6px -1px color-mix(in srgb, var(--color-emerald-600, #059669) 30%, transparent),
+    0 2px 4px -2px color-mix(in srgb, var(--color-emerald-600, #059669) 30%, transparent);
+}
+
+.sirem-btn--success:hover {
+  background: var(--color-emerald-700, #047857);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.sirem-btn--success:active {
+  background: var(--color-emerald-800, #065f46);
+}
+
+.sirem-btn--warning {
+  background: var(--color-amber-500, #f59e0b);
+  color: #fff;
+  box-shadow:
+    0 4px 6px -1px color-mix(in srgb, var(--color-amber-500, #f59e0b) 30%, transparent),
+    0 2px 4px -2px color-mix(in srgb, var(--color-amber-500, #f59e0b) 30%, transparent);
+}
+
+.sirem-btn--warning:hover {
+  background: var(--color-amber-600, #d97706);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.sirem-btn--warning:active {
+  background: var(--color-amber-700, #b45309);
+}
+
+.sirem-btn--ghost {
+  background: transparent;
+  color: var(--sirem-tint-text);
+}
+
+.sirem-btn--ghost:hover {
+  background: var(--sirem-tint-bg);
+}
+
+.sirem-btn--ghost:active {
+  background: var(--sirem-tint-strong-bg);
+}
+
+.sirem-btn--danger {
+  background: var(--color-red-600, #dc2626);
+  color: #fff;
+  box-shadow:
+    0 4px 6px -1px color-mix(in srgb, var(--color-red-600, #dc2626) 30%, transparent),
+    0 2px 4px -2px color-mix(in srgb, var(--color-red-600, #dc2626) 30%, transparent);
+}
+
+.sirem-btn--danger:hover {
+  background: var(--color-red-700, #b91c1c);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.sirem-btn--danger:active {
+  background: var(--color-red-800, #991b1b);
+}
+
+.sirem-btn--sm {
+  height: 2rem;
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+}
+
+.sirem-btn--md {
+  height: 2.5rem;
+  padding: 0 1.25rem;
+  font-size: 0.875rem;
+}
+
+.sirem-btn--lg {
+  height: 3rem;
+  padding: 0 2rem;
+  font-size: 1rem;
+}
+
+.sirem-btn--icon-only-sm {
+  height: 2rem;
+  width: 2rem;
+  font-size: 0.75rem;
+  padding: 0;
+}
+
+.sirem-btn--icon-only-md {
+  height: 2.5rem;
+  width: 2.5rem;
+  font-size: 0.875rem;
+  padding: 0;
+}
+
+.sirem-btn--icon-only-lg {
+  height: 3rem;
+  width: 3rem;
+  font-size: 1rem;
+  padding: 0;
+}
+
+.sirem-btn--loading {
+  cursor: wait;
+}

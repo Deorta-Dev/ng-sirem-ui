@@ -1,0 +1,37 @@
+/* Estilos de sirem-radio-group-field. */
+.sirem-radio__legend {
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sirem-text-soft);
+  padding: 0;
+}
+
+.sirem-radio__options {
+  display: flex;
+  gap: 1rem;
+}
+
+.sirem-radio__options--vertical {
+  flex-direction: column;
+}
+
+.sirem-radio__options--horizontal {
+  flex-wrap: wrap;
+}
+
+.sirem-radio__option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--sirem-text-soft);
+  cursor: pointer;
+}
+
+.sirem-radio__input {
+  height: 1rem;
+  width: 1rem;
+  border: 1px solid var(--sirem-border-strong);
+  accent-color: var(--color-sirem-600);
+}

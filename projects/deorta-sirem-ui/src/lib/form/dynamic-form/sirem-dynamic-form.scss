@@ -1,0 +1,112 @@
+/* Estilos de sirem-dynamic-form: grilla de 12, secciones, tablas y acciones. */
+
+.sirem-form-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@for $i from 1 through 12 {
+  .sirem-col-#{$i} {
+    grid-column: span $i / span $i;
+  }
+}
+
+@media (min-width: 640px) {
+  @for $i from 1 through 12 {
+    .sirem-col-sm-#{$i} {
+      grid-column: span $i / span $i;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  @for $i from 1 through 12 {
+    .sirem-col-md-#{$i} {
+      grid-column: span $i / span $i;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  @for $i from 1 through 12 {
+    .sirem-col-lg-#{$i} {
+      grid-column: span $i / span $i;
+    }
+  }
+}
+
+.sirem-form-section {
+  border-radius: 0.75rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  padding: 1rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.sirem-form-section__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  color: var(--sirem-text);
+  margin: 0;
+}
+
+.sirem-form-section__description {
+  margin: 0.125rem 0 0;
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-form-section__body {
+  margin-top: 0.75rem;
+}
+
+.sirem-form-table-wrap {
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.sirem-form-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.sirem-form-table__row {
+  border-bottom: 1px solid var(--sirem-border-soft);
+}
+
+.sirem-form-table__row:last-child {
+  border-bottom: 0;
+}
+
+.sirem-form-table__head {
+  background: var(--sirem-surface-alt);
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--sirem-text-soft);
+}
+
+.sirem-form-table__cell {
+  min-width: 6rem;
+  padding: 0.375rem;
+  vertical-align: top;
+}
+
+.sirem-form-html {
+  font-size: 0.875rem;
+  color: var(--sirem-text-soft);
+}
+
+.sirem-form-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

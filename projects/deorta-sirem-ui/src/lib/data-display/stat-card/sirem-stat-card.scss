@@ -1,0 +1,84 @@
+/* Estilos de sirem-stat-card: tarjeta KPI. */
+.sirem-stat {
+  border-radius: 0.75rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  padding: 1rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.sirem-stat__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sirem-stat__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-stat__value {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--sirem-text);
+}
+
+.sirem-stat__delta {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.sirem-stat__delta--up {
+  color: light-dark(var(--color-emerald-600, #059669), #34d399);
+}
+
+.sirem-stat__delta--down {
+  color: light-dark(var(--color-red-600, #dc2626), #f87171);
+}
+
+/* Variante a color pleno: fondo saturado + texto blanco. */
+.sirem-stat--solid {
+  border: 0;
+  color: #fff;
+}
+
+.sirem-stat--solid .sirem-stat__label,
+.sirem-stat--solid .sirem-stat__value,
+.sirem-stat--solid .sirem-stat__delta {
+  color: #fff;
+}
+
+.sirem-stat--solid .sirem-stat__delta {
+  opacity: 0.9;
+}
+
+.sirem-stat--brand {
+  background: linear-gradient(135deg, var(--color-sirem-500, #3384fc), var(--color-sirem-700, #174fe1));
+}
+
+.sirem-stat--info {
+  background: linear-gradient(135deg, var(--color-sky-500, #0ea5e9), var(--color-sky-700, #0369a1));
+}
+
+.sirem-stat--success {
+  background: linear-gradient(135deg, var(--color-emerald-500, #10b981), var(--color-emerald-700, #047857));
+}
+
+.sirem-stat--warning {
+  background: linear-gradient(135deg, var(--color-amber-500, #f59e0b), var(--color-amber-700, #b45309));
+}
+
+.sirem-stat--danger {
+  background: linear-gradient(135deg, var(--color-red-500, #ef4444), var(--color-red-700, #b91c1c));
+}
+
+@media (min-width: 768px) {
+  .sirem-stat {
+    padding: 1.25rem;
+  }
+}

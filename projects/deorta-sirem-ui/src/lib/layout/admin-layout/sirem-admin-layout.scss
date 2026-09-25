@@ -1,0 +1,53 @@
+/* Estilos de sirem-admin-layout: header full-width + fila sidebar/contenido. */
+.sirem-admin {
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  background: var(--sirem-surface-hover);
+  color: var(--sirem-text);
+}
+
+.sirem-admin__exit {
+  display: flex;
+  justify-content: flex-end;
+  background: var(--sirem-surface);
+  padding: 0.5rem 1rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.sirem-admin__exit-btn {
+  border: 0;
+  background: none;
+  border-radius: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sirem-tint-text);
+  cursor: pointer;
+}
+
+.sirem-admin__exit-btn:hover {
+  background: var(--sirem-tint-bg);
+}
+
+.sirem-admin__exit-btn:focus-visible {
+  outline: 2px solid var(--color-sirem-600);
+}
+
+.sirem-admin__body {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+}
+
+.sirem-admin__main {
+  min-width: 0;
+  flex: 1;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .sirem-admin__main {
+    padding: 1.5rem;
+  }
+}

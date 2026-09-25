@@ -1,0 +1,62 @@
+/*
+ * Base compartida de todos los fields (sirem-input-field, sirem-textarea-field…).
+ * Cada field la importa con `@use '../fields' as *;` y añade su tamaño.
+ * Bordes idénticos en toda la librería: slate-300, rojo en error.
+ */
+
+.sirem-field {
+  display: block;
+}
+
+.sirem-field__label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sirem-text-soft);
+}
+
+.sirem-field__required {
+  color: var(--color-red-600, #dc2626);
+}
+
+.sirem-field__box {
+  display: block;
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--sirem-border-strong);
+  background: var(--sirem-surface);
+  font-size: 0.875rem;
+  color: var(--sirem-text);
+}
+
+.sirem-field__box::placeholder {
+  color: var(--sirem-text-faint);
+}
+
+.sirem-field__box:focus {
+  outline: 2px solid var(--color-sirem-600);
+}
+
+.sirem-field__box:disabled {
+  background: var(--sirem-input-disabled);
+  color: var(--sirem-text-muted);
+}
+
+.sirem-field__box--error {
+  border-color: var(--color-red-400, #f87171);
+}
+
+.sirem-field__hint {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-field__error {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-red-600, #dc2626);
+}

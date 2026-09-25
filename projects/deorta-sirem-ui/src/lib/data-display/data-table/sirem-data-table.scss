@@ -1,0 +1,128 @@
+/* Estilos de sirem-data-table: tabla de listados con celdas tipadas. */
+.sirem-table-wrap {
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.sirem-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.sirem-table__head-row {
+  border-bottom: 1px solid var(--sirem-border);
+  background: var(--sirem-surface-alt);
+  text-align: left;
+}
+
+.sirem-table__head-cell {
+  padding: 0.625rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-table__head-cell--check {
+  width: 2.5rem;
+}
+
+.sirem-table__head-cell--right,
+.sirem-table__cell--right {
+  text-align: right;
+}
+
+.sirem-table__head-cell--center,
+.sirem-table__cell--center {
+  text-align: center;
+}
+
+.sirem-table__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.sirem-table__sort:hover {
+  color: var(--sirem-text);
+}
+
+.sirem-table__arrow {
+  font-size: 10px;
+}
+
+.sirem-table__body-row {
+  border-bottom: 1px solid var(--sirem-border-soft);
+}
+
+.sirem-table__body-row:last-child {
+  border-bottom: 0;
+}
+
+.sirem-table__body-row:hover {
+  background: var(--sirem-surface-alt);
+}
+
+.sirem-table__body-row--clickable {
+  cursor: pointer;
+}
+
+.sirem-table__cell {
+  padding: 0.625rem 0.75rem;
+  color: var(--sirem-text-soft);
+}
+
+.sirem-table__cell--numeric {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.sirem-table__check {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 0.25rem;
+  accent-color: var(--color-sirem-600);
+}
+
+.sirem-table__avatar-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sirem-table__avatar-name {
+  font-weight: 500;
+  color: var(--sirem-text);
+}
+
+.sirem-table__empty {
+  padding: 2.5rem 0.75rem;
+  text-align: center;
+  color: var(--sirem-text-muted);
+}
+
+/* Celda de dos líneas (`subKey`): valor + detalle tenue. */
+.sirem-table__primary {
+  display: block;
+  font-weight: 500;
+  color: var(--sirem-text);
+}
+
+.sirem-table__sub {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}

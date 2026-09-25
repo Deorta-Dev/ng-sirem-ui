@@ -1,0 +1,341 @@
+/* Estilos de sirem-calendar: small (solo días), medium y large (agenda). */
+:host {
+  display: block;
+  width: 100%;
+}
+
+.sirem-cal {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+/* Tamaños máximos: el calendario llena el contenedor hasta el tope,
+   así small/medium se ven proporcionados en cualquier layout. */
+.sirem-cal--small {
+  max-width: 17rem;
+  padding: 0.5rem;
+}
+
+.sirem-cal--medium {
+  max-width: 23rem;
+}
+
+.sirem-cal--medium,
+.sirem-cal--large {
+  padding: 1rem;
+}
+
+.sirem-cal__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.sirem-cal__title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border: 0;
+  background: none;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--sirem-text);
+  cursor: pointer;
+}
+
+.sirem-cal__title:hover {
+  background: var(--sirem-surface-hover);
+}
+
+.sirem-cal__title:focus-visible {
+  outline: 2px solid var(--color-sirem-600);
+}
+
+.sirem-cal--small .sirem-cal__title {
+  font-size: 0.875rem;
+}
+
+.sirem-cal--medium .sirem-cal__title {
+  font-size: 15px;
+}
+
+.sirem-cal--large .sirem-cal__title {
+  font-size: 1.125rem;
+}
+
+.sirem-cal__nav {
+  border: 0;
+  background: none;
+  border-radius: 0.5rem;
+  padding: 0.375rem;
+  font-size: 1.125rem;
+  line-height: 1;
+  color: var(--color-sirem-600);
+  cursor: pointer;
+}
+
+.sirem-cal__nav:hover {
+  background: var(--sirem-tint-bg);
+}
+
+.sirem-cal__nav:focus-visible {
+  outline: 2px solid var(--color-sirem-600);
+}
+
+.sirem-cal__picker {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 30;
+  margin-top: 0.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--sirem-border-strong);
+  background: var(--sirem-surface);
+  padding: 0.75rem;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.sirem-cal__year {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.sirem-cal__year-label {
+  min-width: 4rem;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--sirem-text);
+}
+
+.sirem-cal__year-btn {
+  border: 0;
+  background: none;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  color: var(--sirem-text-muted);
+  cursor: pointer;
+}
+
+.sirem-cal__year-btn:hover {
+  background: var(--sirem-surface-hover);
+}
+
+.sirem-cal__months {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+.sirem-cal__month {
+  border: 0;
+  background: none;
+  border-radius: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--sirem-text-soft);
+  cursor: pointer;
+}
+
+.sirem-cal__month:hover {
+  background: var(--sirem-surface-hover);
+}
+
+.sirem-cal__month--current {
+  background: var(--color-sirem-600);
+  color: #fff;
+}
+
+.sirem-cal__week {
+  margin-top: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.25rem;
+  text-align: center;
+  font-weight: 500;
+  color: var(--sirem-text-faint);
+}
+
+.sirem-cal--small .sirem-cal__week {
+  font-size: 10px;
+}
+
+.sirem-cal--medium .sirem-cal__week,
+.sirem-cal--large .sirem-cal__week {
+  font-size: 0.75rem;
+}
+
+.sirem-cal__week span {
+  padding: 0.25rem 0;
+}
+
+.sirem-cal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+.sirem-cal__day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border: 0;
+  background: none;
+  border-radius: 0.5rem;
+  font-weight: 400;
+  color: var(--sirem-text-soft);
+  cursor: pointer;
+}
+
+.sirem-cal__day:hover {
+  background: var(--sirem-surface-hover);
+}
+
+.sirem-cal__day:focus-visible {
+  outline: 2px solid var(--color-sirem-600);
+}
+
+.sirem-cal--small .sirem-cal__day {
+  min-height: 2rem;
+  padding: 0.25rem 0;
+  font-size: 0.75rem;
+}
+
+.sirem-cal--medium .sirem-cal__day {
+  min-height: 2.75rem;
+  padding: 0.5rem 0;
+  font-size: 15px;
+}
+
+.sirem-cal__day--selected {
+  background: var(--color-sirem-600);
+  color: #fff;
+}
+
+.sirem-cal__day--selected:hover {
+  background: var(--color-sirem-600);
+}
+
+.sirem-cal__day--today {
+  font-weight: 700;
+}
+
+.sirem-cal__dots {
+  margin-top: 0.125rem;
+  display: flex;
+  height: 0.375rem;
+  gap: 0.125rem;
+}
+
+.sirem-cal__dot {
+  height: 0.375rem;
+  width: 0.375rem;
+  border-radius: 9999px;
+}
+
+.sirem-cal__cell {
+  display: flex;
+  min-height: 5rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.25rem;
+  border: 1px solid var(--sirem-border);
+  border-radius: 0.5rem;
+  background: none;
+  padding: 0.375rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sirem-cal__cell:hover {
+  background: var(--sirem-surface-alt);
+}
+
+.sirem-cal__cell:focus-visible {
+  outline: 2px solid var(--color-sirem-600);
+}
+
+.sirem-cal__cell--selected {
+  border-color: var(--color-sirem-400);
+  background: var(--sirem-tint-bg);
+}
+
+.sirem-cal__cell-day {
+  display: flex;
+  height: 1.5rem;
+  width: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  color: var(--sirem-text-soft);
+}
+
+.sirem-cal__cell-day--today {
+  background: var(--color-sirem-600);
+  color: #fff;
+  font-weight: 700;
+}
+
+.sirem-cal__event {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.375rem;
+  font-size: 11px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.sirem-cal__more {
+  padding: 0 0.25rem;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-cal__legend {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  border-top: 1px solid var(--sirem-border-soft);
+  padding-top: 0.75rem;
+}
+
+.sirem-cal__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--sirem-text-soft);
+}
+
+.sirem-cal__legend-dot {
+  height: 0.625rem;
+  width: 0.625rem;
+  border-radius: 9999px;
+}
+
+@media (min-width: 768px) {
+  .sirem-cal__cell {
+    min-height: 7rem;
+  }
+}

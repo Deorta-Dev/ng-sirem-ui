@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+
+/* Modo oscuro por atributo (toggle de la demo), no por sistema. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+/*
+ * Flaticon UIcons por pesos (todos, para documentar cada versión).
+ * En tu app importa solo los que uses. Ver AGENTS.md §6.
+ */
+@import '@flaticon/flaticon-uicons/css/regular/all.css';
+@import '@flaticon/flaticon-uicons/css/bold/all.css';
+@import '@flaticon/flaticon-uicons/css/solid/all.css';
+@import '@flaticon/flaticon-uicons/css/brands/all.css';
+@import '@flaticon/flaticon-uicons/css/thin/rounded.css';
+@import '@flaticon/flaticon-uicons/css/thin/straight.css';
+
+/*
+ * SIREM UI — estilos globales de la demo.
+ * Tailwind v4 (sin tailwind.config.js, todo por CSS) + Flaticon UIcons.
+ * Tokens SIREM: ver projects/deorta-sirem-ui/src/lib/theme/sirem-theme.css
+ * (usar como clases: bg-sirem-600, text-sirem-600, etc.).
+ */
+@import '../../deorta-sirem-ui/src/lib/theme/sirem-theme.css';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #f8fafc;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+}
+
+[data-theme='dark'] body {
+  background: #020617;
+  color: #f1f5f9;
+}
+
+/*
+ * Shim oscuro SOLO para el chrome de documentación de la demo
+ * (los componentes de la librería usan sus propios tokens).
+ */
+[data-theme='dark'] .bg-white {
+  background-color: #0f172a !important;
+}
+[data-theme='dark'] .bg-slate-50 {
+  background-color: #1e293b !important;
+}
+[data-theme='dark'] .bg-slate-100 {
+  background-color: #243247 !important;
+}
+[data-theme='dark'] .text-slate-900 {
+  color: #f8fafc !important;
+}
+[data-theme='dark'] .text-slate-800 {
+  color: #e2e8f0 !important;
+}
+[data-theme='dark'] .text-slate-700 {
+  color: #cbd5e1 !important;
+}
+[data-theme='dark'] .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+[data-theme='dark'] .text-slate-500 {
+  color: #94a3b8 !important;
+}
+[data-theme='dark'] .text-slate-400 {
+  color: #64748b !important;
+}
+[data-theme='dark'] .border-slate-200 {
+  border-color: #334155 !important;
+}
+[data-theme='dark'] .border-slate-100 {
+  border-color: #1e293b !important;
+}
+[data-theme='dark'] .ring-slate-100,
+[data-theme='dark'] .ring-slate-200 {
+  --tw-ring-color: #334155 !important;
+}
+[data-theme='dark'] .divide-slate-100 > * + * {
+  border-color: #1e293b !important;
+}
+
+/* Flaticon: tamaño por defecto hereda font-size, alineado con texto */
+.fi {
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* Iconos duotone / streamline: heredan currentColor */
+sirem-duotone-icon,
+sirem-streamline-icon,
+sirem-fi-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bloques de código en las páginas de docs */
+.sirem-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/*
+ * Preview de variantes: los componentes de bloque ocupan todo el ancho
+ * disponible (si no, p. ej. sirem-chart colapsa a ancho 0 dentro del flex
+ * y ECharts desiste de renderizar). Los inline (botones, badges, avatares,
+ * campos) siguen centrados en fila.
+ */
+.preview-body > sirem-chart,
+.preview-body > sirem-data-table,
+.preview-body > sirem-calendar,
+.preview-body > sirem-dynamic-form,
+.preview-body > sirem-navbar,
+.preview-body > sirem-sidebar,
+.preview-body > sirem-topbar,
+.preview-body > sirem-timeline,
+.preview-body > sirem-page-header,
+.preview-body > sirem-card,
+.preview-body > sirem-field-group,
+.preview-body > sirem-empty-state,
+.preview-body > sirem-list,
+.preview-body > sirem-card-list,
+.preview-body > sirem-multi-select,
+.preview-body > sirem-code-editor,
+.preview-body > sirem-rich-text {
+  flex: 1 1 100%;
+  width: 100%;
+  min-width: 0;
+}

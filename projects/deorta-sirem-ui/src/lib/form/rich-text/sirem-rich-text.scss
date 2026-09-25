@@ -1,0 +1,125 @@
+/* Estilos de sirem-rich-text: toolbar + área contenteditable. */
+:host {
+  display: block;
+  width: 100%;
+}
+
+.sirem-rich__label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sirem-text);
+}
+
+.sirem-rich__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+  border: 1px solid var(--sirem-border-strong);
+  border-bottom: 0;
+  border-radius: 0.625rem 0.625rem 0 0;
+  background: var(--sirem-surface-alt);
+  padding: 0.375rem 0.5rem;
+}
+
+.sirem-rich__btn {
+  min-width: 2rem;
+  height: 2rem;
+  border: 0;
+  background: none;
+  border-radius: 0.375rem;
+  padding: 0 0.5rem;
+  font-size: 0.875rem;
+  color: var(--sirem-text-soft);
+  cursor: pointer;
+}
+
+.sirem-rich__btn:hover {
+  background: var(--sirem-surface-hover);
+}
+
+.sirem-rich__btn:focus-visible {
+  outline: 2px solid var(--color-sirem-600);
+}
+
+.sirem-rich__btn--b {
+  font-weight: 700;
+}
+
+.sirem-rich__btn--i {
+  font-style: italic;
+}
+
+.sirem-rich__btn--u {
+  text-decoration: underline;
+}
+
+.sirem-rich__btn--s {
+  text-decoration: line-through;
+}
+
+.sirem-rich__sep {
+  width: 1px;
+  height: 1.25rem;
+  margin: 0 0.25rem;
+  background: var(--sirem-border);
+}
+
+.sirem-rich__area {
+  min-height: 8.75rem;
+  border: 1px solid var(--sirem-border-strong);
+  border-radius: 0 0 0.625rem 0.625rem;
+  background: var(--sirem-surface);
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--sirem-text);
+}
+
+.sirem-rich__area:focus {
+  outline: 2px solid var(--color-sirem-600);
+  outline-offset: -1px;
+}
+
+.sirem-rich__area--empty::before {
+  content: attr(data-placeholder);
+  color: var(--sirem-text-faint);
+  pointer-events: none;
+}
+
+.sirem-rich__area blockquote {
+  margin: 0.5rem 0;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--color-sirem-400, #8ec5ff);
+  color: var(--sirem-text-muted);
+}
+
+.sirem-rich__area ul,
+.sirem-rich__area ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.sirem-rich__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.375rem;
+}
+
+.sirem-rich__hint {
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-rich__error {
+  font-size: 0.75rem;
+  color: light-dark(var(--color-red-600, #dc2626), #f87171);
+}
+
+.sirem-rich__count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--sirem-text-faint);
+}

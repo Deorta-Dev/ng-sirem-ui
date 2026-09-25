@@ -1,0 +1,41 @@
+/* Estilos de sirem-breadcrumbs: ubicación jerárquica. */
+.sirem-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sirem-crumbs__item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.sirem-crumbs__sep {
+  color: var(--sirem-text-faint);
+}
+
+.sirem-crumbs__link {
+  border-radius: 0.25rem;
+  color: var(--sirem-text-muted);
+  text-decoration: none;
+}
+
+.sirem-crumbs__link:hover {
+  color: var(--sirem-tint-text);
+  text-decoration: underline;
+}
+
+.sirem-crumbs__link:focus-visible {
+  outline: 2px solid var(--color-sirem-600);
+}
+
+.sirem-crumbs__current {
+  font-weight: 500;
+  color: var(--sirem-text);
+}
