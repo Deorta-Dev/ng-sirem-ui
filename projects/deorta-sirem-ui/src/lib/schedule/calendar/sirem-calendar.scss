@@ -6,10 +6,10 @@
 
 .sirem-cal {
   width: 100%;
-  border-radius: 0.75rem;
+  border-radius: var(--sirem-radius-lg);
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  box-shadow: var(--sirem-shadow-xs);
 }
 
 /* Tamaños máximos: el calendario llena el contenedor hasta el tope,
@@ -90,19 +90,13 @@
 }
 
 .sirem-cal__picker {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  z-index: 30;
-  margin-top: 0.25rem;
-  border-radius: 0.75rem;
+  /* La posicion y el ancho los pone el motor de overlays. */
+  min-width: 16rem;
+  border-radius: var(--sirem-radius-lg);
   border: 1px solid var(--sirem-border-strong);
   background: var(--sirem-surface);
   padding: 0.75rem;
-  box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: var(--sirem-shadow-md);
 }
 
 .sirem-cal__year {

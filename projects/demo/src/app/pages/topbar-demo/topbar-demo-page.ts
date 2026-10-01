@@ -1,16 +1,52 @@
 import { Component, signal } from '@angular/core';
-import { SiremTopbar, SiremButton, SiremUserMenu } from 'deorta-sirem-ui';
+import { SiremTopbar, SiremButton, SiremCard, SiremUserMenu } from 'deorta-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
 @Component({
   selector: 'app-topbar-demo-page',
   standalone: true,
-  imports: [DemoPageLayout, DemoVariantCard, SiremTopbar, SiremButton, SiremUserMenu],
+  imports: [DemoPageLayout, DemoVariantCard, SiremTopbar, SiremButton, SiremCard, SiremUserMenu],
   template: `
-    <app-demo-page-layout title="Topbar" category="Layout" subtitle="sirem-topbar — barra superior de espacio y acciones.">
+    <app-demo-page-layout title="Topbar" category="Layout" subtitle="sirem-topbar — barra superior de espacio y acciones, con fixed+blur y floating (barra redondeada para dashboards, ver /demo/page-admin).">
       <app-demo-variant-card title="Básica" description="Label de espacio por defecto." [htmlCode]="h1" [tsCode]="t">
         <sirem-topbar />
+      </app-demo-variant-card>
+      <app-demo-variant-card
+        title="Apariencia cards"
+        description="Barra transparente con cada pieza como tarjeta flotante y buscador centrado."
+        [htmlCode]="hCards"
+        [tsCode]="t"
+      >
+        <sirem-topbar
+          appearance="cards"
+          searchAlign="center"
+          spaceLabel="Panel principal"
+          searchPlaceholder="Buscar en "
+          searchHighlight="Soeimn Lion Master"
+          searchHint="Ctrl + K"
+          [showFullscreen]="false"
+        >
+          <sirem-button
+            slot="actions"
+            size="sm"
+            variant="secondary"
+            iconOnly
+            aria-label="Notificaciones"
+          >
+            <i slot="icon" class="fi fi-rr-bell"></i>
+          </sirem-button>
+        </sirem-topbar>
+      </app-demo-variant-card>
+      <app-demo-variant-card
+        title="Banner de marca"
+        description="sirem-card con tone=brand para avisos destacados."
+        [htmlCode]="hBanner"
+        [tsCode]="t"
+      >
+        <sirem-card tone="brand" bodyPadding="sm">
+          <p class="text-sm font-semibold text-white">Bienvenido a Li-On</p>
+        </sirem-card>
       </app-demo-variant-card>
       <app-demo-variant-card title="Con acciones" description="Slot actions para botones." [htmlCode]="h2" [tsCode]="t">
         <sirem-topbar spaceLabel="Óptica Norte">
@@ -33,6 +69,25 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 })
 export class TopbarDemoPage {
   readonly msg = signal('');
+  readonly hCards = `<sirem-topbar
+  appearance="cards"
+  searchAlign="center"
+  spaceLabel="Panel principal"
+  searchPlaceholder="Buscar en "
+  searchHighlight="Soeimn Lion Master"
+  searchHint="Ctrl + K"
+  [showFullscreen]="false"
+>
+  <sirem-button slot="actions" size="sm" variant="secondary" iconOnly
+                 aria-label="Notificaciones">
+    <i slot="icon" class="fi fi-rr-bell"></i>
+  </sirem-button>
+</sirem-topbar>`;
+
+  readonly hBanner = `<sirem-card tone="brand" bodyPadding="sm">
+  <p class="text-sm font-semibold text-white">Bienvenido a Li-On</p>
+</sirem-card>`;
+
   readonly h1 = '<sirem-topbar />';
   readonly h2 = '<sirem-topbar spaceLabel="Óptica Norte">\n  <div slot="actions" class="flex gap-2">\n    <sirem-button size="sm" variant="secondary">Buscar</sirem-button>\n  </div>\n</sirem-topbar>';
   readonly h3 = '<sirem-topbar spaceLabel="SIREM">\n  <sirem-user-menu slot="user" userName="María Torres" userDetail="Optómetra" />\n</sirem-topbar>\n<span class="text-sm text-slate-600">Menú: {{ msg() }}</span>';

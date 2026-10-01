@@ -22,7 +22,7 @@ import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/p
   ],
   template: `
     <app-page-demo-shell label="Página de listado" [files]="codeFiles">
-      <main class="min-h-[calc(100dvh-2.75rem)] bg-slate-50 p-4 sm:p-6 lg:p-8 dark:bg-slate-950">
+      <main class="min-h-[calc(100dvh-2.75rem)] p-4 sm:p-6 lg:p-8">
         <div class="mx-auto flex w-full max-w-screen-2xl flex-col gap-5">
           <sirem-page-header title="Pacientes" subtitle="Óptica Norte">
             <div slot="actions" class="flex gap-2">
@@ -84,7 +84,7 @@ export class PageListadoDemoPage {
     {
       name: 'page-listado.html',
       language: 'html',
-      code: `<main class="min-h-screen bg-slate-50 p-4 sm:p-6 lg:p-8">
+      code: `<main class="min-h-screen p-4 sm:p-6 lg:p-8">
   <div class="mx-auto flex w-full max-w-screen-2xl flex-col gap-5">
     <sirem-page-header title="Pacientes" subtitle="Óptica Norte">
       <div slot="actions" class="flex gap-2">

@@ -1,4 +1,5 @@
 import { Component, computed, input, model, output, signal } from '@angular/core';
+import { SiremOverlayTrigger } from '../../overlays/overlay/sirem-overlay-trigger';
 
 /** Evento de agenda. `color` acepta cualquier color CSS (p. ej. `#1d64f1`). */
 export interface SiremCalendarEvent {
@@ -46,6 +47,7 @@ const MONTHS_SHORT = [
 @Component({
   selector: 'sirem-calendar',
   standalone: true,
+  imports: [SiremOverlayTrigger],
   styleUrl: './sirem-calendar.scss',
   template: `
     <div
@@ -57,8 +59,11 @@ const MONTHS_SHORT = [
       <div class="sirem-cal__head">
         <button
           type="button"
-          (click)="titlePressed()"
-          [attr.aria-expanded]="pickerOpen()"
+          [siremOverlay]="pickerTpl"
+          [open]="pickerOpen()"
+          (openChange)="pickerOpen.set($event)"
+          siremOverlayTrigger="click"
+          siremOverlayPlacement="bottom-start"
           aria-haspopup="dialog"
           aria-label="Elegir mes y año"
           class="sirem-cal__title"
@@ -82,46 +87,6 @@ const MONTHS_SHORT = [
           ›
         </button>
 
-        @if (pickerOpen()) {
-          <div
-            role="dialog"
-            aria-label="Selector de mes y año"
-            class="sirem-cal__picker"
-          >
-            <div class="sirem-cal__year">
-              <button
-                type="button"
-                (click)="goYear(-1)"
-                aria-label="Año anterior"
-                class="sirem-cal__year-btn"
-              >
-                ‹
-              </button>
-              <span class="sirem-cal__year-label">{{ year() }}</span>
-              <button
-                type="button"
-                (click)="goYear(1)"
-                aria-label="Año siguiente"
-                class="sirem-cal__year-btn"
-              >
-                ›
-              </button>
-            </div>
-            <div class="sirem-cal__months">
-              @for (m of monthNames; track m; let i = $index) {
-                <button
-                  type="button"
-                  (click)="pickMonth(i)"
-                  [attr.aria-pressed]="i === month()"
-                  class="sirem-cal__month"
-                  [class.sirem-cal__month--current]="i === month()"
-                >
-                  {{ m.slice(0, 3) }}
-                </button>
-              }
-            </div>
-          </div>
-        }
       </div>
 
       <div
@@ -208,6 +173,51 @@ const MONTHS_SHORT = [
         </div>
       }
     </div>
+
+    <!--
+      Selector de mes y anio en la capa de overlays: asi no lo recorta el
+      overflow de la celda, de la card o de una tabla.
+    -->
+    <ng-template #pickerTpl>
+      <div
+        role="dialog"
+        aria-label="Selector de mes y año"
+        class="sirem-cal__picker"
+      >
+        <div class="sirem-cal__year">
+          <button
+            type="button"
+            (click)="goYear(-1)"
+            aria-label="Año anterior"
+            class="sirem-cal__year-btn"
+          >
+            ‹
+          </button>
+          <span class="sirem-cal__year-label">{{ year() }}</span>
+          <button
+            type="button"
+            (click)="goYear(1)"
+            aria-label="Año siguiente"
+            class="sirem-cal__year-btn"
+          >
+            ›
+          </button>
+        </div>
+        <div class="sirem-cal__months">
+          @for (m of monthNames; track m; let i = $index) {
+            <button
+              type="button"
+              (click)="pickMonth(i)"
+              [attr.aria-pressed]="i === month()"
+              class="sirem-cal__month"
+              [class.sirem-cal__month--current]="i === month()"
+            >
+              {{ m.slice(0, 3) }}
+            </button>
+          }
+        </div>
+      </div>
+    </ng-template>
   `,
 })
 export class SiremCalendar {

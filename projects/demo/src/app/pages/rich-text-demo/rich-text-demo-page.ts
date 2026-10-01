@@ -14,7 +14,7 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
       </app-demo-variant-card>
       <app-demo-variant-card title="Con valor inicial" description="Hidrata HTML previo." [htmlCode]="h2" [tsCode]="t">
         <sirem-rich-text label="Fórmula" [(value)]="formula" />
-        <div class="w-full rounded-lg border border-slate-200 bg-white p-3 text-sm text-slate-600">
+        <div class="w-full rounded-lg border border-slate-200 p-3 text-sm text-slate-600">
           <p class="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">HTML generado</p>
           <code class="break-all">{{ formula() }}</code>
         </div>
@@ -30,7 +30,7 @@ export class RichTextDemoPage {
   readonly vacio = signal('');
   readonly formula = signal('<b>OD:</b> -1.25 (-0.50 x 180)<br><b>OI:</b> -1.00');
   readonly h1 = '<sirem-rich-text label="Evolución"\n  placeholder="Describe la atención…" hint="Se guarda como HTML."\n  [(value)]="evo" />';
-  readonly h2 = '<sirem-rich-text label="Fórmula" [(value)]="formula" />\n<div class="w-full rounded-lg border border-slate-200 bg-white p-3 text-sm text-slate-600">\n  <p class="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">HTML generado</p>\n  <code class="break-all">{{ formula() }}</code>\n</div>';
+  readonly h2 = '<sirem-rich-text label="Fórmula" [(value)]="formula" />\n<div class="w-full rounded-lg border border-slate-200 p-3 text-sm text-slate-600">\n  <p class="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">HTML generado</p>\n  <code class="break-all">{{ formula() }}</code>\n</div>';
   readonly h3 = '<sirem-rich-text label="Consentimiento"\n  error="Describe el consentimiento informado." [(value)]="vacio" />';
   readonly t = `import { signal } from '@angular/core';
 import { SiremRichText } from 'deorta-sirem-ui';

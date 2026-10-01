@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  border-radius: 0.375rem;
+  border-radius: var(--sirem-radius-sm);
   font-weight: 600;
   transition: all 0.15s ease;
 }
@@ -45,15 +45,13 @@
   background: var(--color-sirem-600);
   color: #fff;
   box-shadow:
-    0 4px 6px -1px color-mix(in srgb, var(--color-sirem-600) 30%, transparent),
-    0 2px 4px -2px color-mix(in srgb, var(--color-sirem-600) 30%, transparent);
+    0 4px 6px -1px color-mix(in srgb, var(--color-sirem-600) 18%, transparent),
+    0 2px 4px -2px color-mix(in srgb, var(--color-sirem-600) 18%, transparent);
 }
 
 .sirem-btn--primary:hover {
   background: var(--color-sirem-700);
-  box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-btn--primary:active {
@@ -64,15 +62,12 @@
   background: var(--sirem-surface);
   color: var(--sirem-text-soft);
   border: 1px solid var(--sirem-border-strong);
-  box-shadow:
-    0 1px 2px 0 rgb(0 0 0 / 0.05);
+  box-shadow: var(--sirem-shadow-xs);
 }
 
 .sirem-btn--secondary:hover {
   background: var(--sirem-surface-alt);
-  box-shadow:
-    0 4px 6px -1px rgb(0 0 0 / 0.1),
-    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-btn--secondary:active {
@@ -83,15 +78,13 @@
   background: var(--color-emerald-600, #059669);
   color: #fff;
   box-shadow:
-    0 4px 6px -1px color-mix(in srgb, var(--color-emerald-600, #059669) 30%, transparent),
-    0 2px 4px -2px color-mix(in srgb, var(--color-emerald-600, #059669) 30%, transparent);
+    0 4px 6px -1px color-mix(in srgb, var(--color-emerald-600, #059669) 18%, transparent),
+    0 2px 4px -2px color-mix(in srgb, var(--color-emerald-600, #059669) 18%, transparent);
 }
 
 .sirem-btn--success:hover {
   background: var(--color-emerald-700, #047857);
-  box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-btn--success:active {
@@ -102,15 +95,13 @@
   background: var(--color-amber-500, #f59e0b);
   color: #fff;
   box-shadow:
-    0 4px 6px -1px color-mix(in srgb, var(--color-amber-500, #f59e0b) 30%, transparent),
-    0 2px 4px -2px color-mix(in srgb, var(--color-amber-500, #f59e0b) 30%, transparent);
+    0 4px 6px -1px color-mix(in srgb, var(--color-amber-500, #f59e0b) 18%, transparent),
+    0 2px 4px -2px color-mix(in srgb, var(--color-amber-500, #f59e0b) 18%, transparent);
 }
 
 .sirem-btn--warning:hover {
   background: var(--color-amber-600, #d97706);
-  box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-btn--warning:active {
@@ -134,15 +125,13 @@
   background: var(--color-red-600, #dc2626);
   color: #fff;
   box-shadow:
-    0 4px 6px -1px color-mix(in srgb, var(--color-red-600, #dc2626) 30%, transparent),
-    0 2px 4px -2px color-mix(in srgb, var(--color-red-600, #dc2626) 30%, transparent);
+    0 4px 6px -1px color-mix(in srgb, var(--color-red-600, #dc2626) 18%, transparent),
+    0 2px 4px -2px color-mix(in srgb, var(--color-red-600, #dc2626) 18%, transparent);
 }
 
 .sirem-btn--danger:hover {
   background: var(--color-red-700, #b91c1c);
-  box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-btn--danger:active {
@@ -186,6 +175,11 @@
   width: 3rem;
   font-size: 1rem;
   padding: 0;
+}
+
+/* `[bordered]="false"`: suprime el borde sin tocar fondo ni color. */
+.sirem-btn--borderless {
+  border: 0;
 }
 
 .sirem-btn--loading {

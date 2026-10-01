@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { SiremOverlayViewport } from 'deorta-sirem-ui';
 import { DynamicToastViewportComponent } from 'ngx-dynamic-toast';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, DynamicToastViewportComponent],
+  imports: [RouterOutlet, DynamicToastViewportComponent, SiremOverlayViewport],
   templateUrl: './app.html',
 })
 export class App {}

@@ -32,6 +32,31 @@ npm i deorta-sirem-ui @flaticon/flaticon-uicons echarts
 }
 ```
 
+### Tokens semánticos (obligatorio)
+
+Los `.scss` de la librería **no empaquetan CSS**: consumen tokens semánticos
+`--sirem-*` que tu app debe definir (o importar desde la librería). Copia este
+bloque en el `styles.css` del consumidor, o importa el fichero de la librería:
+
+```css
+@import 'deorta-sirem-ui/src/lib/theme/sirem-theme.css';
+```
+
+Tokens disponibles:
+
+| Grupo | Tokens |
+|---|---|
+| Superficie | `--sirem-page-bg`, `--sirem-surface`, `--sirem-surface-alt`, `--sirem-surface-hover`, `--sirem-surface-panel`, `--sirem-surface-glass`, `--sirem-surface-glass-strong` |
+| Texto | `--sirem-text`, `--sirem-text-soft`, `--sirem-text-muted`, `--sirem-text-faint` |
+| Borde | `--sirem-border`, `--sirem-border-soft`, `--sirem-border-strong` |
+| Tintes | `--sirem-tint-bg`, `--sirem-tint-text`, `--sirem-tint-strong-bg`, `--sirem-tint-strong-text`, `--sirem-tint-{success,warning,danger,neutral}-{bg,text}` |
+| Radios | `--sirem-radius-sm` (8px), `--sirem-radius-md` (12px), `--sirem-radius-lg` (16px), `--sirem-radius-xl` (18px) |
+| Sombras | `--sirem-shadow-xs`, `--sirem-shadow-sm`, `--sirem-shadow-md`, `--sirem-shadow-lg` |
+
+Todos salvo los radios tienen override en `:root[data-theme='dark']` (los radios
+son independientes del tema). El modo oscuro se activa con
+`document.documentElement.dataset.theme = 'dark'`.
+
 ```ts
 // app.config.ts (solo si usas optionsEndpoint en sirem-input-field)
 import { provideHttpClient } from '@angular/common/http';

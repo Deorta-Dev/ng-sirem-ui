@@ -1,22 +1,113 @@
+import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { SiremTopbar } from './sirem-topbar';
+import { SiremTopbar, type SiremTopbarAppearance, type SiremTopbarSearchAlign } from './sirem-topbar';
+
+@Component({
+  standalone: true,
+  imports: [SiremTopbar],
+  template: `
+    <sirem-topbar
+      [appearance]="appearance()"
+      [searchAlign]="searchAlign()"
+      [searchPlaceholder]="searchPlaceholder()"
+      [searchHighlight]="searchHighlight()"
+      [searchHint]="searchHint()"
+      [showFullscreen]="showFullscreen()"
+      [spaceLabel]="'Panel principal'"
+    />
+  `,
+})
+class Host {
+  readonly appearance = signal<SiremTopbarAppearance>('default');
+  readonly searchAlign = signal<SiremTopbarSearchAlign>('start');
+  readonly searchPlaceholder = signal('Buscar en ');
+  readonly searchHighlight = signal('Soeimn Lion Master');
+  readonly searchHint = signal('Ctrl + K');
+  readonly showFullscreen = signal(true);
+}
 
 describe('SiremTopbar', () => {
-  it('should create and show space label', () => {
+  const host = (f: { nativeElement: unknown }) => f.nativeElement as HTMLElement;
+
+  it('should render the workspace label', () => {
     const fixture = TestBed.createComponent(SiremTopbar);
-    fixture.componentRef.setInput('spaceLabel', 'Clínica Norte');
+    fixture.componentRef.setInput('spaceLabel', 'Panel principal');
     fixture.detectChanges();
-    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Clínica Norte');
+    expect(host(fixture).textContent).toContain('Panel principal');
   });
 
-  it('should emit searchPressed', () => {
+  it('should split the placeholder into muted prefix and bold highlight', () => {
+    const fixture = TestBed.createComponent(Host);
+    fixture.componentInstance.searchHighlight.set('Clínica Norte');
+    fixture.detectChanges();
+
+    const prefix = host(fixture).querySelector('.sirem-topbar__search-prefix');
+    const highlight = host(fixture).querySelector('.sirem-topbar__search-hl');
+    expect(prefix?.textContent).toBe('Buscar en ');
+    expect(highlight?.textContent).toBe('Clínica Norte');
+    // El resaltado va en negrita, el resto atenuado.
+    expect(highlight?.tagName).toBe('STRONG');
+  });
+
+  it('should hide the keyboard hint when it is empty', () => {
+    const fixture = TestBed.createComponent(Host);
+    fixture.componentInstance.searchHint.set('');
+    fixture.detectChanges();
+    expect(host(fixture).querySelector('.sirem-topbar__kbd')).toBeNull();
+  });
+
+  it('should show the hint when it has content', () => {
+    const fixture = TestBed.createComponent(Host);
+    fixture.componentInstance.searchHint.set('Ctrl + K');
+    fixture.detectChanges();
+    expect(host(fixture).querySelector('.sirem-topbar__kbd')?.textContent).toContain('Ctrl + K');
+  });
+
+  it('should toggle the fullscreen button', () => {
+    const fixture = TestBed.createComponent(Host);
+    fixture.detectChanges();
+    expect(
+      host(fixture).querySelector('button[aria-label="Pantalla completa"]'),
+    ).toBeTruthy();
+
+    fixture.componentInstance.showFullscreen.set(false);
+    fixture.detectChanges();
+    expect(
+      host(fixture).querySelector('button[aria-label="Pantalla completa"]'),
+    ).toBeNull();
+  });
+
+  it('should apply the cards appearance class', () => {
+    const fixture = TestBed.createComponent(Host);
+    fixture.detectChanges();
+    expect(host(fixture).querySelector('.sirem-topbar--cards')).toBeNull();
+
+    fixture.componentInstance.appearance.set('cards');
+    fixture.detectChanges();
+    expect(host(fixture).querySelector('.sirem-topbar--cards')).toBeTruthy();
+  });
+
+  it('should apply the centered search layout class', () => {
+    const fixture = TestBed.createComponent(Host);
+    fixture.componentInstance.searchAlign.set('center');
+    fixture.detectChanges();
+    expect(host(fixture).querySelector('.sirem-topbar--search-center')).toBeTruthy();
+  });
+
+  it('should emit spacePressed and searchPressed', () => {
     const fixture = TestBed.createComponent(SiremTopbar);
     fixture.detectChanges();
-    let pressed = false;
-    fixture.componentInstance.searchPressed.subscribe(() => (pressed = true));
-    (fixture.nativeElement as HTMLElement)
-      .querySelector('button[aria-label^="Búsqueda global"]')
-      ?.dispatchEvent(new MouseEvent('click'));
-    expect(pressed).toBe(true);
+    const root = host(fixture);
+
+    const space: string[] = [];
+    const search: string[] = [];
+    fixture.componentInstance.spacePressed.subscribe(() => space.push('ok'));
+    fixture.componentInstance.searchPressed.subscribe(() => search.push('ok'));
+
+    root.querySelector<HTMLButtonElement>('.sirem-topbar__space')?.click();
+    root.querySelector<HTMLButtonElement>('.sirem-topbar__search')?.click();
+
+    expect(space).toEqual(['ok']);
+    expect(search).toEqual(['ok']);
   });
 });

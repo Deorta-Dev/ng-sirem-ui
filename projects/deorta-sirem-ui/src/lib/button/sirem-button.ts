@@ -53,6 +53,8 @@ export type SiremButtonAction = () => Observable<unknown> | Promise<unknown> | v
  *   Promise, el botón muestra el spinner (`loading`) hasta que finaliza y
  *   emite `(finished)` con el último valor o `(failed)` con el error.
  * - `[(loading)]` también admite control externo manual.
+ * - `[bordered]="false"` quita el borde (útil sobre superficies ya
+ *   delimitadas, como la cabecera del sidebar).
  */
 @Component({
   selector: 'sirem-button',
@@ -98,6 +100,8 @@ export class SiremButton {
   readonly iconOnly = input(false, { transform: booleanAttribute });
   /** Estado de progreso; lo gestiona `action` o se controla desde fuera. */
   readonly loading = model(false);
+  /** Dibuja el borde (defecto). `false` lo suprime sin cambiar el resto. */
+  readonly bordered = input(true, { transform: booleanAttribute });
 
   readonly pressed = output<void>();
   /** Último valor emitido al completar `action` con éxito. */
@@ -135,6 +139,7 @@ export class SiremButton {
     () =>
       `${this.base} ${this.variants[this.variant()]} ` +
       `${this.iconOnly() ? this.iconOnlySizes[this.size()] : this.sizes[this.size()]} ` +
+      `${this.bordered() ? '' : 'sirem-btn--borderless'} ` +
       `${this.loading() ? 'sirem-btn--loading' : ''}`,
   );
 

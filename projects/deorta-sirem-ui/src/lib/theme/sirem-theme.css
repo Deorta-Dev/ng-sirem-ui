@@ -27,20 +27,43 @@
 :root[data-theme='light'] {
   color-scheme: light;
   --sirem-surface: #ffffff;
-  --sirem-surface-alt: #f8fafc;
-  --sirem-surface-hover: #f1f5f9;
+  --sirem-surface-alt: #f6f7f9;
+  --sirem-surface-hover: #eceef1;
   --sirem-text: #0f172a;
   --sirem-text-soft: #334155;
-  --sirem-text-muted: #64748b;
-  --sirem-text-faint: #94a3b8;
-  --sirem-border: #e2e8f0;
-  --sirem-border-soft: #f1f5f9;
-  --sirem-border-strong: #cbd5e1;
+  --sirem-text-muted: #556170;
+  --sirem-text-faint: #7d8899;
+  --sirem-border: #ccd2db;
+  --sirem-border-soft: #dde1e7;
+  --sirem-border-strong: #b3bac5;
   --sirem-input-disabled: #f1f5f9;
   --sirem-tint-bg: #eef6ff;
   --sirem-tint-text: #174fe1;
   --sirem-tint-strong-bg: #d9eaff;
   --sirem-tint-strong-text: #1a3c8b;
+  /* Gris frío de la referencia: hace que las superficies blancas resalten. */
+  --sirem-page-bg: #dcdfe5;
+  /* Panel de aplicación (sidebar, barra fija): gris claro, ni blanco ni
+     igual que la página, para que las fichas blancas se lean encima. */
+  --sirem-surface-panel: #eceef1;
+  --sirem-surface-glass: color-mix(in srgb, var(--sirem-surface) 78%, transparent);
+  --sirem-surface-glass-strong: color-mix(in srgb, var(--sirem-surface) 90%, transparent);
+  --sirem-radius-sm: 0.5rem;
+  --sirem-radius-md: 0.75rem;
+  --sirem-radius-lg: 1rem;
+  --sirem-radius-xl: 1.125rem;
+  --sirem-shadow-xs: 0 1px 2px rgb(15 23 42 / 0.06);
+  --sirem-shadow-sm: 0 4px 14px rgb(15 23 42 / 0.1);
+  --sirem-shadow-md: 0 14px 34px rgb(15 23 42 / 0.14);
+  --sirem-shadow-lg: 0 25px 50px -12px rgb(15 23 42 / 0.25);
+  --sirem-tint-success-bg: #ecfdf5;
+  --sirem-tint-success-text: #047857;
+  --sirem-tint-warning-bg: #fffbeb;
+  --sirem-tint-warning-text: #b45309;
+  --sirem-tint-danger-bg: #fef2f2;
+  --sirem-tint-danger-text: #b91c1c;
+  --sirem-tint-neutral-bg: #f1f5f9;
+  --sirem-tint-neutral-text: #475569;
 }
 
 :root[data-theme='dark'] {
@@ -52,12 +75,28 @@
   --sirem-text-soft: #cbd5e1;
   --sirem-text-muted: #94a3b8;
   --sirem-text-faint: #64748b;
-  --sirem-border: #334155;
-  --sirem-border-soft: #1e293b;
-  --sirem-border-strong: #475569;
+  --sirem-border: #3b4a63;
+  --sirem-border-soft: #243147;
+  --sirem-border-strong: #55647d;
   --sirem-input-disabled: #1e293b;
   --sirem-tint-bg: rgb(29 100 241 / 0.18);
   --sirem-tint-text: #8ec5ff;
   --sirem-tint-strong-bg: rgb(29 100 241 / 0.3);
   --sirem-tint-strong-text: #bcdcff;
+  --sirem-page-bg: #080d16;
+  --sirem-surface-panel: #151d2e;
+  --sirem-surface-glass: color-mix(in srgb, var(--sirem-surface) 76%, transparent);
+  --sirem-surface-glass-strong: color-mix(in srgb, var(--sirem-surface) 90%, transparent);
+  --sirem-shadow-xs: 0 1px 2px rgb(0 0 0 / 0.4);
+  --sirem-shadow-sm: 0 4px 12px rgb(0 0 0 / 0.45);
+  --sirem-shadow-md: 0 12px 28px rgb(0 0 0 / 0.5);
+  --sirem-shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.6);
+  --sirem-tint-success-bg: rgb(16 185 129 / 0.16);
+  --sirem-tint-success-text: #6ee7b7;
+  --sirem-tint-warning-bg: rgb(245 158 11 / 0.16);
+  --sirem-tint-warning-text: #fcd34d;
+  --sirem-tint-danger-bg: rgb(239 68 68 / 0.16);
+  --sirem-tint-danger-text: #fca5a5;
+  --sirem-tint-neutral-bg: #1e293b;
+  --sirem-tint-neutral-text: #cbd5e1;
 }

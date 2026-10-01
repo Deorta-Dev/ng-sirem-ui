@@ -57,12 +57,17 @@ export * from './lib/form/rich-text/sirem-rich-text';
 // Formularios dinámicos (grid 12 columnas, autoguardado)
 export * from './lib/form/field-group/sirem-field-group';
 export * from './lib/form/dynamic-form/sirem-dynamic-form';
+export * from './lib/form/invoice-editor/sirem-invoice-editor';
 
 // Overlays (CRUD en modales, paneles, popups de mapa)
 export * from './lib/overlays/modal/sirem-modal';
 export * from './lib/overlays/confirm-dialog/sirem-confirm-dialog';
 export * from './lib/overlays/drawer/sirem-drawer';
 export * from './lib/overlays/popup-card/sirem-popup-card';
+export * from './lib/overlays/overlay/sirem-overlay-position';
+export * from './lib/overlays/overlay/sirem-overlay-layer';
+export * from './lib/overlays/overlay/sirem-overlay-viewport';
+export * from './lib/overlays/overlay/sirem-overlay-trigger';
 
 // Agenda (calendario con estados por colores)
 export * from './lib/schedule/calendar/sirem-calendar';

@@ -1,0 +1,327 @@
+/* Estilos de sirem-invoice-editor: cabecera, tabla de conceptos y totales. */
+@use '../fields' as *;
+
+.sirem-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sirem-invoice-editor {
+  display: block;
+  border: 1px solid var(--sirem-border);
+  border-radius: var(--sirem-radius-lg);
+  background: var(--sirem-surface);
+  box-shadow: var(--sirem-shadow-xs);
+  padding: 1rem;
+  color: var(--sirem-text);
+}
+
+/* ---- cabecera ---- */
+
+.sirem-invoice-editor__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--sirem-border-soft);
+}
+
+.sirem-invoice-editor__eyebrow {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-invoice-editor__ident {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.sirem-invoice-editor__number {
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--sirem-text);
+}
+
+.sirem-invoice-editor__party {
+  text-align: right;
+}
+
+.sirem-invoice-editor__party-name {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sirem-text);
+}
+
+.sirem-invoice-editor__party-doc {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-invoice-editor__party-empty {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--sirem-text-faint);
+  text-align: right;
+}
+
+/* ---- cabecera de campos ---- */
+
+.sirem-invoice-editor__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.875rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--sirem-border-soft);
+}
+
+@media (min-width: 768px) {
+  .sirem-invoice-editor__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .sirem-invoice-editor__field--3 {
+    grid-column: span 3 / span 3;
+  }
+
+  .sirem-invoice-editor__field--6 {
+    grid-column: span 6 / span 6;
+  }
+
+  .sirem-invoice-editor__field--9 {
+    grid-column: span 9 / span 9;
+  }
+}
+
+/* ---- conceptos ---- */
+
+.sirem-invoice-editor__lines {
+  padding-top: 1rem;
+}
+
+.sirem-invoice-editor__lines-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.sirem-invoice-editor__subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sirem-text);
+}
+
+.sirem-invoice-editor__hint {
+  margin: 0.125rem 0 0;
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-invoice-editor__table-wrap {
+  margin-top: 0.875rem;
+  overflow-x: auto;
+  border: 1px solid var(--sirem-border-soft);
+  border-radius: var(--sirem-radius-md);
+}
+
+.sirem-invoice-editor__table {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.sirem-invoice-editor__table th {
+  padding: 0.625rem 0.75rem;
+  background: var(--sirem-surface-alt);
+  border-bottom: 1px solid var(--sirem-border-soft);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: left;
+  white-space: nowrap;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-invoice-editor__table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--sirem-border-soft);
+  vertical-align: top;
+}
+
+.sirem-invoice-editor__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.sirem-invoice-editor__cell--num {
+  text-align: right;
+}
+
+.sirem-invoice-editor__cell--action {
+  width: 2.75rem;
+}
+
+.sirem-invoice-editor__input {
+  width: 100%;
+  min-width: 5.5rem;
+  padding: 0.375rem 0.5rem;
+}
+
+.sirem-invoice-editor__input--desc {
+  min-width: 13rem;
+}
+
+.sirem-invoice-editor__input--num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.sirem-invoice-editor__cell-error {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.6875rem;
+  line-height: 1.25;
+  color: var(--color-red-600, #dc2626);
+}
+
+.sirem-invoice-editor__money {
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--sirem-text);
+}
+
+.sirem-invoice-editor__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--sirem-text-muted);
+  cursor: pointer;
+}
+
+.sirem-invoice-editor__remove:hover:not(:disabled) {
+  background: var(--sirem-tint-danger-bg);
+  color: var(--sirem-tint-danger-text);
+}
+
+.sirem-invoice-editor__remove:focus-visible {
+  outline: 2px solid var(--color-sirem-600);
+  outline-offset: 2px;
+}
+
+.sirem-invoice-editor__remove:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sirem-invoice-editor__empty {
+  padding: 1.5rem 0.75rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-invoice-editor__lines-error {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: var(--color-red-600, #dc2626);
+}
+
+/* ---- totales y acciones ---- */
+
+.sirem-invoice-editor__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--sirem-border-soft);
+}
+
+.sirem-invoice-editor__totals {
+  display: grid;
+  gap: 0.375rem;
+  min-width: 14rem;
+  margin: 0;
+}
+
+.sirem-invoice-editor__total-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.sirem-invoice-editor__total-row dt {
+  color: var(--sirem-text-muted);
+}
+
+.sirem-invoice-editor__total-row dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--sirem-text-soft);
+}
+
+.sirem-invoice-editor__total-row--grand {
+  margin-top: 0.25rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--sirem-border);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.sirem-invoice-editor__total-row--grand dt,
+.sirem-invoice-editor__total-row--grand dd {
+  color: var(--sirem-text);
+}
+
+.sirem-invoice-editor__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.625rem;
+}
+
+.sirem-invoice-editor__alert {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-red-600, #dc2626);
+}
+
+@media (min-width: 768px) {
+  .sirem-invoice-editor {
+    padding: 1.25rem;
+  }
+}

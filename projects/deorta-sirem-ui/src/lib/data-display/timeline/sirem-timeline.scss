@@ -24,6 +24,11 @@
   box-shadow: 0 0 0 4px var(--sirem-surface);
 }
 
+/* Sobre una tarjeta translúcida el halo debe copiar su superficie. */
+:host-context(.sirem-card--glass) .sirem-timeline__dot {
+  box-shadow: 0 0 0 4px var(--sirem-surface-glass-strong);
+}
+
 .sirem-timeline__dot--neutral {
   background: var(--sirem-text-faint);
 }

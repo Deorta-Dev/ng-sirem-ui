@@ -13,7 +13,7 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
         <sirem-button size="sm" (pressed)="open.set(true)">Abrir panel</sirem-button>
         @if (open()) {
           <div (siremClickOutside)="open.set(false); fuera.set(fuera() + 1)"
-            class="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm text-slate-700">
+            class="w-full rounded-xl border border-slate-300 p-4 text-sm text-slate-700">
             Panel abierto — pulsa fuera de este recuadro para cerrarlo.
           </div>
         }
@@ -28,7 +28,7 @@ export class ClickOutsideDemoPage {
   readonly h1 = `<sirem-button size="sm" (pressed)="open.set(true)">Abrir panel</sirem-button>
 @if (open()) {
   <div (siremClickOutside)="open.set(false)"
-    class="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm text-slate-700">
+    class="w-full rounded-xl border border-slate-300 p-4 text-sm text-slate-700">
     Panel abierto — pulsa fuera de este recuadro para cerrarlo.
   </div>
 }`;

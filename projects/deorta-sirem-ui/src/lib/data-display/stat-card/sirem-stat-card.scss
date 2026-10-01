@@ -1,16 +1,73 @@
 /* Estilos de sirem-stat-card: tarjeta KPI. */
 .sirem-stat {
-  border-radius: 0.75rem;
+  --sirem-stat-accent: var(--color-sirem-600);
+  --sirem-stat-tint: var(--sirem-tint-bg);
+  border-radius: var(--sirem-radius-lg);
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
   padding: 1rem;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  box-shadow: var(--sirem-shadow-xs);
+}
+
+.sirem-stat--glass {
+  background: var(--sirem-surface-glass-strong);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  backdrop-filter: blur(18px) saturate(1.25);
+  box-shadow: var(--sirem-shadow-sm);
+}
+
+.sirem-stat--tint {
+  border-color: color-mix(in srgb, var(--sirem-stat-accent) 18%, var(--sirem-border));
+  background: var(--sirem-stat-tint);
+  box-shadow: var(--sirem-shadow-xs);
+}
+
+.sirem-stat--tint-brand {
+  --sirem-stat-accent: var(--color-sirem-600);
+  --sirem-stat-tint: var(--sirem-tint-bg);
+}
+
+.sirem-stat--tint-info {
+  --sirem-stat-accent: var(--color-sky-600, #0284c7);
+  --sirem-stat-tint: color-mix(in srgb, var(--color-sky-500, #0ea5e9) 10%, var(--sirem-surface));
+}
+
+.sirem-stat--tint-success {
+  --sirem-stat-accent: var(--color-emerald-600, #059669);
+  --sirem-stat-tint: var(--sirem-tint-success-bg);
+}
+
+.sirem-stat--tint-warning {
+  --sirem-stat-accent: var(--color-amber-600, #d97706);
+  --sirem-stat-tint: var(--sirem-tint-warning-bg);
+}
+
+.sirem-stat--tint-danger {
+  --sirem-stat-accent: var(--color-red-600, #dc2626);
+  --sirem-stat-tint: var(--sirem-tint-danger-bg);
 }
 
 .sirem-stat__head {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.sirem-stat__icon {
+  display: inline-flex;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--sirem-radius-sm);
+  background: color-mix(in srgb, var(--sirem-stat-accent) 14%, var(--sirem-surface));
+  color: var(--sirem-stat-accent);
+  font-size: 1rem;
+}
+
+.sirem-stat__icon:empty {
+  display: none;
 }
 
 .sirem-stat__label {
@@ -39,6 +96,11 @@
 
 .sirem-stat__delta--down {
   color: light-dark(var(--color-red-600, #dc2626), #f87171);
+}
+
+.sirem-stat--solid .sirem-stat__icon {
+  background: rgb(255 255 255 / 0.16);
+  color: #fff;
 }
 
 /* Variante a color pleno: fondo saturado + texto blanco. */

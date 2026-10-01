@@ -11,6 +11,7 @@ import {
   SiremListItem,
   SiremModal,
   SiremNavItem,
+  SiremOverlayTrigger,
   SiremPageHeader,
   SiremPaletteItem,
   SiremRadioGroup,
@@ -31,6 +32,7 @@ import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/p
 interface DemoApp {
   label: string;
   icon: string;
+  description: string;
   route: string;
 }
 
@@ -46,6 +48,7 @@ interface DemoApp {
     SiremInput,
     SiremList,
     SiremModal,
+    SiremOverlayTrigger,
     SiremPageHeader,
     SiremRadioGroup,
     SiremSearchPalette,
@@ -58,20 +61,22 @@ interface DemoApp {
   ],
   template: `
     <app-page-demo-shell label="Panel administrativo" [files]="codeFiles">
-      <div class="min-h-[calc(100dvh-2.75rem)] bg-slate-50 dark:bg-slate-950">
+      <div class="min-h-[calc(100dvh-2.75rem)]" style="background: var(--sirem-page-bg)">
         <sirem-sidebar
           brand="SIREM"
           [items]="navItems"
           [pinned]="true"
           [centerNav]="true"
           [blur]="true"
+          [floating]="true"
           [(collapsed)]="sidebarCollapsed"
           [(mobileOpen)]="mobileOpen"
         >
           <sirem-button
             slot="apps"
             size="sm"
-            variant="secondary"
+            variant="ghost"
+            [bordered]="false"
             [iconOnly]="sidebarCollapsed()"
             aria-label="Abrir aplicaciones"
             (pressed)="appsOpen.set(true)"
@@ -98,21 +103,26 @@ interface DemoApp {
         </sirem-sidebar>
 
         <section
-          class="min-h-[calc(100dvh-2.75rem)] transition-[padding] duration-200 md:pl-[var(--workspace-sidebar-width)]"
+          class="min-h-[calc(100dvh-2.75rem)] transition-[padding] duration-200 md:pl-[calc(var(--workspace-sidebar-width)+1.5rem)]"
           [style.--workspace-sidebar-width]="sidebarCollapsed() ? '4rem' : '15rem'"
         >
           <sirem-topbar
             [spaceLabel]="workspace()"
+            spaceAriaLabel="sede"
+            appearance="cards"
+            searchAlign="center"
+            searchPlaceholder="Buscar en "
+            searchHighlight="Clínica Norte"
+            searchHint="Ctrl + K"
+            [showSpaceDot]="false"
             [fixed]="true"
-            [blur]="true"
             (menuPressed)="mobileOpen.set(true)"
             (searchPressed)="searchOpen.set(true)"
             (spacePressed)="openWorkspace()"
-            (fullscreenPressed)="toggleFullscreen()"
           >
             <sirem-button
               slot="actions"
-              size="sm"
+              size="md"
               variant="secondary"
               (pressed)="quickCreateOpen.set(true)"
             >
@@ -122,17 +132,24 @@ interface DemoApp {
 
             <div slot="actions" class="relative">
               <sirem-button
-                size="sm"
+                size="md"
                 variant="secondary"
                 iconOnly
                 aria-label="Abrir notificaciones"
-                (pressed)="showNotifications()"
+                [siremOverlay]="notifTpl"
+                siremOverlayTrigger="click"
+                siremOverlayPlacement="bottom-end"
               >
                 <i slot="icon" class="fi fi-rr-bell" aria-hidden="true"></i>
                 <span class="sr-only">Notificaciones</span>
               </sirem-button>
               <span
-                class="pointer-events-none absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white"
+                class="pointer-events-none absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[9px] font-bold text-white"
+                style="
+                  background: var(--sirem-tint-danger-bg);
+                  color: var(--sirem-tint-danger-text);
+                  box-shadow: 0 0 0 2px var(--sirem-surface);
+                "
                 aria-label="3 notificaciones nuevas"
               >
                 3
@@ -140,7 +157,9 @@ interface DemoApp {
             </div>
           </sirem-topbar>
 
-          <main class="mx-auto flex w-full max-w-screen-2xl flex-col gap-5 p-4 sm:p-6 lg:p-8">
+          <main
+            class="mx-auto flex w-full max-w-screen-2xl flex-col gap-4 p-3 sm:p-4 lg:p-5"
+          >
             <sirem-page-header
               title="Panel de trabajo"
               [subtitle]="workspace() + ' · Viernes, 25 de septiembre'"
@@ -155,18 +174,36 @@ interface DemoApp {
                 label="Pacientes activos"
                 value="1.240"
                 [delta]="4.8"
-                variant="solid"
+                variant="tint"
                 color="brand"
               >
                 <i slot="icon" class="fi fi-rr-users" aria-hidden="true"></i>
               </sirem-stat-card>
-              <sirem-stat-card label="Citas hoy" value="32" [delta]="8.1">
+              <sirem-stat-card
+                label="Citas hoy"
+                value="32"
+                [delta]="8.1"
+                variant="tint"
+                color="info"
+              >
                 <i slot="icon" class="fi fi-rr-calendar" aria-hidden="true"></i>
               </sirem-stat-card>
-              <sirem-stat-card label="Facturado" value="$18,5 M" [delta]="12.4">
+              <sirem-stat-card
+                label="Facturado"
+                value="$18,5 M"
+                [delta]="12.4"
+                variant="tint"
+                color="success"
+              >
                 <i slot="icon" class="fi fi-rr-wallet" aria-hidden="true"></i>
               </sirem-stat-card>
-              <sirem-stat-card label="Cartera" value="$4,2 M" [delta]="-2.1">
+              <sirem-stat-card
+                label="Cartera"
+                value="$4,2 M"
+                [delta]="-2.1"
+                variant="tint"
+                color="warning"
+              >
                 <i slot="icon" class="fi fi-rr-receipt" aria-hidden="true"></i>
               </sirem-stat-card>
             </div>
@@ -176,6 +213,7 @@ interface DemoApp {
                 class="xl:col-span-3"
                 title="Próximas citas"
                 subtitle="Agenda de la mañana"
+                surface="glass"
               >
                 <sirem-list [items]="appointments" />
               </sirem-card>
@@ -184,6 +222,7 @@ interface DemoApp {
                 class="xl:col-span-2"
                 title="Actividad reciente"
                 subtitle="Actualizaciones del equipo"
+                surface="glass"
               >
                 <sirem-timeline [items]="activity" />
               </sirem-card>
@@ -193,6 +232,8 @@ interface DemoApp {
               title="Pacientes recientes"
               subtitle="Últimos registros actualizados"
               padding="none"
+              footerPadding="sm"
+              surface="glass"
             >
               <sirem-data-table [columns]="patientColumns" [rows]="patients" />
               <div slot="footer" class="flex justify-end">
@@ -210,13 +251,60 @@ interface DemoApp {
         (selected)="selectSearchResult($event)"
       />
 
-      <sirem-modal [(open)]="appsOpen" title="Aplicaciones" size="sm">
-        <div class="grid grid-cols-2 gap-3">
-          @for (app of apps; track app.label) {
-            <sirem-button variant="secondary" (pressed)="openApp(app.route)">
-              <i slot="icon" [class]="app.icon" aria-hidden="true"></i>
-              {{ app.label }}
+      <!-- Notificaciones: panel en la capa de overlays, no un modal. -->
+      <ng-template #notifTpl>
+        <sirem-card
+          class="w-[22rem]"
+          title="Notificaciones"
+          subtitle="3 sin leer"
+          surface="glass"
+          headerPadding="sm"
+          bodyPadding="none"
+          footerPadding="sm"
+        >
+          <sirem-list [items]="notifications" (itemPressed)="readNotification($event)" />
+          <div slot="footer" class="flex justify-end">
+            <sirem-button size="sm" variant="ghost" (pressed)="markAllRead()">
+              Marcar todas como leídas
             </sirem-button>
+          </div>
+        </sirem-card>
+      </ng-template>
+
+      <sirem-modal [(open)]="appsOpen" title="Aplicaciones" size="md">
+        <div class="grid gap-3 sm:grid-cols-2">
+          @for (app of apps; track app.label) {
+            <sirem-card
+              class="relative transition hover:-translate-y-0.5"
+              surface="glass"
+              headerPadding="none"
+              bodyPadding="none"
+              [showHeader]="false"
+              [showFooter]="false"
+            >
+              <div class="flex flex-col items-center gap-2 p-4 text-center">
+                <span
+                  class="flex h-11 w-11 items-center justify-center rounded-xl text-lg"
+                  style="background: var(--sirem-tint-bg); color: var(--sirem-tint-text)"
+                  aria-hidden="true"
+                >
+                  <i [class]="app.icon"></i>
+                </span>
+                <span class="text-sm font-semibold text-slate-900">{{ app.label }}</span>
+                @if (app.description) {
+                  <span class="text-xs text-slate-500">{{ app.description }}</span>
+                }
+              </div>
+
+              <!-- Botón estirado: mantiene la semántica y el foco por teclado
+                   de un enlace, manteniendo el aspecto de tarjeta. -->
+              <button
+                type="button"
+                class="absolute inset-0 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2"
+                [attr.aria-label]="app.label + ': ' + app.description"
+                (click)="openApp(app.route)"
+              ></button>
+            </sirem-card>
           }
         </div>
       </sirem-modal>
@@ -322,21 +410,50 @@ export class PageAdminDemoPage {
     { value: 'sur', label: 'Clínica Sur' },
   ];
 
+  readonly notifications: SiremListItem[] = [
+    {
+      title: 'Historia clínica por revisar',
+      subtitle: 'María Torres · hace 5 min',
+      badge: 'Nueva',
+      badgeTone: 'info',
+    },
+    {
+      title: 'Stock de lentes bajo',
+      subtitle: 'Lente progresivo · hace 40 min',
+      badge: 'Aviso',
+      badgeTone: 'warning',
+    },
+    {
+      title: 'Cita cancelada',
+      subtitle: 'Juan Pérez · mañana 09:00',
+      badge: 'Info',
+      badgeTone: 'neutral',
+    },
+  ];
+
   readonly apps: DemoApp[] = [
     {
       label: 'Pacientes',
       icon: 'fi fi-rr-users',
+      description: 'Listado y ficha clínica',
       route: '/demo/page-listado',
     },
     {
       label: 'Historias',
       icon: 'fi fi-rr-copy',
+      description: 'Evoluciones y anexos',
       route: '/demo/page-detalle',
     },
-    { label: 'Agenda', icon: 'fi fi-rr-calendar', route: '/demo/calendar' },
+    {
+      label: 'Agenda',
+      icon: 'fi fi-rr-calendar',
+      description: 'Citas del día',
+      route: '/demo/calendar',
+    },
     {
       label: 'Configuración',
       icon: 'fi fi-rr-settings',
+      description: 'Sedes y permisos',
       route: '/demo/page-admin',
     },
   ];
@@ -444,11 +561,16 @@ export class PageAdminDemoPage {
     ['Configuración', '/demo/page-admin'],
   ]);
 
-  showNotifications(): void {
-    this.toasts.info({
-      title: 'Notificaciones nuevas',
-      description: 'Hay 3 novedades del equipo y 1 historia clínica por revisar.',
-      duration: 5_000,
+  /** Al pulsar una notificación se marca leída y se avisa con un toast. */
+  readNotification(item: SiremListItem): void {
+    this.toasts.info({ title: item.title, description: item.subtitle, duration: 4_000 });
+  }
+
+  markAllRead(): void {
+    this.toasts.success({
+      title: 'Notificaciones leídas',
+      description: 'Se marcaron las 3 notificaciones como leídas.',
+      duration: 3_000,
     });
   }
 
@@ -494,27 +616,27 @@ export class PageAdminDemoPage {
     {
       name: 'page-admin.html',
       language: 'html',
-      code: `<div class="min-h-screen bg-slate-50">
+      code: `<div class="min-h-[calc(100dvh-2.75rem)]" style="background: var(--sirem-page-bg)">
   <sirem-sidebar
     brand="SIREM"
     [items]="navItems"
     [pinned]="true"
     [centerNav]="true"
+    [blur]="true"
+    [floating]="true"
     [(collapsed)]="sidebarCollapsed"
     [(mobileOpen)]="mobileOpen"
   >
     <sirem-button
       slot="apps"
       size="sm"
+      variant="ghost"
+      [bordered]="false"
       [iconOnly]="sidebarCollapsed()"
       (pressed)="appsOpen.set(true)"
     >
-      <i slot="icon" class="fi fi-rr-apps"></i>
-      @if (sidebarCollapsed()) {
-        <span class="sr-only">Aplicaciones</span>
-      } @else {
-        Aplicaciones
-      }
+      <sirem-fi-icon name="rr-category" />
+      <span class="sr-only">Aplicaciones</span>
     </sirem-button>
 
     <div slot="user" class="flex w-full items-center gap-2">
@@ -529,24 +651,77 @@ export class PageAdminDemoPage {
   </sirem-sidebar>
 
   <section
-    class="min-h-screen transition-[padding] md:pl-[var(--workspace-sidebar-width)]"
-    [style.--workspace-sidebar-width]="sidebarCollapsed() ? '5rem' : '18rem'"
+    class="min-h-[calc(100dvh-2.75rem)] transition-[padding] md:pl-[calc(var(--workspace-sidebar-width)+1.5rem)]"
+    [style.--workspace-sidebar-width]="sidebarCollapsed() ? '4rem' : '15rem'"
   >
+    <!-- fixed + blur + floating: tarjeta redondeada pegada al borde superior -->
     <sirem-topbar
       spaceLabel="Clínica Norte"
       [fixed]="true"
+      [blur]="true"
+      [floating]="true"
       (menuPressed)="mobileOpen.set(true)"
       (searchPressed)="searchOpen.set(true)"
+      (spacePressed)="openWorkspace()"
+      (fullscreenPressed)="toggleFullscreen()"
     >
-      <sirem-button slot="actions">Nuevo paciente</sirem-button>
-      <sirem-button slot="actions" iconOnly>
-        <i slot="icon" class="fi fi-rr-bell"></i>
-        <span class="sr-only">Notificaciones</span>
+      <sirem-button slot="actions" size="sm" variant="secondary">
+        <i slot="icon" class="fi fi-rr-plus"></i>
+        Nuevo paciente
       </sirem-button>
+
+      <div slot="actions" class="relative">
+        <sirem-button
+          size="sm"
+          variant="secondary"
+          iconOnly
+          aria-label="Abrir notificaciones"
+          (pressed)="showNotifications()"
+        >
+          <i slot="icon" class="fi fi-rr-bell"></i>
+        </sirem-button>
+        <span class="absolute -right-1 -top-1 … rounded-full px-1 text-[9px] font-bold">3</span>
+      </div>
     </sirem-topbar>
 
-    <main class="p-4 md:p-6 lg:p-8">
-      <!-- KPIs, agenda, actividad y pacientes -->
+    <main class="mx-auto flex w-full max-w-screen-2xl flex-col gap-4 p-3 sm:p-4 lg:p-5">
+      <sirem-page-header title="Panel de trabajo" subtitle="Clínica Norte · Viernes, 25 de septiembre">
+        <div slot="actions"><sirem-badge tone="success" dot>Operación normal</sirem-badge></div>
+      </sirem-page-header>
+
+      <!-- KPIs: variant="tint" = fondo pastel + icono en chip -->
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <sirem-stat-card label="Pacientes activos" value="1.240" [delta]="4.8" variant="tint" color="brand">
+          <i slot="icon" class="fi fi-rr-users"></i>
+        </sirem-stat-card>
+        <sirem-stat-card label="Citas hoy" value="32" [delta]="8.1" variant="tint" color="info">
+          <i slot="icon" class="fi fi-rr-calendar"></i>
+        </sirem-stat-card>
+        <sirem-stat-card label="Facturado" value="$18,5 M" [delta]="12.4" variant="tint" color="success">
+          <i slot="icon" class="fi fi-rr-wallet"></i>
+        </sirem-stat-card>
+        <sirem-stat-card label="Cartera" value="$4,2 M" [delta]="-2.1" variant="tint" color="warning">
+          <i slot="icon" class="fi fi-rr-receipt"></i>
+        </sirem-stat-card>
+      </div>
+
+      <!-- Paneles: surface="glass" = translúcidos -->
+      <div class="grid gap-4 xl:grid-cols-5">
+        <sirem-card class="xl:col-span-3" title="Próximas citas" subtitle="Agenda de la mañana" surface="glass">
+          <sirem-list [items]="appointments" />
+        </sirem-card>
+
+        <sirem-card class="xl:col-span-2" title="Actividad reciente" subtitle="Actualizaciones del equipo" surface="glass">
+          <sirem-timeline [items]="activity" />
+        </sirem-card>
+      </div>
+
+      <sirem-card title="Pacientes recientes" subtitle="Últimos registros actualizados" padding="none" footerPadding="sm" surface="glass">
+        <sirem-data-table [columns]="patientColumns" [rows]="patients" />
+        <div slot="footer" class="flex justify-end">
+          <sirem-button size="sm" variant="secondary">Ver todos los pacientes</sirem-button>
+        </div>
+      </sirem-card>
     </main>
   </section>
 </div>`,

@@ -3,6 +3,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgTemplateOutlet } from '@angular/common';
 import type { SiremNavItem } from '../../layout/sidebar/sirem-sidebar';
+import { SiremOverlayTrigger } from '../../overlays/overlay/sirem-overlay-trigger';
 
 export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floating';
 
@@ -25,7 +26,7 @@ export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floatin
 @Component({
   selector: 'sirem-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgTemplateOutlet],
+  imports: [RouterLink, RouterLinkActive, NgTemplateOutlet, SiremOverlayTrigger],
   styleUrl: './sirem-navbar.scss',
   template: `
     @if (layout() === 'horizontal') {
@@ -40,10 +41,11 @@ export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floatin
             @if (item.children?.length) {
               <button
                 type="button"
-                (click)="toggle(item.label)"
-                [attr.aria-expanded]="isExpanded(item.label)"
+                [siremOverlay]="dropTpl"
+                [siremOverlayData]="{ item: item }"
+                siremOverlayTrigger="click"
+                siremOverlayPlacement="bottom-start"
                 class="sirem-navbar__link"
-                [class.sirem-navbar__link--open]="isExpanded(item.label)"
               >
                 @if (item.svg) {
                   <span class="sirem-navbar__svgicon" [innerHTML]="safeSvg(item.svg)" aria-hidden="true"></span>
@@ -53,13 +55,6 @@ export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floatin
                 <span>{{ item.label }}</span>
                 <span class="sirem-navbar__chev" aria-hidden="true">▾</span>
               </button>
-              @if (isExpanded(item.label)) {
-                <div class="sirem-navbar__drop">
-                  @for (child of visibleChildren(item); track child.label) {
-                    <ng-container *ngTemplateOutlet="linkTpl; context: { $implicit: child }" />
-                  }
-                </div>
-              }
             } @else {
               <ng-container *ngTemplateOutlet="linkTpl; context: { $implicit: item }" />
             }
@@ -163,6 +158,18 @@ export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floatin
         }
       </nav>
     }
+
+    <!--
+      Desplegable en la capa de overlays: asi no lo recorta el overflow de
+      la barra ni el de un contenedor con scroll.
+    -->
+    <ng-template #dropTpl let-data>
+      <div class="sirem-overlay__panel" role="menu">
+        @for (child of visibleChildren(data.item); track child.label) {
+          <ng-container *ngTemplateOutlet="linkTpl; context: { $implicit: child }" />
+        }
+      </div>
+    </ng-template>
 
     <ng-template #linkTpl let-item>
       @if (item.route) {

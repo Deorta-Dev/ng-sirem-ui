@@ -48,25 +48,13 @@
   color: var(--sirem-text-faint);
 }
 
-.sirem-user__backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-}
-
 .sirem-user__panel {
-  position: absolute;
-  right: 0;
-  z-index: 50;
-  margin-top: 0.5rem;
   width: 16rem;
   overflow: hidden;
-  border-radius: 0.75rem;
+  border-radius: var(--sirem-radius-lg);
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
-  box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: var(--sirem-shadow-md);
 }
 
 .sirem-user__head {

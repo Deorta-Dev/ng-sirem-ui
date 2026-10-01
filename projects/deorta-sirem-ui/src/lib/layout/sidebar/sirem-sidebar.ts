@@ -4,6 +4,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SiremFiIcon } from '../../icons/fi-icon/sirem-fi-icon';
 import { SiremButton } from '../../button/sirem-button';
+import { SiremOverlayTrigger } from '../../overlays/overlay/sirem-overlay-trigger';
 
 /** Ítem de navegación jerárquica del sidebar / navbar. */
 export interface SiremNavItem {
@@ -45,7 +46,14 @@ export interface SiremNavItem {
 @Component({
   selector: 'sirem-sidebar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgTemplateOutlet, SiremFiIcon, SiremButton],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    NgTemplateOutlet,
+    SiremFiIcon,
+    SiremButton,
+    SiremOverlayTrigger,
+  ],
   host: { '[class.is-collapsed]': 'collapsed()' },
   template: `
     @if (layout() === 'horizontal') {
@@ -67,8 +75,10 @@ export interface SiremNavItem {
               @if (item.children?.length) {
                 <button
                   type="button"
-                  (click)="toggle(item.label)"
-                  [attr.aria-expanded]="isExpanded(item.label)"
+                  [siremOverlay]="dropTpl"
+                  [siremOverlayData]="{ item: item }"
+                  siremOverlayTrigger="click"
+                  siremOverlayPlacement="bottom-start"
                   class="sirem-sidebar__link"
                 >
                   @if (item.svg) {
@@ -81,19 +91,8 @@ export interface SiremNavItem {
                     <i [class]="item.icon + ' sirem-sidebar__icon'" aria-hidden="true"></i>
                   }
                   <span>{{ item.label }}</span>
-                  <span class="sirem-sidebar__chev" aria-hidden="true">
-                    {{ isExpanded(item.label) ? '▾' : '▸' }}
-                  </span>
+                  <span class="sirem-sidebar__chev" aria-hidden="true">▾</span>
                 </button>
-                @if (isExpanded(item.label)) {
-                  <div class="sirem-sidebar__drop" role="menu">
-                    @for (child of visibleChildren(item); track child.label) {
-                      <ng-container
-                        *ngTemplateOutlet="linkTpl; context: { $implicit: child }"
-                      ></ng-container>
-                    }
-                  </div>
-                }
               } @else {
                 <ng-container
                   *ngTemplateOutlet="linkTpl; context: { $implicit: item }"
@@ -118,6 +117,7 @@ export interface SiremNavItem {
         [class.sirem-sidebar--fixed]="fixed()"
         [class.sirem-sidebar--pinned]="pinned()"
         [class.sirem-sidebar--blur]="blur()"
+        [class.sirem-sidebar--floating]="floating()"
         aria-label="Navegación principal"
       >
         <div class="sirem-sidebar__brand">
@@ -133,7 +133,7 @@ export interface SiremNavItem {
           </div>
 
           <div class="sirem-sidebar__header-actions">
-            <sirem-button size="sm" variant="secondary"
+            <sirem-button size="sm" variant="ghost" [bordered]="false"
 
               (click)="collapsed.set(!collapsed())"
               [attr.aria-label]="collapsed() ? 'Expandir menú' : 'Contraer menú'"
@@ -205,6 +205,18 @@ export interface SiremNavItem {
       </aside>
     }
 
+    <!--
+      Desplegable del layout horizontal: se pinta en la capa de overlays, no
+      dentro del navbar, para que ningun overflow lo recorte.
+    -->
+    <ng-template #dropTpl let-data>
+      <div class="sirem-overlay__panel" role="menu">
+        @for (child of visibleChildren(data.item); track child.label) {
+          <ng-container *ngTemplateOutlet="linkTpl; context: { $implicit: child }" />
+        }
+      </div>
+    </ng-template>
+
     <ng-template #linkTpl let-item>
       @if (item.route) {
         <a
@@ -267,6 +279,8 @@ export class SiremSidebar {
   readonly centerNav = input(false);
   /** Fondo translúcido con desenfoque (ideal con `fixed`). */
   readonly blur = input(false);
+  /** Panel flotante: se separa de los bordes con margen y radio (dashboard). */
+  readonly floating = input(false);
   /** Colapso total (desktop): solo iconos. Ideal para mapas. */
   readonly collapsed = model(false);
   /** Drawer en móvil. */

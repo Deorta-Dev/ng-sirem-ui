@@ -1,4 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { SiremOverlayTrigger } from '../../overlays/overlay/sirem-overlay-trigger';
 import {
   booleanAttribute,
   Component,
@@ -50,9 +51,22 @@ export type SiremOptionsMapper = (item: unknown) => SiremSelectOption;
 @Component({
   selector: 'sirem-input-field',
   standalone: true,
+  imports: [SiremOverlayTrigger],
   styleUrl: './sirem-input.scss',
   template: `
-    <div class="sirem-field">
+    <!--
+      El contenedor del campo es el disparador del overlay. Va en modo manual
+      porque el panel se abre al enfocar (ver ensureOpen), no al hacer clic.
+    -->
+    <div
+      class="sirem-field"
+      [siremOverlay]="panelTpl"
+      [open]="open()"
+      (openChange)="open.set($event)"
+      siremOverlayTrigger="manual"
+      siremOverlayPlacement="bottom-start"
+      [siremOverlayMatchTriggerWidth]="true"
+    >
       @if (label()) {
         <span class="sirem-field__label" [id]="labelId()">
           {{ label() }}
@@ -187,51 +201,6 @@ export type SiremOptionsMapper = (item: unknown) => SiremSelectOption;
             }
           }
 
-          @if (open()) {
-            <div class="sirem-input__backdrop" (click)="close()" aria-hidden="true"></div>
-            <ul
-              role="listbox"
-              [id]="listId()"
-              [attr.aria-label]="label() || 'Opciones'"
-              class="sirem-input__panel"
-            >
-              @if (loading()) {
-                <li class="sirem-input__state" aria-disabled="true">Cargando opciones…</li>
-              } @else if (remoteError()) {
-                <li class="sirem-input__state sirem-input__state--error" aria-disabled="true">
-                  {{ remoteError() }}
-                </li>
-              } @else {
-                @for (opt of suggestions(); track opt.value; let i = $index) {
-                  <li role="option" [id]="listId() + '-' + i" [attr.aria-selected]="isSelected(opt)">
-                    <button
-                      type="button"
-                      (mousedown)="$event.preventDefault()"
-                      (click)="choose(opt)"
-                      (mouseenter)="active.set(i)"
-                      class="sirem-input__option-btn"
-                      [class.sirem-input__option-btn--active]="i === active()"
-                    >
-                      <span class="sirem-input__option-label">{{ opt.label }}</span>
-                      @if (isSelected(opt)) {
-                        <span class="sirem-input__check" aria-hidden="true">
-                          <i class="fi fi-rr-check" aria-hidden="true"></i>
-                        </span>
-                      }
-                    </button>
-                  </li>
-                } @empty {
-                  <li class="sirem-input__state" aria-disabled="true">
-                    @if (strictEffective()) {
-                      Sin coincidencias.
-                    } @else {
-                      Pulsa Enter para usar “{{ text() }}”.
-                    }
-                  </li>
-                }
-              }
-            </ul>
-          }
         </div>
       }
 
@@ -243,6 +212,58 @@ export type SiremOptionsMapper = (item: unknown) => SiremSelectOption;
         <span [id]="hintId()" class="sirem-field__hint">{{ hint() }}</span>
       }
     </div>
+
+    <!--
+      Sugerencias en la capa de overlays. Se conecta en modo manual porque el
+      campo se abre al recibir el foco, no al hacer clic; el vinculo open mantiene
+      el estado propio del componente como unica fuente de verdad.
+    -->
+    <ng-template #panelTpl>
+      <ul
+        role="listbox"
+        [id]="listId()"
+        [attr.aria-label]="label() || 'Opciones'"
+        class="sirem-input__panel"
+      >
+
+          @if (loading()) {
+            <li class="sirem-input__state" aria-disabled="true">Cargando opciones…</li>
+          } @else if (remoteError()) {
+            <li class="sirem-input__state sirem-input__state--error" aria-disabled="true">
+              {{ remoteError() }}
+            </li>
+          } @else {
+            @for (opt of suggestions(); track opt.value; let i = $index) {
+              <li role="option" [id]="listId() + '-' + i" [attr.aria-selected]="isSelected(opt)">
+                <button
+                  type="button"
+                  (mousedown)="$event.preventDefault()"
+                  (click)="choose(opt)"
+                  (mouseenter)="active.set(i)"
+                  class="sirem-input__option-btn"
+                  [class.sirem-input__option-btn--active]="i === active()"
+                >
+                  <span class="sirem-input__option-label">{{ opt.label }}</span>
+                  @if (isSelected(opt)) {
+                    <span class="sirem-input__check" aria-hidden="true">
+                      <i class="fi fi-rr-check" aria-hidden="true"></i>
+                    </span>
+                  }
+                </button>
+              </li>
+            } @empty {
+              <li class="sirem-input__state" aria-disabled="true">
+                @if (strictEffective()) {
+                  Sin coincidencias.
+                } @else {
+                  Pulsa Enter para usar “{{ text() }}”.
+                }
+              </li>
+            }
+          }
+
+      </ul>
+    </ng-template>
   `,
 })
 export class SiremInput {

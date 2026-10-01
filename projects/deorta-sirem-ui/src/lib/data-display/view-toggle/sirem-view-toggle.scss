@@ -20,5 +20,5 @@
 .sirem-view-toggle__btn--active {
   background: var(--sirem-surface);
   color: var(--sirem-text);
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  box-shadow: var(--sirem-shadow-xs);
 }

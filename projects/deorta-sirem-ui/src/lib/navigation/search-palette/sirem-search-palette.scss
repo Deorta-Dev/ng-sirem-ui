@@ -21,10 +21,9 @@
   width: 100%;
   max-width: 32rem;
   overflow: hidden;
-  border-radius: 0.75rem;
+  border-radius: var(--sirem-radius-lg);
   background: var(--sirem-surface);
-  box-shadow:
-    0 25px 50px -12px rgb(0 0 0 / 0.25);
+  box-shadow: var(--sirem-shadow-lg);
 }
 
 .sirem-palette__bar {

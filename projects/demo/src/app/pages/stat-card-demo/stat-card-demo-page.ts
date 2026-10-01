@@ -28,6 +28,35 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
         <sirem-stat-card label="Glosa" value="3,1 %" variant="solid" color="warning" />
         <sirem-stat-card label="Telemedicina" value="12" variant="solid" color="info" />
       </app-demo-variant-card>
+      <app-demo-variant-card
+        title="Pastel (tint)"
+        description="variant=tint: fondo pastel del tono con el icono en chip."
+        [htmlCode]="h5"
+        [tsCode]="t"
+      >
+        <sirem-stat-card label="Pacientes" value="1.240" [delta]="4.8" variant="tint" color="brand">
+          <i slot="icon" class="fi fi-rr-users"></i>
+        </sirem-stat-card>
+        <sirem-stat-card label="Citas hoy" value="32" [delta]="8.1" variant="tint" color="info">
+          <i slot="icon" class="fi fi-rr-calendar"></i>
+        </sirem-stat-card>
+        <sirem-stat-card label="Facturado" value="$18,5 M" [delta]="12.4" variant="tint" color="success">
+          <i slot="icon" class="fi fi-rr-wallet"></i>
+        </sirem-stat-card>
+        <sirem-stat-card label="Cartera" value="$4,2 M" [delta]="-2.1" variant="tint" color="warning">
+          <i slot="icon" class="fi fi-rr-receipt"></i>
+        </sirem-stat-card>
+      </app-demo-variant-card>
+      <app-demo-variant-card
+        title="Superficie glass"
+        description="surface=glass para superponer sobre fondos con color."
+        [htmlCode]="h6"
+        [tsCode]="t"
+      >
+        <sirem-stat-card label="Facturado" value="$18,5 M" [delta]="12.4" surface="glass">
+          <i slot="icon" class="fi fi-rr-wallet"></i>
+        </sirem-stat-card>
+      </app-demo-variant-card>
     </app-demo-page-layout>
   `,
 })
@@ -36,5 +65,7 @@ export class StatCardDemoPage {
   readonly h2 = '<sirem-stat-card label="Ventas mes" value="$18,5 M" [delta]="12.4" />\n<sirem-stat-card label="Glosa" value="3,1 %" [delta]="-0.8" />';
   readonly h3 = '<sirem-stat-card label="Citas hoy" value="32" [delta]="5">\n  <i slot="icon" class="fi fi-rr-calendar"></i>\n</sirem-stat-card>';
   readonly h4 = '<sirem-stat-card label="Citas hoy" value="32" variant="solid" color="brand" />\n<sirem-stat-card label="Urgencias" value="7" variant="solid" color="danger" />\n<sirem-stat-card label="Recaudo" value="$18,5 M" variant="solid" color="success" />\n<sirem-stat-card label="Glosa" value="3,1 %" variant="solid" color="warning" />\n<sirem-stat-card label="Telemedicina" value="12" variant="solid" color="info" />';
+  readonly h5 = '<sirem-stat-card label="Pacientes" value="1.240" [delta]="4.8" variant="tint" color="brand">\n  <i slot="icon" class="fi fi-rr-users"></i>\n</sirem-stat-card>\n<sirem-stat-card label="Citas hoy" value="32" [delta]="8.1" variant="tint" color="info">\n  <i slot="icon" class="fi fi-rr-calendar"></i>\n</sirem-stat-card>';
+  readonly h6 = '<sirem-stat-card label="Facturado" value="$18,5 M" [delta]="12.4" surface="glass">\n  <i slot="icon" class="fi fi-rr-wallet"></i>\n</sirem-stat-card>';
   readonly t = "import { SiremStatCard } from 'deorta-sirem-ui';";
 }

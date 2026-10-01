@@ -10,7 +10,7 @@ const DUO_USERS = '<svg viewBox="0 0 256 256" fill="currentColor"><path opacity=
   standalone: true,
   imports: [DemoPageLayout, DemoVariantCard, SiremSidebar],
   template: `
-    <app-demo-page-layout title="Sidebar" category="Layout" subtitle="sirem-sidebar — vertical/horizontal, colapsable con restauración, iconos fi/svg y fixed+blur.">
+    <app-demo-page-layout title="Sidebar" category="Layout" subtitle="sirem-sidebar — vertical/horizontal, colapsable con restauración, iconos fi/svg, fixed+blur y floating (panel redondeado para dashboards, ver /demo/page-admin).">
       <app-demo-variant-card title="Expandida" description="Estado normal con etiquetas." [htmlCode]="h1" [tsCode]="t">
         <div class="w-64"><sirem-sidebar [items]="items" brand="SIREM" /></div>
       </app-demo-variant-card>

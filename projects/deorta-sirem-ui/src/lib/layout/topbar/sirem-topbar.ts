@@ -1,18 +1,39 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
+import { SiremFiIcon } from '../../icons/fi-icon/sirem-fi-icon';
+import { SiremButton } from '../../button/sirem-button';
+
+/** Cómo se alinea el buscador dentro de la barra. */
+export type SiremTopbarSearchAlign = 'start' | 'center';
+/** Estética global de la barra. */
+export type SiremTopbarAppearance = 'default' | 'cards';
 
 /**
  * Barra superior: hamburguesa (móvil), workspace a la izquierda,
  * buscador global (Ctrl+K), acciones especiales y pantalla completa.
  * El menú de usuario se proyecta en `slot="user"`.
  *
+ * ## Apariencia
+ * - `default`: barra continua con borde inferior (uso clásico).
+ * - `cards`: la barra se vuelve transparente y cada pieza (workspace,
+ *   buscador, acciones) se convierte en una tarjeta flotante con sombra,
+ *   como en la referencia. Se combina con `searchAlign="center"` para dejar
+ *   el buscador centrado.
+ *
+ * ## Buscador
+ * `searchPlaceholder` admite emphasis con `searchHighlight`, que se pinta en
+ * negrita dentro del texto atenuado. `searchHint` es la tecla sugerida y se
+ * oculta si va vacía.
+ *
  * Uso:
  * ```html
  * <sirem-topbar
- *   spaceLabel="Clínica Norte"
- *   (menuPressed)="menuAbierto = true"
+ *   appearance="cards"
+ *   searchAlign="center"
+ *   spaceLabel="Panel principal"
+ *   searchPlaceholder="Buscar en "
+ *   searchHighlight="Soeimn Lion Master"
+ *   searchHint="Ctrl + K"
  *   (searchPressed)="paleta.set(true)"
- *   (spacePressed)="abrirSucursales()"
- *   (fullscreenPressed)="fs.set(true)"
  * >
  *   <sirem-user-menu slot="user" userName="..." userDetail="..." />
  * </sirem-topbar>
@@ -21,12 +42,16 @@ import { Component, input, output } from '@angular/core';
 @Component({
   selector: 'sirem-topbar',
   standalone: true,
+  imports: [SiremFiIcon, SiremButton],
   styleUrl: './sirem-topbar.scss',
   template: `
     <header
       class="sirem-topbar"
       [class.sirem-topbar--fixed]="fixed()"
       [class.sirem-topbar--blur]="blur()"
+      [class.sirem-topbar--floating]="floating()"
+      [class.sirem-topbar--cards]="appearance() === 'cards'"
+      [class.sirem-topbar--search-center]="searchAlign() === 'center'"
     >
       <button
         type="button"
@@ -34,50 +59,63 @@ import { Component, input, output } from '@angular/core';
         class="sirem-topbar__icon-btn sirem-topbar__icon-btn--menu"
         aria-label="Abrir menú"
       >
-        <span aria-hidden="true" class="sirem-topbar__glyph">☰</span>
+        <sirem-fi-icon name="rr-menu" />
       </button>
 
-      <button
-        type="button"
+      <sirem-button
+        size="md"
+        variant="secondary"
         (click)="spacePressed.emit()"
-        class="sirem-topbar__space"
-        aria-label="Cambiar de workspace"
-        title="Cambiar de workspace"
+        [attr.aria-label]="'Cambiar de ' + spaceAriaLabel()"
+        [title]="'Cambiar de ' + spaceAriaLabel()"
       >
-        <span aria-hidden="true" class="sirem-topbar__space-dot">◉</span>
+        @if (showSpaceDot()) {
+          <span aria-hidden="true" class="sirem-topbar__space-dot">◉</span>
+        }
         <span class="sirem-topbar__space-label">{{ spaceLabel() }}</span>
-        <span aria-hidden="true" class="sirem-topbar__space-chev">▾</span>
-      </button>
+        @if (showSpaceChevron()) {
+          <span aria-hidden="true" class="sirem-topbar__space-chev">▾</span>
+        }
+      </sirem-button>
 
-      <button
-        type="button"
+      <sirem-button
         (click)="searchPressed.emit()"
-        class="sirem-topbar__search"
-        aria-label="Búsqueda global (Ctrl+K)"
+        [attr.aria-label]="searchAriaLabel()"
+        size="md" variant="secondary"
       >
-        <span aria-hidden="true">⌕</span>
-        <span class="sirem-topbar__search-text">Buscar pacientes, facturas, placas…</span>
-        <kbd class="sirem-topbar__kbd"> Ctrl K </kbd>
-      </button>
+        <sirem-fi-icon name="rr-search" class="sirem-topbar__search-icon" />
+        <span class="sirem-topbar__search-text">
+          <span class="sirem-topbar__search-prefix">{{ searchPlaceholder() }}</span
+          >@if (searchHighlight()) {
+            <strong class="sirem-topbar__search-hl">{{ searchHighlight() }}</strong>
+          }
+        </span>
+        @if (searchHint()) {
+          <kbd class="sirem-topbar__kbd">{{ searchHint() }}</kbd>
+        }
+      </sirem-button>
+
       <button
         type="button"
         (click)="searchPressed.emit()"
         class="sirem-topbar__icon-btn sirem-topbar__search-btn"
         aria-label="Búsqueda global"
       >
-        <span aria-hidden="true" class="sirem-topbar__glyph">⌕</span>
+        <sirem-fi-icon name="rr-search" />
       </button>
 
       <div class="sirem-topbar__right">
-        <button
-          type="button"
-          (click)="fullscreenPressed.emit()"
-          class="sirem-topbar__icon-btn"
-          aria-label="Pantalla completa"
-          title="Pantalla completa"
-        >
-          <span aria-hidden="true" class="sirem-topbar__glyph">⛶</span>
-        </button>
+        @if (showFullscreen()) {
+          <sirem-button
+            (click)="fullscreenPressed.emit()"
+            aria-label="Pantalla completa"
+            title="Pantalla completa"
+            variant="secondary"
+            size="md"
+          >
+            <sirem-fi-icon name="rr-expand" />
+          </sirem-button>
+        }
 
         <ng-content select="[slot='actions']" />
         <ng-content select="[slot='user']" />
@@ -88,10 +126,35 @@ import { Component, input, output } from '@angular/core';
 export class SiremTopbar {
   /** Workspace o sede actual. Dispara `spacePressed` para abrir su selector. */
   readonly spaceLabel = input('Mi espacio');
+  /** Texto del workspace cuando no se muestra como botón (móvil). */
+  readonly spaceAriaLabel = input('workspace');
   /** Fija la barra al hacer scroll (`position: sticky`). */
   readonly fixed = input(false);
   /** Fondo translúcido con desenfoque (ideal con `fixed`). */
   readonly blur = input(false);
+  /** Barra flotante: se separa de los bordes con margen y radio (dashboard). */
+  readonly floating = input(false);
+  /** Estética global: `default` continua, `cards` piezas flotantes. */
+  readonly appearance = input<SiremTopbarAppearance>('default');
+  /** Alineación del buscador; `center` lo deja centrado en la barra. */
+  readonly searchAlign = input<SiremTopbarSearchAlign>('start');
+  /** Texto atenuado del buscador. */
+  readonly searchPlaceholder = input('Buscar pacientes, facturas, placas…');
+  /** Parte del placeholder que se muestra en negrita. */
+  readonly searchHighlight = input('');
+  /** Tecla sugerida; cadena vacía la oculta. */
+  readonly searchHint = input('Ctrl K');
+  /** Muestra el botón de pantalla completa. */
+  readonly showFullscreen = input(true);
+  /** Muestra el punto decorativo junto al workspace. */
+  readonly showSpaceDot = input(true);
+  /** Muestra la flecha del workspace (indica que abre un selector). */
+  readonly showSpaceChevron = input(true);
+
+  /** Etiqueta accesible del buscador, con la tecla sugerida incluida. */
+  readonly searchAriaLabel = computed(() =>
+    this.searchHint() ? `Búsqueda global (${this.searchHint()})` : 'Búsqueda global',
+  );
 
   readonly menuPressed = output<void>();
   readonly searchPressed = output<void>();

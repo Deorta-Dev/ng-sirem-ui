@@ -8,10 +8,10 @@
 }
 
 .sirem-navbar--vertical {
-  border-radius: 0.75rem;
+  border-radius: var(--sirem-radius-lg);
   border: 1px solid var(--sirem-border);
   padding: 0.5rem;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  box-shadow: var(--sirem-shadow-xs);
 }
 
 .sirem-navbar--floating {
@@ -19,9 +19,7 @@
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
   padding: 0.75rem;
-  box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: var(--sirem-shadow-md);
 }
 
 .sirem-navbar--horizontal {
@@ -115,21 +113,6 @@
   width: auto;
 }
 
-.sirem-navbar__drop {
-  position: absolute;
-  left: 0;
-  top: 100%;
-  z-index: 30;
-  margin-top: 0.25rem;
-  min-width: 12rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--sirem-border);
-  background: var(--sirem-surface);
-  padding: 0.375rem;
-  box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
-}
 
 .sirem-navbar__rail-item {
   position: relative;
@@ -143,7 +126,7 @@
   justify-content: center;
   border: 0;
   background: none;
-  border-radius: 0.75rem;
+  border-radius: var(--sirem-radius-lg);
   color: var(--sirem-text-muted);
   cursor: pointer;
   text-decoration: none;
@@ -174,13 +157,11 @@
   z-index: 30;
   margin-left: 0.5rem;
   min-width: 12rem;
-  border-radius: 0.75rem;
+  border-radius: var(--sirem-radius-lg);
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
   padding: 0.375rem;
-  box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: var(--sirem-shadow-md);
 }
 
 .sirem-navbar__flyout-title {

@@ -9,7 +9,7 @@ import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/p
   template: `
     <app-page-demo-shell label="Página de login" [files]="codeFiles">
       <main
-        class="grid min-h-[calc(100dvh-2.75rem)] place-items-center bg-slate-100 p-4 sm:p-8 dark:bg-slate-950"
+        class="grid min-h-[calc(100dvh-2.75rem)] place-items-center p-4 sm:p-8"
       >
         <sirem-card class="w-full max-w-md" title="Iniciar sesión" subtitle="SIREM · Óptica Norte">
           <sirem-input-field
@@ -61,7 +61,7 @@ export class PageLoginDemoPage {
     {
       name: 'page-login.html',
       language: 'html',
-      code: `<main class="grid min-h-screen place-items-center bg-slate-100 p-4 sm:p-8">
+      code: `<main class="grid min-h-screen place-items-center p-4 sm:p-8">
   <sirem-card class="w-full max-w-md" title="Iniciar sesión" subtitle="SIREM · Óptica Norte">
     <sirem-input-field
       label="Usuario"

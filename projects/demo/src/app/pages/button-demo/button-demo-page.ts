@@ -36,6 +36,18 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
         </sirem-button>
         <span class="text-sm text-slate-600">{{ msg() }}</span>
       </app-demo-variant-card>
+      <app-demo-variant-card
+        title="Sin borde"
+        description="bordered=false quita el borde sin cambiar fondo ni color."
+        [htmlCode]="h6"
+        [tsCode]="t1"
+      >
+        <sirem-button variant="secondary">Con borde</sirem-button>
+        <sirem-button variant="secondary" [bordered]="false">Sin borde</sirem-button>
+        <sirem-button variant="secondary" iconOnly [bordered]="false" aria-label="Buscar">
+          <i slot="icon" class="fi fi-rr-search"></i>
+        </sirem-button>
+      </app-demo-variant-card>
     </app-demo-page-layout>
   `,
 })
@@ -48,6 +60,7 @@ export class ButtonDemoPage {
   readonly h3 = '<sirem-button variant="primary">\n  <i slot="icon" class="fi fi-rr-check"></i>Guardar\n</sirem-button>\n<sirem-button variant="secondary" iconOnly aria-label="Buscar">\n  <i slot="icon" class="fi fi-rr-search"></i>\n</sirem-button>';
   readonly h4 = '<sirem-button variant="primary" [(loading)]="cargando">Guardar</sirem-button>\n<sirem-button variant="secondary" [disabled]="true">Deshabilitado</sirem-button>';
   readonly h5 = '<sirem-button variant="success" [action]="guardar"\n  (finished)="msg.set(\'Guardado ✓\')" (failed)="msg.set(\'Falló\')">\n  Guardar historia\n</sirem-button>';
+  readonly h6 = '<sirem-button variant="secondary">Con borde</sirem-button>\n<sirem-button variant="secondary" [bordered]="false">Sin borde</sirem-button>\n<sirem-button variant="secondary" iconOnly [bordered]="false" aria-label="Buscar">\n  <i slot="icon" class="fi fi-rr-search"></i>\n</sirem-button>';
   readonly t1 = "import { SiremButton } from 'deorta-sirem-ui';";
   readonly t2 = "import { signal } from '@angular/core';\nimport { SiremButton } from 'deorta-sirem-ui';\n\nreadonly cargando = signal(false);";
   readonly t3 = "import { signal } from '@angular/core';\nimport { SiremButton } from 'deorta-sirem-ui';\n\nreadonly msg = signal('');\nreadonly guardar = () => new Promise((r) => setTimeout(r, 1200));";

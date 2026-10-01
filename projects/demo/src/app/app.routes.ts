@@ -15,6 +15,7 @@ import { PageHeaderDemoPage } from './pages/page-header-demo/page-header-demo-pa
 import { ViewToggleDemoPage } from './pages/view-toggle-demo/view-toggle-demo-page';
 import { DataTableDemoPage } from './pages/data-table-demo/data-table-demo-page';
 import { CardDemoPage } from './pages/card-demo/card-demo-page';
+import { OverlayDemoPage } from './pages/overlay-demo/overlay-demo-page';
 import { AvatarDemoPage } from './pages/avatar-demo/avatar-demo-page';
 import { BadgeDemoPage } from './pages/badge-demo/badge-demo-page';
 import { StatCardDemoPage } from './pages/stat-card-demo/stat-card-demo-page';
@@ -38,6 +39,7 @@ import { MultiSelectDemoPage } from './pages/multi-select-demo/multi-select-demo
 import { CodeEditorDemoPage } from './pages/code-editor-demo/code-editor-demo-page';
 import { RichTextDemoPage } from './pages/rich-text-demo/rich-text-demo-page';
 import { DynamicFormDemoPage } from './pages/dynamic-form-demo/dynamic-form-demo-page';
+import { InvoiceEditorDemoPage } from './pages/invoice-editor-demo/invoice-editor-demo-page';
 import { ModalDemoPage } from './pages/modal-demo/modal-demo-page';
 import { ConfirmDialogDemoPage } from './pages/confirm-dialog-demo/confirm-dialog-demo-page';
 import { DrawerDemoPage } from './pages/drawer-demo/drawer-demo-page';
@@ -56,6 +58,43 @@ import { PageListadoDemoPage } from './pages/page-listado-demo/page-listado-demo
 import { PageDetalleDemoPage } from './pages/page-detalle-demo/page-detalle-demo-page';
 import { ToastDemoPage } from './pages/toast-demo/toast-demo-page';
 
+// Módulos ERP — Ventas y Facturación Electrónica
+import { FacturacionElectronicaDemoPage } from './pages/facturacion-electronica-demo/facturacion-electronica-demo-page';
+import { CotizacionesDemoPage } from './pages/cotizaciones-demo/cotizaciones-demo-page';
+import { RemisionesDemoPage } from './pages/remisiones-demo/remisiones-demo-page';
+import { CuentasPorCobrarDemoPage } from './pages/cuentas-por-cobrar-demo/cuentas-por-cobrar-demo-page';
+import { PosDemoPage } from './pages/pos-demo/pos-demo-page';
+// Módulos ERP — Compras y Gastos
+import { FacturasProveedoresDemoPage } from './pages/facturas-proveedores-demo/facturas-proveedores-demo-page';
+import { OrdenesCompraDemoPage } from './pages/ordenes-compra-demo/ordenes-compra-demo-page';
+import { CuentasPorPagarDemoPage } from './pages/cuentas-por-pagar-demo/cuentas-por-pagar-demo-page';
+import { RetencionesDemoPage } from './pages/retenciones-demo/retenciones-demo-page';
+// Módulos ERP — Finanzas y Tesorería
+import { CuentasBancariasDemoPage } from './pages/cuentas-bancarias-demo/cuentas-bancarias-demo-page';
+import { ConciliacionBancariaDemoPage } from './pages/conciliacion-bancaria-demo/conciliacion-bancaria-demo-page';
+import { FlujoDeCajaDemoPage } from './pages/flujo-de-caja-demo/flujo-de-caja-demo-page';
+import { TransferenciasFondosDemoPage } from './pages/transferencias-fondos-demo/transferencias-fondos-demo-page';
+// Módulos ERP — Inventario
+import { MultibodegaDemoPage } from './pages/multibodega-demo/multibodega-demo-page';
+import { KardexDemoPage } from './pages/kardex-demo/kardex-demo-page';
+import { ListasDePreciosDemoPage } from './pages/listas-de-precios-demo/listas-de-precios-demo-page';
+import { AjustesInventarioDemoPage } from './pages/ajustes-inventario-demo/ajustes-inventario-demo-page';
+// Módulos ERP — Contabilidad Integral
+import { PlanCuentasDemoPage } from './pages/plan-cuentas-demo/plan-cuentas-demo-page';
+import { AsientosContablesDemoPage } from './pages/asientos-contables-demo/asientos-contables-demo-page';
+import { ReportesFinancierosDemoPage } from './pages/reportes-financieros-demo/reportes-financieros-demo-page';
+import { InformacionExogenaDemoPage } from './pages/informacion-exogena-demo/informacion-exogena-demo-page';
+import { CierreContableDemoPage } from './pages/cierre-contable-demo/cierre-contable-demo-page';
+// Módulos ERP — Nómina Electrónica
+import { GestionEmpleadosDemoPage } from './pages/gestion-empleados-demo/gestion-empleados-demo-page';
+import { LiquidacionNominaDemoPage } from './pages/liquidacion-nomina-demo/liquidacion-nomina-demo-page';
+import { NominaDianDemoPage } from './pages/nomina-dian-demo/nomina-dian-demo-page';
+import { PrestacionesSocialesDemoPage } from './pages/prestaciones-sociales-demo/prestaciones-sociales-demo-page';
+// Módulos ERP — Panel de la firma contable
+import { PortafolioClientesDemoPage } from './pages/portafolio-clientes-demo/portafolio-clientes-demo-page';
+import { ImpersonationDemoPage } from './pages/impersonation-demo/impersonation-demo-page';
+import { SaludClientesDemoPage } from './pages/salud-clientes-demo/salud-clientes-demo-page';
+
 export const routes: Routes = [
   { path: '', component: HomePage },
   { path: 'demo/button', component: ButtonDemoPage },
@@ -72,6 +111,7 @@ export const routes: Routes = [
   { path: 'demo/view-toggle', component: ViewToggleDemoPage },
   { path: 'demo/data-table', component: DataTableDemoPage },
   { path: 'demo/card', component: CardDemoPage },
+  { path: 'demo/overlay', component: OverlayDemoPage },
   { path: 'demo/avatar', component: AvatarDemoPage },
   { path: 'demo/badge', component: BadgeDemoPage },
   { path: 'demo/stat-card', component: StatCardDemoPage },
@@ -95,6 +135,7 @@ export const routes: Routes = [
   { path: 'demo/code-editor', component: CodeEditorDemoPage },
   { path: 'demo/rich-text', component: RichTextDemoPage },
   { path: 'demo/dynamic-form', component: DynamicFormDemoPage },
+  { path: 'demo/invoice-editor', component: InvoiceEditorDemoPage },
   { path: 'demo/modal', component: ModalDemoPage },
   { path: 'demo/confirm-dialog', component: ConfirmDialogDemoPage },
   { path: 'demo/drawer', component: DrawerDemoPage },
@@ -112,5 +153,43 @@ export const routes: Routes = [
   { path: 'demo/page-listado', component: PageListadoDemoPage },
   { path: 'demo/page-detalle', component: PageDetalleDemoPage },
   { path: 'demo/toast', component: ToastDemoPage },
+
+  // Módulos ERP — Ventas y Facturación Electrónica
+  { path: 'demo/facturacion-electronica', component: FacturacionElectronicaDemoPage },
+  { path: 'demo/cotizaciones', component: CotizacionesDemoPage },
+  { path: 'demo/remisiones', component: RemisionesDemoPage },
+  { path: 'demo/cuentas-por-cobrar', component: CuentasPorCobrarDemoPage },
+  { path: 'demo/pos', component: PosDemoPage },
+  // Módulos ERP — Compras y Gastos
+  { path: 'demo/facturas-proveedores', component: FacturasProveedoresDemoPage },
+  { path: 'demo/ordenes-compra', component: OrdenesCompraDemoPage },
+  { path: 'demo/cuentas-por-pagar', component: CuentasPorPagarDemoPage },
+  { path: 'demo/retenciones', component: RetencionesDemoPage },
+  // Módulos ERP — Finanzas y Tesorería
+  { path: 'demo/cuentas-bancarias', component: CuentasBancariasDemoPage },
+  { path: 'demo/conciliacion-bancaria', component: ConciliacionBancariaDemoPage },
+  { path: 'demo/flujo-de-caja', component: FlujoDeCajaDemoPage },
+  { path: 'demo/transferencias-fondos', component: TransferenciasFondosDemoPage },
+  // Módulos ERP — Inventario
+  { path: 'demo/multibodega', component: MultibodegaDemoPage },
+  { path: 'demo/kardex', component: KardexDemoPage },
+  { path: 'demo/listas-de-precios', component: ListasDePreciosDemoPage },
+  { path: 'demo/ajustes-inventario', component: AjustesInventarioDemoPage },
+  // Módulos ERP — Contabilidad Integral
+  { path: 'demo/plan-cuentas', component: PlanCuentasDemoPage },
+  { path: 'demo/asientos-contables', component: AsientosContablesDemoPage },
+  { path: 'demo/reportes-financieros', component: ReportesFinancierosDemoPage },
+  { path: 'demo/informacion-exogena', component: InformacionExogenaDemoPage },
+  { path: 'demo/cierre-contable', component: CierreContableDemoPage },
+  // Módulos ERP — Nómina Electrónica
+  { path: 'demo/gestion-empleados', component: GestionEmpleadosDemoPage },
+  { path: 'demo/liquidacion-nomina', component: LiquidacionNominaDemoPage },
+  { path: 'demo/nomina-dian', component: NominaDianDemoPage },
+  { path: 'demo/prestaciones-sociales', component: PrestacionesSocialesDemoPage },
+  // Módulos ERP — Panel de la firma contable
+  { path: 'demo/portafolio-clientes', component: PortafolioClientesDemoPage },
+  { path: 'demo/impersonation', component: ImpersonationDemoPage },
+  { path: 'demo/salud-clientes', component: SaludClientesDemoPage },
+
   { path: '**', redirectTo: '' },
 ];

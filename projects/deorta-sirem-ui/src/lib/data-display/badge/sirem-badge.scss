@@ -26,7 +26,7 @@
 .sirem-badge--info {
   background: var(--sirem-tint-bg);
   color: var(--sirem-tint-text);
-  border-color: var(--color-sirem-200);
+  border-color: light-dark(var(--color-sirem-200, #bcdcff), rgb(142 197 255 / 0.3));
 }
 
 .sirem-badge--success {

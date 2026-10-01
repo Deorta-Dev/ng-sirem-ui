@@ -1,16 +1,45 @@
 /* Estilos de sirem-card: contenedor genérico con encabezado opcional. */
+:host {
+  display: block;
+}
+
 .sirem-card {
   overflow: hidden;
-  border-radius: 0.75rem;
+  border-radius: var(--sirem-radius-lg);
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
-  box-shadow:
-    0 1px 2px 0 rgb(0 0 0 / 0.05);
+  box-shadow: var(--sirem-shadow-xs);
+}
+
+.sirem-card--glass {
+  background: var(--sirem-surface-glass-strong);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  backdrop-filter: blur(18px) saturate(1.25);
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-card__header {
   border-bottom: 1px solid var(--sirem-border-soft);
-  padding: 0.75rem 1rem;
+}
+
+/* Tono de marca: fondo con el color primario y texto blanco. */
+.sirem-card--brand {
+  border-color: transparent;
+  background: var(--color-sirem-600);
+  box-shadow: var(--sirem-shadow-sm);
+}
+
+.sirem-card--brand .sirem-card__header {
+  border-bottom-color: rgb(255 255 255 / 0.2);
+}
+
+.sirem-card--brand .sirem-card__title {
+  color: #fff;
+}
+
+.sirem-card--brand .sirem-card__subtitle,
+.sirem-card--brand .sirem-card__footer {
+  color: rgb(255 255 255 / 0.85);
 }
 
 .sirem-card__title {
@@ -25,26 +54,37 @@
   color: var(--sirem-text-muted);
 }
 
-.sirem-card__body {
-  padding: 1rem;
+.sirem-card__footer {
+  border-top: 1px solid var(--sirem-border-soft);
 }
 
-.sirem-card__footer{
-  padding: 0.75rem 1rem;
+/*
+ * Escala de relleno compartida por header, body y footer. Cada zona lleva su
+ * clase modificadora (`sirem-card__part--*`), así el relleno se controla por
+ * separado en las tres sin depender del encabezado de cada bloque.
+ */
+/*
+ * Sin contenido en `slot="footer"` el pie no debe aportar relleno. Se resuelve
+ * en CSS (`:empty`) y no con una query de contenido: el `<ng-content>` está
+ * dentro de un bloque condicional, así que una query que dependa de él solo
+ * vería los nodos cuando ya se han proyectado, y nunca encontraría nada.
+ */
+.sirem-card__footer:empty {
+  display: none;
 }
 
-.sirem-card__body--none {
+.sirem-card__part--none {
   padding: 0;
 }
 
-.sirem-card__body--sm {
-  padding: 0.75rem;
+.sirem-card__part--sm {
+  padding: 0.75rem 1rem;
 }
 
-@media (min-width: 768px) {
-  .sirem-card__header,
-  .sirem-card__body {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
+.sirem-card__part--md {
+  padding: 1rem 1.25rem;
+}
+
+.sirem-card__part--lg {
+  padding: 1.5rem 2rem;
 }

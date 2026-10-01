@@ -33,9 +33,29 @@ describe('PageAdminDemoPage', () => {
     expect((fixture.nativeElement as HTMLElement).querySelector('[role="dialog"]')).toBeTruthy();
   });
 
+  it('should show the "Ver todos los pacientes" button in the table card footer', () => {
+    const host = fixture.nativeElement as HTMLElement;
+    // Varias cards proyectan `.sirem-card__footer`; solo la de la tabla tiene
+    // contenido (las demás quedan ocultas por `:empty`). Se busca la que lo tiene.
+    const footer = [...host.querySelectorAll('.sirem-card__footer')].find(
+      (el) => !el.matches(':empty'),
+    );
+    expect(footer).toBeTruthy();
+    expect(footer?.textContent).toContain('Ver todos los pacientes');
+  });
+
+  it('should render the sidebar as a floating panel and the topbar in cards mode', () => {
+    const host = fixture.nativeElement as HTMLElement;
+    expect(host.querySelector('.sirem-sidebar--floating')).toBeTruthy();
+    expect(host.querySelector('.sirem-topbar--cards')).toBeTruthy();
+    // El buscador centrado se marca con su propia clase de layout.
+    expect(host.querySelector('.sirem-topbar--search-center')).toBeTruthy();
+  });
+
   it('should collapse the sidebar and expose mini mode', () => {
-    const collapse = (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>(
-      'button[aria-label="Contraer menú"]',
+    // El aria-label vive en el host <sirem-button>, no en un <button> nativo.
+    const collapse = (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
+      'sirem-button[aria-label="Contraer menú"]',
     );
     collapse?.click();
     fixture.detectChanges();

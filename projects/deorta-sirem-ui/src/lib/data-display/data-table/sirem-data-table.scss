@@ -1,10 +1,17 @@
 /* Estilos de sirem-data-table: tabla de listados con celdas tipadas. */
 .sirem-table-wrap {
   overflow-x: auto;
-  border-radius: 0.75rem;
+  border-radius: var(--sirem-radius-lg);
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  box-shadow: var(--sirem-shadow-xs);
+}
+
+/* Dentro de una sirem-card el marco propio sobra: la tarjeta ya lo aporta. */
+:host-context(.sirem-card) .sirem-table-wrap {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .sirem-table {

@@ -2,6 +2,7 @@ import { Component, ElementRef, computed, input, signal, viewChildren } from '@a
 import { RouterLink } from '@angular/router';
 import { SiremButton, SiremModal } from 'deorta-sirem-ui';
 import { CodeViewer } from '../code-viewer/code-viewer';
+import { DemoGlossary } from '../demo-glossary/demo-glossary';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';
 
 export type DemoCodeLanguage = 'html' | 'typescript' | 'json';
@@ -20,11 +21,14 @@ export interface DemoCodeFile {
 @Component({
   selector: 'app-page-demo-shell',
   standalone: true,
-  imports: [CodeViewer, RouterLink, SiremButton, SiremModal, ThemeToggle],
+  imports: [CodeViewer, RouterLink, SiremButton, SiremModal, ThemeToggle, DemoGlossary],
   template: `
-    <div class="min-h-[100dvh] bg-slate-100 dark:bg-slate-950">
+    <div class="min-h-[100dvh]" style="background: var(--sirem-page-bg)">
       <div class="min-h-[100dvh] pb-12">
         <ng-content />
+        <div class="mx-auto max-w-screen-2xl px-4 pb-8 sm:px-6">
+          <app-demo-glossary />
+        </div>
       </div>
 
       <footer

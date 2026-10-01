@@ -1,5 +1,6 @@
 import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SiremOverlayTrigger } from '../../overlays/overlay/sirem-overlay-trigger';
 
 /** Acción del menú de usuario. */
 export interface SiremUserMenuAction {
@@ -37,13 +38,17 @@ export interface SiremUserMenuGroup {
 @Component({
   selector: 'sirem-user-menu',
   standalone: true,
+  imports: [SiremOverlayTrigger],
   styleUrl: './sirem-user-menu.scss',
   template: `
     <div class="sirem-user">
       <button
         type="button"
-        (click)="toggle()"
-        [attr.aria-expanded]="open()"
+        [siremOverlay]="menuTpl"
+        [open]="open()"
+        (openChange)="open.set($event)"
+        siremOverlayTrigger="click"
+        siremOverlayPlacement="bottom-end"
         aria-haspopup="menu"
         aria-label="Menú de usuario"
         class="sirem-user__trigger"
@@ -62,20 +67,14 @@ export interface SiremUserMenuGroup {
             {{ initials() }}
           </span>
         }
-        <span aria-hidden="true" class="sirem-user__chev">▾</span>
       </button>
 
-      @if (open()) {
-        <div
-          class="sirem-user__backdrop"
-          (click)="open.set(false)"
-          aria-hidden="true"
-        ></div>
-        <div
-          role="menu"
-          (click)="open.set(false)"
-          class="sirem-user__panel"
-        >
+      <!--
+        El panel vive en la capa de overlays, no dentro del componente: asi
+        no lo recorta el overflow de la barra o de una tabla.
+      -->
+      <ng-template #menuTpl>
+        <div role="menu" class="sirem-user__panel" (click)="open.set(false)">
           <div class="sirem-user__head">
             <p class="sirem-user__name">{{ userName() }}</p>
             <p class="sirem-user__detail">{{ userDetail() }}</p>
@@ -113,7 +112,7 @@ export interface SiremUserMenuGroup {
             <ng-content />
           </div>
         </div>
-      }
+      </ng-template>
     </div>
   `,
 })
