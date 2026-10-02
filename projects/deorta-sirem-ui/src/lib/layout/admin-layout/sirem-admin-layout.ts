@@ -2,7 +2,9 @@ import { Component, input, model } from '@angular/core';
 
 /**
  * Contenedor maestro de la app autenticada (equivale a `lo-admin-layout`).
- * Header a todo el ancho arriba; debajo, sidebar + contenido.
+ * Columna de sidebar a la izquierda y, al lado, el main que contiene el
+ * header (`slot="topbar"`) y el contenido: el header comparte ancho con la
+ * zona de trabajo, consecuente con el navbar.
  * El modo `fullscreen` oculta el chrome para vistas que necesitan el 100%
  * (mapas, GPS).
  *
@@ -26,9 +28,7 @@ import { Component, input, model } from '@angular/core';
   styleUrl: './sirem-admin-layout.scss',
   template: `
     <div class="sirem-admin">
-      @if (!fullscreen()) {
-        <ng-content select="[slot='topbar']" />
-      } @else {
+      @if (fullscreen()) {
         <div class="sirem-admin__exit">
           <button
             type="button"
@@ -48,6 +48,11 @@ import { Component, input, model } from '@angular/core';
           [class.sirem-admin__main--none]="mainPadding() === 'none'"
           [class.sirem-admin__main--sm]="mainPadding() === 'sm'"
         >
+          <!-- El header vive dentro del main: comparte ancho con la zona
+               de contenido, consecuente con el navbar de al lado. -->
+          @if (!fullscreen()) {
+            <ng-content select="[slot='topbar']" />
+          }
           <ng-content />
         </main>
       </div>

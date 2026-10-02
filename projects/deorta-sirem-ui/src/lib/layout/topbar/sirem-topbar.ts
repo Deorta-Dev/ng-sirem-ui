@@ -151,8 +151,8 @@ export class SiremTopbar {
   /** Fondo translúcido con desenfoque (ideal con `fixed`). */
   readonly blur = input(false);
   /**
-   * Barra flotante: se separa de los bordes con margen y radio, y su fondo
-   * pasa a cristal translúcido (se intuye el fondo del shell). El margen
+   * Barra flotante: se separa de los bordes con margen y radio, con fondo
+   * transparente (se ve el shell; borde + blur dan legibilidad). El margen
    * izquierdo lo puede fijar el shell con `--sirem-topbar-inset-left`.
    */
   readonly floating = input(false);

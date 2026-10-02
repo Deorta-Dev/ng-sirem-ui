@@ -37,8 +37,9 @@
   overflow: hidden;
   border: 1px solid var(--sirem-border-soft);
   border-radius: var(--sirem-radius-lg);
-  /* Transparente: el fondo del shell se intuye a través del cristal. */
-  background: color-mix(in srgb, var(--sirem-surface, #fff) 55%, transparent);
+  /* Transparente: se ve el fondo del shell a través de la barra; el borde,
+     la sombra y el blur dan la legibilidad al hacer scroll. */
+  background: transparent;
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
   backdrop-filter: blur(18px) saturate(1.4);
   box-shadow: var(--sirem-shadow-sm);

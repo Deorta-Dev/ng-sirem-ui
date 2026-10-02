@@ -251,6 +251,16 @@ span.sirem-sidebar__label {
     transform: none;
   }
 
+  /* Panel flotante en flujo: sticky a altura de ventana con sus márgenes,
+     para que el pie (avatar de usuario) no se pierda al hacer scroll. La
+     columna principal queda a su derecha, sin offsets manuales. */
+  .sirem-sidebar--floating:not(.sirem-sidebar--pinned) {
+    position: sticky;
+    top: 0;
+    height: calc(100dvh - 1.5rem);
+    margin: 0.75rem 0 0 0.75rem;
+  }
+
   .sirem-sidebar--pinned {
     position: fixed;
     z-index: 40;
