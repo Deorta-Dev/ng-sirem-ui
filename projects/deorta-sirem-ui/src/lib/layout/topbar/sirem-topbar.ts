@@ -53,41 +53,46 @@ export type SiremTopbarAppearance = 'default' | 'cards';
       [class.sirem-topbar--cards]="appearance() === 'cards'"
       [class.sirem-topbar--search-center]="searchAlign() === 'center'"
     >
-      <button
-        type="button"
-        (click)="menuPressed.emit()"
-        class="sirem-topbar__icon-btn sirem-topbar__icon-btn--menu"
-        aria-label="Abrir menú"
-      >
-        <sirem-fi-icon name="rr-menu" />
-      </button>
+      <!-- Cabezal izquierdo: menú + workspace + chip de página agrupados en
+           una sola celda, para que el buscador centrado no los desplace. -->
+      <div class="sirem-topbar__left">
+        <button
+          type="button"
+          (click)="menuPressed.emit()"
+          class="sirem-topbar__icon-btn sirem-topbar__icon-btn--menu"
+          aria-label="Abrir menú"
+        >
+          <sirem-fi-icon name="rr-menu" />
+        </button>
 
-      <sirem-button
-        size="md"
-        variant="secondary"
-        (click)="spacePressed.emit()"
-        [attr.aria-label]="'Cambiar de ' + spaceAriaLabel()"
-        [title]="'Cambiar de ' + spaceAriaLabel()"
-      >
-        @if (showSpaceDot()) {
-          <span aria-hidden="true" class="sirem-topbar__space-dot">◉</span>
-        }
-        <span class="sirem-topbar__space-label">{{ spaceLabel() }}</span>
-        @if (showSpaceChevron()) {
-          <span aria-hidden="true" class="sirem-topbar__space-chev">▾</span>
-        }
-      </sirem-button>
-
-      @if (pageTitle()) {
-        <div class="sirem-topbar__page">
-          <span class="sirem-topbar__page-title">{{ pageTitle() }}</span>
-          @if (pageSupTitle()) {
-            <span class="sirem-topbar__page-sub">{{ pageSupTitle() }}</span>
+        <sirem-button
+          size="md"
+          variant="secondary"
+          (click)="spacePressed.emit()"
+          [attr.aria-label]="'Cambiar de ' + spaceAriaLabel()"
+          [title]="'Cambiar de ' + spaceAriaLabel()"
+        >
+          @if (showSpaceDot()) {
+            <span aria-hidden="true" class="sirem-topbar__space-dot">◉</span>
           }
-        </div>
-      }
+          <span class="sirem-topbar__space-label">{{ spaceLabel() }}</span>
+          @if (showSpaceChevron()) {
+            <span aria-hidden="true" class="sirem-topbar__space-chev">▾</span>
+          }
+        </sirem-button>
+
+        @if (pageTitle()) {
+          <div class="sirem-topbar__page">
+            <span class="sirem-topbar__page-title">{{ pageTitle() }}</span>
+            @if (pageSupTitle()) {
+              <span class="sirem-topbar__page-sub">{{ pageSupTitle() }}</span>
+            }
+          </div>
+        }
+      </div>
 
       <sirem-button
+        class="sirem-topbar__search-toggle"
         (click)="searchPressed.emit()"
         [attr.aria-label]="searchAriaLabel()"
         size="md" variant="secondary"
@@ -145,7 +150,11 @@ export class SiremTopbar {
   readonly fixed = input(false);
   /** Fondo translúcido con desenfoque (ideal con `fixed`). */
   readonly blur = input(false);
-  /** Barra flotante: se separa de los bordes con margen y radio (dashboard). */
+  /**
+   * Barra flotante: se separa de los bordes con margen y radio, y su fondo
+   * pasa a cristal translúcido (se intuye el fondo del shell). El margen
+   * izquierdo lo puede fijar el shell con `--sirem-topbar-inset-left`.
+   */
   readonly floating = input(false);
   /** Estética global: `default` continua, `cards` piezas flotantes. */
   readonly appearance = input<SiremTopbarAppearance>('default');

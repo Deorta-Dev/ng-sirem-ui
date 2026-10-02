@@ -3,7 +3,11 @@
   display: flex;
   min-height: 100dvh;
   flex-direction: column;
-  background: var(--sirem-surface-hover);
+  /* Fondo del shell configurable: el consumidor define `--sirem-admin-bg`
+     (p. ej. un degradado propio) y así el hueco queda unificado por
+     debajo del chrome flotante. */
+  background: var(--sirem-admin-bg, var(--sirem-surface-hover));
+  background-attachment: fixed;
   color: var(--sirem-text);
 }
 

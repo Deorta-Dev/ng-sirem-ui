@@ -31,10 +31,14 @@
 .sirem-topbar--floating {
   height: 3.5rem;
   margin: 0.75rem 0.75rem 0;
+  /* Inserto izquierdo configurable: el shell puede separar la barra del
+     rail flotante (p. ej. 16.5rem) sin perder su margen base. */
+  margin-left: var(--sirem-topbar-inset-left, 0.75rem);
   overflow: hidden;
   border: 1px solid var(--sirem-border-soft);
   border-radius: var(--sirem-radius-lg);
-  background: var(--sirem-surface-glass-strong);
+  /* Transparente: el fondo del shell se intuye a través del cristal. */
+  background: color-mix(in srgb, var(--sirem-surface, #fff) 55%, transparent);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
   backdrop-filter: blur(18px) saturate(1.4);
   box-shadow: var(--sirem-shadow-sm);
@@ -287,11 +291,43 @@
  * la del medio, de modo que queda centrado respecto a la ventana y no
  * respecto al espacio que dejan las piezas de los lados.
  */
+/* Cabezal izquierdo: menú, workspace y chip de página en una sola celda. */
+.sirem-topbar__left {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Disparador del buscador (≥640px): en móvil lo sustituye el botón
+   nativo `__search-btn`. Es un botón, no un campo: solo control de
+   visibilidad y de su celda en la barra centrada. */
+.sirem-topbar__search-toggle {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .sirem-topbar__search-toggle {
+    display: inline-flex;
+    max-width: 26rem;
+  }
+}
+
 .sirem-topbar--search-center {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   column-gap: 0.75rem;
+}
+
+.sirem-topbar--search-center .sirem-topbar__left {
+  grid-column: 1;
+  justify-self: start;
+}
+
+.sirem-topbar--search-center .sirem-topbar__search-toggle {
+  grid-column: 2;
+  justify-self: center;
 }
 
 .sirem-topbar--search-center .sirem-topbar__space {

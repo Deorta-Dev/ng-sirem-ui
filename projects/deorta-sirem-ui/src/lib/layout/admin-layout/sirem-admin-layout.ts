@@ -6,6 +6,11 @@ import { Component, input, model } from '@angular/core';
  * El modo `fullscreen` oculta el chrome para vistas que necesitan el 100%
  * (mapas, GPS).
  *
+ * El fondo del shell se sustituye definiendo `--sirem-admin-bg` en un
+ * ancestro (la custom property hereda y cruza el encapsulado): p. ej. un
+ * degradado propio con `background-attachment: fixed`. Por defecto usa
+ * `--sirem-surface-hover`.
+ *
  * Uso:
  * ```html
  * <sirem-admin-layout [(fullscreen)]="fs">
