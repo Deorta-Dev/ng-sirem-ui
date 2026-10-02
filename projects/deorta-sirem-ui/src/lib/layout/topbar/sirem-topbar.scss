@@ -329,3 +329,43 @@
     max-width: none;
   }
 }
+
+
+/* Chip de título de página (al lado del workspace; oculto en móvil). */
+.sirem-topbar__page {
+  display: none;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.125rem;
+  border: 1px solid var(--sirem-border);
+  border-radius: var(--sirem-radius-md);
+  background: var(--sirem-surface);
+  box-shadow: var(--sirem-shadow-xs);
+  padding: 0.3125rem 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .sirem-topbar__page {
+    display: flex;
+  }
+}
+
+.sirem-topbar__page-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sirem-text);
+}
+
+.sirem-topbar__page-sub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sirem-text-muted);
+}

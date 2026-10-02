@@ -62,6 +62,7 @@ export interface SiremUserMenuGroup {
         } @else {
           <span
             class="sirem-user__initials"
+            [style.background]="avatarBg() || null"
             aria-hidden="true"
           >
             {{ initials() }}
@@ -77,7 +78,9 @@ export interface SiremUserMenuGroup {
         <div role="menu" class="sirem-user__panel" (click)="open.set(false)">
           <div class="sirem-user__head">
             <p class="sirem-user__name">{{ userName() }}</p>
-            <p class="sirem-user__detail">{{ userDetail() }}</p>
+            @if (userDetail()) {
+              <p class="sirem-user__detail">{{ userDetail() }}</p>
+            }
           </div>
           @if (groups().length) {
             <div class="sirem-user__items">
@@ -120,6 +123,8 @@ export class SiremUserMenu {
   readonly userName = input.required<string>();
   readonly userDetail = input('');
   readonly avatarSrc = input<string | null>(null);
+  /** Color de fondo de las iniciales (opcional; usa el primario por defecto). */
+  readonly avatarBg = input('');
   /** Grupos de acciones con iconos (alternativa a proyectar contenido). */
   readonly groups = input<SiremUserMenuGroup[]>([]);
 

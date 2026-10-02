@@ -78,6 +78,15 @@ export type SiremTopbarAppearance = 'default' | 'cards';
         }
       </sirem-button>
 
+      @if (pageTitle()) {
+        <div class="sirem-topbar__page">
+          <span class="sirem-topbar__page-title">{{ pageTitle() }}</span>
+          @if (pageSupTitle()) {
+            <span class="sirem-topbar__page-sub">{{ pageSupTitle() }}</span>
+          }
+        </div>
+      }
+
       <sirem-button
         (click)="searchPressed.emit()"
         [attr.aria-label]="searchAriaLabel()"
@@ -128,6 +137,10 @@ export class SiremTopbar {
   readonly spaceLabel = input('Mi espacio');
   /** Texto del workspace cuando no se muestra como botón (móvil). */
   readonly spaceAriaLabel = input('workspace');
+  /** Título de la página actual (chip al lado del workspace). */
+  readonly pageTitle = input('');
+  /** Subtítulo del chip de página (opcional, en versalitas). */
+  readonly pageSupTitle = input('');
   /** Fija la barra al hacer scroll (`position: sticky`). */
   readonly fixed = input(false);
   /** Fondo translúcido con desenfoque (ideal con `fixed`). */

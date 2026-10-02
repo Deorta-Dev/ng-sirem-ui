@@ -1,4 +1,4 @@
-import { Component, model } from '@angular/core';
+import { Component, input, model } from '@angular/core';
 
 /**
  * Contenedor maestro de la app autenticada (equivale a `lo-admin-layout`).
@@ -38,7 +38,11 @@ import { Component, model } from '@angular/core';
         @if (!fullscreen()) {
           <ng-content select="[slot='sidebar']" />
         }
-        <main class="sirem-admin__main">
+        <main
+          class="sirem-admin__main"
+          [class.sirem-admin__main--none]="mainPadding() === 'none'"
+          [class.sirem-admin__main--sm]="mainPadding() === 'sm'"
+        >
           <ng-content />
         </main>
       </div>
@@ -47,4 +51,9 @@ import { Component, model } from '@angular/core';
 })
 export class SiremAdminLayout {
   readonly fullscreen = model(false);
+  /**
+   * Relleno del área de contenido: `md` (defecto), `sm` o `none` para
+   * contenido a sangre (la fachada gestiona su propio padding).
+   */
+  readonly mainPadding = input<'none' | 'sm' | 'md'>('md');
 }

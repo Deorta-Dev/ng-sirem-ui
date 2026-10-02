@@ -13,4 +13,23 @@ describe('SiremAdminLayout', () => {
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('Salir de pantalla completa');
   });
+
+  it('should apply the mainPadding variant to the content area', () => {
+    const fixture = TestBed.createComponent(SiremAdminLayout);
+    fixture.detectChanges();
+    const main = () => (fixture.nativeElement as HTMLElement).querySelector('main');
+
+    // Por defecto (md) no lleva modificadores.
+    expect(main()?.classList.contains('sirem-admin__main--none')).toBe(false);
+    expect(main()?.classList.contains('sirem-admin__main--sm')).toBe(false);
+
+    fixture.componentRef.setInput('mainPadding', 'none');
+    fixture.detectChanges();
+    expect(main()?.classList.contains('sirem-admin__main--none')).toBe(true);
+
+    fixture.componentRef.setInput('mainPadding', 'sm');
+    fixture.detectChanges();
+    expect(main()?.classList.contains('sirem-admin__main--sm')).toBe(true);
+    expect(main()?.classList.contains('sirem-admin__main--none')).toBe(false);
+  });
 });

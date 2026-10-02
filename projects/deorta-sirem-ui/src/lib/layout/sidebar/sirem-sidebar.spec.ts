@@ -59,4 +59,21 @@ describe('SiremSidebar', () => {
     expect(element.querySelector('.sirem-sidebar--pinned')).toBeTruthy();
     expect(element.querySelector('.sirem-sidebar__nav--center')).toBeTruthy();
   });
+
+  it('should render external links (href) and image icons (img)', () => {
+    const fixture = TestBed.createComponent(SiremSidebar);
+    fixture.componentRef.setInput('items', [
+      { label: 'Documentación', href: 'https://example.com/docs' },
+      { label: 'Espacio', img: '/logo.png' },
+    ]);
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+
+    const link = element.querySelector<HTMLAnchorElement>('a[href="https://example.com/docs"]');
+    expect(link).toBeTruthy();
+    expect(link?.querySelector('.sirem-sidebar__label')?.textContent).toContain('Documentación');
+
+    const img = element.querySelector<HTMLImageElement>('img.sirem-sidebar__img');
+    expect(img?.getAttribute('src')).toBe('/logo.png');
+  });
 });

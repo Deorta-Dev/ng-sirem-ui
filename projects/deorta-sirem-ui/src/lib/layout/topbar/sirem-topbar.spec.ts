@@ -66,14 +66,15 @@ describe('SiremTopbar', () => {
   it('should toggle the fullscreen button', () => {
     const fixture = TestBed.createComponent(Host);
     fixture.detectChanges();
+    // El aria-label vive en el host <sirem-button>, no en el <button> nativo.
     expect(
-      host(fixture).querySelector('button[aria-label="Pantalla completa"]'),
+      host(fixture).querySelector('[aria-label="Pantalla completa"]'),
     ).toBeTruthy();
 
     fixture.componentInstance.showFullscreen.set(false);
     fixture.detectChanges();
     expect(
-      host(fixture).querySelector('button[aria-label="Pantalla completa"]'),
+      host(fixture).querySelector('[aria-label="Pantalla completa"]'),
     ).toBeNull();
   });
 
@@ -94,6 +95,20 @@ describe('SiremTopbar', () => {
     expect(host(fixture).querySelector('.sirem-topbar--search-center')).toBeTruthy();
   });
 
+  it('should render the page title chip and hide it when empty', () => {
+    const fixture = TestBed.createComponent(SiremTopbar);
+    fixture.detectChanges();
+    expect(host(fixture).querySelector('.sirem-topbar__page')).toBeNull();
+
+    fixture.componentRef.setInput('pageTitle', 'Agenda');
+    fixture.componentRef.setInput('pageSupTitle', 'Hoy');
+    fixture.detectChanges();
+
+    const chip = host(fixture).querySelector('.sirem-topbar__page');
+    expect(chip?.querySelector('.sirem-topbar__page-title')?.textContent).toContain('Agenda');
+    expect(chip?.querySelector('.sirem-topbar__page-sub')?.textContent).toContain('Hoy');
+  });
+
   it('should emit spacePressed and searchPressed', () => {
     const fixture = TestBed.createComponent(SiremTopbar);
     fixture.detectChanges();
@@ -104,8 +119,10 @@ describe('SiremTopbar', () => {
     fixture.componentInstance.spacePressed.subscribe(() => space.push('ok'));
     fixture.componentInstance.searchPressed.subscribe(() => search.push('ok'));
 
-    root.querySelector<HTMLButtonElement>('.sirem-topbar__space')?.click();
-    root.querySelector<HTMLButtonElement>('.sirem-topbar__search')?.click();
+    // El disparador de espacio es un <sirem-button> con aria-label en el host;
+    // la búsqueda la hace el icono nativo (`.sirem-topbar__search-btn`).
+    root.querySelector<HTMLElement>('[aria-label^="Cambiar de"]')?.click();
+    root.querySelector<HTMLButtonElement>('.sirem-topbar__search-btn')?.click();
 
     expect(space).toEqual(['ok']);
     expect(search).toEqual(['ok']);

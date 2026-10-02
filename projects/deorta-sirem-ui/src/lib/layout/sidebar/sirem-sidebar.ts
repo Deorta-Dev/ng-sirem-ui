@@ -15,6 +15,10 @@ export interface SiremNavItem {
   svg?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   route?: string | any[];
+  /** Enlace externo (`href`); alternativa a `route` para URLs fuera de la app. */
+  href?: string;
+  /** Imagen redonda como icono (p. ej. logo); prioridad sobre `svg`/`icon`. */
+  img?: string;
   badge?: string | number;
   /** Permiso requerido; se oculta si no está en `permissions`. */
   permission?: string;
@@ -81,7 +85,9 @@ export interface SiremNavItem {
                   siremOverlayPlacement="bottom-start"
                   class="sirem-sidebar__link"
                 >
-                  @if (item.svg) {
+                  @if (item.img) {
+                    <img [src]="item.img" alt="" class="sirem-sidebar__img" aria-hidden="true" />
+                  } @else if (item.svg) {
                     <span
                       class="sirem-sidebar__svgicon"
                       [innerHTML]="safeSvg(item.svg)"
@@ -163,7 +169,9 @@ export interface SiremNavItem {
                 class="sirem-sidebar__link"
                 [attr.title]="collapsed() ? item.label : null"
               >
-                @if (item.svg) {
+                @if (item.img) {
+                  <img [src]="item.img" alt="" class="sirem-sidebar__img" aria-hidden="true" />
+                } @else if (item.svg) {
                   <span
                     class="sirem-sidebar__svgicon"
                     [innerHTML]="safeSvg(item.svg)"
@@ -226,7 +234,34 @@ export interface SiremNavItem {
           class="sirem-sidebar__link"
           [attr.title]="collapsed() ? item.label : null"
         >
-          @if (item.svg) {
+          @if (item.img) {
+            <img [src]="item.img" alt="" class="sirem-sidebar__img" aria-hidden="true" />
+          } @else if (item.svg) {
+            <span
+              class="sirem-sidebar__svgicon"
+              [innerHTML]="safeSvg(item.svg)"
+              aria-hidden="true"
+            ></span>
+          } @else if (item.icon) {
+            <i [class]="item.icon + ' sirem-sidebar__icon'" aria-hidden="true"></i>
+          }
+          <span class="sirem-sidebar__label">{{ item.label }}</span>
+          @if (item.badge !== undefined) {
+            <span class="sirem-sidebar__label sirem-sidebar__badge">
+              {{ item.badge }}
+            </span>
+          }
+        </a>
+      } @else if (item.href) {
+        <a
+          [href]="item.href"
+          (click)="mobileOpen.set(false)"
+          class="sirem-sidebar__link"
+          [attr.title]="collapsed() ? item.label : null"
+        >
+          @if (item.img) {
+            <img [src]="item.img" alt="" class="sirem-sidebar__img" aria-hidden="true" />
+          } @else if (item.svg) {
             <span
               class="sirem-sidebar__svgicon"
               [innerHTML]="safeSvg(item.svg)"
@@ -249,7 +284,9 @@ export interface SiremNavItem {
           class="sirem-sidebar__link"
           [attr.title]="collapsed() ? item.label : null"
         >
-          @if (item.svg) {
+          @if (item.img) {
+            <img [src]="item.img" alt="" class="sirem-sidebar__img" aria-hidden="true" />
+          } @else if (item.svg) {
             <span
               class="sirem-sidebar__svgicon"
               [innerHTML]="safeSvg(item.svg)"

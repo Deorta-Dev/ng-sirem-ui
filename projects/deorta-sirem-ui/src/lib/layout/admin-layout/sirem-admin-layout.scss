@@ -51,3 +51,23 @@
     padding: 1.5rem;
   }
 }
+
+
+/* Modificadores de relleno del área de contenido (van tras las reglas base). */
+.sirem-admin__main--sm {
+  padding: 0.75rem;
+}
+
+.sirem-admin__main--none {
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .sirem-admin__main--sm {
+    padding: 1rem;
+  }
+
+  .sirem-admin__main--none {
+    padding: 0;
+  }
+}
