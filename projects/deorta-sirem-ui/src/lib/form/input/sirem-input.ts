@@ -4,6 +4,7 @@ import {
   booleanAttribute,
   Component,
   computed,
+  effect,
   ElementRef,
   inject,
   input,
@@ -376,11 +377,18 @@ export class SiremInput {
   });
 
   constructor() {
-    const v = this.value();
-    if (!Array.isArray(v) && v !== null && v !== undefined) {
-      const found = this.options().find((o) => String(o.value) === String(v));
-      this.text.set(found ? found.label : String(v));
-    }
+    /*
+     * Sincroniza el texto visible cuando el valor llega desde fuera (carga
+     * inicial, formulario restaurado o etiqueta de una opción remota). No
+     * interfiere al escribir: mientras se teclea cambia `text`, no `value`.
+     */
+    effect(() => {
+      const value = this.value();
+      if (Array.isArray(value) || value === null || value === undefined || value === '') return;
+      const option = this.allOptions().find((o) => String(o.value) === String(value));
+      const label = option ? option.label : String(value);
+      if (this.text() !== label) this.text.set(label);
+    });
   }
 
   boxClass(): string {

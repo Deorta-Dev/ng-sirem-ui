@@ -65,6 +65,19 @@ describe('SiremInput', () => {
     expect(c.showClear()).toBe(false);
   });
 
+  it('should show a value set from outside as its option label', () => {
+    const fixture = TestBed.createComponent(SiremInput);
+    fixture.componentRef.setInput('options', [
+      { value: 'H52.1', label: 'H52.1 Miopía' },
+      { value: 'H52.0', label: 'H52.0 Hipermetropía' },
+    ]);
+    fixture.componentRef.setInput('value', 'H52.1');
+    fixture.detectChanges();
+    expect(fixture.componentInstance.text()).toBe('H52.1 Miopía');
+    const input = fixture.nativeElement.querySelector('input') as HTMLInputElement;
+    expect(input.value).toBe('H52.1 Miopía');
+  });
+
   it('should mark free-text options with the pen indicator', () => {
     const fixture = TestBed.createComponent(SiremInput);
     fixture.componentRef.setInput('options', [{ value: 'A', label: 'Opción A' }]);
