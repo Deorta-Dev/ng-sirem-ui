@@ -8,7 +8,7 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
   standalone: true,
   imports: [DemoPageLayout, DemoVariantCard, SiremInput],
   template: `
-    <app-demo-page-layout title="Input" category="Formularios" subtitle="sirem-input-field — texto, iconos, validación y autocompletado.">
+    <app-demo-page-layout title="Input" category="Formularios" subtitle="sirem-input-field — texto, iconos, opciones (estrictas o libres) y selección múltiple.">
       <app-demo-variant-card title="Texto simple" description="Label + placeholder." [htmlCode]="h1" [tsCode]="t1">
         <sirem-input-field label="Nombres" placeholder="Ej. María Torres" [(value)]="nombre" />
       </app-demo-variant-card>
