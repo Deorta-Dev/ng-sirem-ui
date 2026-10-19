@@ -30,6 +30,13 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
           <p class="text-sm text-slate-600">Contenido amplio: tablas o formularios largos.</p>
         </sirem-modal>
       </app-demo-variant-card>
+      <app-demo-variant-card title="No cerrar al fondo" description="backdropClose='false': el clic fuera no cierra; Escape sí." [htmlCode]="h5" [tsCode]="t">
+        <sirem-button size="sm" variant="secondary" (pressed)="noFondo.set(true)">Abrir sin fondo</sirem-button>
+        <sirem-modal [(open)]="noFondo" title="Sin cerrar al fondo" size="sm" [backdropClose]="false"
+          [actions]="okActions" (actionPressed)="noFondo.set(false)">
+          <p class="text-sm text-slate-600">Pulsa fuera del panel: no se cierra. Usa Escape o el botón.</p>
+        </sirem-modal>
+      </app-demo-variant-card>
       <app-demo-variant-card title="Footer libre" description="slot=footer recibe el mismo contenedor con estilo." [htmlCode]="h4" [tsCode]="t">
         <sirem-button size="sm" variant="secondary" (pressed)="free.set(true)">Abrir libre</sirem-button>
         <sirem-modal [(open)]="free" title="Recordatorio" size="sm">
@@ -48,6 +55,7 @@ export class ModalDemoPage {
   readonly md = signal(false);
   readonly lg = signal(false);
   readonly free = signal(false);
+  readonly noFondo = signal(false);
   readonly nombre = signal('');
   readonly msg = signal('');
 
@@ -77,6 +85,7 @@ export class ModalDemoPage {
   readonly h1 = '<sirem-button size="sm" (pressed)="sm.set(true)">Abrir sm</sirem-button>\n<sirem-modal [(open)]="sm" title="Eliminar" size="sm"\n  [actions]="delActions" (actionPressed)="onDel($event)" />\n<span class="text-sm text-slate-600 w-full text-center">Acción: {{ msg() }}</span>';
   readonly h2 = '<sirem-button size="sm" variant="secondary" (pressed)="md.set(true)">Abrir md</sirem-button>\n<sirem-modal [(open)]="md" title="Nuevo paciente" size="md"\n  [actions]="formActions" (actionPressed)="onForm($event)">\n  <sirem-input-field label="Nombres" [(value)]="nombre" />\n</sirem-modal>';
   readonly h3 = '<sirem-button size="sm" variant="secondary" (pressed)="lg.set(true)">Abrir centrado</sirem-button>\n<sirem-modal [(open)]="lg" title="Historia completa" size="lg"\n  [persistent]="true" actionsAlign="center"\n  [actions]="okActions" (actionPressed)="lg.set(false)">\n  <p class="text-sm text-slate-600">Contenido amplio: tablas o formularios largos.</p>\n</sirem-modal>';
+  readonly h5 = '<sirem-button size="sm" variant="secondary" (pressed)="noFondo.set(true)">Abrir sin fondo</sirem-button>\n<sirem-modal [(open)]="noFondo" title="Sin cerrar al fondo" [backdropClose]="false">\n  <p class="text-sm text-slate-600">Pulsa fuera: no se cierra.</p>\n</sirem-modal>';
   readonly h4 = '<sirem-button size="sm" variant="secondary" (pressed)="free.set(true)">Abrir libre</sirem-button>\n<sirem-modal [(open)]="free" title="Recordatorio" size="sm">\n  <p class="text-sm text-slate-600">Tu fórmula está lista para descargar.</p>\n  <div slot="footer" class="flex items-center justify-between gap-2">\n    <span class="text-xs text-slate-500">Válida por 30 días</span>\n    <sirem-button size="sm" (pressed)="free.set(false)">Descargar</sirem-button>\n  </div>\n</sirem-modal>';
   readonly t = `import { signal } from '@angular/core';
 import { SiremModal, SiremModalAction, SiremButton, SiremInput } from 'deorta-sirem-ui';

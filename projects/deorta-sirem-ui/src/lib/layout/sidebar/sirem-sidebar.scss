@@ -24,8 +24,8 @@
   background: var(--sirem-surface);
   transform: translateX(-100%);
   transition:
-    transform 0.2s ease,
-    width 0.2s ease;
+    transform var(--sirem-duration, 200ms) var(--sirem-ease, ease),
+    width var(--sirem-duration, 200ms) var(--sirem-ease, ease);
 }
 
 .sirem-sidebar--open {
@@ -131,6 +131,9 @@ button.sirem-sidebar__label {
   padding: 0.5rem;
   color: var(--sirem-text-muted);
   cursor: pointer;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-sidebar__collapse:hover {
@@ -182,9 +185,9 @@ button.sirem-sidebar__label {
   cursor: pointer;
   text-decoration: none;
   transition:
-    background 0.15s ease,
-    color 0.15s ease,
-    box-shadow 0.15s ease;
+    background var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    box-shadow var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-sidebar__link:hover {

@@ -5,7 +5,9 @@ import { SiremBadge, SiremBadgeTone } from '../badge/sirem-badge';
 
 /** Fila de la lista. */
 export interface SiremListItem {
+  /** Texto principal de la fila. */
   title: string;
+  /** Línea secundaria bajo el título. */
   subtitle?: string;
   /** Texto a la derecha (hora, valor…). */
   meta?: string;
@@ -15,12 +17,17 @@ export interface SiremListItem {
   svg?: string;
   /** Muestra avatar con estas iniciales en lugar de icono. */
   avatarName?: string;
+  /** URL del avatar, usado junto a `avatarName`. */
   avatarSrc?: string | null;
+  /** Texto del badge de la derecha. */
   badge?: string;
+  /** Color del badge (`neutral` si se omite). */
   badgeTone?: SiremBadgeTone;
   /** Muestra chevron › a la derecha. */
   chevron?: boolean;
+  /** Atenúa la fila y bloquea la pulsación. */
   disabled?: boolean;
+  /** Dato libre que se devuelve en `itemPressed`. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value?: any;
 }
@@ -81,11 +88,14 @@ export interface SiremListItem {
   `,
 })
 export class SiremList {
+  /** Elementos a mostrar (título, subtítulo, icono, avatar…). */
   readonly items = input.required<SiremListItem[]>();
   /** Separadores entre filas. */
   readonly dividers = input(true);
+  /** Texto que se muestra cuando `items` está vacío. */
   readonly emptyText = input('Sin elementos.');
 
+  /** Se emite con el elemento pulsado. */
   readonly itemPressed = output<SiremListItem>();
 
   private readonly sanitizer = inject(DomSanitizer);

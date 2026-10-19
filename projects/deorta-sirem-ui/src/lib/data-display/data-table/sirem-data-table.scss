@@ -60,6 +60,7 @@
   font: inherit;
   color: inherit;
   cursor: pointer;
+  transition: color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-table__sort:hover {
@@ -67,11 +68,14 @@
 }
 
 .sirem-table__arrow {
+  display: inline-block;
   font-size: 10px;
+  transition: transform var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-table__body-row {
   border-bottom: 1px solid var(--sirem-border-soft);
+  transition: background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-table__body-row:last-child {

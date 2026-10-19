@@ -55,6 +55,8 @@
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
   box-shadow: var(--sirem-shadow-md);
+  transform-origin: top right;
+  animation: sirem-scale-in var(--sirem-duration, 200ms) var(--sirem-ease-out, ease-out) both;
 }
 
 .sirem-user__head {
@@ -100,6 +102,9 @@
   text-decoration: none;
   color: var(--sirem-text-soft);
   cursor: pointer;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-user__items > button:hover,

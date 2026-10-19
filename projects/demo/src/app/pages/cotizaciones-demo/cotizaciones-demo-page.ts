@@ -12,7 +12,7 @@ import {
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
-  SiremViewToggle,
+  SiremSegmented,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
@@ -54,7 +54,7 @@ type LineaCotizacion = { sku: string; nombre: string; cantidad: number; precio: 
     SiremPageHeader,
     SiremSearchField,
     SiremStatCard,
-    SiremViewToggle,
+    SiremSegmented,
   ],
   template: `
     <app-page-demo-shell label="Cotizaciones y presupuestos" [files]="codeFiles">
@@ -92,7 +92,7 @@ type LineaCotizacion = { sku: string; nombre: string; cantidad: number; precio: 
             <p class="text-sm text-slate-500 dark:text-slate-400">
               {{ filtrados().length }} cotización(es) en pantalla
             </p>
-            <sirem-view-toggle [(view)]="vista" />
+            <sirem-segmented [(value)]="vista" />
           </div>
 
           @if (filtrados().length) {
@@ -190,7 +190,7 @@ export class CotizacionesDemoPage {
 
   readonly q = signal('');
   readonly estado = signal<string | number | null>(null);
-  readonly vista = signal<string>('table');
+  readonly vista = signal<string | null>('table');
 
   readonly detalleAbierto = signal(false);
   readonly seleccion = signal<ErpCotizacion | null>(null);
@@ -320,7 +320,7 @@ export class CotizacionesDemoPage {
 
 <div class="flex flex-wrap items-center justify-between gap-3">
   <p class="text-sm text-slate-500 dark:text-slate-400">{{ filtrados().length }} cotización(es) en pantalla</p>
-  <sirem-view-toggle [(view)]="vista" />
+  <sirem-segmented [(value)]="vista" />
 </div>
 
 @if (filtrados().length) {
@@ -372,7 +372,7 @@ export class CotizacionesPage {
   readonly cots = signal<ErpCotizacion[]>(COTIZACIONES.map(c => ({ ...c })));
   readonly q = signal('');
   readonly estado = signal<string | number | null>(null);
-  readonly vista = signal<string>('table');
+  readonly vista = signal<string | null>('table');
   readonly seleccion = signal<ErpCotizacion | null>(null);
   readonly detalleAbierto = signal(false);
 

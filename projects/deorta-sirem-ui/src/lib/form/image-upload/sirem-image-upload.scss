@@ -19,6 +19,11 @@
   border-radius: var(--sirem-radius-md, 1rem);
   border: 1px solid var(--sirem-border);
   object-fit: cover;
+  transition: transform var(--sirem-duration, 200ms) var(--sirem-ease, ease);
+}
+
+.sirem-image__preview:hover .sirem-image__img {
+  transform: scale(1.02);
 }
 
 .sirem-image__remove {
@@ -37,6 +42,9 @@
   border: 1px solid var(--sirem-border);
   box-shadow: var(--sirem-shadow-xs);
   cursor: pointer;
+  transition:
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    transform var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-image__remove:hover {
@@ -54,6 +62,9 @@
   padding: 2rem 1.5rem;
   text-align: center;
   cursor: pointer;
+  transition:
+    border-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-image__drop:hover {

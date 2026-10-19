@@ -36,6 +36,8 @@
   min-width: 0.1875rem;
   border-radius: var(--sirem-radius-pill, 999px);
   background: var(--sirem-spark-bar);
+  transform-origin: bottom;
+  animation: sirem-grow-bar var(--sirem-duration-slow, 320ms) var(--sirem-ease-out, ease-out) both;
 }
 
 .sirem-spark__bar--on {
@@ -54,4 +56,8 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
+  /* Trazo que se dibuja de izquierda a derecha (pathLength="1"). */
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: sirem-draw-line var(--sirem-duration-slow, 320ms) var(--sirem-ease-out, ease-out) forwards;
 }

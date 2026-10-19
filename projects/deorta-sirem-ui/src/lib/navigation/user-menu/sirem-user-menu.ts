@@ -4,6 +4,7 @@ import { SiremOverlayTrigger } from '../../overlays/overlay/sirem-overlay-trigge
 
 /** Acción del menú de usuario. */
 export interface SiremUserMenuAction {
+  /** Texto de la acción. */
   label: string;
   /** Clase CSS del icono (p. ej. `fi fi-rr-user`). */
   icon?: string;
@@ -11,7 +12,9 @@ export interface SiremUserMenuAction {
   svg?: string;
   /** Marca la acción como peligrosa (p. ej. cerrar sesión). */
   danger?: boolean;
+  /** Deshabilita la acción. */
   disabled?: boolean;
+  /** Dato libre que se devuelve en `actionPressed`. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value?: any;
 }
@@ -120,8 +123,11 @@ export interface SiremUserMenuGroup {
   `,
 })
 export class SiremUserMenu {
+  /** Nombre del usuario; origen de las iniciales del avatar. */
   readonly userName = input.required<string>();
+  /** Línea secundaria bajo el nombre (cargo, sede…). */
   readonly userDetail = input('');
+  /** URL de la foto de perfil; si falta, se usan las iniciales. */
   readonly avatarSrc = input<string | null>(null);
   /** Color de fondo de las iniciales (opcional; usa el primario por defecto). */
   readonly avatarBg = input('');
@@ -133,6 +139,7 @@ export class SiremUserMenu {
   /** Grupos de acciones con iconos (alternativa a proyectar contenido). */
   readonly groups = input<SiremUserMenuGroup[]>([]);
 
+  /** Se emite con la acción elegida del menú. */
   readonly actionPressed = output<SiremUserMenuAction>();
 
   readonly open = signal(false);

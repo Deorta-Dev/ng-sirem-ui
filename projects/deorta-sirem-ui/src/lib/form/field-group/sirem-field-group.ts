@@ -32,6 +32,8 @@ import { Component, input } from '@angular/core';
   `,
 })
 export class SiremFieldGroup {
+  /** Título del grupo de campos. */
   readonly title = input('');
+  /** Texto de apoyo bajo el título. */
   readonly description = input('');
 }

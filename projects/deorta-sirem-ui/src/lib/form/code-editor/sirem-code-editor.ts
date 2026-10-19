@@ -18,6 +18,7 @@ import { json } from '@codemirror/lang-json';
 import { css } from '@codemirror/lang-css';
 import { oneDark } from '@codemirror/theme-one-dark';
 
+/** Lenguaje con el que se resalta el código. */
 export type SiremCodeLanguage = 'html' | 'typescript' | 'javascript' | 'json' | 'css';
 
 /**
@@ -55,11 +56,15 @@ export type SiremCodeLanguage = 'html' | 'typescript' | 'javascript' | 'json' | 
 export class SiremCodeEditor implements AfterViewInit {
   /** Código fuente (doble vía). */
   readonly code = model('');
+  /** Lenguaje resaltado: `html`, `typescript`, `javascript`, `json` o `css`. */
   readonly language = input<SiremCodeLanguage>('typescript');
+  /** Etiqueta visible sobre el editor. */
   readonly label = input('');
+  /** Nota de ayuda bajo el editor. */
   readonly hint = input('');
   /** Tema oscuro One Dark; en claro usa el tema base de CodeMirror. */
   readonly dark = input(false);
+  /** Solo lectura: se puede seleccionar y copiar, pero no editar. */
   readonly readonly = input(false);
   /** Alto del editor en px. */
   readonly height = input(240);

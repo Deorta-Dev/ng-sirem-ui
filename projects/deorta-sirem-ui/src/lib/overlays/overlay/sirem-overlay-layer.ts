@@ -40,11 +40,23 @@ const CSS = `
   max-height: 100vh;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.12s ease, visibility 0.12s;
+  /*
+   * El panel se posiciona con transform inline (translate3d). Por eso la
+   * entrada se hace con la propiedad scale (se compone con el transform y no
+   * lo pisa) y con el origen en el lado del disparador: crece desde el y no
+   * desde la esquina de la pantalla.
+   */
+  scale: 0.97;
+  transform-origin: var(--sirem-overlay-origin, center);
+  transition:
+    opacity var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    scale var(--sirem-duration-fast, 120ms) var(--sirem-ease-out, ease),
+    visibility var(--sirem-duration-fast, 120ms);
 }
 .sirem-overlay-panel--visible {
   visibility: visible;
   opacity: 1;
+  scale: 1;
 }
 .sirem-overlay__panel {
   min-width: 12rem;
@@ -68,6 +80,9 @@ const CSS = `
   text-align: left;
   color: var(--sirem-text-soft, #3c3d42);
   cursor: pointer;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 .sirem-overlay__item:hover:not(:disabled) {
   background: var(--sirem-surface-hover, #eceef2);
@@ -83,7 +98,10 @@ const CSS = `
   font-weight: 600;
 }
 @media (prefers-reduced-motion: reduce) {
-  .sirem-overlay-panel { transition: none; }
+  .sirem-overlay-panel {
+    transition: none;
+    scale: 1;
+  }
 }
 `;
 

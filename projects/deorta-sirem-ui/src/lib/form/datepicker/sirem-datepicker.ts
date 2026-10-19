@@ -35,13 +35,21 @@ import { Component, input, model } from '@angular/core';
   `,
 })
 export class SiremDatepicker {
+  /** Fecha elegida en ISO `yyyy-MM-dd`, con enlace de dos vías. */
   readonly value = model<string | null>(null);
+  /** Etiqueta visible sobre el control. */
   readonly label = input('');
+  /** Nota de ayuda bajo el campo; la sustituye `error` cuando lo hay. */
   readonly hint = input('');
+  /** Mensaje de error. Con texto, el campo se marca en rojo y se anuncia. */
   readonly error = input('');
+  /** Fecha mínima seleccionable, en ISO `yyyy-MM-dd`. */
   readonly min = input<string | null>(null);
+  /** Fecha máxima seleccionable, en ISO `yyyy-MM-dd`. */
   readonly max = input<string | null>(null);
+  /** Marca el campo como obligatorio (`aria-required` e indicador visual). */
   readonly required = input(false);
+  /** Deshabilita el control: no se puede enfocar ni editar. */
   readonly disabled = input(false);
 
   box(): string {

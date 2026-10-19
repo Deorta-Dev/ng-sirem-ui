@@ -1,9 +1,10 @@
-/* Estilos de sirem-segmented: grupo de pastillas con la activa resaltada. */
+/* Estilos de sirem-segmented: carril con una ficha deslizante. */
 :host {
   display: inline-flex;
 }
 
 .sirem-seg {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.125rem;
@@ -16,7 +17,34 @@
   width: 100%;
 }
 
+/*
+ * Ficha activa: una sola pieza que se desliza hasta la opción elegida. Se
+ * coloca con `transform` (no con `left`) para que el movimiento no reflowee.
+ */
+.sirem-seg__thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: var(--sirem-surface);
+  box-shadow: var(--sirem-shadow-xs);
+  pointer-events: none;
+  transition:
+    transform var(--sirem-duration, 200ms) var(--sirem-ease-out, ease-out),
+    width var(--sirem-duration, 200ms) var(--sirem-ease-out, ease-out),
+    height var(--sirem-duration, 200ms) var(--sirem-ease-out, ease-out),
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
+}
+
+.sirem-seg__thumb--accent {
+  background: var(--sirem-accent);
+  box-shadow: none;
+}
+
 .sirem-seg__item {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   flex: none;
   align-items: center;
@@ -31,9 +59,13 @@
   color: var(--sirem-text-muted);
   cursor: pointer;
   transition:
-    background 0.15s ease,
-    color 0.15s ease,
-    box-shadow 0.15s ease;
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    transform var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
+}
+
+/* La pastilla se hunde un pelín al pulsarla (feedback inmediato). */
+.sirem-seg__item:active {
+  transform: scale(0.96);
 }
 
 .sirem-seg--stretch .sirem-seg__item {
@@ -41,8 +73,23 @@
   min-width: 0;
 }
 
+/* Tamaños. El carril y la ficha se ajustan solos: la ficha se mide. */
+.sirem-seg--sm {
+  padding: 0.1875rem;
+}
+
 .sirem-seg--sm .sirem-seg__item {
   padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+}
+
+.sirem-seg--lg .sirem-seg__item {
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9375rem;
+}
+
+.sirem-seg--lg .sirem-seg__hint {
   font-size: 0.75rem;
 }
 
@@ -55,21 +102,16 @@
   outline-offset: 2px;
 }
 
-/* Activa: ficha blanca elevada sobre el carril. */
 .sirem-seg__item--active,
 .sirem-seg__item--active:hover {
-  background: var(--sirem-surface);
   color: var(--sirem-text);
   font-weight: 600;
-  box-shadow: var(--sirem-shadow-xs);
 }
 
-/* Acento: la activa se pinta en lima con texto tinta. */
+/* Acento: la ficha se pinta en lima y la etiqueta activa va en tinta. */
 .sirem-seg--accent .sirem-seg__item--active,
 .sirem-seg--accent .sirem-seg__item--active:hover {
-  background: var(--sirem-accent);
   color: var(--sirem-accent-ink, #1a1a1a);
-  box-shadow: none;
 }
 
 .sirem-seg__text {

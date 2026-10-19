@@ -34,13 +34,21 @@ import { Component, input, model } from '@angular/core';
   `,
 })
 export class SiremTextarea {
+  /** Texto del área, con enlace de dos vías. */
   readonly value = model<string | null>(null);
+  /** Etiqueta visible sobre el control. */
   readonly label = input('');
+  /** Texto de ayuda que aparece mientras el campo está vacío. */
   readonly placeholder = input('');
+  /** Nota de ayuda bajo el campo; la sustituye `error` cuando lo hay. */
   readonly hint = input('');
+  /** Mensaje de error. Con texto, el campo se marca en rojo y se anuncia. */
   readonly error = input('');
+  /** Número de líneas visibles (alto inicial). */
   readonly rows = input(3);
+  /** Marca el campo como obligatorio (`aria-required` e indicador visual). */
   readonly required = input(false);
+  /** Deshabilita el control: no se puede enfocar ni editar. */
   readonly disabled = input(false);
 
   box(): string {

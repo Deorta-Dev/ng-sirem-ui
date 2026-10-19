@@ -34,8 +34,12 @@ import { Component, input, model } from '@angular/core';
   `,
 })
 export class SiremSwitch {
+  /** Estado activado, con enlace de dos vías. */
   readonly checked = model(false);
+  /** Texto del interruptor. */
   readonly label = input('');
+  /** Línea secundaria bajo la etiqueta. */
   readonly description = input('');
+  /** Deshabilita el interruptor. */
   readonly disabled = input(false);
 }

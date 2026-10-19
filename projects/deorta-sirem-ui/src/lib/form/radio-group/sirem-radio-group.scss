@@ -34,4 +34,16 @@
   width: 1rem;
   border: 1px solid var(--sirem-border-strong);
   accent-color: var(--sirem-control-accent);
+  transition:
+    border-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    box-shadow var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
+}
+
+.sirem-radio__option:hover .sirem-radio__input {
+  border-color: var(--sirem-text-muted);
+}
+
+.sirem-radio__input:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: 2px;
 }

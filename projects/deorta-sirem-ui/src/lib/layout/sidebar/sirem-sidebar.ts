@@ -15,17 +15,20 @@ import {
 
 /** Ítem de navegación jerárquica del sidebar / navbar. */
 export interface SiremNavItem {
+  /** Texto del ítem. */
   label: string;
   /** Clase CSS del icono (p. ej. `fi fi-rr-users`). */
   icon?: string;
   /** SVG inline (duotone/streamline). Tiene prioridad sobre `icon`. */
   svg?: string;
+  /** Ruta de Angular a la que navega. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   route?: string | any[];
   /** Enlace externo (`href`); alternativa a `route` para URLs fuera de la app. */
   href?: string;
   /** Imagen redonda como icono (p. ej. logo); prioridad sobre `svg`/`icon`. */
   img?: string;
+  /** Texto o número del badge de la derecha. */
   badge?: string | number;
   /** Permiso requerido; se oculta si no está en `permissions`. */
   permission?: string;
@@ -34,6 +37,7 @@ export interface SiremNavItem {
    * (solo iconos). Por defecto usa `label`.
    */
   tooltip?: string;
+  /** Subítems; con hijos el ítem se vuelve desplegable. */
   children?: SiremNavItem[];
 }
 
@@ -346,6 +350,7 @@ export interface SiremNavItem {
   styleUrl: './sirem-sidebar.scss',
 })
 export class SiremSidebar {
+  /** Árbol de navegación (iconos, hijos, permisos, separadores…). */
   readonly items = input.required<SiremNavItem[]>();
   /** Permisos del usuario; los ítems con `permission` ausente se ocultan. */
   readonly permissions = input<Set<string> | string[] | null>(null);
@@ -365,6 +370,7 @@ export class SiremSidebar {
   readonly collapsed = model(false);
   /** Drawer en móvil. */
   readonly mobileOpen = model(false);
+  /** Nombre de la marca en la cabecera del sidebar. */
   readonly brand = input('SIREM UI');
 
   /**
@@ -378,6 +384,7 @@ export class SiremSidebar {
    */
   readonly submenu = input<SiremSubmenuConfig>({});
 
+  /** Se emite al pulsar un ítem (para rutas o telemetría). */
   readonly itemPressed = output<SiremNavItem>();
 
   private readonly sanitizer = inject(DomSanitizer);

@@ -93,6 +93,7 @@ export class SiremChart {
   /** Renderizador: svg (nítido, apto tests) o canvas (miles de puntos). */
   readonly renderer = input<'canvas' | 'svg'>('svg');
 
+  /** Emite la instancia de ECharts cuando la gráfica ya está inicializada. */
   readonly ready = output<ECharts>();
 
   private readonly box = viewChild<ElementRef<HTMLDivElement>>('box');
@@ -154,7 +155,20 @@ export class SiremChart {
     }
     const chart = this.chart;
     if (!chart) return;
-    chart.setOption(this.option(), { notMerge: false });
+    /* Ritmo de animación común (el consumidor puede sobrescribirlo en su option). */
+    const reduced =
+      typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    chart.setOption(
+      {
+        animation: !reduced,
+        animationDuration: 600,
+        animationEasing: 'cubicOut',
+        animationDurationUpdate: 400,
+        animationEasingUpdate: 'cubicOut',
+        ...this.option(),
+      },
+      { notMerge: false },
+    );
     chart.resize();
   }
 }

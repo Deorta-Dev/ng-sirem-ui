@@ -10,6 +10,7 @@
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
   box-shadow: var(--sirem-shadow-xs);
+  animation: sirem-fade-in var(--sirem-duration, 200ms) var(--sirem-ease-out, ease-out) both;
 }
 
 /* Tamaños máximos: el calendario llena el contenedor hasta el tope,
@@ -48,6 +49,7 @@
   font-weight: 700;
   color: var(--sirem-text);
   cursor: pointer;
+  transition: background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-cal__title:hover {
@@ -79,6 +81,7 @@
   line-height: 1;
   color: var(--sirem-primary);
   cursor: pointer;
+  transition: background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-cal__nav:hover {
@@ -122,6 +125,7 @@
   padding: 0.25rem 0.5rem;
   color: var(--sirem-text-muted);
   cursor: pointer;
+  transition: background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-cal__year-btn:hover {
@@ -143,6 +147,9 @@
   font-weight: 500;
   color: var(--sirem-text-soft);
   cursor: pointer;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-cal__month:hover {
@@ -194,6 +201,9 @@
   font-weight: 400;
   color: var(--sirem-text-soft);
   cursor: pointer;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-cal__day:hover {
@@ -270,6 +280,9 @@
   padding: 0.375rem;
   text-align: left;
   cursor: pointer;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    border-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-cal__cell:hover {

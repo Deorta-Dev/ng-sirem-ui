@@ -40,15 +40,24 @@ import { SiremModal } from '../modal/sirem-modal';
   `,
 })
 export class SiremConfirmDialog {
+  /** Controla la visibilidad del diálogo, con enlace de dos vías. */
   readonly open = model(false);
+  /** Título del diálogo. */
   readonly title = input('Confirmar acción');
+  /** Pregunta principal. */
   readonly message = input('¿Deseas continuar?');
+  /** Aclaración o consecuencia bajo el mensaje; vacío la oculta. */
   readonly detail = input('');
+  /** Texto del botón de confirmación. */
   readonly confirmLabel = input('Confirmar');
+  /** Texto del botón de cancelación. */
   readonly cancelLabel = input('Cancelar');
+  /** Estilo del botón principal: `primary` o `danger`. */
   readonly variant = input<'primary' | 'danger'>('primary');
 
+  /** Se emite al confirmar; el diálogo se cierra. */
   readonly confirmed = output<void>();
+  /** Se emite al cancelar o cerrar sin confirmar. */
   readonly cancelled = output<void>();
 
   confirm(): void {

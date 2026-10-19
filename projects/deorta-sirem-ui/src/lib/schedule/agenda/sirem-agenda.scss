@@ -65,8 +65,8 @@
   font-family: inherit;
   cursor: pointer;
   transition:
-    background 0.15s ease,
-    color 0.15s ease;
+    background var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-agenda__navbtn {
@@ -281,7 +281,7 @@
   text-align: left;
   box-shadow: var(--sirem-shadow-xs);
   cursor: pointer;
-  transition: box-shadow 0.15s ease;
+  transition: box-shadow var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-agenda__event:hover {
@@ -436,8 +436,8 @@
   font-variant-numeric: tabular-nums;
   cursor: pointer;
   transition:
-    background 0.15s ease,
-    color 0.15s ease;
+    background var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-agenda__mday:hover {
@@ -584,7 +584,7 @@
   font-family: inherit;
   text-align: left;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-agenda__row::before {
@@ -678,4 +678,11 @@
   .sirem-agenda__row {
     transition: none;
   }
+}
+
+/* Entrada de cada vista al cambiar el selector (`@switch` las recrea). */
+.sirem-agenda__timeview,
+.sirem-agenda__month,
+.sirem-agenda__list {
+  animation: sirem-fade-in var(--sirem-duration, 200ms) var(--sirem-ease-out, ease-out) both;
 }

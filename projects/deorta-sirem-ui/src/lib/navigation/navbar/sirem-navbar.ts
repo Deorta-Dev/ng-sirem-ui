@@ -1,4 +1,11 @@
-import { Component, computed, inject, input, output, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgTemplateOutlet } from '@angular/common';
@@ -10,7 +17,12 @@ import {
   type SiremSubmenuConfig,
   type SiremSubmenuResolved,
 } from '../../overlays/overlay/sirem-submenu';
+import {
+  SIREM_STICKY_STATE,
+  type SiremStickyAppearance,
+} from '../../layout/sticky/sirem-sticky';
 
+/** Disposición de la barra de navegación. */
 export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floating';
 
 /**
@@ -34,9 +46,15 @@ export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floatin
  * - `items`: ítems a mostrar (obligatorio).
  * - `layout`: `vertical` (defecto) | `horizontal` | `minibar` | `floating`.
  * - `permissions`: `Set` o array de permisos; oculta los ítems restringidos.
- * - `fixed`: barra `sticky` al hacer scroll.
+ * - `appearance` / `stickyAppearance`: piel normal y piel mientras la
+ *   directiva `siremSticky` la mantiene fija
+ *   (`default` | `elevated` | `glass` | `flat`; `auto` hereda la normal).
  * - `blur`: fondo translúcido con desenfoque.
  * - `submenu`: gesto, placement y retardo de los submenús por franja de ancho.
+ *
+ * La fijación se hace con la directiva **`siremSticky`** (común a topbar,
+ * navbar y page-header), que admite offset, límite numérico o un componente
+ * como tope.
  *
  * Outputs:
  * - `itemPressed`: se emite al pulsar un ítem (incluidos los hijos del overlay).
@@ -46,8 +64,10 @@ export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floatin
  * <sirem-navbar layout="horizontal" [items]="nav" [permissions]="perms" />
  *
  * <sirem-navbar
+ *   siremSticky
+ *   layout="horizontal"
  *   [items]="nav"
- *   [submenu]="{ breakpoint: 1024, desktop: { trigger: 'hover' }, mobile: { trigger: 'click' } }"
+ *   stickyAppearance="elevated"
  * />
  * ```
  */
@@ -60,8 +80,10 @@ export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floatin
     @if (layout() === 'horizontal') {
       <nav
         class="sirem-navbar sirem-navbar--horizontal"
-        [class.sirem-navbar--fixed]="fixed()"
         [class.sirem-navbar--blur]="blur()"
+        [class.sirem-navbar--elevated]="activeAppearance() === 'elevated'"
+        [class.sirem-navbar--glass]="activeAppearance() === 'glass'"
+        [class.sirem-navbar--flat]="activeAppearance() === 'flat'"
         aria-label="Navegación principal"
       >
         @for (item of visible(); track item.label) {
@@ -100,8 +122,10 @@ export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floatin
     } @else if (layout() === 'minibar') {
       <nav
         class="sirem-navbar sirem-navbar--minibar"
-        [class.sirem-navbar--fixed]="fixed()"
         [class.sirem-navbar--blur]="blur()"
+        [class.sirem-navbar--elevated]="activeAppearance() === 'elevated'"
+        [class.sirem-navbar--glass]="activeAppearance() === 'glass'"
+        [class.sirem-navbar--flat]="activeAppearance() === 'flat'"
         aria-label="Navegación principal"
       >
         @for (item of visible(); track item.label) {
@@ -154,8 +178,10 @@ export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floatin
         class="sirem-navbar"
         [class.sirem-navbar--vertical]="layout() === 'vertical'"
         [class.sirem-navbar--floating]="layout() === 'floating'"
-        [class.sirem-navbar--fixed]="fixed()"
         [class.sirem-navbar--blur]="blur()"
+        [class.sirem-navbar--elevated]="activeAppearance() === 'elevated'"
+        [class.sirem-navbar--glass]="activeAppearance() === 'glass'"
+        [class.sirem-navbar--flat]="activeAppearance() === 'flat'"
         aria-label="Navegación principal"
       >
         @for (item of visible(); track item.label) {
@@ -255,14 +281,38 @@ export type SiremNavbarLayout = 'vertical' | 'horizontal' | 'minibar' | 'floatin
   `,
 })
 export class SiremNavbar {
+  /** Árbol de navegación (iconos, hijos, permisos, separadores…). */
   readonly items = input.required<SiremNavItem[]>();
+  /** Disposición: `vertical`, `horizontal`, `minibar` o `floating`. */
   readonly layout = input<SiremNavbarLayout>('vertical');
   /** Permisos del usuario; oculta ítems con `permission` ausente. */
   readonly permissions = input<Set<string> | string[] | null>(null);
-  /** Fija la barra al hacer scroll (`position: sticky`). */
-  readonly fixed = input(false);
-  /** Fondo translúcido con desenfoque (ideal con `fixed`). */
+  /**
+   * Aspecto **mientras la directiva `siremSticky` la mantiene fija**. `auto`
+   * (defecto) mantiene el de `appearance`; `elevated`, `glass` o `flat`
+   * cambian la piel al pegarse.
+   */
+  readonly stickyAppearance = input<'auto' | SiremStickyAppearance>('auto');
+  /** Directiva de fijación aplicada al host, si la hay. */
+  private readonly stickyRef = inject(SIREM_STICKY_STATE, {
+    optional: true,
+    host: true,
+  });
+  /** `true` mientras la directiva mantiene la barra fija. */
+  private readonly stuck = computed(() => this.stickyRef?.stuck() ?? false);
+  /** Aspecto normal: `default`, `elevated`, `glass` o `flat`. */
+  readonly appearance = input<SiremStickyAppearance>('default');
+  /** Fondo translúcido con desenfoque (ideal con `siremSticky`). */
   readonly blur = input(false);
+
+  /**
+   * Aspecto efectivo: `stickyAppearance` cuando está fija y no es `auto`;
+   * en el resto de casos, `appearance`.
+   */
+  readonly activeAppearance = computed<SiremStickyAppearance>(() => {
+    const whenStuck = this.stickyAppearance();
+    return this.stuck() && whenStuck !== 'auto' ? whenStuck : this.appearance();
+  });
 
   /**
    * Gesto y colocación de los submenús, por franja de ancho de pantalla.
@@ -275,6 +325,7 @@ export class SiremNavbar {
    */
   readonly submenu = input<SiremSubmenuConfig>({});
 
+  /** Se emite al pulsar un ítem. */
   readonly itemPressed = output<SiremNavItem>();
 
   private readonly sanitizer = inject(DomSanitizer);

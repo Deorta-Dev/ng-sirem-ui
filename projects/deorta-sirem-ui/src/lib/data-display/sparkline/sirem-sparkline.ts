@@ -1,6 +1,8 @@
 import { Component, computed, input } from '@angular/core';
 
+/** Forma de la minigráfica (área, línea o barras). */
 export type SiremSparklineVariant = 'bar' | 'line';
+/** Color semántico de la minigráfica. */
 export type SiremSparklineTone = 'neutral' | 'accent' | 'sage' | 'danger';
 
 /**
@@ -42,7 +44,7 @@ export type SiremSparklineTone = 'neutral' | 'accent' | 'sage' | 'danger';
           preserveAspectRatio="none"
           aria-hidden="true"
         >
-          <polyline class="sirem-spark__line" [attr.points]="points()" />
+          <polyline class="sirem-spark__line" pathLength="1" [attr.points]="points()" />
         </svg>
       } @else {
         @for (bar of bars(); track $index) {

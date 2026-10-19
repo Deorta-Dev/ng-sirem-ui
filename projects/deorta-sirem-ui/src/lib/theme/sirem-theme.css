@@ -132,11 +132,28 @@
   --sirem-radius-2xl: 2.5rem;
   --sirem-radius-pill: 999px;
 
-  /* Elevación: sombras amplias, muy difusas y de baja opacidad. */
-  --sirem-shadow-xs: 0 1px 2px rgb(18 20 24 / 0.04);
-  --sirem-shadow-sm: 0 4px 16px rgb(18 20 24 / 0.05);
-  --sirem-shadow-md: 0 10px 30px rgb(18 20 24 / 0.06);
-  --sirem-shadow-lg: 0 24px 60px -12px rgb(18 20 24 / 0.14);
+  /*
+   * Elevación: cada nivel suma un contacto corto (define el borde apoyado) y
+   * un halo amplio y difuso (define la altura). La escala es deliberadamente
+   * legible: los contenedores flotan sobre el fondo y las tarjetas se
+   * distinguen de las superficies planas (tablas, listas, campos).
+   */
+  --sirem-shadow-xs: 0 1px 2px rgb(18 20 24 / 0.05), 0 2px 6px -2px rgb(18 20 24 / 0.06);
+  --sirem-shadow-sm: 0 1px 2px rgb(18 20 24 / 0.06), 0 8px 24px -6px rgb(18 20 24 / 0.12);
+  --sirem-shadow-md: 0 2px 4px rgb(18 20 24 / 0.06), 0 16px 40px -10px rgb(18 20 24 / 0.18);
+  --sirem-shadow-lg: 0 4px 10px rgb(18 20 24 / 0.08), 0 32px 72px -18px rgb(18 20 24 / 0.26);
+
+  /*
+   * Movimiento: una curva y tres duraciones para todo el sistema. Los
+   * componentes animan SIEMPRE con estos tokens (nunca con valores sueltos)
+   * para que el ritmo sea el mismo en toda la librería y para que
+   * `prefers-reduced-motion` los apague de una vez (ver el final del fichero).
+   */
+  --sirem-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --sirem-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --sirem-duration-fast: 120ms;
+  --sirem-duration: 200ms;
+  --sirem-duration-slow: 320ms;
 
   --sirem-tint-success-bg: #e8f3ea;
   --sirem-tint-success-text: #2f6b47;
@@ -194,10 +211,11 @@
   --sirem-surface-glass: color-mix(in srgb, var(--sirem-surface) 72%, transparent);
   --sirem-surface-glass-strong: color-mix(in srgb, var(--sirem-surface) 88%, transparent);
 
-  --sirem-shadow-xs: 0 1px 2px rgb(0 0 0 / 0.4);
-  --sirem-shadow-sm: 0 4px 16px rgb(0 0 0 / 0.45);
-  --sirem-shadow-md: 0 12px 30px rgb(0 0 0 / 0.5);
-  --sirem-shadow-lg: 0 26px 60px -12px rgb(0 0 0 / 0.6);
+  /* Sobre superficies oscuras el negro necesita más opacidad para leerse. */
+  --sirem-shadow-xs: 0 1px 2px rgb(0 0 0 / 0.55), 0 2px 6px -2px rgb(0 0 0 / 0.5);
+  --sirem-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.5), 0 10px 28px -8px rgb(0 0 0 / 0.62);
+  --sirem-shadow-md: 0 2px 6px rgb(0 0 0 / 0.55), 0 20px 48px -12px rgb(0 0 0 / 0.7);
+  --sirem-shadow-lg: 0 6px 16px rgb(0 0 0 / 0.6), 0 40px 88px -20px rgb(0 0 0 / 0.78);
 
   --sirem-tint-success-bg: rgb(140 179 150 / 0.16);
   --sirem-tint-success-text: #a5d2a4;
@@ -207,4 +225,121 @@
   --sirem-tint-danger-text: #fca5a5;
   --sirem-tint-neutral-bg: #202329;
   --sirem-tint-neutral-text: #cfd2d8;
+}
+
+/*
+ * Animaciones compartidas.
+ *
+ * Viven aquí (global) junto a los tokens porque los paneles flotantes
+ * (tooltip, overlay, menús) se crean fuera del componente y todos los `.scss`
+ * de la librería las referencian por nombre. Cada componente decide cuál usa:
+ * - `sirem-fade-in`      → telón/backdrop.
+ * - `sirem-pop-in`       → panel centrado (modal, paleta, popover).
+ * - `sirem-drop-in`      → panel anclado a un disparador (menú, tooltip).
+ * - `sirem-rise-in`      → contenido que entra desde abajo (listas, celdas).
+ * - `sirem-slide-*-in`   → paneles laterales (drawer, sidebar móvil).
+ * - `sirem-draw-line`    → trazo de gráficas (sparkline).
+ * - `sirem-pulse-dot`    → indicadores «en vivo».
+ */
+@keyframes sirem-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes sirem-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(0.25rem);
+  }
+}
+
+/* Como `sirem-drop-in` pero con `scale`: para paneles anclados por `transform`. */
+@keyframes sirem-scale-in {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+@keyframes sirem-drop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.375rem) scale(0.98);
+  }
+}
+
+@keyframes sirem-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+@keyframes sirem-slide-right-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes sirem-slide-left-in {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes sirem-slide-up-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes sirem-slide-down-out {
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes sirem-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes sirem-draw-line {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes sirem-grow-bar {
+  from {
+    transform: scaleY(0.05);
+    opacity: 0.2;
+  }
+}
+
+@keyframes sirem-pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.5;
+  }
+}
+
+/*
+ * Movimiento reducido: se anulan las duraciones de los tokens, así que toda
+ * transición/animación de la librería (que los usa) se resuelve al instante
+ * sin cambiar ni un selector.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --sirem-duration-fast: 0.01ms;
+    --sirem-duration: 0.01ms;
+    --sirem-duration-slow: 0.01ms;
+  }
 }

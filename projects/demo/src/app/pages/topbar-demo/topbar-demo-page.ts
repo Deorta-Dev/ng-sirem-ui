@@ -1,14 +1,14 @@
 import { Component, signal } from '@angular/core';
-import { SiremTopbar, SiremButton, SiremCard, SiremUserMenu } from 'deorta-sirem-ui';
+import { SiremTopbar, SiremButton, SiremCard, SiremSticky, SiremUserMenu } from 'deorta-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
 @Component({
   selector: 'app-topbar-demo-page',
   standalone: true,
-  imports: [DemoPageLayout, DemoVariantCard, SiremTopbar, SiremButton, SiremCard, SiremUserMenu],
+  imports: [DemoPageLayout, DemoVariantCard, SiremTopbar, SiremButton, SiremCard, SiremSticky, SiremUserMenu],
   template: `
-    <app-demo-page-layout title="Topbar" category="Layout" subtitle="sirem-topbar — barra superior de espacio y acciones, con fixed+blur y floating (barra redondeada para dashboards, ver /demo/page-admin).">
+    <app-demo-page-layout title="Topbar" category="Layout" subtitle="sirem-topbar — barra superior de espacio y acciones, con sticky configurable (apariencia al fijarse + evento) y floating para dashboards.">
       <app-demo-variant-card title="Básica" description="Label de espacio por defecto." [htmlCode]="h1" [tsCode]="t">
         <sirem-topbar />
       </app-demo-variant-card>
@@ -61,14 +61,140 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
         </sirem-topbar>
         <span class="text-sm text-slate-600">Menú: {{ msg() }}</span>
       </app-demo-variant-card>
-      <app-demo-variant-card title="Fixed + blur" description="Fija al scroll con fondo translúcido." [htmlCode]="h4" [tsCode]="t">
-        <sirem-topbar spaceLabel="SIREM" [fixed]="true" [blur]="true" />
+      <app-demo-variant-card
+        title="Sticky con cambio de piel"
+        description="Dentro de un panel con scroll: se fija arriba, pasa a elevated al pegarse y emite (siremStickyChange)."
+        [htmlCode]="hSticky"
+        [tsCode]="tSticky"
+      >
+        <div
+          class="h-64 overflow-auto rounded-lg border"
+          style="border-color: var(--sirem-border-soft)"
+        >
+          <sirem-topbar
+            spaceLabel="SIREM"
+            [showFullscreen]="false"
+            siremSticky
+            stickyAppearance="elevated"
+            (siremStickyChange)="stuck.set($event)"
+          />
+          <div class="min-h-[22rem] space-y-3 p-4 text-sm text-slate-500">
+            <p>Desplaza este panel para ver cómo la barra se fija arriba.</p>
+            @for (line of filler; track line) {
+              <p>{{ line }}</p>
+            }
+          </div>
+        </div>
+        <span class="text-xs font-semibold text-slate-600">
+          stuck: {{ stuck() ? 'sí (pegada arriba)' : 'no' }}
+        </span>
+      </app-demo-variant-card>
+      <app-demo-variant-card
+        title="Sticky glass"
+        description="Fondo flat en reposo y glass al fijarse, con 8px de separación superior."
+        [htmlCode]="hGlass"
+        [tsCode]="tSticky"
+      >
+        <div
+          class="h-64 overflow-auto rounded-lg border"
+          style="border-color: var(--sirem-border-soft)"
+        >
+          <sirem-topbar
+            spaceLabel="Clínica Norte"
+            appearance="flat"
+            [showFullscreen]="false"
+            siremSticky
+            [siremStickyOffset]="8"
+            stickyAppearance="glass"
+            (siremStickyChange)="stuck.set($event)"
+          />
+          <div class="min-h-[22rem] space-y-3 p-4 text-sm text-slate-500">
+            <p>El aspecto cambia solo mientras la barra está pegada.</p>
+            @for (line of filler; track line) {
+              <p>{{ line }}</p>
+            }
+          </div>
+        </div>
+        <span class="text-xs font-semibold text-slate-600">
+          stuck: {{ stuck() ? 'sí (pegada arriba)' : 'no' }}
+        </span>
+      </app-demo-variant-card>
+      <app-demo-variant-card
+        title="Sticky con límite"
+        description="Modo acotado: se queda fija 120 px de recorrido y después se suelta y sigue con el contenido."
+        [htmlCode]="hLimit"
+        [tsCode]="tSticky"
+      >
+        <div
+          class="h-64 overflow-auto rounded-lg border"
+          style="border-color: var(--sirem-border-soft)"
+        >
+          <sirem-topbar
+            spaceLabel="Límite 120"
+            [showFullscreen]="false"
+            siremSticky
+            [siremStickyLimit]="120"
+            stickyAppearance="elevated"
+            (siremStickyChange)="stuck.set($event)"
+          />
+          <div class="min-h-[22rem] space-y-3 p-4 text-sm text-slate-500">
+            <p>Tras 120 px fija, la barra se suelta y acompaña al contenido.</p>
+            @for (line of filler; track line) {
+              <p>{{ line }}</p>
+            }
+          </div>
+        </div>
+        <span class="text-xs font-semibold text-slate-600">
+          stuck: {{ stuck() ? 'sí (pegada arriba)' : 'no' }}
+        </span>
       </app-demo-variant-card>
     </app-demo-page-layout>
   `,
 })
 export class TopbarDemoPage {
   readonly msg = signal('');
+  readonly stuck = signal(false);
+  /** Texto de relleno para que el panel de demo tenga scroll. */
+  readonly filler = [
+    'Historia clínica, agenda y facturación conviven en la misma barra.',
+    'El workspace cambia de sede sin salir de la página.',
+    'El buscador global abre la paleta con Ctrl + K.',
+    'Las acciones del slot derecho son las de la pantalla actual.',
+    'La barra no sale del flujo: no hay hueco que compensar.',
+    'Al soltarse, la apariencia vuelve a la de reposo.',
+  ];
+  readonly hSticky = `<div class="h-64 overflow-auto">
+  <sirem-topbar
+    spaceLabel="SIREM"
+    siremSticky
+    stickyAppearance="elevated"
+    (siremStickyChange)="stuck.set($event)"
+  />
+  <!-- contenido alto para poder desplazar -->
+</div>
+<span>stuck: {{ stuck() }}</span>`;
+  readonly hGlass = `<div class="h-64 overflow-auto">
+  <sirem-topbar
+    spaceLabel="Clínica Norte"
+    appearance="flat"
+    siremSticky
+    [siremStickyOffset]="8"
+    stickyAppearance="glass"
+  />
+  <!-- contenido alto para poder desplazar -->
+</div>`;
+  readonly hLimit = `<div class="h-64 overflow-auto">
+  <sirem-topbar
+    spaceLabel="Límite 120"
+    siremSticky
+    [siremStickyLimit]="120"
+    stickyAppearance="elevated"
+    (siremStickyChange)="stuck.set($event)"
+  />
+  <!-- contenido alto para poder desplazar -->
+</div>
+<span>stuck: {{ stuck() }}</span>`;
+  readonly tSticky = "import { signal } from '@angular/core';\nimport { SiremTopbar, SiremSticky } from 'deorta-sirem-ui';\n\nreadonly stuck = signal(false);";
   readonly hCards = `<sirem-topbar
   appearance="cards"
   searchAlign="center"
@@ -91,6 +217,5 @@ export class TopbarDemoPage {
   readonly h1 = '<sirem-topbar />';
   readonly h2 = '<sirem-topbar spaceLabel="Óptica Norte">\n  <div slot="actions" class="flex gap-2">\n    <sirem-button size="sm" variant="secondary">Buscar</sirem-button>\n  </div>\n</sirem-topbar>';
   readonly h3 = '<sirem-topbar spaceLabel="SIREM">\n  <sirem-user-menu slot="user" userName="María Torres" userDetail="Optómetra" />\n</sirem-topbar>\n<span class="text-sm text-slate-600">Menú: {{ msg() }}</span>';
-  readonly h4 = '<sirem-topbar spaceLabel="SIREM" [fixed]="true" [blur]="true" />';
   readonly t = "import { signal } from '@angular/core';\nimport { SiremTopbar, SiremButton, SiremUserMenu } from 'deorta-sirem-ui';\n\nreadonly msg = signal('');";
 }

@@ -5,6 +5,10 @@
 
 .sirem-navbar {
   background: var(--sirem-surface);
+  transition:
+    background-color var(--sirem-duration, 180ms) var(--sirem-ease, ease),
+    border-color var(--sirem-duration, 180ms) var(--sirem-ease, ease),
+    box-shadow var(--sirem-duration, 180ms) var(--sirem-ease, ease);
 }
 
 .sirem-navbar--vertical {
@@ -57,6 +61,9 @@
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-navbar__link:hover {
@@ -185,16 +192,28 @@
   color: var(--sirem-primary-text, #fff);
 }
 
-/* Fija la barra al hacer scroll. */
-.sirem-navbar--fixed {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-}
-
 /* Fondo translúcido con desenfoque. */
 .sirem-navbar--blur {
   background: color-mix(in srgb, var(--sirem-surface, #fff) 82%, transparent);
   -webkit-backdrop-filter: blur(12px) saturate(1.4);
   backdrop-filter: blur(12px) saturate(1.4);
+}
+
+/* Aspectos configurables (normal y sticky); van tras blur para ganarle. */
+.sirem-navbar--elevated {
+  box-shadow: var(--sirem-shadow-md);
+}
+
+.sirem-navbar--glass {
+  background: color-mix(in srgb, var(--sirem-surface, #fff) 78%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+}
+
+.sirem-navbar--flat {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }

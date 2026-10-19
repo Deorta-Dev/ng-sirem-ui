@@ -30,7 +30,7 @@ const at = (dayOffset: number, hour: number, minute = 0): Date => {
     <app-demo-page-layout
       title="Agenda"
       category="Agenda"
-      subtitle="sirem-agenda — día, semana, mes y lista sobre la misma fuente de eventos. El selector es view-toggle y la navegación, date-chip."
+      subtitle="sirem-agenda — día, semana, mes y lista sobre la misma fuente de eventos. El selector es segmented y la navegación, date-chip."
     >
       <app-demo-variant-card
         title="Semana completa"

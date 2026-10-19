@@ -21,6 +21,7 @@ import { SiremSelectOption } from '../select/sirem-select';
 import { SiremSwitch } from '../switch/sirem-switch';
 import { SiremTextarea } from '../textarea/sirem-textarea';
 
+/** Tipo de control del formulario dinámico. */
 export type SiremFieldType =
   | 'text'
   | 'number'
@@ -312,16 +313,24 @@ const COL_TOKEN = /^(sm|md|lg)-([1-9]|1[0-2])$|^([1-9]|1[0-2])$/;
   `,
 })
 export class SiremDynamicForm {
+  /** Árbol de nodos del formulario (campos, grupos, tablas y HTML). */
   readonly fields = input.required<SiremFormNode[]>();
+  /** Valores por clave, con enlace de dos vías. */
   readonly values = model<Record<string, unknown>>({});
   /** Emite valores con ~400 ms de antirrebote (historias autoguardables). */
   readonly autosave = input(false);
+  /** Muestra el pie con los botones de enviar y cancelar. */
   readonly showActions = input(true);
+  /** Texto del botón de envío. */
   readonly submitLabel = input('Guardar');
+  /** Texto del botón de cancelación. */
   readonly cancelLabel = input('Cancelar');
 
+  /** Emite los valores al pulsar enviar (solo si el formulario es válido). */
   readonly submitted = output<Record<string, unknown>>();
+  /** Se emite al pulsar cancelar. */
   readonly cancelled = output<void>();
+  /** Emite los valores en cada cambio (con antirrebote si `autosave`). */
   readonly valueChanged = output<Record<string, unknown>>();
 
   private readonly destroyRef = inject(DestroyRef);

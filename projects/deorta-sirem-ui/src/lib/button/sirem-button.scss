@@ -19,7 +19,12 @@
   /* Botones tipo píldora (referencia Bento). */
   border-radius: var(--sirem-radius-pill, 999px);
   font-weight: 600;
-  transition: all 0.15s ease;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    border-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    box-shadow var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    transform var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-btn:focus-visible {
@@ -27,8 +32,13 @@
   outline-offset: 2px;
 }
 
-.sirem-btn:active {
-  transform: scale(0.98);
+/* Se levanta 1px al pasar: el botón responde antes del clic. */
+.sirem-btn:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.sirem-btn:not(:disabled):active {
+  transform: translateY(0) scale(0.98);
 }
 
 .sirem-btn:disabled {

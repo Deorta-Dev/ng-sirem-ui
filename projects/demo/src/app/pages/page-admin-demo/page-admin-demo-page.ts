@@ -19,6 +19,7 @@ import {
   SiremSelectOption,
   SiremSidebar,
   SiremStatCard,
+  SiremSticky,
   SiremSubmenuConfig,
   SiremTableColumn,
   SiremTimeline,
@@ -55,6 +56,7 @@ interface DemoApp {
     SiremSearchPalette,
     SiremSidebar,
     SiremStatCard,
+    SiremSticky,
     SiremTimeline,
     SiremTopbar,
     SiremUserMenu,
@@ -117,7 +119,7 @@ interface DemoApp {
             searchHighlight="Clínica Norte"
             searchHint="Ctrl + K"
             [showSpaceDot]="false"
-            [fixed]="true"
+            siremSticky
             (menuPressed)="mobileOpen.set(true)"
             (searchPressed)="searchOpen.set(true)"
             (spacePressed)="openWorkspace()"
@@ -674,10 +676,10 @@ export class PageAdminDemoPage {
     class="min-h-[calc(100dvh-2.75rem)] transition-[padding] md:pl-[calc(var(--workspace-sidebar-width)+1.5rem)]"
     [style.--workspace-sidebar-width]="sidebarCollapsed() ? '4rem' : '15rem'"
   >
-    <!-- fixed + blur + floating: tarjeta redondeada pegada al borde superior -->
+    <!-- sticky + blur + floating: tarjeta redondeada pegada al borde superior -->
     <sirem-topbar
       spaceLabel="Clínica Norte"
-      [fixed]="true"
+      siremSticky
       [blur]="true"
       [floating]="true"
       (menuPressed)="mobileOpen.set(true)"

@@ -1,5 +1,6 @@
 import { booleanAttribute, Component, computed, input } from '@angular/core';
 
+/** Semántica de color del badge. */
 export type SiremBadgeTone = 'neutral' | 'info' | 'accent' | 'success' | 'warning' | 'danger';
 
 /**
@@ -20,8 +21,11 @@ export type SiremBadgeTone = 'neutral' | 'info' | 'accent' | 'success' | 'warnin
   `,
 })
 export class SiremBadge {
+  /** Semántica de color: `neutral`, `info`, `accent`, `success`, `warning` o `danger`. */
   readonly tone = input<SiremBadgeTone>('neutral');
+  /** Añade un punto de color a la izquierda del texto. */
   readonly dot = input(false, { transform: booleanAttribute });
+  /** Nombre accesible cuando el propio texto del badge no basta. */
   readonly label = input<string | null>(null);
 
   private readonly tones: Record<SiremBadgeTone, string> = {

@@ -62,6 +62,7 @@ import { Component, input, model } from '@angular/core';
   `,
 })
 export class SiremAdminLayout {
+  /** Oculta el chrome (sidebar, topbar, navbar) para llenar la ventana; doble vía. */
   readonly fullscreen = model(false);
   /**
    * Relleno del área de contenido: `md` (defecto), `sm` o `none` para

@@ -236,6 +236,7 @@ const MONTHS_SHORT = [
   `,
 })
 export class SiremCalendar {
+  /** Eventos a pintar (fecha ISO, etiqueta y color). */
   readonly events = input<SiremCalendarEvent[]>([]);
   /** Leyenda estado → color (p. ej. Confirmada, Pendiente, Cancelada). */
   readonly legend = input<{ label: string; color: string }[]>([]);
@@ -254,6 +255,7 @@ export class SiremCalendar {
   /** Día seleccionado en ISO. */
   readonly selected = model<string | null>(null);
 
+  /** Se emite con la fecha ISO del día pulsado. */
   readonly dayPressed = output<string>();
 
   readonly weekDays = [

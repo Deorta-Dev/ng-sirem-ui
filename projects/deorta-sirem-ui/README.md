@@ -4,6 +4,18 @@ Librería Angular standalone (v21) de componentes reutilizables SIREM:
 botones, iconos Flaticon UIcons, iconos duotone y registro de iconos
 Streamline Ultimate Duotone. Estilos con Tailwind CSS v4.
 
+## Referencia completa de la API
+
+La documentación de **todos** los componentes, directivas y pipes (cada
+propiedad con su tipo, valor por defecto, valores admitidos, salidas y
+esquemas) se genera desde el JSDoc del código y vive en la raíz del repo:
+
+- Español: `README.es.md`
+- Inglés: `README.md`
+
+Se regeneran con `python3 tools/generate-readmes.py` (el glosario que alimenta
+la demo, con `python3 tools/generate-api-glossary.py`).
+
 ## Consumir en otro proyecto
 
 ```bash
@@ -69,6 +81,7 @@ Tokens disponibles:
 | Tintes | `--sirem-tint-bg`, `--sirem-tint-text`, `--sirem-tint-strong-bg`, `--sirem-tint-strong-text`, `--sirem-tint-{success,warning,danger,neutral}-{bg,text}` |
 | Radios | Contenedores `--sirem-radius-lg` (24px); interiores `--sirem-radius-md` (16px); redondos `--sirem-radius-pill`. `sm`/`xl`/`2xl` quedan en la escala para el consumidor, la librería no los usa (ver «Radios» en AGENTS.md §10) |
 | Sombras | `--sirem-shadow-xs`, `--sirem-shadow-sm`, `--sirem-shadow-md`, `--sirem-shadow-lg` |
+| Movimiento | `--sirem-ease`, `--sirem-ease-out`, `--sirem-duration`, `--sirem-duration-fast`, `--sirem-duration-slow` (los componentes animan con ellos; `prefers-reduced-motion` los anula) |
 
 Todos salvo los radios tienen override en `:root[data-theme='dark']` (los radios
 son independientes del tema). El modo oscuro se activa con
@@ -136,11 +149,26 @@ Flujo Streamline Pro: ver `docs/STREAMLINE.md`.
 
 ## Publicar
 
+El paquete publicado es `deorta-sirem-ui` (solo la librería, no la demo):
+
 ```bash
-ng build deorta-sirem-ui
-cd dist/deorta-sirem-ui
-npm publish
+npm login            # una vez por máquina (navegador; OTP si tienes 2FA)
+npm run pack:lib     # opcional: revisa el tarball sin publicar
+npm run publish:lib  # compila la librería y publica dist/deorta-sirem-ui
 ```
+
+`build:lib` copia la hoja de tokens (`src/lib/theme/sirem-theme.css`) al paquete
+y añade las entradas de `exports` (`./src/lib/theme/sirem-theme.css` y el alias
+`./theme.css`); sin ellas el `exports` que genera ng-packagr bloquea esa ruta.
+Para publicar a mano:
+
+```bash
+ng build deorta-sirem-ui && node tools/patch-lib-package.mjs
+cd dist/deorta-sirem-ui && npm publish
+```
+
+La versión sale del `package.json` de la librería
+(`projects/deorta-sirem-ui/package.json`).
 
 ## Atribución (obligatoria al publicar apps que la usen)
 

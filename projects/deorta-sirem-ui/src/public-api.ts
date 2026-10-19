@@ -17,7 +17,10 @@ export * from './lib/icons/streamline-icon/sirem-streamline-icon';
 export * from './lib/layout/admin-layout/sirem-admin-layout';
 export * from './lib/layout/sidebar/sirem-sidebar';
 export * from './lib/layout/topbar/sirem-topbar';
+export * from './lib/layout/sticky/sirem-sticky';
 export * from './lib/layout/breadcrumbs/sirem-breadcrumbs';
+export * from './lib/layout/collapsible/sirem-collapsible';
+export * from './lib/layout/collapsible/sirem-collapsible-group';
 
 // Navegación (perfil, paleta Ctrl+K, control segmentado)
 export * from './lib/navigation/user-menu/sirem-user-menu';
@@ -27,7 +30,6 @@ export * from './lib/navigation/segmented/sirem-segmented';
 
 // Datos (listados lo-resource-set-list, tarjetas, estados)
 export * from './lib/data-display/page-header/sirem-page-header';
-export * from './lib/data-display/view-toggle/sirem-view-toggle';
 export * from './lib/data-display/data-table/sirem-data-table';
 export * from './lib/data-display/card/sirem-card';
 export * from './lib/data-display/avatar/sirem-avatar';
@@ -67,6 +69,7 @@ export * from './lib/overlays/modal/sirem-modal';
 export * from './lib/overlays/confirm-dialog/sirem-confirm-dialog';
 export * from './lib/overlays/drawer/sirem-drawer';
 export * from './lib/overlays/popup-card/sirem-popup-card';
+export * from './lib/overlays/sheet/sirem-sheet';
 export * from './lib/overlays/overlay/sirem-overlay-position';
 export * from './lib/overlays/overlay/sirem-overlay-layer';
 export * from './lib/overlays/overlay/sirem-overlay-viewport';
@@ -91,5 +94,3 @@ export * from './lib/pipes/age/sirem-age.pipe';
 // Interceptores HTTP
 export * from './lib/interceptors/auth/sirem-auth.interceptor';
 export * from './lib/interceptors/base-url/sirem-base-url.interceptor';
-
-export * from './lib/deorta-sirem-ui';

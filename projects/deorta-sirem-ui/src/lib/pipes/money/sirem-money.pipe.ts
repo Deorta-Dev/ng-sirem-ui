@@ -10,6 +10,11 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class SiremMoneyPipe implements PipeTransform {
+  /**
+   * @param value Importe, en número o en texto (`'250000'`).
+   * @param currencyCode Divisa ISO 4217 del formato (`COP` por defecto).
+   * @returns Importe formateado sin decimales (`'$ 250.000'`) o `—`.
+   */
   transform(value: number | string | null | undefined, currencyCode = 'COP'): string {
     const n = typeof value === 'string' ? Number(value) : (value ?? NaN);
     if (typeof n !== 'number' || Number.isNaN(n)) return '—';

@@ -9,6 +9,7 @@
   position: absolute;
   inset: 0;
   background: rgb(15 23 42 / 0.5);
+  animation: sirem-fade-in var(--sirem-duration, 200ms) var(--sirem-ease-out, ease-out) both;
 }
 
 .sirem-drawer__panel {
@@ -25,10 +26,12 @@
 
 .sirem-drawer__panel--right {
   right: 0;
+  animation: sirem-slide-right-in var(--sirem-duration-slow, 320ms) var(--sirem-ease-out, ease-out) both;
 }
 
 .sirem-drawer__panel--left {
   left: 0;
+  animation: sirem-slide-left-in var(--sirem-duration-slow, 320ms) var(--sirem-ease-out, ease-out) both;
 }
 
 .sirem-drawer__head {

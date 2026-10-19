@@ -52,7 +52,9 @@ import { Component, computed, input } from '@angular/core';
   `,
 })
 export class SiremStatCard {
+  /** Título de la métrica (p. ej. «Pacientes activos»). */
   readonly label = input.required<string>();
+  /** Valor principal, ya formateado (`'1.248'`, `'98 %'`…). */
   readonly value = input.required<string | number>();
   /** Variación porcentual; null la oculta. */
   readonly delta = input<number | null>(null);

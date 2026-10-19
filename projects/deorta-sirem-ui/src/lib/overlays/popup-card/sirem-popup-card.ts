@@ -49,8 +49,11 @@ export interface SiremPopupRow {
 export class SiremPopupCard {
   /** Identificador del dispositivo (p. ej. placa o IMEI corto). */
   readonly title = input('Dispositivo');
+  /** Filas `etiqueta → valor`, con tono de badge opcional. */
   readonly rows = input<SiremPopupRow[]>([]);
+  /** Muestra el botón de cerrar de la cabecera. */
   readonly closable = input(true);
 
+  /** Se emite al pulsar cerrar. */
   readonly closed = output<void>();
 }

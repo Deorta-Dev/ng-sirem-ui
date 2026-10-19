@@ -56,4 +56,5 @@
   margin-top: 0.25rem;
   width: 18rem;
   max-width: calc(100vw - 2rem);
+  animation: sirem-drop-in var(--sirem-duration-fast, 120ms) var(--sirem-ease-out, ease-out) both;
 }

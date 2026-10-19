@@ -8,11 +8,11 @@ import { StreamlineIconDemoPage } from './pages/streamline-icon-demo/streamline-
 import { SidebarDemoPage } from './pages/sidebar-demo/sidebar-demo-page';
 import { TopbarDemoPage } from './pages/topbar-demo/topbar-demo-page';
 import { BreadcrumbsDemoPage } from './pages/breadcrumbs-demo/breadcrumbs-demo-page';
+import { CollapsibleDemoPage } from './pages/collapsible-demo/collapsible-demo-page';
 import { UserMenuDemoPage } from './pages/user-menu-demo/user-menu-demo-page';
 import { SearchPaletteDemoPage } from './pages/search-palette-demo/search-palette-demo-page';
 import { NavbarDemoPage } from './pages/navbar-demo/navbar-demo-page';
 import { PageHeaderDemoPage } from './pages/page-header-demo/page-header-demo-page';
-import { ViewToggleDemoPage } from './pages/view-toggle-demo/view-toggle-demo-page';
 import { DataTableDemoPage } from './pages/data-table-demo/data-table-demo-page';
 import { CardDemoPage } from './pages/card-demo/card-demo-page';
 import { OverlayDemoPage } from './pages/overlay-demo/overlay-demo-page';
@@ -44,6 +44,7 @@ import { ModalDemoPage } from './pages/modal-demo/modal-demo-page';
 import { ConfirmDialogDemoPage } from './pages/confirm-dialog-demo/confirm-dialog-demo-page';
 import { DrawerDemoPage } from './pages/drawer-demo/drawer-demo-page';
 import { PopupCardDemoPage } from './pages/popup-card-demo/popup-card-demo-page';
+import { SheetDemoPage } from './pages/sheet-demo/sheet-demo-page';
 import { CalendarDemoPage } from './pages/calendar-demo/calendar-demo-page';
 import { AgendaDemoPage } from './pages/agenda-demo/agenda-demo-page';
 import { SparklineDemoPage } from './pages/sparkline-demo/sparkline-demo-page';
@@ -110,11 +111,11 @@ export const routes: Routes = [
   { path: 'demo/sidebar', component: SidebarDemoPage },
   { path: 'demo/topbar', component: TopbarDemoPage },
   { path: 'demo/breadcrumbs', component: BreadcrumbsDemoPage },
+  { path: 'demo/collapsible', component: CollapsibleDemoPage },
   { path: 'demo/user-menu', component: UserMenuDemoPage },
   { path: 'demo/search-palette', component: SearchPaletteDemoPage },
   { path: 'demo/navbar', component: NavbarDemoPage },
   { path: 'demo/page-header', component: PageHeaderDemoPage },
-  { path: 'demo/view-toggle', component: ViewToggleDemoPage },
   { path: 'demo/data-table', component: DataTableDemoPage },
   { path: 'demo/card', component: CardDemoPage },
   { path: 'demo/overlay', component: OverlayDemoPage },
@@ -149,6 +150,7 @@ export const routes: Routes = [
   { path: 'demo/confirm-dialog', component: ConfirmDialogDemoPage },
   { path: 'demo/drawer', component: DrawerDemoPage },
   { path: 'demo/popup-card', component: PopupCardDemoPage },
+  { path: 'demo/sheet', component: SheetDemoPage },
   { path: 'demo/calendar', component: CalendarDemoPage },
   { path: 'demo/agenda', component: AgendaDemoPage },
   { path: 'demo/autofocus', component: AutofocusDemoPage },

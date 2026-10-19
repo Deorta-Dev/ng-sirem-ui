@@ -2,6 +2,7 @@ import { Component, computed, input, model, output, signal } from '@angular/core
 import { SiremAvatar } from '../avatar/sirem-avatar';
 import { SiremBadge, SiremBadgeTone } from '../badge/sirem-badge';
 
+/** Cómo se pinta el valor de una columna de la tabla. */
 export type SiremColumnKind = 'text' | 'number' | 'badge' | 'avatar' | 'date' | 'currency';
 
 export interface SiremTableColumn {
@@ -161,17 +162,26 @@ type SortDir = 'asc' | 'desc' | null;
   `,
 })
 export class SiremDataTable {
+  /** Definición de las columnas (clave, título, tipo, alineación…). */
   readonly columns = input.required<SiremTableColumn[]>();
+  /** Filas a mostrar; los valores se leen por la clave de cada columna. */
   readonly rows = input.required<Record<string, unknown>[]>();
+  /** Clave que identifica cada fila (seguimiento y selección). */
   readonly trackKey = input('id');
+  /** Añade una columna de casillas para selección múltiple. */
   readonly selectable = input(false);
+  /** Permite ordenar al pulsar la cabecera de una columna. */
   readonly sortable = input(true);
+  /** Resalta las filas y emite `rowClicked` al pulsarlas. */
   readonly rowClickable = input(true);
+  /** Texto que se muestra cuando `rows` está vacío. */
   readonly emptyText = input('Sin registros.');
+  /** Divisa de las columnas de tipo `currency` (`COP`, `EUR`…). */
   readonly currencyCode = input('COP');
 
   /** Claves (`trackKey`) de las filas seleccionadas. */
   readonly selection = model<unknown[]>([]);
+  /** Se emite con la fila pulsada (con `rowClickable`). */
   readonly rowClicked = output<Record<string, unknown>>();
 
   private readonly sortKey = signal<string | null>(null);

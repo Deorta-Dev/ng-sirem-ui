@@ -103,6 +103,7 @@
   padding: 0.25rem;
   color: var(--sirem-text-faint);
   cursor: pointer;
+  transition: color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-input__clear:hover {
@@ -121,6 +122,16 @@
   transform: translateY(-50%);
   font-size: 0.75rem;
   color: var(--sirem-text-faint);
+}
+
+/* La flecha ▾ se gira al abrir el panel (el ✎ libre no se gira). */
+.sirem-input__chev i {
+  display: block;
+  transition: transform var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
+}
+
+.sirem-input__chev--open:not(.sirem-input__chev--free) i {
+  transform: rotate(180deg);
 }
 
 /* Indicador ✎ de los campos de opciones libres (autocompletado). */
@@ -161,6 +172,7 @@
   font-size: 0.875rem;
   text-align: left;
   cursor: pointer;
+  transition: background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-input__option-btn:hover {

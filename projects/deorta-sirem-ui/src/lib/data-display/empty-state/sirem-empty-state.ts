@@ -24,6 +24,8 @@ import { Component, input } from '@angular/core';
   `,
 })
 export class SiremEmptyState {
+  /** Titular del estado vacío. */
   readonly title = input('Sin resultados');
+  /** Texto de apoyo bajo el titular; puede quedar vacío. */
   readonly description = input('');
 }

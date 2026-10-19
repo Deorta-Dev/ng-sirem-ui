@@ -36,7 +36,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class SiremDuotoneIcon {
   /** SVG completo del icono (debe usar fill="currentColor" + capa opacity="0.2"). */
   readonly svg = input.required<string>();
+  /** Lado del icono en px. */
   readonly size = input<number>(24);
+  /** Nombre accesible; sin él el icono es decorativo (`aria-hidden`). */
   readonly label = input<string | null>(null);
 
   private readonly sanitizer = inject(DomSanitizer);

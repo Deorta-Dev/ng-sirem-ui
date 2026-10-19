@@ -114,14 +114,21 @@ export interface SiremMultiSelectOption {
   `,
 })
 export class SiremMultiSelect {
+  /** Opciones seleccionables (valor, texto e icono opcional). */
   readonly options = input.required<SiremMultiSelectOption[]>();
   /** Valores seleccionados (doble vía). */
   readonly value = model<(string | number)[]>([]);
+  /** Etiqueta visible sobre el control. */
   readonly label = input('');
+  /** Texto de ejemplo del buscador interno. */
   readonly searchPlaceholder = input('Buscar opciones…');
+  /** Mensaje cuando ninguna opción coincide con el filtro. */
   readonly emptyText = input('Sin coincidencias.');
+  /** Nota de ayuda bajo el campo; la sustituye `error` cuando lo hay. */
   readonly hint = input('');
+  /** Mensaje de error. Con texto, el campo se marca en rojo y se anuncia. */
   readonly error = input('');
+  /** Deshabilita el control: no se puede enfocar ni editar. */
   readonly disabled = input(false);
   /** Muestra el botón elegir/quitar todas. */
   readonly selectAll = input(true);

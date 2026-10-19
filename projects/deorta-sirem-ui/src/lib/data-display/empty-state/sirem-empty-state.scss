@@ -17,6 +17,7 @@
   background: var(--sirem-surface-hover);
   font-size: 1.25rem;
   color: var(--sirem-text-faint);
+  animation: sirem-rise-in var(--sirem-duration-slow, 320ms) var(--sirem-ease-out, ease-out) both;
 }
 
 .sirem-empty__title {

@@ -81,7 +81,9 @@ export class SiremStreamlineIcon {
   readonly name = input<string | null>(null);
   /** SVG directo (tiene prioridad sobre `name`). */
   readonly svg = input<string | null>(null);
+  /** Lado del icono en px. */
   readonly size = input<number>(24);
+  /** Nombre accesible; sin él el icono es decorativo (`aria-hidden`). */
   readonly label = input<string | null>(null);
 
   private readonly sanitizer = inject(DomSanitizer);

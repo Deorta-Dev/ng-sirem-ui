@@ -33,6 +33,9 @@
   font-size: 0.875rem;
   color: var(--sirem-text-soft);
   cursor: pointer;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-rich__btn:hover {

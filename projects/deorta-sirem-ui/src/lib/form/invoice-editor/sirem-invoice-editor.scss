@@ -226,6 +226,11 @@
   background: transparent;
   color: var(--sirem-text-muted);
   cursor: pointer;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    border-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    transform var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-invoice-editor__remove:hover:not(:disabled) {

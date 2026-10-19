@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
+/** Lado por el que aparece el tooltip. */
 export type SiremTooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
 
 const STYLE_ID = 'sirem-tooltip-styles';
@@ -36,7 +37,9 @@ const STYLES = `
   box-shadow: 0 8px 24px rgb(0 0 0 / 0.28);
   opacity: 0;
   transform: scale(0.96);
-  transition: opacity 0.12s ease, transform 0.12s ease;
+  transition:
+    opacity var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    transform var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 .sirem-tooltip--visible {
   opacity: 1;
@@ -61,12 +64,13 @@ const STYLES = `
   margin-left: -0.25rem;
 }
 .sirem-tooltip[data-placement='left']::after {
-  right: -0.24rem;
+  /* 1px más adentro: en los lados la flecha se comía el borde del globo. */
+  right: calc(-0.24rem + 1px);
   top: 50%;
   margin-top: -0.25rem;
 }
 .sirem-tooltip[data-placement='right']::after {
-  left: -0.24rem;
+  left: calc(-0.24rem + 1px);
   top: 50%;
   margin-top: -0.25rem;
 }

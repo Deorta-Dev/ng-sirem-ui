@@ -25,6 +25,32 @@ import {
 /** Clase que se aplica al nodo proyectado para estilarlo como panel. */
 const PANEL_CLASS = 'sirem-overlay-panel';
 
+/**
+ * Lado del panel que mira al disparador. Ahí se ancla el `scale` de entrada
+ * para que el panel «salga» del componente y no de la esquina de la pantalla.
+ */
+function enterOrigin(placement: SiremOverlayPlacement): string {
+  const side = placement.startsWith('inline-start')
+    ? 'inline-start'
+    : placement.startsWith('inline-end')
+      ? 'inline-end'
+      : placement.split('-')[0];
+  switch (side) {
+    case 'top':
+      return 'center bottom';
+    case 'bottom':
+      return 'center top';
+    case 'left':
+    case 'inline-start':
+      return 'right center';
+    case 'right':
+    case 'inline-end':
+      return 'left center';
+    default:
+      return 'center';
+  }
+}
+
 /** Evento que abre el overlay. */
 export type SiremOverlayTriggerType =
   | 'click'
@@ -137,7 +163,9 @@ export class SiremOverlayTrigger {
   /** Estado de apertura, controlable con dos vías. */
   readonly open = model(false);
 
+  /** Se emite cuando el panel se abre. */
   readonly opened = output<void>();
+  /** Se emite cuando el panel se cierra. */
   readonly closed = output<void>();
 
   /** Geometría del último reposicionamiento; `null` si está cerrado. */
@@ -479,6 +507,7 @@ export class SiremOverlayTrigger {
     if (this.siremOverlayMatchTriggerWidth()) {
       panel.style.minWidth = `${hostRect.width}px`;
     }
+    panel.style.setProperty('--sirem-overlay-origin', enterOrigin(result.placement));
     panel.style.transform = `translate3d(${result.x}px, ${result.y}px, 0)`;
 
     this.clampIntoViewport(panel, pad, result.x, result.y);

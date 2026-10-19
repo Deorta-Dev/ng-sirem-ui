@@ -20,8 +20,11 @@ export interface SiremInvoiceCustomer {
 
 /** Concepto (línea) de la factura. */
 export interface SiremInvoiceLine {
+  /** Identificador de la línea. */
   id: string;
+  /** Concepto facturado. */
   description: string;
+  /** Cantidad. */
   quantity: number;
   /** Precio unitario antes de impuestos. */
   unitPrice: number;
@@ -33,13 +36,17 @@ export interface SiremInvoiceLine {
 
 /** Cabecera + conceptos de la factura (lo que edita y emite el componente). */
 export interface SiremInvoiceDraft {
+  /** Número de la factura. */
   number: string;
+  /** Cliente elegido (`value` de `customers`). */
   customerId: string | number | null;
   /** Fecha de emisión `yyyy-mm-dd`. */
   issueDate: string;
   /** Fecha de vencimiento `yyyy-mm-dd`. */
   dueDate: string;
+  /** Notas libres del pie. */
   notes: string;
+  /** Líneas de la factura. */
   lines: SiremInvoiceLine[];
 }
 

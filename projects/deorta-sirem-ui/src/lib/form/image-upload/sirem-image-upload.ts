@@ -60,13 +60,21 @@ import { Component, input, model } from '@angular/core';
   `,
 })
 export class SiremImageUpload {
+  /** Imagen elegida (data URL o ruta), con enlace de dos vías. */
   readonly value = model<string | null>(null);
+  /** Etiqueta visible sobre el control. */
   readonly label = input('');
+  /** Texto del estado vacío de la zona de carga. */
   readonly placeholder = input('Toca para subir una imagen');
+  /** Nota de ayuda bajo el campo; la sustituye `error` cuando lo hay. */
   readonly hint = input('PNG o JPG');
+  /** Mensaje de error. Con texto, el campo se marca en rojo y se anuncia. */
   readonly error = input('');
+  /** Tipos admitidos por el selector de archivos (`image/*`, `.png`…). */
   readonly accept = input('image/*');
+  /** Marca el campo como obligatorio (`aria-required` e indicador visual). */
   readonly required = input(false);
+  /** Deshabilita el control: no se puede enfocar ni editar. */
   readonly disabled = input(false);
 
   onFile(event: Event): void {

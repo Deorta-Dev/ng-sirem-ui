@@ -10,6 +10,10 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class SiremAgePipe implements PipeTransform {
+  /**
+   * @param value Fecha de nacimiento, en ISO `yyyy-MM-dd` o como `Date`.
+   * @returns Edad en años (`'35 años'`) o `—` si la fecha no es válida.
+   */
   transform(value: string | Date | null | undefined): string {
     const d = value instanceof Date ? value : new Date(String(value ?? ''));
     if (!value || Number.isNaN(d.getTime())) return '—';

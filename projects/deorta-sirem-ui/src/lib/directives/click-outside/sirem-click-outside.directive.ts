@@ -17,6 +17,7 @@ import { Directive, ElementRef, inject, output } from '@angular/core';
   },
 })
 export class SiremClickOutsideDirective {
+  /** Se emite con el `PointerEvent` cuando se pulsa fuera del anfitrión. */
   readonly siremClickOutside = output<PointerEvent>();
 
   private readonly el = inject(ElementRef<HTMLElement>);

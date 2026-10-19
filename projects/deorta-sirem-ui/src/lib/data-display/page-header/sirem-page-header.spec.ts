@@ -11,4 +11,13 @@ describe('SiremPageHeader', () => {
     expect(text).toContain('Pacientes');
     expect(text).toContain('Gestión de pacientes');
   });
+
+  it('should keep the default appearance when no sticky directive is applied', () => {
+    const fixture = TestBed.createComponent(SiremPageHeader);
+    fixture.componentRef.setInput('title', 'Pacientes');
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('.sirem-page-header--elevated')).toBeNull();
+    expect(el.querySelector('.sirem-page-header--glass')).toBeNull();
+  });
 });

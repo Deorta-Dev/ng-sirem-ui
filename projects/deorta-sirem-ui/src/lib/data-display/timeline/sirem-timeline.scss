@@ -22,6 +22,7 @@
   width: 0.75rem;
   border-radius: 9999px;
   box-shadow: 0 0 0 4px var(--sirem-surface);
+  animation: sirem-pop-in var(--sirem-duration, 200ms) var(--sirem-ease-out, ease-out) both;
 }
 
 /* Sobre una tarjeta translúcida el halo debe copiar su superficie. */

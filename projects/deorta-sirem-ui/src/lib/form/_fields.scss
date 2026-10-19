@@ -28,6 +28,11 @@
   background: var(--sirem-surface);
   font-size: 0.875rem;
   color: var(--sirem-text);
+  /* El foco se «enciende» en lugar de aparecer de golpe. */
+  transition:
+    border-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    box-shadow var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-field__box::placeholder {
@@ -36,6 +41,7 @@
 
 .sirem-field__box:focus {
   outline: 2px solid var(--sirem-focus-ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sirem-focus-ring) 20%, transparent);
 }
 
 .sirem-field__box:disabled {

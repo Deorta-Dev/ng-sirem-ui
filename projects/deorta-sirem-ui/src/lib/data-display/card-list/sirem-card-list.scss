@@ -15,7 +15,11 @@
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
   padding: 1rem;
-  box-shadow: var(--sirem-shadow-xs);
+  box-shadow: var(--sirem-shadow-sm);
+  transition:
+    border-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    box-shadow var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    transform var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-cards__card--clickable {
@@ -24,7 +28,12 @@
 
 .sirem-cards__card--clickable:hover {
   border-color: var(--sirem-border-strong);
-  box-shadow: var(--sirem-shadow-sm);
+  box-shadow: var(--sirem-shadow-md);
+  transform: translateY(-2px);
+}
+
+.sirem-cards__card--clickable:active {
+  transform: translateY(0);
 }
 
 .sirem-cards__card--clickable:focus-visible {

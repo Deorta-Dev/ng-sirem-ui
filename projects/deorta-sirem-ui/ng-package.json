@@ -3,5 +3,12 @@
   "dest": "../../dist/deorta-sirem-ui",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [
+    {
+      "input": "src/lib/theme",
+      "glob": "*.css",
+      "output": "src/lib/theme"
+    }
+  ]
 }

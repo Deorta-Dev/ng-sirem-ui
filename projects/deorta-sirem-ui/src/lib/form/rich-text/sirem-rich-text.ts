@@ -66,9 +66,13 @@ import {
 export class SiremRichText implements AfterViewInit {
   /** HTML del contenido (doble vía). */
   readonly value = model('');
+  /** Etiqueta visible sobre el editor. */
   readonly label = input('');
+  /** Texto de ayuda mientras el contenido está vacío. */
   readonly placeholder = input('Escribe aquí…');
+  /** Nota de ayuda bajo el editor. */
   readonly hint = input('');
+  /** Mensaje de error. Con texto, el campo se marca en rojo y se anuncia. */
   readonly error = input('');
   /** Alto mínimo del área en px. */
   readonly minHeight = input(140);

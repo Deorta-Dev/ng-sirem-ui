@@ -1,5 +1,6 @@
 import { Component, input, output } from '@angular/core';
 
+/** Tamaño del chip de fecha. */
 export type SiremDateChipSize = 'md' | 'lg';
 
 /**
@@ -49,8 +50,11 @@ export class SiremDateChip {
   readonly active = input(false);
   /** Punto de estado (día con eventos o recordatorio). */
   readonly dot = input(false);
+  /** Tamaño: `md` (defecto) o `lg`. */
   readonly size = input<SiremDateChipSize>('md');
+  /** Nombre accesible cuando `day` y `weekday` no bastan. */
   readonly ariaLabel = input<string | null>(null);
 
+  /** Se emite al pulsar el chip. */
   readonly pressed = output<void>();
 }

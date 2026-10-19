@@ -1,6 +1,8 @@
 import { Component, computed, input } from '@angular/core';
 
+/** Tamaño del avatar. */
 export type SiremAvatarSize = 'xs' | 'sm' | 'md' | 'lg';
+/** Color del punto de presencia (estado del usuario). */
 export type SiremPresenceTone = 'success' | 'warning' | 'danger' | 'neutral' | null;
 
 /**
@@ -27,10 +29,15 @@ export type SiremPresenceTone = 'success' | 'warning' | 'danger' | 'neutral' | n
   `,
 })
 export class SiremAvatar {
+  /** Nombre de la persona; origen de las iniciales. */
   readonly name = input('');
+  /** URL de la foto. Si falta o falla la carga, se muestran las iniciales. */
   readonly src = input<string | null>(null);
+  /** Tamaño: `xs`, `sm`, `md` o `lg`. */
   readonly size = input<SiremAvatarSize>('md');
+  /** Punto de estado (`success`, `warning`, `danger`, `neutral`); `null` lo oculta. */
   readonly presence = input<SiremPresenceTone>(null);
+  /** Nombre accesible cuando las iniciales no bastan. */
   readonly label = input<string | null>(null);
 
   private readonly boxes: Record<SiremAvatarSize, string> = {

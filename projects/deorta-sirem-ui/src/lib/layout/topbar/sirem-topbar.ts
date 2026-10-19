@@ -1,11 +1,23 @@
-import { Component, computed, HostListener, input, output, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  HostListener,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { SiremFiIcon } from '../../icons/fi-icon/sirem-fi-icon';
 import { SiremButton } from '../../button/sirem-button';
+import {
+  SIREM_STICKY_STATE,
+  type SiremStickyAppearance,
+} from '../sticky/sirem-sticky';
 
 /** Cómo se alinea el buscador dentro de la barra. */
 export type SiremTopbarSearchAlign = 'start' | 'center';
-/** Estética global de la barra. */
-export type SiremTopbarAppearance = 'default' | 'cards';
+/** Estética global de la barra (incluye los aspectos de `sticky`). */
+export type SiremTopbarAppearance = 'cards' | SiremStickyAppearance;
 
 /**
  * Barra superior: hamburguesa (móvil), workspace a la izquierda,
@@ -18,6 +30,15 @@ export type SiremTopbarAppearance = 'default' | 'cards';
  *   buscador, acciones) se convierte en una tarjeta flotante con sombra,
  *   como en la referencia. Se combina con `searchAlign="center"` para dejar
  *   el buscador centrado.
+ * - `elevated`, `glass` y `flat`: los aspectos de `SiremStickyAppearance`,
+ *   pensados para cambiar la piel al fijarse.
+ *
+ * ## Sticky
+ * La fijación es responsabilidad de la directiva **`siremSticky`** (común a
+ * topbar, navbar y page-header): aplícala en el elemento y configura allí el
+ * offset, el límite numérico o el componente que marca el final.
+ * `stickyAppearance` define el aspecto **solo mientras la directiva la
+ * mantiene fija** (`auto` = el de `appearance`).
  *
  * ## Buscador
  * `searchPlaceholder` admite emphasis con `searchHighlight`, que se pinta en
@@ -27,7 +48,9 @@ export type SiremTopbarAppearance = 'default' | 'cards';
  * Uso:
  * ```html
  * <sirem-topbar
+ *   siremSticky
  *   appearance="cards"
+ *   stickyAppearance="glass"
  *   searchAlign="center"
  *   spaceLabel="Panel principal"
  *   searchPlaceholder="Buscar en "
@@ -47,12 +70,14 @@ export type SiremTopbarAppearance = 'default' | 'cards';
   template: `
     <header
       class="sirem-topbar"
-      [class.sirem-topbar--fixed]="fixed()"
       [class.sirem-topbar--blur]="blur()"
       [class.sirem-topbar--transparent]="transparent()"
       [class.sirem-topbar--shadow]="scrolled()"
       [class.sirem-topbar--floating]="floating()"
-      [class.sirem-topbar--cards]="appearance() === 'cards'"
+      [class.sirem-topbar--cards]="activeAppearance() === 'cards'"
+      [class.sirem-topbar--elevated]="activeAppearance() === 'elevated'"
+      [class.sirem-topbar--glass]="activeAppearance() === 'glass'"
+      [class.sirem-topbar--flat]="activeAppearance() === 'flat'"
       [class.sirem-topbar--search-center]="searchAlign() === 'center'"
     >
       <!-- Cabezal izquierdo: menú + workspace + chip de página agrupados en
@@ -150,9 +175,20 @@ export class SiremTopbar {
   readonly pageTitle = input('');
   /** Subtítulo del chip de página (opcional, en versalitas). */
   readonly pageSupTitle = input('');
-  /** Fija la barra al hacer scroll (`position: sticky`). */
-  readonly fixed = input(false);
-  /** Fondo translúcido con desenfoque (ideal con `fixed`). */
+  /**
+   * Aspecto **mientras la directiva `siremSticky` la mantiene fija**. `auto`
+   * (defecto) mantiene el de `appearance`; `elevated`, `glass` o `flat`
+   * cambian la piel al pegarse.
+   */
+  readonly stickyAppearance = input<'auto' | SiremTopbarAppearance>('auto');
+  /** Directiva de fijación aplicada al host, si la hay. */
+  private readonly stickyRef = inject(SIREM_STICKY_STATE, {
+    optional: true,
+    host: true,
+  });
+  /** `true` mientras la directiva mantiene la barra fija. */
+  private readonly stuck = computed(() => this.stickyRef?.stuck() ?? false);
+  /** Fondo translúcido con desenfoque (ideal con `siremSticky`). */
   readonly blur = input(false);
   /**
    * Fondo transparente: el shell de la app se ve a través de la barra.
@@ -162,7 +198,7 @@ export class SiremTopbar {
   readonly transparent = input(false);
   /**
    * Muestra la sombra al hacer scroll (`shadowOnScroll`): la barra gana
-   * elevación cuando el contenido pasa por debajo (útil con `fixed`).
+   * elevación cuando el contenido pasa por debajo (útil con `siremSticky`).
    */
   readonly shadowOnScroll = input(false);
   /** Muestra el botón de workspace/sucursal. */
@@ -173,7 +209,7 @@ export class SiremTopbar {
    * izquierdo lo puede fijar el shell con `--sirem-topbar-inset-left`.
    */
   readonly floating = input(false);
-  /** Estética global: `default` continua, `cards` piezas flotantes. */
+  /** Estética global: `default`, `cards`, `elevated`, `glass` o `flat`. */
   readonly appearance = input<SiremTopbarAppearance>('default');
   /** Alineación del buscador; `center` lo deja centrado en la barra. */
   readonly searchAlign = input<SiremTopbarSearchAlign>('start');
@@ -195,6 +231,15 @@ export class SiremTopbar {
     this.searchHint() ? `Búsqueda global (${this.searchHint()})` : 'Búsqueda global',
   );
 
+  /**
+   * Aspecto efectivo: `stickyAppearance` cuando está fija y no es `auto`;
+   * en el resto de casos, `appearance`.
+   */
+  readonly activeAppearance = computed<SiremTopbarAppearance>(() => {
+    const whenStuck = this.stickyAppearance();
+    return this.stuck() && whenStuck !== 'auto' ? whenStuck : this.appearance();
+  });
+
   /** Posición de scroll actual (solo se observa con `shadowOnScroll`). */
   readonly scrolled = signal(false);
 
@@ -207,8 +252,12 @@ export class SiremTopbar {
     this.scrolled.set(window.scrollY > 5);
   }
 
+  /** Se emite al pulsar el botón de menú (abre el sidebar en móvil). */
   readonly menuPressed = output<void>();
+  /** Se emite al pulsar el buscador (abre la paleta de búsqueda). */
   readonly searchPressed = output<void>();
+  /** Se emite al pulsar el workspace (abre su selector). */
   readonly spacePressed = output<void>();
+  /** Se emite al pulsar el botón de pantalla completa. */
   readonly fullscreenPressed = output<void>();
 }

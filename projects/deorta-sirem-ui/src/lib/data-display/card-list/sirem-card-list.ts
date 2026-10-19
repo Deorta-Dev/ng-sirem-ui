@@ -85,11 +85,15 @@ export type SiremCardListAvatar = string | { name: string; src?: string | null }
   `,
 })
 export class SiremCardList {
+  /** Filas a mostrar; cada objeto se pinta como una tarjeta. */
   readonly items = input.required<Record<string, unknown>[]>();
   /** Clave del título de cada tarjeta. */
   readonly titleKey = input('title');
+  /** Clave cuyo valor se pinta como subtítulo de la tarjeta. */
   readonly subtitleKey = input<string | null>(null);
+  /** Clave cuyo valor se pinta como badge en la esquina. */
   readonly badgeKey = input<string | null>(null);
+  /** Color del badge según su valor (p. ej. `{ Activo: 'success' }`). */
   readonly badgeTones = input<Record<string, SiremBadgeTone>>({});
   /** Clave con el nombre (o `{ name, src }`) para el avatar. */
   readonly avatarKey = input<string | null>(null);
@@ -97,12 +101,16 @@ export class SiremCardList {
   readonly fields = input<SiremCardListField[]>([]);
   /** Ancho mínimo de cada tarjeta (define las columnas). */
   readonly minWidth = input('17rem');
+  /** Hace las tarjetas clicables (cursor, foco y emisión de `itemPressed`). */
   readonly rowClickable = input(true);
+  /** Añade una casilla por tarjeta para selección múltiple. */
   readonly selectable = input(false);
   /** Índices seleccionados. */
   readonly selection = model<number[]>([]);
+  /** Texto que se muestra cuando `items` está vacío. */
   readonly emptyText = input('Sin registros.');
 
+  /** Se emite con la fila pulsada (con `rowClickable`). */
   readonly itemPressed = output<Record<string, unknown>>();
 
   trackBy(item: Record<string, unknown>, index: number): unknown {

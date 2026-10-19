@@ -2,8 +2,11 @@ import { Component, computed, HostListener, input, model, output, signal } from 
 
 /** Resultado seleccionable de la paleta (paciente, factura, placa, acción…). */
 export interface SiremPaletteItem {
+  /** Texto principal del resultado. */
   label: string;
+  /** Contexto secundario (ruta, tipo, sede…). */
   hint?: string;
+  /** Sección a la que pertenece el resultado. */
   group?: string;
 }
 
@@ -82,10 +85,14 @@ export interface SiremPaletteItem {
   `,
 })
 export class SiremSearchPalette {
+  /** Entradas buscables (título, sección, icono, ruta). */
   readonly items = input<SiremPaletteItem[]>([]);
+  /** Texto de ejemplo del buscador. */
   readonly placeholder = input('Buscar pacientes, facturas, placas…');
+  /** Controla la visibilidad de la paleta, con enlace de dos vías. */
   readonly open = model(false);
 
+  /** Se emite con la entrada elegida. */
   readonly selected = output<SiremPaletteItem>();
 
   readonly query = signal('');

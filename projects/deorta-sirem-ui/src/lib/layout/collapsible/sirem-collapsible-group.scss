@@ -1,0 +1,10 @@
+/* Estilos de sirem-collapsible-group: apila secciones con un aire común. */
+:host {
+  display: block;
+}
+
+.sirem-collapsible-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

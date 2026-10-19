@@ -47,10 +47,14 @@ import { Component, HostListener, input, model, output } from '@angular/core';
   `,
 })
 export class SiremDrawer {
+  /** Estado abierto, con enlace de dos vías. */
   readonly open = model(false);
+  /** Título de la cabecera. */
   readonly title = input('');
+  /** Lado del que entra el panel: `left` o `right`. */
   readonly side = input<'left' | 'right'>('right');
 
+  /** Se emite al cerrarse. */
   readonly closed = output<void>();
 
   @HostListener('document:keydown.escape')

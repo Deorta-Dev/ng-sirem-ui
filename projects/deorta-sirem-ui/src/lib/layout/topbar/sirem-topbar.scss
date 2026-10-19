@@ -11,13 +11,10 @@
   border-bottom: 1px solid var(--sirem-border-soft);
   background: var(--sirem-surface);
   padding: 0 0.75rem;
-}
-
-/* Fija la barra al hacer scroll. */
-.sirem-topbar--fixed {
-  position: sticky;
-  top: 0;
-  z-index: 30;
+  transition:
+    background-color var(--sirem-duration, 180ms) var(--sirem-ease, ease),
+    border-color var(--sirem-duration, 180ms) var(--sirem-ease, ease),
+    box-shadow var(--sirem-duration, 180ms) var(--sirem-ease, ease);
 }
 
 /* Fondo translúcido con desenfoque. */
@@ -58,6 +55,30 @@
   padding: 0 0.5rem;
 }
 
+/*
+ * Aspectos configurables (valen para el estado normal y para `sticky`).
+ * Van después de blur/transparent/floating para que ganen al combinarse.
+ */
+.sirem-topbar--elevated {
+  border-bottom-color: transparent;
+  background: var(--sirem-surface);
+  box-shadow: var(--sirem-shadow-md);
+}
+
+.sirem-topbar--glass {
+  background: color-mix(in srgb, var(--sirem-surface, #fff) 78%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+}
+
+.sirem-topbar--flat {
+  border-bottom-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 .sirem-topbar__icon-btn {
   border: 0;
   background: none;
@@ -65,6 +86,9 @@
   padding: 0.5rem;
   color: var(--sirem-text-soft);
   cursor: pointer;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-topbar__icon-btn:hover {
@@ -98,6 +122,7 @@
   font-size: 0.875rem;
   color: var(--sirem-text-muted);
   cursor: pointer;
+  transition: background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-topbar__search:hover {
@@ -150,6 +175,7 @@
   font-weight: 500;
   color: var(--sirem-text-soft);
   cursor: pointer;
+  transition: background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-topbar__space:hover {

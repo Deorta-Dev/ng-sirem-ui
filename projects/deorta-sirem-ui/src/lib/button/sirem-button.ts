@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
+/** Estilo visual del botón (semántica de color). */
 export type SiremButtonVariant =
   | 'primary'
   | 'accent'
@@ -18,6 +19,7 @@ export type SiremButtonVariant =
   | 'warning'
   | 'ghost'
   | 'danger';
+/** Tamaño del botón; `md` iguala la altura de los campos. */
 export type SiremButtonSize = 'sm' | 'md' | 'lg';
 
 /**
@@ -95,8 +97,11 @@ export type SiremButtonAction = () => Observable<unknown> | Promise<unknown> | v
   `,
 })
 export class SiremButton {
+  /** Estilo visual: `primary`, `secondary`, `success`, `warning`, `ghost` o `danger`. */
   readonly variant = input<SiremButtonVariant>('primary');
+  /** Tamaño: `sm` (2 rem), `md` (2.5 rem, igual que los campos) o `lg` (3 rem). */
   readonly size = input<SiremButtonSize>('md');
+  /** Bloquea el botón: no emite `pressed` ni ejecuta `action`. */
   readonly disabled = input(false);
   /** Acción a ejecutar al hacer clic (puede devolver Observable/Promise). */
   readonly action = input<SiremButtonAction | null>(null);
@@ -107,6 +112,7 @@ export class SiremButton {
   /** Dibuja el borde (defecto). `false` lo suprime sin cambiar el resto. */
   readonly bordered = input(true, { transform: booleanAttribute });
 
+  /** Se emite al pulsar, antes de resolver `action`. */
   readonly pressed = output<void>();
   /** Último valor emitido al completar `action` con éxito. */
   readonly finished = output<unknown>();

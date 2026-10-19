@@ -37,6 +37,7 @@
   text-align: left;
   cursor: pointer;
   color: var(--sirem-text-soft);
+  transition: background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-list__row:hover {
@@ -105,6 +106,15 @@
   flex-shrink: 0;
   font-size: 1.125rem;
   color: var(--sirem-text-faint);
+  transition:
+    transform var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
+}
+
+/* La flecha acompaña al puntero: invita a entrar en la fila. */
+.sirem-list__row:hover .sirem-list__chev {
+  transform: translateX(2px);
+  color: var(--sirem-text-muted);
 }
 
 .sirem-list__empty {

@@ -13,7 +13,7 @@ import {
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
-  SiremViewToggle,
+  SiremSegmented,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { BODEGAS, PRODUCTOS, type ErpProducto, stockTotal } from '../../data/erp-mock';
@@ -29,7 +29,7 @@ import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/p
   standalone: true,
   imports: [PageDemoShell, SiremCardList, SiremDataTable, SiremEmptyState, SiremInput, SiremModal,
     SiremMoneyPipe, SiremPageHeader, SiremSearchField, SiremStatCard,
-    SiremViewToggle],
+    SiremSegmented],
   template: `
     <app-page-demo-shell label="Multibodega" [files]="codeFiles">
       <main class="min-h-[calc(100dvh-2.75rem)] p-4 sm:p-6 lg:p-8">
@@ -52,7 +52,7 @@ import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/p
             <span class="text-xs font-medium text-slate-500 dark:text-slate-400" role="status">
               {{ filas().length }} de {{ productos.length }} referencias · {{ bodegaNombre() }}
             </span>
-            <sirem-view-toggle [(view)]="vista" />
+            <sirem-segmented [(value)]="vista" />
           </div>
 
           @if (filas().length) {
@@ -102,7 +102,7 @@ export class MultibodegaDemoPage {
 
   readonly q = signal('');
   readonly bodegaSel = signal<string | number | null>(BODEGAS[0].id);
-  readonly vista = signal<string>('table');
+  readonly vista = signal<string | null>('table');
   readonly detalleAbierto = signal(false);
   readonly seleccion = signal<ErpProducto | null>(null);
 
@@ -231,7 +231,7 @@ export class MultibodegaDemoPage {
 
 <div class="flex flex-wrap items-end justify-between gap-3">
   <sirem-search-field class="w-full md:w-80" placeholder="Buscar por SKU o nombre…" [(value)]="q" />
-  <sirem-view-toggle [(view)]="vista" />
+  <sirem-segmented [(value)]="vista" />
 </div>
 
 @if (filas().length) {
@@ -262,7 +262,7 @@ export class MultibodegaDemoPage {
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremCardList, SiremDataTable, SiremEmptyState, SiremModal, SiremMoneyPipe,
-  SiremPageHeader, SiremSearchField, SiremInput, SiremStatCard, SiremViewToggle,
+  SiremPageHeader, SiremSearchField, SiremInput, SiremStatCard, SiremSegmented,
   type SiremBadgeTone, type SiremCardListField, type SiremModalAction,
   type SiremSelectOption, type SiremTableColumn,
 } from 'deorta-sirem-ui';
@@ -273,7 +273,7 @@ import { BODEGAS, PRODUCTOS, type ErpProducto, stockTotal } from '../../data/erp
   selector: 'app-multibodega-page',
   standalone: true,
   imports: [SiremPageHeader, SiremInput, SiremStatCard, SiremSearchField,
-    SiremViewToggle, SiremDataTable, SiremCardList, SiremEmptyState, SiremModal,
+    SiremSegmented, SiremDataTable, SiremCardList, SiremEmptyState, SiremModal,
     SiremMoneyPipe],
   templateUrl: './multibodega.html',
 })
@@ -285,7 +285,7 @@ export class MultibodegaPage {
 
   readonly q = signal('');
   readonly bodegaSel = signal<string | number | null>(BODEGAS[0].id);
-  readonly vista = signal<string>('table');
+  readonly vista = signal<string | null>('table');
   readonly seleccion = signal<ErpProducto | null>(null);
   readonly detalleAbierto = signal(false);
 

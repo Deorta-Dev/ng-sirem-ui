@@ -13,6 +13,7 @@
   position: absolute;
   inset: 0;
   background: rgb(15 23 42 / 0.5);
+  animation: sirem-fade-in var(--sirem-duration, 200ms) var(--sirem-ease-out, ease-out) both;
 }
 
 .sirem-modal__panel {
@@ -26,6 +27,7 @@
   border-top-right-radius: var(--sirem-radius-lg, 1.5rem);
   background: var(--sirem-surface);
   box-shadow: var(--sirem-shadow-lg);
+  animation: sirem-pop-in var(--sirem-duration-slow, 320ms) var(--sirem-ease-out, ease-out) both;
 }
 
 .sirem-modal__panel--sm {

@@ -1,6 +1,7 @@
 import { Component, input } from '@angular/core';
 import { SiremBadgeTone } from '../badge/sirem-badge';
 
+/** Un hito de la línea de tiempo. */
 export interface SiremTimelineItem {
   title: string;
   description?: string;
@@ -39,6 +40,7 @@ export interface SiremTimelineItem {
   `,
 })
 export class SiremTimeline {
+  /** Hitos a mostrar (título, descripción, hora y tono). */
   readonly items = input<SiremTimelineItem[]>([]);
 
   dot(tone: SiremBadgeTone = 'neutral'): string {

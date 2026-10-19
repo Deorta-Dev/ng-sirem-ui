@@ -10,6 +10,10 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class SiremPhonePipe implements PipeTransform {
+  /**
+   * @param value Teléfono de 10 dígitos; se ignoran los separadores.
+   * @returns Teléfono en bloques (`'300 111 2233'`) o el valor original.
+   */
   transform(value: string | number | null | undefined): string {
     const digits = String(value ?? '').replace(/[^0-9]/g, '');
     if (digits.length !== 10) return String(value ?? '—');

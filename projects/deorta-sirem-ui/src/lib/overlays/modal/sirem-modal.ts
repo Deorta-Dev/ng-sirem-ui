@@ -1,11 +1,14 @@
 import { Component, HostListener, computed, input, model, output } from '@angular/core';
 import { SiremButton, SiremButtonSize, SiremButtonVariant } from '../../button/sirem-button';
 
+/** Ancho máximo del diálogo. */
 export type SiremModalSize = 'sm' | 'md' | 'lg' | 'xl';
+/** Alineación de los botones declarativos del pie del modal. */
 export type SiremModalActionsAlign = 'start' | 'center' | 'end' | 'stretch';
 
 /** Botón del footer declarativo del modal. */
 export interface SiremModalAction {
+  /** Texto del botón. */
   label: string;
   /** Variante visual (defecto `secondary`). */
   variant?: SiremButtonVariant;
@@ -13,8 +16,11 @@ export interface SiremModalAction {
   size?: SiremButtonSize;
   /** Clase CSS del icono en `slot="icon"` (p. ej. `fi fi-rr-check`). */
   icon?: string;
+  /** Deshabilita el botón. */
   disabled?: boolean;
+  /** Muestra el estado de carga del botón. */
   loading?: boolean;
+  /** Dato libre que se devuelve en `actionPressed`. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value?: any;
 }
@@ -25,7 +31,10 @@ export interface SiremModalAction {
  *
  * Botones configurables con `actions` (se pintan en un footer con
  * padding, borde superior y alineación) o footer 100% libre con
- * `slot="footer"` (recibe el mismo contenedor con estilo):
+ * `slot="footer"` (recibe el mismo contenedor con estilo).
+ *
+ * Cierre: `[backdropClose]="false"` hace que pulsar el fondo no lo cierre
+ * (Escape sigue funcionando); `[persistent]="true"` desactiva fondo y Escape.
  *
  * Uso:
  * ```html
@@ -85,17 +94,28 @@ export interface SiremModalAction {
   `,
 })
 export class SiremModal {
+  /** Estado abierto, con enlace de dos vías. */
   readonly open = model(false);
+  /** Título del diálogo y nombre accesible del panel. */
   readonly title = input('');
+  /** Ancho máximo: `sm`, `md` (defecto), `lg` o `xl`. */
   readonly size = input<SiremModalSize>('md');
   /** Si es true, el backdrop y Escape no lo cierran. */
   readonly persistent = input(false);
+  /**
+   * Cerrar al pulsar fuera del panel (el fondo). Independiente de
+   * `persistent`: con `false` el fondo no cierra pero Escape sigue
+   * funcionando, salvo que también sea `persistent`.
+   */
+  readonly backdropClose = input(true);
   /** Botones del footer (admiten N acciones con variante, icono y loading). */
   readonly actions = input<SiremModalAction[]>([]);
   /** Alineación de los botones declarativos. */
   readonly actionsAlign = input<SiremModalActionsAlign>('end');
 
+  /** Se emite al cerrarse. */
   readonly closed = output<void>();
+  /** Se emite con el botón pulsado del footer declarativo. */
   readonly actionPressed = output<SiremModalAction>();
 
   readonly footerClass = computed(() =>
@@ -121,7 +141,8 @@ export class SiremModal {
   }
 
   onBackdrop(): void {
-    if (!this.persistent()) this.close();
+    if (this.persistent() || !this.backdropClose()) return;
+    this.close();
   }
 
   close(): void {

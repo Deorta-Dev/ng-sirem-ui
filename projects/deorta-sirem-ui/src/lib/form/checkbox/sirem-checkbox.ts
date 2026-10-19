@@ -28,10 +28,15 @@ import { Component, input, model } from '@angular/core';
   `,
 })
 export class SiremCheckbox {
+  /** Estado marcado, con enlace de dos vías. */
   readonly checked = model(false);
+  /** Texto de la casilla. */
   readonly label = input('');
+  /** Línea secundaria bajo la etiqueta. */
   readonly description = input('');
+  /** Marca el campo como obligatorio (`aria-required` e indicador visual). */
   readonly required = input(false);
+  /** Deshabilita la casilla: no se puede marcar ni enfocar. */
   readonly disabled = input(false);
 
   onChange(event: Event): void {

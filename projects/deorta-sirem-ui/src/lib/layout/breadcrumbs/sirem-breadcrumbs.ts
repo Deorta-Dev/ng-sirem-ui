@@ -43,5 +43,6 @@ export interface SiremCrumb {
   `,
 })
 export class SiremBreadcrumbs {
+  /** Migas a mostrar; la última se pinta como página actual. */
   readonly items = input.required<SiremCrumb[]>();
 }

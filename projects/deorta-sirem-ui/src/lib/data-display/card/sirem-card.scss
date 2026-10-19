@@ -20,7 +20,8 @@
   border-radius: var(--sirem-radius-lg);
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
-  box-shadow: var(--sirem-shadow-xs);
+  /* Un escalón por encima de las superficies planas (tabla, lista, campos). */
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-card__header,
@@ -63,20 +64,23 @@
   color: color-mix(in srgb, var(--sirem-primary-text, #fff) 85%, transparent);
 }
 
-/* Tonos pastel Bento: tinte de superficie, sin borde ni sombra dura. */
+/* Tonos pastel Bento: tinte de superficie y la misma elevación que la tarjeta. */
 .sirem-card--muted {
   border-color: transparent;
   background: var(--sirem-surface-muted);
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-card--sage {
   border-color: transparent;
   background: var(--sirem-surface-sage);
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-card--accent {
   border-color: transparent;
   background: var(--sirem-surface-accent-soft);
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-card--muted .sirem-card__header,

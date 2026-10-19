@@ -43,10 +43,15 @@ import { Component, input, model } from '@angular/core';
   `,
 })
 export class SiremSearchField {
+  /** Texto de búsqueda, con enlace de dos vías. */
   readonly value = model<string>('');
+  /** Etiqueta del buscador (a menudo solo accesible). */
   readonly label = input('');
+  /** Texto de ejemplo dentro del campo. */
   readonly placeholder = input('Buscar…');
+  /** Deshabilita el control: no se puede enfocar ni editar. */
   readonly disabled = input(false);
+  /** Mensaje de error. Con texto, el campo se marca en rojo y se anuncia. */
   readonly error = input('');
 
   box(): string {

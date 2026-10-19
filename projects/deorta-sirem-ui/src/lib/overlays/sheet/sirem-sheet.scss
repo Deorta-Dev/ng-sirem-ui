@@ -1,0 +1,187 @@
+/* Estilos de sirem-sheet: hoja inferior redimensionable. */
+:host {
+  /* El sheet es `fixed`: el host no debe crear caja propia. */
+  display: contents;
+}
+
+.sirem-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.sirem-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(15 23 42 / 0.5);
+  animation: sirem-fade-in var(--sirem-duration, 200ms) var(--sirem-ease-out, ease-out) both;
+}
+
+/* Salida: el sheet se va hacia abajo y el fondo se apaga a la vez. */
+.sirem-sheet--closing {
+  pointer-events: none;
+}
+
+.sirem-sheet--closing .sirem-sheet__backdrop {
+  animation: sirem-fade-out var(--sirem-duration, 200ms) var(--sirem-ease, ease) both;
+}
+
+.sirem-sheet--closing .sirem-sheet__panel {
+  animation: sirem-slide-down-out var(--sirem-duration-slow, 320ms) var(--sirem-ease, ease) both;
+}
+
+.sirem-sheet__panel {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-height: 100dvh;
+  flex-direction: column;
+  overflow: hidden;
+  border-top-left-radius: var(--sirem-radius-lg, 1.5rem);
+  border-top-right-radius: var(--sirem-radius-lg, 1.5rem);
+  background: var(--sirem-surface);
+  box-shadow: var(--sirem-shadow-lg);
+  outline: none;
+  /* Presets: se pueden afinar por CSS sin tocar la API. */
+  height: var(--sirem-sheet-h-md, 62dvh);
+  animation: sirem-slide-up-in var(--sirem-duration-slow, 320ms) var(--sirem-ease-out, ease-out) both;
+  transition: height var(--sirem-duration-slow, 320ms) var(--sirem-ease-out, ease-out);
+}
+
+.sirem-sheet__panel--sm {
+  height: var(--sirem-sheet-h-sm, 42dvh);
+}
+
+.sirem-sheet__panel--md {
+  height: var(--sirem-sheet-h-md, 62dvh);
+}
+
+.sirem-sheet__panel--lg {
+  height: var(--sirem-sheet-h-lg, 85dvh);
+}
+
+/* Pantalla completa: sin esquinas y sin asidero (sale el par de botones). */
+.sirem-sheet__panel--full {
+  height: var(--sirem-sheet-h-full, 100dvh);
+  border-radius: 0;
+}
+
+/* Durante el arrastre el alto lo manda el puntero, sin transición. */
+.sirem-sheet__panel--dragging {
+  transition: none;
+  user-select: none;
+}
+
+.sirem-sheet__handle {
+  display: flex;
+  height: 1.25rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  cursor: ns-resize;
+  touch-action: none;
+}
+
+.sirem-sheet__handle:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: -2px;
+}
+
+.sirem-sheet__grip {
+  height: 0.3125rem;
+  width: 2.75rem;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: var(--sirem-border-strong);
+  transition: background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
+}
+
+.sirem-sheet__handle:hover .sirem-sheet__grip {
+  background: var(--sirem-text-faint);
+}
+
+/* Reserva el alto del asidero cuando el control no se muestra. */
+.sirem-sheet__handle--spacer {
+  pointer-events: none;
+}
+
+.sirem-sheet__head {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem 0.75rem;
+}
+
+.sirem-sheet__heading {
+  min-width: 0;
+  flex: 1;
+}
+
+.sirem-sheet__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--sirem-text);
+}
+
+.sirem-sheet__subtitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0.125rem 0 0;
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-sheet__icon {
+  display: inline-flex;
+  height: 2rem;
+  width: 2rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: none;
+  font-size: 1rem;
+  color: var(--sirem-text-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
+}
+
+.sirem-sheet__icon:hover {
+  background: var(--sirem-surface-hover);
+  color: var(--sirem-text);
+}
+
+.sirem-sheet__icon:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: 1px;
+}
+
+.sirem-sheet__body {
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 1rem 1rem;
+  overscroll-behavior: contain;
+}
+
+.sirem-sheet__footer {
+  flex: none;
+  border-top: 1px solid var(--sirem-border-soft);
+  padding: 0.75rem 1rem;
+}
+
+/* Sin slot de pie: no ocupa espacio. */
+.sirem-sheet__footer:empty {
+  display: none;
+}

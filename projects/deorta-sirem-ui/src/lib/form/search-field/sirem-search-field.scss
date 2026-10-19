@@ -31,6 +31,7 @@
   padding: 0.25rem;
   color: var(--sirem-text-faint);
   cursor: pointer;
+  transition: color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
 }
 
 .sirem-search__clear:hover {

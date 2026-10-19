@@ -5,9 +5,11 @@
     "ng": "ng",
     "start": "ng serve demo",
     "start:poll": "ng serve demo --poll 2000",
-    "build": "ng build deorta-sirem-ui && ng build demo",
-    "build:lib": "ng build deorta-sirem-ui",
+    "build": "npm run build:lib && ng build demo",
+    "build:lib": "ng build deorta-sirem-ui && node tools/patch-lib-package.mjs",
     "build:demo": "ng build demo",
+    "pack:lib": "npm run build:lib && cd dist/deorta-sirem-ui && npm pack",
+    "publish:lib": "npm run build:lib && cd dist/deorta-sirem-ui && npm publish",
     "watch:lib": "ng build deorta-sirem-ui --watch --configuration development",
     "test": "ng test"
   },

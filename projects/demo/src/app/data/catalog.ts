@@ -66,6 +66,13 @@ export const CATALOG: CatalogEntry[] = [
     description: 'Barra superior de espacio y acciones, fija o flotante.',
   },
   {
+    slug: 'collapsible',
+    name: 'Collapsible',
+    selector: 'sirem-collapsible',
+    category: 'Layout',
+    description: 'Sección plegable: carta o plana, con o sin fondo, y acordeón.',
+  },
+  {
     slug: 'breadcrumbs',
     name: 'Breadcrumbs',
     selector: 'sirem-breadcrumbs',
@@ -99,7 +106,7 @@ export const CATALOG: CatalogEntry[] = [
     name: 'Segmented',
     selector: 'sirem-segmented',
     category: 'Navegación',
-    description: 'Control de pastillas con la opción activa resaltada.',
+    description: 'Pastillas; sin items, switch Tabla ⇄ Tarjetas.',
   },
   // Datos
   {
@@ -108,13 +115,6 @@ export const CATALOG: CatalogEntry[] = [
     selector: 'sirem-page-header',
     category: 'Datos',
     description: 'Título + subtítulo + acciones.',
-  },
-  {
-    slug: 'view-toggle',
-    name: 'View Toggle',
-    selector: 'sirem-view-toggle',
-    category: 'Datos',
-    description: 'Alternar tabla / tarjetas.',
   },
   {
     slug: 'data-table',
@@ -356,6 +356,13 @@ export const CATALOG: CatalogEntry[] = [
     category: 'Overlays',
     description: 'Tarjeta popup de mapa.',
   },
+  {
+    slug: 'sheet',
+    name: 'Sheet',
+    selector: 'sirem-sheet',
+    category: 'Overlays',
+    description: 'Hoja inferior redimensionable con presets y pantalla completa.',
+  },
   // Agenda
   {
     slug: 'calendar',
@@ -369,7 +376,7 @@ export const CATALOG: CatalogEntry[] = [
     name: 'Agenda',
     selector: 'sirem-agenda',
     category: 'Agenda',
-    description: 'Día, semana, mes y lista, con view-toggle + date-chip.',
+    description: 'Día, semana, mes y lista, con segmented + date-chip.',
   },
   // Directivas
   {

@@ -39,12 +39,20 @@ import { SiremSelectOption } from '../select/sirem-select';
   `,
 })
 export class SiremRadioGroup {
+  /** Opción seleccionada, con enlace de dos vías. */
   readonly value = model<string | number | null>(null);
+  /** Opciones del grupo (valor y texto). */
   readonly options = input<SiremSelectOption[]>([]);
+  /** Título del grupo; se asocia al `fieldset` como leyenda. */
   readonly label = input('');
+  /** Nota de ayuda bajo el grupo. */
   readonly hint = input('');
+  /** Nombre compartido por los radios para agruparlos en el DOM. */
   readonly groupName = input('sirem-radio');
+  /** `horizontal` (fila) o `vertical` (columna). */
   readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
+  /** Marca el campo como obligatorio (`aria-required` e indicador visual). */
   readonly required = input(false);
+  /** Deshabilita todas las opciones. */
   readonly disabled = input(false);
 }

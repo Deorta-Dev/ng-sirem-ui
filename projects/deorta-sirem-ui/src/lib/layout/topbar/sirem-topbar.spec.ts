@@ -1,6 +1,23 @@
 import { Component, signal } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { TestBed } from '@angular/core/testing';
+import { vi } from 'vitest';
+import { SiremSticky } from '../sticky/sirem-sticky';
 import { SiremTopbar, type SiremTopbarAppearance, type SiremTopbarSearchAlign } from './sirem-topbar';
+
+/** `DOMRect` mínimo para simular posiciones de scroll en jsdom. */
+const rect = (top: number, bottom: number) =>
+  ({
+    top,
+    bottom,
+    left: 0,
+    right: 0,
+    width: 0,
+    height: bottom - top,
+    x: 0,
+    y: top,
+    toJSON: () => ({}),
+  }) as DOMRect;
 
 @Component({
   standalone: true,
@@ -127,4 +144,34 @@ describe('SiremTopbar', () => {
     expect(space).toEqual(['ok']);
     expect(search).toEqual(['ok']);
   });
+
+  it('should switch to the sticky appearance while the directive keeps it stuck', async () => {
+    const fixture = TestBed.createComponent(StickyTopbarHost);
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    const el = fixture.nativeElement.querySelector('sirem-topbar') as HTMLElement;
+    vi.spyOn(el, 'getBoundingClientRect').mockReturnValue(rect(0, 64));
+
+    try {
+      Object.defineProperty(window, 'scrollY', { value: 120, configurable: true });
+      document.dispatchEvent(new Event('scroll'));
+      fixture.detectChanges();
+
+      expect(
+        fixture.debugElement.query(By.directive(SiremTopbar)).componentInstance.activeAppearance(),
+      ).toBe('elevated');
+      expect(el.querySelector('.sirem-topbar--elevated')).toBeTruthy();
+    } finally {
+      Object.defineProperty(window, 'scrollY', { value: 0, configurable: true });
+    }
+  });
 });
+
+/** Host con la directiva aplicada al componente: valida la integración por DI. */
+@Component({
+  standalone: true,
+  imports: [SiremTopbar, SiremSticky],
+  template: `<sirem-topbar siremSticky stickyAppearance="elevated" />`,
+})
+class StickyTopbarHost {}

@@ -13,9 +13,9 @@ import {
 } from '@angular/core';
 import { SiremDateChip } from '../../data-display/date-chip/sirem-date-chip';
 import {
-  SiremViewToggle,
-  type SiremViewToggleItem,
-} from '../../data-display/view-toggle/sirem-view-toggle';
+  SiremSegmented,
+  type SiremSegmentedItem,
+} from '../../navigation/segmented/sirem-segmented';
 
 /** Vistas de la agenda. */
 export type SiremAgendaMode = 'day' | 'week' | 'month' | 'list';
@@ -112,8 +112,11 @@ export interface SiremAgendaListGroup {
 
 /** Hueco pulsado en la rejilla horaria. */
 export interface SiremAgendaSlot {
+  /** Día del hueco. */
   date: Date;
+  /** Hora (0–23). */
   hour: number;
+  /** Minuto (0–59). */
   minute: number;
 }
 
@@ -182,7 +185,7 @@ function blurFilter(px: number | null): string | null {
  * - `month`: rejilla mensual con chips de eventos y «+N más».
  * - `list`: agenda agrupada por días con eventos.
  *
- * El selector de vistas es `sirem-view-toggle`; la navegación temporal, flechas,
+ * El selector de vistas es `sirem-segmented`; la navegación temporal, flechas,
  * botón **Hoy** y los chips de día.
  *
  * ## Responsive
@@ -233,7 +236,7 @@ function blurFilter(px: number | null): string | null {
 @Component({
   selector: 'sirem-agenda',
   standalone: true,
-  imports: [SiremDateChip, SiremViewToggle],
+  imports: [SiremDateChip, SiremSegmented],
   styleUrl: './sirem-agenda.scss',
   template: `
     <div
@@ -278,10 +281,10 @@ function blurFilter(px: number | null): string | null {
           <span class="sirem-agenda__subtitle">{{ subtitle() }}</span>
         </div>
 
-        <sirem-view-toggle
+        <sirem-segmented
           [items]="modeItems()"
-          [view]="mode()"
-          (viewChange)="setMode($event)"
+          [value]="mode()"
+          (valueChange)="setMode($event)"
           [size]="compact() ? 'sm' : 'md'"
           ariaLabel="Vista de agenda"
         />
@@ -643,7 +646,7 @@ export class SiremAgenda {
     const filtered = this.compact() ? modes.filter((mode) => mode !== 'week') : modes;
     return filtered.length ? filtered : ['day'];
   });
-  readonly modeItems = computed<SiremViewToggleItem[]>(() => {
+  readonly modeItems = computed<SiremSegmentedItem[]>(() => {
     const labels: Record<SiremAgendaMode, { label: string; icon: string }> = {
       day: { label: 'Día', icon: 'fi fi-rr-calendar-day' },
       week: { label: 'Semana', icon: 'fi fi-rr-calendar-days' },
@@ -986,7 +989,8 @@ export class SiremAgenda {
   }
 
   /** Cambia de vista desde el selector. */
-  setMode(value: string): void {
+  setMode(value: string | null): void {
+    if (!value) return;
     const mode = value as SiremAgendaMode;
     if (mode !== this.mode()) this.mode.set(mode);
   }

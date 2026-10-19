@@ -75,13 +75,21 @@ import { SiremCalendar } from '../../schedule/calendar/sirem-calendar';
 export class SiremDate {
   /** Fecha en ISO `yyyy-MM-dd`. */
   readonly value = model<string | null>(null);
+  /** Etiqueta visible sobre el control. */
   readonly label = input('');
+  /** Texto de ayuda cuando no hay fecha (`dd/mm/aaaa`). */
   readonly placeholder = input('dd/mm/aaaa');
+  /** Nota de ayuda bajo el campo; la sustituye `error` cuando lo hay. */
   readonly hint = input('');
+  /** Mensaje de error. Con texto, el campo se marca en rojo y se anuncia. */
   readonly error = input('');
+  /** Fecha mínima seleccionable, en ISO `yyyy-MM-dd`. */
   readonly min = input<string | null>(null);
+  /** Fecha máxima seleccionable, en ISO `yyyy-MM-dd`. */
   readonly max = input<string | null>(null);
+  /** Marca el campo como obligatorio (`aria-required` e indicador visual). */
   readonly required = input(false);
+  /** Deshabilita el control: no se puede enfocar ni editar. */
   readonly disabled = input(false);
 
   readonly open = signal(false);

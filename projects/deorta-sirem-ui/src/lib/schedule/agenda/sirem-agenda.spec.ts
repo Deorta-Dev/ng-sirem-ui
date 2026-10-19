@@ -195,7 +195,7 @@ describe('SiremAgenda', () => {
 
     // `week` ya no está disponible: se cae a la primera vista ofrecida.
     expect(fixture.componentInstance.mode()).toBe('month');
-    expect(element(fixture).querySelectorAll('.sirem-view-toggle__btn').length).toBe(2);
+    expect(element(fixture).querySelectorAll('.sirem-seg__item').length).toBe(2);
   });
 
   it('should follow the page scroll and stick only the requested headers', () => {

@@ -6,6 +6,7 @@
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
   box-shadow: var(--sirem-shadow-md);
+  animation: sirem-scale-in var(--sirem-duration, 200ms) var(--sirem-ease-out, ease-out) both;
 }
 
 .sirem-popup__head {

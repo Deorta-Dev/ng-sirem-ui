@@ -78,7 +78,9 @@ export type SiremCardPart = 'header' | 'body' | 'footer';
   `,
 })
 export class SiremCard {
+  /** Título del encabezado. Sin `title` ni `subtitle` el encabezado no se pinta. */
   readonly title = input('');
+  /** Línea secundaria bajo el título. */
   readonly subtitle = input('');
   /** Superficie sólida (defecto) o translúcida tipo dashboard. */
   readonly surface = input<'solid' | 'glass'>('solid');

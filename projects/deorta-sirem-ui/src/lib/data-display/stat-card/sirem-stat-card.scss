@@ -16,7 +16,8 @@
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
   padding: 1rem;
-  box-shadow: var(--sirem-shadow-xs);
+  /* Igual que `sirem-card`: un escalón por encima de las superficies planas. */
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-stat--glass {
@@ -29,7 +30,7 @@
 .sirem-stat--tint {
   border-color: color-mix(in srgb, var(--sirem-stat-accent) 18%, var(--sirem-border));
   background: var(--sirem-stat-tint);
-  box-shadow: var(--sirem-shadow-xs);
+  box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-stat--tint-brand {

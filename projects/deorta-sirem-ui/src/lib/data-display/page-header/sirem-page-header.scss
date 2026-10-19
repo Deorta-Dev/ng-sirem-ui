@@ -1,9 +1,41 @@
 /* Estilos de sirem-page-header: título + subtítulo + acciones. */
+:host {
+  display: block;
+}
+
+/* Sticky: la directiva `siremSticky` pone la posición en el host; aquí solo
+   se reserva el aire vertical para que el alto no cambie al fijarse. */
+:host(.sirem-sticky) .sirem-page-header {
+  padding-block: 0.75rem;
+}
+
 .sirem-page-header {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   gap: 0.75rem;
+  transition:
+    background-color var(--sirem-duration, 180ms) var(--sirem-ease, ease),
+    box-shadow var(--sirem-duration, 180ms) var(--sirem-ease, ease);
+}
+
+/* Aspectos configurables (normal y sticky). */
+.sirem-page-header--elevated {
+  background: var(--sirem-surface);
+  box-shadow: var(--sirem-shadow-md);
+}
+
+.sirem-page-header--glass {
+  background: color-mix(in srgb, var(--sirem-surface, #fff) 78%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+}
+
+.sirem-page-header--flat {
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .sirem-page-header__titles {
