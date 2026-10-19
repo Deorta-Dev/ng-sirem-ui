@@ -23,7 +23,7 @@
 .sirem-admin__exit-btn {
   border: 0;
   background: none;
-  border-radius: 0.5rem;
+  border-radius: var(--sirem-radius-pill, 999px);
   padding: 0.375rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -36,7 +36,7 @@
 }
 
 .sirem-admin__exit-btn:focus-visible {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
 }
 
 .sirem-admin__body {
@@ -49,6 +49,15 @@
   min-width: 0;
   flex: 1;
   padding: 1rem;
+}
+
+/* Inset del main cuando el sidebar está fijo (fuera del flujo): el shell
+   desplaza la columna principal para que el header empiece donde termina el
+   navbar. Solo desktop (en móvil el sidebar es drawer off-canvas). */
+@media (min-width: 768px) {
+  .sirem-admin__main--inset {
+    margin-left: var(--sirem-main-inset, 15.75rem);
+  }
 }
 
 @media (min-width: 768px) {

@@ -18,7 +18,7 @@
   gap: 0.125rem;
   border: 1px solid var(--sirem-border-strong);
   border-bottom: 0;
-  border-radius: 0.625rem 0.625rem 0 0;
+  border-radius: var(--sirem-radius-md, 1rem) var(--sirem-radius-md, 1rem) 0 0;
   background: var(--sirem-surface-alt);
   padding: 0.375rem 0.5rem;
 }
@@ -28,7 +28,7 @@
   height: 2rem;
   border: 0;
   background: none;
-  border-radius: 0.375rem;
+  border-radius: var(--sirem-radius-pill, 999px);
   padding: 0 0.5rem;
   font-size: 0.875rem;
   color: var(--sirem-text-soft);
@@ -40,7 +40,7 @@
 }
 
 .sirem-rich__btn:focus-visible {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
 }
 
 .sirem-rich__btn--b {
@@ -69,7 +69,7 @@
 .sirem-rich__area {
   min-height: 8.75rem;
   border: 1px solid var(--sirem-border-strong);
-  border-radius: 0 0 0.625rem 0.625rem;
+  border-radius: 0 0 var(--sirem-radius-md, 1rem) var(--sirem-radius-md, 1rem);
   background: var(--sirem-surface);
   padding: 0.75rem;
   font-size: 0.875rem;
@@ -77,7 +77,7 @@
 }
 
 .sirem-rich__area:focus {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
   outline-offset: -1px;
 }
 
@@ -90,7 +90,7 @@
 .sirem-rich__area blockquote {
   margin: 0.5rem 0;
   padding-left: 0.75rem;
-  border-left: 3px solid var(--color-sirem-400, #8ec5ff);
+  border-left: 3px solid var(--sirem-sage);
   color: var(--sirem-text-muted);
 }
 

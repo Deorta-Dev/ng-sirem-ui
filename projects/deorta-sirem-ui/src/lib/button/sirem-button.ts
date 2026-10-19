@@ -12,6 +12,7 @@ import { Observable, Subscription } from 'rxjs';
 
 export type SiremButtonVariant =
   | 'primary'
+  | 'accent'
   | 'secondary'
   | 'success'
   | 'warning'
@@ -26,16 +27,19 @@ export type SiremButtonSize = 'sm' | 'md' | 'lg';
 export type SiremButtonAction = () => Observable<unknown> | Promise<unknown> | void;
 
 /**
- * Botón base del design system SIREM (criterios Creative Tim:
- * bordes redondeados md, sombras con volumen y semántica de color;
- * escala compacta: el tamaño md mide h-10 (40px) como los campos).
+ * Botón base del design system SIREM (estética Bento: píldoras de esquinas
+ * completamente redondeadas, sombras difusas y semántica de color; escala
+ * compacta: el tamaño md mide h-10 (40px) como los campos).
+ *
+ * `variant="primary"` usa la tinta de marca; `variant="accent"` el acento
+ * lima (siempre con texto tinta encima).
  *
  * Iconos por slots (cualquier contenido: `fi`, `sirem-duotone-icon`…):
  * ```html
  * <sirem-button variant="primary">
  *   <i slot="icon" class="fi fi-rr-check"></i>Guardar
  * </sirem-button>
- * <sirem-button variant="secondary" iconOnly aria-label="Buscar">
+ * <sirem-button variant="accent" iconOnly aria-label="Buscar">
  *   <i slot="icon" class="fi fi-rr-search"></i>
  * </sirem-button>
  * ```
@@ -43,7 +47,7 @@ export type SiremButtonAction = () => Observable<unknown> | Promise<unknown> | v
  * Uso:
  * ```html
  * <sirem-button variant="primary" size="md" (pressed)="guardar()">Guardar</sirem-button>
- * <sirem-button variant="success" [action]="guardar$" [disabled]="formInvalido">
+ * <sirem-button variant="accent" [action]="guardar$" [disabled]="formInvalido">
  *   Guardar historia
  * </sirem-button>
  * ```
@@ -116,6 +120,7 @@ export class SiremButton {
 
   private readonly variants: Record<SiremButtonVariant, string> = {
     primary: 'sirem-btn--primary',
+    accent: 'sirem-btn--accent',
     secondary: 'sirem-btn--secondary',
     success: 'sirem-btn--success',
     warning: 'sirem-btn--warning',

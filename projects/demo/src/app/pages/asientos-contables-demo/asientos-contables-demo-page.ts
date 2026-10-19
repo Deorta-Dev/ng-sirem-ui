@@ -1,8 +1,8 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremBadge, SiremButton, SiremDataTable, SiremEmptyState, SiremModal, SiremModalAction,
-  SiremPageHeader, SiremSearchField, SiremSelect, SiremSelectOption, SiremStatCard, SiremTableColumn,
+  SiremBadge, SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal, SiremModalAction,
+  SiremPageHeader, SiremSearchField, SiremSelectOption, SiremStatCard, SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { ASIENTOS, type ErpAsiento, totalesAsiento } from '../../data/erp-mock';
@@ -20,7 +20,7 @@ const ESTADOS: ErpAsiento['estado'][] = ['Borrador', 'Publicado'];
   standalone: true,
   imports: [
     DecimalPipe, PageDemoShell, SiremBadge, SiremButton, SiremDataTable, SiremEmptyState,
-    SiremModal, SiremPageHeader, SiremSearchField, SiremSelect, SiremStatCard,
+    SiremInput, SiremModal, SiremPageHeader, SiremSearchField, SiremStatCard,
   ],
   template: `
     <app-page-demo-shell label="Asientos contables" [files]="codeFiles">
@@ -42,8 +42,8 @@ const ESTADOS: ErpAsiento['estado'][] = ['Borrador', 'Publicado'];
 
           <div class="grid gap-3 md:grid-cols-[1fr_11rem_11rem]">
             <sirem-search-field placeholder="Buscar por número o concepto…" [(value)]="q" />
-            <sirem-select-field label="Origen" placeholder="Todos" [options]="origenOptions" [(value)]="origen" />
-            <sirem-select-field label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+            <sirem-input-field [strictOptions]="true" label="Origen" placeholder="Todos" [options]="origenOptions" [(value)]="origen" />
+            <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
           </div>
 
           @if (filtrados().length) {
@@ -223,8 +223,8 @@ export class AsientosContablesDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_11rem_11rem]">
   <sirem-search-field placeholder="Buscar por número o concepto…" [(value)]="q" />
-  <sirem-select-field label="Origen" placeholder="Todos" [options]="origenOptions" [(value)]="origen" />
-  <sirem-select-field label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+  <sirem-input-field [strictOptions]="true" label="Origen" placeholder="Todos" [options]="origenOptions" [(value)]="origen" />
+  <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
 </div>
 
 @if (filtrados().length) {

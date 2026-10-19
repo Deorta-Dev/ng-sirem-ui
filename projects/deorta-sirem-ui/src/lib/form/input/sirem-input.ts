@@ -22,9 +22,10 @@ export type SiremOptionsMapper = (item: unknown) => SiremSelectOption;
  * Campo de texto con autocompletado integrado (doble vía con `[(value)]`).
  *
  * - Sin `options`: input normal.
- * - Con `options`: combobox con sugerencias (permite texto libre).
+ * - Con `options`: combobox con sugerencias (permite texto libre) e indicador
+ *   ✎ (`fi fi-rr-pen-field`) a la derecha del campo.
  * - Con `strictOptions` (alias `isStrict`): se comporta como **select**
- *   (solo admite valores de la lista).
+ *   (solo admite valores de la lista) e indicador ▾ (`fi fi-rr-angle-small-down`).
  * - Con `multiple` (alias `isMultiple`): multi-selección con chips
  *   (`value` pasa a ser un array).
  * - Con `optionsEndpoint`: las opciones se descargan por HTTP (GET) esperando
@@ -187,11 +188,16 @@ export type SiremOptionsMapper = (item: unknown) => SiremSelectOption;
                 <i class="fi fi-rr-trash" aria-hidden="true"></i>
               </button>
             }
-            @if (strictEffective()) {
-              <span aria-hidden="true" class="sirem-input__chev">
-                <i class="fi fi-rr-angle-small-down" aria-hidden="true"></i>
-              </span>
-            }
+            <span
+              aria-hidden="true"
+              class="sirem-input__chev"
+              [class.sirem-input__chev--free]="!strictEffective()"
+            >
+              <i
+                [class]="strictEffective() ? 'fi fi-rr-angle-small-down' : 'fi fi-rr-pen-field'"
+                aria-hidden="true"
+              ></i>
+            </span>
             @if (suffixIcon()) {
               <i
                 [class]="suffixIcon() + ' sirem-input__suffix'"
@@ -392,25 +398,24 @@ export class SiremInput {
     return hasValue || this.text().trim() !== '';
   });
 
-  /** Reserva espacio a la derecha para ✕ y ▾ sin tapar el texto. */
+  /** Reserva espacio a la derecha para ✕ y ▾/✎ sin tapar el texto. */
   readonly padRight = computed<number | null>(() => {
     if (!this.hasList() || this.multipleEffective()) {
       return this.suffixIcon() ? 2.5 : null;
     }
-    let slots = 0;
-    if (this.strictEffective()) slots++;
+    let slots = 1; // ▾ (estricto) o ✎ (texto libre), siempre presente en la lista
     if (this.showClear()) slots++;
     if (this.suffixIcon()) slots++;
-    return slots ? 0.75 + slots * 1.25 : null;
+    return 0.75 + slots * 1.25;
   });
 
   readonly padLeft = computed<number | null>(() => (this.prefixIcon() ? 2.5 : null));
 
-  /** Posición del sufijo contando chevrón y ✕ previos desde el borde. */
+  /** Posición del sufijo contando el indicador ▾/✎ y la ✕ previos desde el borde. */
   readonly suffixRight = computed(() => {
     let n = 0;
     if (!this.multipleEffective()) {
-      if (this.strictEffective()) n++;
+      n++; // ▾ (estricto) o ✎ (texto libre)
       if (this.showClear()) n++;
     }
     return 0.75 + n * 1.25;

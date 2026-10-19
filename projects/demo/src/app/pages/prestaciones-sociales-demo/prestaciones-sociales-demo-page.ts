@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremButton, SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremModal,
-  SiremPageHeader, SiremSelect, SiremSelectOption, SiremStatCard, SiremTableColumn,
+  SiremButton, SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremInput, SiremModal,
+  SiremPageHeader, SiremSelectOption, SiremStatCard, SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { EMPLEADOS, PRESTACIONES, type ErpPrestacion } from '../../data/erp-mock';
@@ -16,7 +16,7 @@ import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/p
   standalone: true,
   imports: [
     PageDemoShell, SiremButton, SiremDataTable, SiremEmptyState, SiremFieldGroup,
-    SiremModal, SiremPageHeader, SiremSelect, SiremStatCard,
+    SiremInput, SiremModal, SiremPageHeader, SiremStatCard,
   ],
   template: `
     <app-page-demo-shell label="Prestaciones sociales" [files]="codeFiles">
@@ -29,8 +29,8 @@ import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/p
           </sirem-page-header>
 
           <div class="grid gap-3 md:grid-cols-2">
-            <sirem-select-field label="Empleado" [options]="empleadoOptions" [(value)]="empleadoSel" />
-            <sirem-select-field label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
+            <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Empleado" [options]="empleadoOptions" [(value)]="empleadoSel" />
+            <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
           </div>
 
           <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -188,8 +188,8 @@ export class PrestacionesSocialesDemoPage {
 </sirem-page-header>
 
 <div class="grid gap-3 md:grid-cols-2">
-  <sirem-select-field label="Empleado" [options]="empleadoOptions" [(value)]="empleadoSel" />
-  <sirem-select-field label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
+  <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Empleado" [options]="empleadoOptions" [(value)]="empleadoSel" />
+  <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
 </div>
 
 <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -224,7 +224,7 @@ export class PrestacionesSocialesDemoPage {
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremModal, SiremSelect,
+  SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremModal, SiremInput,
   SiremSelectOption, SiremStatCard, SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';

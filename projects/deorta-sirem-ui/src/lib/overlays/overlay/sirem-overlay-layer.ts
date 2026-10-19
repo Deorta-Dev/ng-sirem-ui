@@ -48,11 +48,11 @@ const CSS = `
 }
 .sirem-overlay__panel {
   min-width: 12rem;
-  border-radius: var(--sirem-radius-lg, 1rem);
-  border: 1px solid var(--sirem-border, #ccd2db);
+  border-radius: var(--sirem-radius-lg, 1.5rem);
+  border: 1px solid var(--sirem-border, #e2e3e8);
   background: var(--sirem-surface, #ffffff);
   padding: 0.375rem;
-  box-shadow: var(--sirem-shadow-md, 0 12px 28px rgb(15 23 42 / 0.14));
+  box-shadow: var(--sirem-shadow-md, 0 10px 30px rgb(18 20 24 / 0.06));
 }
 .sirem-overlay__item {
   display: flex;
@@ -60,26 +60,26 @@ const CSS = `
   align-items: center;
   gap: 0.625rem;
   border: 0;
-  border-radius: var(--sirem-radius-sm, 0.5rem);
+  border-radius: var(--sirem-radius-pill, 999px);
   background: none;
   padding: 0.5rem 0.625rem;
   font-size: 0.875rem;
   font-family: inherit;
   text-align: left;
-  color: var(--sirem-text-soft, #334155);
+  color: var(--sirem-text-soft, #3c3d42);
   cursor: pointer;
 }
 .sirem-overlay__item:hover:not(:disabled) {
-  background: var(--sirem-surface-hover, #eceef1);
-  color: var(--sirem-text, #0f172a);
+  background: var(--sirem-surface-hover, #eceef2);
+  color: var(--sirem-text, #1a1a1a);
 }
 .sirem-overlay__item:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 .sirem-overlay__item--active {
-  background: var(--sirem-tint-bg, #eef6ff);
-  color: var(--sirem-tint-text, #174fe1);
+  background: var(--sirem-tint-bg, #f3ffc7);
+  color: var(--sirem-tint-text, #3f4a00);
   font-weight: 600;
 }
 @media (prefers-reduced-motion: reduce) {

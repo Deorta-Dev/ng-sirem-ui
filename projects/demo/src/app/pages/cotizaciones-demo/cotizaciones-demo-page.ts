@@ -6,14 +6,12 @@ import {
   SiremCardList,
   SiremDataTable,
   SiremEmptyState,
-  SiremModal,
+  SiremInput, SiremModal,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
-  SiremViewMode,
   SiremViewToggle,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
@@ -52,10 +50,9 @@ type LineaCotizacion = { sku: string; nombre: string; cantidad: number; precio: 
     SiremCardList,
     SiremDataTable,
     SiremEmptyState,
-    SiremModal,
+    SiremInput, SiremModal,
     SiremPageHeader,
     SiremSearchField,
-    SiremSelect,
     SiremStatCard,
     SiremViewToggle,
   ],
@@ -83,7 +80,7 @@ type LineaCotizacion = { sku: string; nombre: string; cantidad: number; precio: 
 
           <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
             <sirem-search-field placeholder="Buscar por número o cliente…" [(value)]="q" />
-            <sirem-select-field
+            <sirem-input-field [strictOptions]="true"
               label="Estado"
               placeholder="Todos"
               [options]="estadoOptions"
@@ -193,7 +190,7 @@ export class CotizacionesDemoPage {
 
   readonly q = signal('');
   readonly estado = signal<string | number | null>(null);
-  readonly vista = signal<SiremViewMode>('table');
+  readonly vista = signal<string>('table');
 
   readonly detalleAbierto = signal(false);
   readonly seleccion = signal<ErpCotizacion | null>(null);
@@ -318,7 +315,7 @@ export class CotizacionesDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
   <sirem-search-field placeholder="Buscar por número o cliente…" [(value)]="q" />
-  <sirem-select-field label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+  <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
 </div>
 
 <div class="flex flex-wrap items-center justify-between gap-3">
@@ -362,7 +359,7 @@ export class CotizacionesDemoPage {
 import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremBadgeTone, SiremCardList, SiremDataTable, SiremEmptyState, SiremModal,
-  SiremSelect, SiremSelectOption, SiremTableColumn, SiremViewMode,
+  SiremInput, SiremSelectOption, SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { COTIZACIONES, PRODUCTOS, type ErpCotizacion, type ErpEstadoCotizacion } from '../../data/erp-mock';
@@ -375,7 +372,7 @@ export class CotizacionesPage {
   readonly cots = signal<ErpCotizacion[]>(COTIZACIONES.map(c => ({ ...c })));
   readonly q = signal('');
   readonly estado = signal<string | number | null>(null);
-  readonly vista = signal<SiremViewMode>('table');
+  readonly vista = signal<string>('table');
   readonly seleccion = signal<ErpCotizacion | null>(null);
   readonly detalleAbierto = signal(false);
 

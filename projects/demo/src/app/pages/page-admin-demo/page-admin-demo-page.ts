@@ -19,6 +19,7 @@ import {
   SiremSelectOption,
   SiremSidebar,
   SiremStatCard,
+  SiremSubmenuConfig,
   SiremTableColumn,
   SiremTimeline,
   SiremTimelineItem,
@@ -65,6 +66,7 @@ interface DemoApp {
         <sirem-sidebar
           brand="SIREM"
           [items]="navItems"
+          [submenu]="submenuCfg"
           [pinned]="true"
           [centerNav]="true"
           [blur]="true"
@@ -361,6 +363,17 @@ export class PageAdminDemoPage {
   readonly workspaceOpen = signal(false);
   readonly quickCreateOpen = signal(false);
 
+  /**
+   * Gesto de los submenús del sidebar: hover por encima de 1024 px y click
+   * por debajo. El panel siempre sale en la capa de overlays (también con el
+   * rail colapsado o en el drawer móvil).
+   */
+  readonly submenuCfg: SiremSubmenuConfig = {
+    breakpoint: 1024,
+    desktop: { trigger: 'hover' },
+    mobile: { trigger: 'click' },
+  };
+
   readonly workspace = signal('Clínica Norte');
   readonly pendingWorkspace = signal<string | number | null>('norte');
   readonly newPatientName = signal('');
@@ -370,13 +383,19 @@ export class PageAdminDemoPage {
     {
       label: 'Pacientes',
       icon: 'fi fi-rr-users',
-      route: '/demo/page-listado',
       badge: 12,
+      children: [
+        { label: 'Listado', route: '/demo/page-listado' },
+        { label: 'Ficha del paciente', route: '/demo/page-detalle' },
+      ],
     },
     {
       label: 'Historias clínicas',
       icon: 'fi fi-rr-copy',
-      route: '/demo/page-detalle',
+      children: [
+        { label: 'Evoluciones', route: '/demo/rich-text' },
+        { label: 'Documentos', route: '/demo/card-list' },
+      ],
     },
     {
       label: 'Agenda',
@@ -620,6 +639,7 @@ export class PageAdminDemoPage {
   <sirem-sidebar
     brand="SIREM"
     [items]="navItems"
+    [submenu]="submenuCfg"
     [pinned]="true"
     [centerNav]="true"
     [blur]="true"
@@ -734,6 +754,7 @@ import {
   SiremButton,
   SiremNavItem,
   SiremSidebar,
+  SiremSubmenuConfig,
   SiremTopbar,
   SiremUserMenu,
 } from 'deorta-sirem-ui';
@@ -750,9 +771,30 @@ export class PageAdmin {
   readonly searchOpen = signal(false);
   readonly appsOpen = signal(false);
 
+  // Los hijos salen en overlay: hover en escritorio, click en móvil.
+  readonly submenuCfg: SiremSubmenuConfig = {
+    breakpoint: 1024,
+    desktop: { trigger: 'hover' },
+    mobile: { trigger: 'click' },
+  };
+
   readonly navItems: SiremNavItem[] = [
-    { label: 'Pacientes', icon: 'fi fi-rr-users', route: '/patients' },
-    { label: 'Historias clínicas', icon: 'fi fi-rr-copy', route: '/records' },
+    {
+      label: 'Pacientes',
+      icon: 'fi fi-rr-users',
+      children: [
+        { label: 'Listado', route: '/patients' },
+        { label: 'Nueva ficha', route: '/patients/new' },
+      ],
+    },
+    {
+      label: 'Historias clínicas',
+      icon: 'fi fi-rr-copy',
+      children: [
+        { label: 'Evoluciones', route: '/records/evolutions' },
+        { label: 'Documentos', route: '/records/documents' },
+      ],
+    },
     { label: 'Agenda', icon: 'fi fi-rr-calendar', route: '/calendar' },
     { label: 'Configuración', icon: 'fi fi-rr-settings', route: '/settings' },
   ];

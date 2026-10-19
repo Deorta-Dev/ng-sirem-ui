@@ -1,6 +1,16 @@
 /* Estilos de sirem-stat-card: tarjeta KPI. */
+:host {
+  display: block;
+}
+
 .sirem-stat {
-  --sirem-stat-accent: var(--color-sirem-600);
+  /* Columna flexible: el contenido proyectado puede empujarse con `mt-auto`
+     (p. ej. el sparkline al pie de una fila del Bento). El `height: 100%`
+     resuelve contra el alto del host (estira si está en grid/flex). */
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  --sirem-stat-accent: var(--sirem-primary);
   --sirem-stat-tint: var(--sirem-tint-bg);
   border-radius: var(--sirem-radius-lg);
   border: 1px solid var(--sirem-border);
@@ -23,8 +33,13 @@
 }
 
 .sirem-stat--tint-brand {
-  --sirem-stat-accent: var(--color-sirem-600);
+  --sirem-stat-accent: var(--sirem-primary);
   --sirem-stat-tint: var(--sirem-tint-bg);
+}
+
+.sirem-stat--tint-accent {
+  --sirem-stat-accent: var(--color-sirem-accent-ink, #1a1a1a);
+  --sirem-stat-tint: var(--sirem-accent-tint-bg);
 }
 
 .sirem-stat--tint-info {
@@ -60,7 +75,7 @@
   flex: none;
   align-items: center;
   justify-content: center;
-  border-radius: var(--sirem-radius-sm);
+  border-radius: var(--sirem-radius-md, 1rem);
   background: color-mix(in srgb, var(--sirem-stat-accent) 14%, var(--sirem-surface));
   color: var(--sirem-stat-accent);
   font-size: 1rem;
@@ -99,20 +114,21 @@
 }
 
 .sirem-stat--solid .sirem-stat__icon {
-  background: rgb(255 255 255 / 0.16);
-  color: #fff;
+  background: color-mix(in srgb, var(--sirem-stat-on, #fff) 16%, transparent);
+  color: var(--sirem-stat-on, #fff);
 }
 
-/* Variante a color pleno: fondo saturado + texto blanco. */
+/* Variante a color pleno: fondo saturado + texto de contraste.
+   `--sirem-stat-on` lo redefine cada color cuando el fondo lo exige. */
 .sirem-stat--solid {
   border: 0;
-  color: #fff;
+  color: var(--sirem-stat-on, #fff);
 }
 
 .sirem-stat--solid .sirem-stat__label,
 .sirem-stat--solid .sirem-stat__value,
 .sirem-stat--solid .sirem-stat__delta {
-  color: #fff;
+  color: var(--sirem-stat-on, #fff);
 }
 
 .sirem-stat--solid .sirem-stat__delta {
@@ -120,7 +136,14 @@
 }
 
 .sirem-stat--brand {
-  background: linear-gradient(135deg, var(--color-sirem-500, #3384fc), var(--color-sirem-700, #174fe1));
+  --sirem-stat-on: var(--sirem-primary-text, #fff);
+  background: linear-gradient(135deg, var(--sirem-primary), var(--sirem-primary-hover));
+}
+
+/* Acento lima: fondo lima con texto tinta (en ambos temas). */
+.sirem-stat--accent {
+  --sirem-stat-on: var(--sirem-accent-ink, #1a1a1a);
+  background: linear-gradient(135deg, var(--sirem-accent), var(--sirem-accent-strong));
 }
 
 .sirem-stat--info {
@@ -143,4 +166,36 @@
   .sirem-stat {
     padding: 1.25rem;
   }
+}
+
+/*
+ * Tamaño compacto (`size="sm"`): filas de KPIs dentro de un Bento. Va después
+ * del `@media` para ganar el relleno en todos los anchos.
+ */
+.sirem-stat--sm {
+  padding: 0.75rem 0.875rem;
+}
+
+.sirem-stat--sm .sirem-stat__head {
+  gap: 0.5rem;
+}
+
+.sirem-stat--sm .sirem-stat__icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 0.8125rem;
+}
+
+.sirem-stat--sm .sirem-stat__label {
+  font-size: 0.75rem;
+}
+
+.sirem-stat--sm .sirem-stat__value {
+  margin-top: 0.25rem;
+  font-size: 1.125rem;
+}
+
+.sirem-stat--sm .sirem-stat__delta {
+  margin-top: 0.125rem;
+  font-size: 0.6875rem;
 }

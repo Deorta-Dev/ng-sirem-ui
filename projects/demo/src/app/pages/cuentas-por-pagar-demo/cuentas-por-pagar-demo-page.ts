@@ -4,11 +4,10 @@ import {
   SiremDataTable,
   SiremDate,
   SiremEmptyState,
-  SiremModal,
+  SiremInput, SiremModal,
   SiremMoneyPipe,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremStatCard,
   type SiremModalAction,
   type SiremSelectOption,
@@ -53,11 +52,10 @@ function estadoPagoInicial(id: number): EstadoPago {
     SiremDataTable,
     SiremDate,
     SiremEmptyState,
-    SiremModal,
+    SiremInput, SiremModal,
     SiremMoneyPipe,
     SiremPageHeader,
     SiremSearchField,
-    SiremSelect,
     SiremStatCard,
   ],
   template: `
@@ -97,7 +95,7 @@ function estadoPagoInicial(id: number): EstadoPago {
               placeholder="Número o proveedor…"
               [(value)]="q"
             />
-            <sirem-select-field
+            <sirem-input-field [strictOptions]="true"
               label="Estado de pago"
               placeholder="Todos"
               [options]="estadoOptions"
@@ -137,7 +135,7 @@ function estadoPagoInicial(id: number): EstadoPago {
 
             <div class="mt-4 grid gap-3 sm:grid-cols-2">
               <sirem-date-field label="Fecha de pago" [(value)]="fechaPago" />
-              <sirem-select-field
+              <sirem-input-field [strictOptions]="true"
                 label="Cuenta origen"
                 placeholder="Seleccionar cuenta"
                 [options]="cuentaOptions"
@@ -342,7 +340,7 @@ export class CuentasPorPagarDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
   <sirem-search-field label="Buscar" placeholder="Número o proveedor…" [(value)]="q" />
-  <sirem-select-field label="Estado de pago" placeholder="Todos"
+  <sirem-input-field [strictOptions]="true" label="Estado de pago" placeholder="Todos"
     [options]="estadoOptions" [(value)]="estado" />
 </div>
 
@@ -354,7 +352,7 @@ export class CuentasPorPagarDemoPage {
     <p class="text-sm font-semibold">{{ fac.numero }} · {{ fac.total | siremMoney }}</p>
     <div class="grid gap-3 sm:grid-cols-2">
       <sirem-date-field label="Fecha de pago" [(value)]="fechaPago" />
-      <sirem-select-field label="Cuenta origen" [options]="cuentaOptions" [(value)]="cuenta" />
+      <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Cuenta origen" [options]="cuentaOptions" [(value)]="cuenta" />
     </div>
     <p class="mt-3 text-sm">Saldo de la cuenta: {{ (cuentaActual()?.saldo ?? 0) | siremMoney }}</p>
   }
@@ -365,7 +363,7 @@ export class CuentasPorPagarDemoPage {
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremDataTable, SiremModal, SiremSelect,
+  SiremDataTable, SiremModal, SiremInput,
   type ErpFacturaCompra, type SiremModalAction, type SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';

@@ -15,7 +15,7 @@
 }
 
 .sirem-navbar--floating {
-  border-radius: 1rem;
+  border-radius: var(--sirem-radius-lg, 1.5rem);
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
   padding: 0.75rem;
@@ -49,7 +49,7 @@
   gap: 0.625rem;
   border: 0;
   background: none;
-  border-radius: 0.5rem;
+  border-radius: var(--sirem-radius-md, 1rem);
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -98,12 +98,8 @@
   color: var(--sirem-text-faint);
 }
 
-.sirem-navbar__children {
-  margin-left: 1rem;
-  border-left: 1px solid var(--sirem-border);
-  padding-left: 0.5rem;
-}
-
+/* El submenú vive en la capa de overlays (`.sirem-overlay__panel`), nunca
+   dentro de la barra: así no lo recorta su `overflow`. */
 .sirem-navbar__hitem {
   position: relative;
   flex-shrink: 0;
@@ -138,32 +134,19 @@
 }
 
 .sirem-navbar__rail-btn.sirem-navbar__link--active {
-  background: var(--color-sirem-600);
-  color: #fff;
+  background: var(--sirem-primary);
+  color: var(--sirem-primary-text, #fff);
 }
 
 .sirem-navbar__rail-btn.sirem-navbar__link--active .sirem-navbar__rail-icon {
-  color: #fff;
+  color: var(--sirem-primary-text, #fff);
 }
 
 .sirem-navbar__rail-icon {
   font-size: 1.25rem;
 }
 
-.sirem-navbar__flyout {
-  position: absolute;
-  left: 100%;
-  top: 0;
-  z-index: 30;
-  margin-left: 0.5rem;
-  min-width: 12rem;
-  border-radius: var(--sirem-radius-lg);
-  border: 1px solid var(--sirem-border);
-  background: var(--sirem-surface);
-  padding: 0.375rem;
-  box-shadow: var(--sirem-shadow-md);
-}
-
+/* Título del panel del riel (solo iconos): el padre no tiene etiqueta. */
 .sirem-navbar__flyout-title {
   padding: 0.375rem 0.75rem;
   font-size: 0.75rem;
@@ -199,7 +182,7 @@
 }
 
 .sirem-navbar__rail-btn.sirem-navbar__link--active .sirem-navbar__svgicon {
-  color: #fff;
+  color: var(--sirem-primary-text, #fff);
 }
 
 /* Fija la barra al hacer scroll. */

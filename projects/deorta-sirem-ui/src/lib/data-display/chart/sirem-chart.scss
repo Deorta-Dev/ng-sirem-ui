@@ -4,6 +4,12 @@
   width: 100%;
 }
 
+/* Modo «llenar» (`height="100%"`): el host toma el alto del contenedor y el
+   lienzo de la gráfica lo ocupa entero. */
+:host(.sirem-chart-host--fill) {
+  height: 100%;
+}
+
 .sirem-chart {
   position: relative;
   width: 100%;
@@ -28,7 +34,7 @@
   height: 2rem;
   border-radius: 9999px;
   border: 3px solid var(--sirem-border-strong);
-  border-top-color: var(--color-sirem-600);
+  border-top-color: var(--sirem-primary);
   animation: sirem-chart-spin 0.9s linear infinite;
 }
 

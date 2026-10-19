@@ -1,0 +1,57 @@
+/* Estilos de sirem-sparkline: barras píldora o línea, sin ejes. */
+:host {
+  display: block;
+}
+
+.sirem-spark {
+  --sirem-spark-bar: color-mix(in srgb, var(--sirem-primary) 22%, transparent);
+  --sirem-spark-on: var(--sirem-primary);
+
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.1875rem;
+}
+
+.sirem-spark--accent {
+  --sirem-spark-on: var(--sirem-accent);
+}
+
+.sirem-spark--sage {
+  --sirem-spark-bar: color-mix(in srgb, var(--sirem-sage) 40%, transparent);
+  --sirem-spark-on: var(--sirem-sage);
+}
+
+.sirem-spark--danger {
+  --sirem-spark-bar: color-mix(in srgb, var(--color-red-500, #ef4444) 22%, transparent);
+  --sirem-spark-on: var(--color-red-500, #ef4444);
+}
+
+/* Barra fina: el ancho se topa para que una serie corta no se convierta en
+   una fila de blobs redondos (el espacio sobrante lo reparte `space-between`). */
+.sirem-spark__bar {
+  flex: 1 1 0;
+  max-width: 0.75rem;
+  min-width: 0.1875rem;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: var(--sirem-spark-bar);
+}
+
+.sirem-spark__bar--on {
+  background: var(--sirem-spark-on);
+}
+
+.sirem-spark__svg {
+  width: 100%;
+  height: 100%;
+}
+
+.sirem-spark__line {
+  fill: none;
+  stroke: var(--sirem-spark-on);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}

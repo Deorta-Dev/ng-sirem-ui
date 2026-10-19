@@ -30,6 +30,13 @@ describe('SiremButton', () => {
     expect(classes).not.toContain('sirem-btn--md ');
   });
 
+  it('should support the accent (lime) variant', () => {
+    const fixture = TestBed.createComponent(SiremButton);
+    fixture.componentRef.setInput('variant', 'accent');
+    fixture.detectChanges();
+    expect(fixture.componentInstance.classes()).toContain('sirem-btn--accent');
+  });
+
   it('should show loading until the observable action completes', () => {
     const fixture = TestBed.createComponent(SiremButton);
     const gate = new Subject<string>();

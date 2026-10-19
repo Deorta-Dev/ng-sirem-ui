@@ -1,6 +1,8 @@
 /*
  * Estilos de sirem-badge: pastilla de estado con 5 tonos + punto opcional.
- * Paleta: slate (neutral), sirem (info), emerald, amber, red.
+ * Tonos: neutral (gris), info (tinte lima), accent (lima pleno), success,
+ * warning y danger. Todos se apoyan en los tokens `--sirem-tint-*` para
+ * heredar el modo oscuro sin condicionales.
  */
 :host {
   display: inline-flex;
@@ -10,7 +12,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  border-radius: 9999px;
+  border-radius: var(--sirem-radius-pill, 9999px);
   padding: 0.125rem 0.625rem;
   font-size: 0.75rem;
   font-weight: 600;
@@ -18,39 +20,45 @@
 }
 
 .sirem-badge--neutral {
-  background: var(--sirem-surface-hover);
-  color: var(--sirem-text-soft);
+  background: var(--sirem-tint-neutral-bg);
+  color: var(--sirem-tint-neutral-text);
   border-color: var(--sirem-border);
 }
 
 .sirem-badge--info {
-  background: var(--sirem-tint-bg);
-  color: var(--sirem-tint-text);
-  border-color: light-dark(var(--color-sirem-200, #bcdcff), rgb(142 197 255 / 0.3));
+  background: var(--sirem-accent-tint-bg);
+  color: var(--sirem-accent-tint-text);
+  border-color: color-mix(in srgb, var(--sirem-accent) 45%, transparent);
+}
+
+/* Acento de marca: lima pleno con texto tinta. */
+.sirem-badge--accent {
+  background: var(--sirem-accent);
+  color: var(--sirem-accent-ink, #1a1a1a);
 }
 
 .sirem-badge--success {
-  background: light-dark(var(--color-emerald-50, #ecfdf5), rgb(16 185 129 / 0.16));
-  color: light-dark(var(--color-emerald-700, #047857), #6ee7b7);
-  border-color: light-dark(var(--color-emerald-200, #a7f3d0), rgb(110 231 183 / 0.3));
+  background: var(--sirem-tint-success-bg);
+  color: var(--sirem-tint-success-text);
+  border-color: color-mix(in srgb, var(--sirem-tint-success-text) 25%, transparent);
 }
 
 .sirem-badge--warning {
-  background: light-dark(var(--color-amber-50, #fffbeb), rgb(245 158 11 / 0.16));
-  color: light-dark(var(--color-amber-800, #92400e), #fcd34d);
-  border-color: light-dark(var(--color-amber-200, #fde68a), rgb(252 211 77 / 0.3));
+  background: var(--sirem-tint-warning-bg);
+  color: var(--sirem-tint-warning-text);
+  border-color: color-mix(in srgb, var(--sirem-tint-warning-text) 25%, transparent);
 }
 
 .sirem-badge--danger {
-  background: light-dark(var(--color-red-50, #fef2f2), rgb(239 68 68 / 0.16));
-  color: light-dark(var(--color-red-700, #b91c1c), #fca5a5);
-  border-color: light-dark(var(--color-red-200, #fecaca), rgb(252 165 165 / 0.3));
+  background: var(--sirem-tint-danger-bg);
+  color: var(--sirem-tint-danger-text);
+  border-color: color-mix(in srgb, var(--sirem-tint-danger-text) 25%, transparent);
 }
 
 .sirem-badge__dot {
   width: 0.375rem;
   height: 0.375rem;
-  border-radius: 9999px;
+  border-radius: var(--sirem-radius-pill, 9999px);
 }
 
 .sirem-badge__dot--neutral {
@@ -58,17 +66,21 @@
 }
 
 .sirem-badge__dot--info {
-  background: var(--color-sirem-500);
+  background: var(--sirem-accent-tint-text);
+}
+
+.sirem-badge__dot--accent {
+  background: var(--sirem-accent-ink, #1a1a1a);
 }
 
 .sirem-badge__dot--success {
-  background: var(--color-emerald-500, #10b981);
+  background: var(--sirem-tint-success-text);
 }
 
 .sirem-badge__dot--warning {
-  background: var(--color-amber-500, #f59e0b);
+  background: var(--sirem-tint-warning-text);
 }
 
 .sirem-badge__dot--danger {
-  background: var(--color-red-500, #ef4444);
+  background: var(--sirem-tint-danger-text);
 }

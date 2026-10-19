@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal,
-  SiremModalAction, SiremMoneyPipe, SiremPageHeader, SiremSelect, SiremSelectOption,
+  SiremModalAction, SiremMoneyPipe, SiremPageHeader, SiremSelectOption,
   SiremStatCard, SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
@@ -70,7 +70,7 @@ function movimientosBase(p: ErpProducto): MovBase[] {
   selector: 'app-kardex-demo-page',
   standalone: true,
   imports: [PageDemoShell, SiremButton, SiremDataTable, SiremEmptyState, SiremInput,
-    SiremModal, SiremMoneyPipe, SiremPageHeader, SiremSelect, SiremStatCard],
+    SiremModal, SiremMoneyPipe, SiremPageHeader, SiremStatCard],
   template: `
     <app-page-demo-shell label="Kárdex y movimientos" [files]="codeFiles">
       <main class="min-h-[calc(100dvh-2.75rem)] p-4 sm:p-6 lg:p-8">
@@ -85,8 +85,8 @@ function movimientosBase(p: ErpProducto): MovBase[] {
           </sirem-page-header>
 
           <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-[22rem_16rem]">
-            <sirem-select-field label="Producto" [options]="productoOptions" [(value)]="skuSel" />
-            <sirem-select-field label="Tipo de movimiento" placeholder="Todos" [options]="tipoOptions" [(value)]="tipoSel" />
+            <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Producto" [options]="productoOptions" [(value)]="skuSel" />
+            <sirem-input-field [strictOptions]="true" label="Tipo de movimiento" placeholder="Todos" [options]="tipoOptions" [(value)]="tipoSel" />
           </div>
 
           <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -281,8 +281,8 @@ export class KardexDemoPage {
 </sirem-page-header>
 
 <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-[22rem_16rem]">
-  <sirem-select-field label="Producto" [options]="productoOptions" [(value)]="skuSel" />
-  <sirem-select-field label="Tipo de movimiento" placeholder="Todos"
+  <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Producto" [options]="productoOptions" [(value)]="skuSel" />
+  <sirem-input-field [strictOptions]="true" label="Tipo de movimiento" placeholder="Todos"
     [options]="tipoOptions" [(value)]="tipoSel" />
 </div>
 
@@ -328,7 +328,7 @@ export class KardexDemoPage {
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal, SiremMoneyPipe,
-  SiremPageHeader, SiremSelect, SiremStatCard,
+  SiremPageHeader, SiremStatCard,
   type SiremModalAction, type SiremSelectOption, type SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
@@ -380,8 +380,8 @@ function movimientosBase(p: ErpProducto): MovBase[] {
 @Component({
   selector: 'app-kardex-page',
   standalone: true,
-  imports: [SiremPageHeader, SiremButton, SiremSelect, SiremStatCard, SiremDataTable,
-    SiremEmptyState, SiremModal, SiremInput, SiremMoneyPipe],
+  imports: [SiremPageHeader, SiremButton, SiremInput, SiremStatCard, SiremDataTable,
+    SiremEmptyState, SiremModal, SiremMoneyPipe],
   templateUrl: './kardex.html',
 })
 export class KardexPage {

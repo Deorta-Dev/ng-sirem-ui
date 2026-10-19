@@ -71,7 +71,7 @@
 }
 
 .sirem-input__chip-x:hover {
-  background: var(--color-sirem-200);
+  background: color-mix(in srgb, var(--sirem-accent-ink, #1a1a1a) 18%, transparent);
 }
 
 .sirem-input__filter {
@@ -110,7 +110,7 @@
 }
 
 .sirem-input__clear:focus-visible {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
 }
 
 .sirem-input__chev {
@@ -123,10 +123,15 @@
   color: var(--sirem-text-faint);
 }
 
+/* Indicador ✎ de los campos de opciones libres (autocompletado). */
+.sirem-input__chev--free {
+  font-size: 0.875rem;
+}
+
 .sirem-input__panel {
   max-height: 14rem;
   overflow-y: auto;
-  border-radius: 0.5rem;
+  border-radius: var(--sirem-radius-md, 1rem);
   border: 1px solid var(--sirem-border-strong);
   background: var(--sirem-surface);
   padding: 0.25rem 0;
@@ -175,5 +180,5 @@
 }
 
 .sirem-input__check {
-  color: var(--color-sirem-600);
+  color: var(--sirem-primary);
 }

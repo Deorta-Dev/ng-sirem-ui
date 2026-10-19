@@ -76,7 +76,7 @@ export interface GlossarySection {
           <div
             class="mb-5 border p-5"
             style="
-              border-radius: var(--sirem-radius-xl);
+              border-radius: var(--sirem-radius-lg);
               border-color: var(--sirem-border-soft);
               background: var(--sirem-surface);
               box-shadow: var(--sirem-shadow-xs);

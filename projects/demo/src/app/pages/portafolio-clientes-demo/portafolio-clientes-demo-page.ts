@@ -1,8 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremButton, SiremCardList, SiremCardListField, SiremEmptyState, SiremFieldGroup,
-  SiremModal, type SiremModalAction, SiremPageHeader, SiremSearchField, SiremSelect,
-  type SiremSelectOption, SiremStatCard, SiremTimeline, type SiremTimelineItem,
+  SiremInput, SiremModal, type SiremModalAction, SiremPageHeader, SiremSearchField, type SiremSelectOption, SiremStatCard, SiremTimeline, type SiremTimelineItem,
   type SiremBadgeTone,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
@@ -24,7 +23,7 @@ const tonoSeveridad = (sev: ErpSeveridad): 'danger' | 'warning' | 'info' =>
   standalone: true,
   imports: [
     PageDemoShell, SiremButton, SiremCardList, SiremEmptyState, SiremFieldGroup,
-    SiremModal, SiremPageHeader, SiremSearchField, SiremSelect, SiremStatCard,
+    SiremInput, SiremModal, SiremPageHeader, SiremSearchField, SiremStatCard,
     SiremTimeline,
   ],
   template: `
@@ -43,7 +42,7 @@ const tonoSeveridad = (sev: ErpSeveridad): 'danger' | 'warning' | 'info' =>
 
           <div class="grid gap-3 md:grid-cols-[1fr_12rem]">
             <sirem-search-field label="Buscar cliente" placeholder="Por nombre, NIT o contador…" [(value)]="q" />
-            <sirem-select-field label="Salud" [options]="saludOptions" [(value)]="saludSel" />
+            <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Salud" [options]="saludOptions" [(value)]="saludSel" />
           </div>
 
           <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -231,7 +230,7 @@ export class PortafolioClientesDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_12rem]">
   <sirem-search-field label="Buscar cliente" placeholder="Por nombre, NIT o contador…" [(value)]="q" />
-  <sirem-select-field label="Salud" [options]="saludOptions" [(value)]="saludSel" />
+  <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Salud" [options]="saludOptions" [(value)]="saludSel" />
 </div>
 
 <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -264,7 +263,7 @@ export class PortafolioClientesDemoPage {
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremCardList, SiremFieldGroup, SiremModal, type SiremModalAction, SiremSelect,
+  SiremCardList, SiremFieldGroup, SiremModal, type SiremModalAction, SiremInput,
   type SiremSelectOption, SiremStatCard, SiremTimeline, type SiremTimelineItem,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';

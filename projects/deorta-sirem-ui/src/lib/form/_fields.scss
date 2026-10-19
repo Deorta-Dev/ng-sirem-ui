@@ -23,7 +23,7 @@
 .sirem-field__box {
   display: block;
   width: 100%;
-  border-radius: 0.5rem;
+  border-radius: var(--sirem-radius-md, 1rem);
   border: 1px solid var(--sirem-border-strong);
   background: var(--sirem-surface);
   font-size: 0.875rem;
@@ -35,7 +35,7 @@
 }
 
 .sirem-field__box:focus {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
 }
 
 .sirem-field__box:disabled {

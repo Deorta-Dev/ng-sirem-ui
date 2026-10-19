@@ -19,7 +19,7 @@
 }
 
 .sirem-user__trigger:focus-visible {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
 }
 
 .sirem-user__photo {
@@ -36,10 +36,10 @@
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background: var(--color-sirem-600);
+  background: var(--sirem-primary);
   font-size: 0.875rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--sirem-primary-text, #fff);
 }
 
 .sirem-user__chev {
@@ -93,7 +93,7 @@
   gap: 0.625rem;
   border: 0;
   background: none;
-  border-radius: 0.5rem;
+  border-radius: var(--sirem-radius-md, 1rem);
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   text-align: left;

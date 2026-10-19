@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal,
   SiremModalAction, SiremMoneyPipe, SiremMultiSelect, SiremMultiSelectOption,
-  SiremPageHeader, SiremSearchField, SiremSelect, SiremSelectOption, SiremStatCard,
+  SiremPageHeader, SiremSearchField, SiremSelectOption, SiremStatCard,
   SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
@@ -26,14 +26,14 @@ function numero(v: ValorCampo): number {
   standalone: true,
   imports: [PageDemoShell, SiremButton, SiremDataTable, SiremEmptyState, SiremInput,
     SiremModal, SiremMoneyPipe, SiremMultiSelect, SiremPageHeader, SiremSearchField,
-    SiremSelect, SiremStatCard],
+    SiremStatCard],
   template: `
     <app-page-demo-shell label="Listas de precios" [files]="codeFiles">
       <main class="min-h-[calc(100dvh-2.75rem)] p-4 sm:p-6 lg:p-8">
         <div class="mx-auto flex w-full max-w-screen-2xl flex-col gap-5">
           <sirem-page-header title="Listas de precios" subtitle="Tarifas mayorista y detal con actualización masiva de precios">
             <div slot="actions" class="flex flex-wrap items-end gap-3">
-              <sirem-select-field class="w-full sm:w-48" label="Lista" [options]="listaOptions" [(value)]="listaSel" />
+              <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" class="w-full sm:w-48" label="Lista" [options]="listaOptions" [(value)]="listaSel" />
               <sirem-button size="sm" (pressed)="abrirMasiva()">
                 <i slot="icon" class="fi fi-rr-magic-wand" aria-hidden="true"></i>
                 Actualización masiva
@@ -60,7 +60,7 @@ function numero(v: ValorCampo): number {
         <sirem-modal [(open)]="masivaAbierta" title="Actualización masiva de precios" size="md" [actions]="accionesMasiva()" (actionPressed)="accion($event.label)">
           <div class="grid gap-3 sm:grid-cols-2">
             <sirem-input-field label="Aumento %" type="number" hint="Se aplica sobre el precio de la lista objetivo." [error]="errorPct()" [(value)]="pct" />
-            <sirem-select-field label="Lista objetivo" [options]="listaOptions" [(value)]="listaObjetivo" />
+            <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Lista objetivo" [options]="listaOptions" [(value)]="listaObjetivo" />
           </div>
 
           <sirem-multi-select class="mt-3 block" label="Referencias afectadas" [options]="referenciasOptions()" [(value)]="afectados" />
@@ -253,7 +253,7 @@ export class ListasDePreciosDemoPage {
       code: `<sirem-page-header title="Listas de precios"
   subtitle="Tarifas mayorista y detal con actualización masiva de precios">
   <div slot="actions" class="flex flex-wrap items-end gap-3">
-    <sirem-select-field class="w-full sm:w-48" label="Lista"
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" class="w-full sm:w-48" label="Lista"
       [options]="listaOptions" [(value)]="listaSel" />
     <sirem-button size="sm" (pressed)="abrirMasiva()">
       <i slot="icon" class="fi fi-rr-magic-wand" aria-hidden="true"></i>
@@ -285,7 +285,7 @@ export class ListasDePreciosDemoPage {
     <sirem-input-field label="Aumento %" type="number"
       hint="Se aplica sobre el precio de la lista objetivo."
       [error]="errorPct" [(value)]="pct" />
-    <sirem-select-field label="Lista objetivo" [options]="listaOptions"
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Lista objetivo" [options]="listaOptions"
       [(value)]="listaObjetivo" />
   </div>
   <sirem-multi-select class="mt-3 block" label="Referencias afectadas"
@@ -311,7 +311,7 @@ export class ListasDePreciosDemoPage {
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal, SiremMoneyPipe,
-  SiremMultiSelect, SiremPageHeader, SiremSearchField, SiremSelect, SiremStatCard,
+  SiremMultiSelect, SiremPageHeader, SiremSearchField, SiremStatCard,
   type SiremModalAction, type SiremMultiSelectOption, type SiremSelectOption,
   type SiremTableColumn,
 } from 'deorta-sirem-ui';
@@ -328,8 +328,8 @@ function numero(v: ValorCampo): number {
 @Component({
   selector: 'app-listas-de-precios-page',
   standalone: true,
-  imports: [SiremPageHeader, SiremSelect, SiremButton, SiremStatCard, SiremSearchField,
-    SiremDataTable, SiremEmptyState, SiremModal, SiremInput, SiremMultiSelect,
+  imports: [SiremPageHeader, SiremInput, SiremButton, SiremStatCard, SiremSearchField,
+    SiremDataTable, SiremEmptyState, SiremModal, SiremMultiSelect,
     SiremMoneyPipe],
   templateUrl: './listas-de-precios.html',
 })

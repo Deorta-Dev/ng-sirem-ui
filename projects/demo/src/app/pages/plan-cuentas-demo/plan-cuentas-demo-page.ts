@@ -7,7 +7,6 @@ import {
   SiremModal,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
@@ -27,7 +26,7 @@ const TIPOS: ErpTipoCuentaPuc[] = ['Activo', 'Pasivo', 'Patrimonio', 'Ingreso', 
   standalone: true,
   imports: [
     PageDemoShell, SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal,
-    SiremPageHeader, SiremSearchField, SiremSelect, SiremStatCard, SiremTimeline,
+    SiremPageHeader, SiremSearchField, SiremStatCard, SiremTimeline,
   ],
   template: `
     <app-page-demo-shell label="Plan Único de Cuentas" [files]="codeFiles">
@@ -48,7 +47,7 @@ const TIPOS: ErpTipoCuentaPuc[] = ['Activo', 'Pasivo', 'Patrimonio', 'Ingreso', 
 
           <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
             <sirem-search-field placeholder="Buscar por código o nombre…" [(value)]="q" />
-            <sirem-select-field label="Tipo de cuenta" placeholder="Todos" [options]="tipoOptions" [(value)]="tipo" />
+            <sirem-input-field [strictOptions]="true" label="Tipo de cuenta" placeholder="Todos" [options]="tipoOptions" [(value)]="tipo" />
           </div>
 
           @if (filtradas().length) {
@@ -75,8 +74,8 @@ const TIPOS: ErpTipoCuentaPuc[] = ['Activo', 'Pasivo', 'Patrimonio', 'Ingreso', 
           <div class="grid gap-3 sm:grid-cols-2">
             <sirem-input-field label="Código" placeholder="1105-10" [(value)]="nuevoCodigo" />
             <sirem-input-field label="Nombre" placeholder="Bancos locales" [(value)]="nuevoNombre" />
-            <sirem-select-field label="Tipo" placeholder="Seleccionar…" [options]="tipoOptions" [(value)]="nuevoTipo" />
-            <sirem-select-field label="Naturaleza" placeholder="Seleccionar…" [options]="naturalezaOptions" [(value)]="nuevaNaturaleza" />
+            <sirem-input-field [strictOptions]="true" label="Tipo" placeholder="Seleccionar…" [options]="tipoOptions" [(value)]="nuevoTipo" />
+            <sirem-input-field [strictOptions]="true" label="Naturaleza" placeholder="Seleccionar…" [options]="naturalezaOptions" [(value)]="nuevaNaturaleza" />
           </div>
         </sirem-modal>
       </main>
@@ -225,7 +224,7 @@ export class PlanCuentasDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
   <sirem-search-field placeholder="Buscar por código o nombre…" [(value)]="q" />
-  <sirem-select-field label="Tipo de cuenta" placeholder="Todos" [options]="tipoOptions" [(value)]="tipo" />
+  <sirem-input-field [strictOptions]="true" label="Tipo de cuenta" placeholder="Todos" [options]="tipoOptions" [(value)]="tipo" />
 </div>
 
 @if (filtradas().length) {
@@ -239,8 +238,8 @@ export class PlanCuentasDemoPage {
   <div class="grid gap-3 sm:grid-cols-2">
     <sirem-input-field label="Código" placeholder="1105-10" [(value)]="nuevoCodigo" />
     <sirem-input-field label="Nombre" placeholder="Bancos locales" [(value)]="nuevoNombre" />
-    <sirem-select-field label="Tipo" [options]="tipoOptions" [(value)]="nuevoTipo" />
-    <sirem-select-field label="Naturaleza" [options]="naturalezaOptions" [(value)]="nuevaNaturaleza" />
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Tipo" [options]="tipoOptions" [(value)]="nuevoTipo" />
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Naturaleza" [options]="naturalezaOptions" [(value)]="nuevaNaturaleza" />
   </div>
 </sirem-modal>`,
     },
@@ -248,7 +247,7 @@ export class PlanCuentasDemoPage {
       name: 'plan-cuentas.component.ts',
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
-import { SiremDataTable, SiremModal, SiremSelect, SiremStatCard, type SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremDataTable, SiremModal, SiremInput, SiremStatCard, type SiremTableColumn } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { CUENTAS_PUC, type ErpCuentaPuc, type ErpTipoCuentaPuc } from '../../data/erp-mock';
 

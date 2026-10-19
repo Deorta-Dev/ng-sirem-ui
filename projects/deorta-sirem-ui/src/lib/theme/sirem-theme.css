@@ -1,7 +1,14 @@
 /**
  * Tema SIREM: fuente única de verdad de los tokens.
  *
- * - Paleta de marca (`--color-sirem-*`, vía `@theme` de Tailwind).
+ * Identidad "Bento": fondo gris muy claro, superficies blancas flotantes,
+ * esquinas muy redondeadas, sombras difusas y un acento lima vibrante sobre
+ * una base de tinta casi negra.
+ *
+ * - Escala de marca (`--color-sirem-*`, vía `@theme` de Tailwind): es la
+ *   escala "ink" (neutros) que define el acento primario del sistema
+ *   (botones, estado activo, foco). El brillo de marca vive aparte en la
+ *   escala `--color-sirem-accent-*` (lima) y `--color-sirem-sage-*` (salvia).
  * - Tokens semánticos de superficie/texto/borde (`--sirem-*`) con valores
  *   light + override en `:root[data-theme='dark']`. TODOS los `.scss` de la
  *   librería usan estos tokens (nunca literales) para soportar modo oscuro.
@@ -9,16 +16,34 @@
  * - La demo y las apps consumidoras lo importan una vez en su CSS global.
  */
 @theme {
-  --color-sirem-50: #eef6ff;
-  --color-sirem-100: #d9eaff;
-  --color-sirem-200: #bcdcff;
-  --color-sirem-300: #8ec5ff;
-  --color-sirem-400: #59a5ff;
-  --color-sirem-500: #3384fc;
-  --color-sirem-600: #1d64f1;
-  --color-sirem-700: #174fe1;
-  --color-sirem-800: #1943b4;
-  --color-sirem-900: #1a3c8b;
+  /* Escala de marca "ink": neutros del sistema. 600 = primario (tinta). */
+  --color-sirem-50: #f7f8f9;
+  --color-sirem-100: #eceef1;
+  --color-sirem-200: #dfe2e7;
+  --color-sirem-300: #c6cbd3;
+  --color-sirem-400: #9aa1ac;
+  --color-sirem-500: #5c636e;
+  --color-sirem-600: #26272b;
+  --color-sirem-700: #1c1d20;
+  --color-sirem-800: #141518;
+  --color-sirem-900: #0c0d0f;
+
+  /* Acento de marca: lima vibrante de la referencia (#E4FF42).
+     Va siempre con texto tinta (`--color-sirem-accent-ink`) encima. */
+  --color-sirem-accent-100: #f5ffc2;
+  --color-sirem-accent-200: #eeff8f;
+  --color-sirem-accent-300: #e4ff42;
+  --color-sirem-accent-400: #d3f524;
+  --color-sirem-accent-500: #b4d80f;
+  --color-sirem-accent-ink: #1a1a1a;
+
+  /* Acento secundario: verde salvia/menta (gradientes y éxito). */
+  --color-sirem-sage-100: #e7f1e8;
+  --color-sirem-sage-200: #cfe4d0;
+  --color-sirem-sage-300: #a5d2a4;
+  --color-sirem-sage-400: #8cb396;
+  --color-sirem-sage-500: #5f8a72;
+  --color-sirem-sage-700: #37624a;
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
@@ -26,77 +51,160 @@
 :root,
 :root[data-theme='light'] {
   color-scheme: light;
+
   --sirem-surface: #ffffff;
-  --sirem-surface-alt: #f6f7f9;
-  --sirem-surface-hover: #eceef1;
-  --sirem-text: #0f172a;
-  --sirem-text-soft: #334155;
-  --sirem-text-muted: #556170;
-  --sirem-text-faint: #7d8899;
-  --sirem-border: #ccd2db;
-  --sirem-border-soft: #dde1e7;
-  --sirem-border-strong: #b3bac5;
-  --sirem-input-disabled: #f1f5f9;
-  --sirem-tint-bg: #eef6ff;
-  --sirem-tint-text: #174fe1;
-  --sirem-tint-strong-bg: #d9eaff;
-  --sirem-tint-strong-text: #1a3c8b;
-  /* Gris frío de la referencia: hace que las superficies blancas resalten. */
-  --sirem-page-bg: #dcdfe5;
-  /* Panel de aplicación (sidebar, barra fija): gris claro, ni blanco ni
-     igual que la página, para que las fichas blancas se lean encima. */
-  --sirem-surface-panel: #eceef1;
-  --sirem-surface-glass: color-mix(in srgb, var(--sirem-surface) 78%, transparent);
-  --sirem-surface-glass-strong: color-mix(in srgb, var(--sirem-surface) 90%, transparent);
-  --sirem-radius-sm: 0.5rem;
-  --sirem-radius-md: 0.75rem;
-  --sirem-radius-lg: 1rem;
-  --sirem-radius-xl: 1.125rem;
-  --sirem-shadow-xs: 0 1px 2px rgb(15 23 42 / 0.06);
-  --sirem-shadow-sm: 0 4px 14px rgb(15 23 42 / 0.1);
-  --sirem-shadow-md: 0 14px 34px rgb(15 23 42 / 0.14);
-  --sirem-shadow-lg: 0 25px 50px -12px rgb(15 23 42 / 0.25);
-  --sirem-tint-success-bg: #ecfdf5;
-  --sirem-tint-success-text: #047857;
-  --sirem-tint-warning-bg: #fffbeb;
-  --sirem-tint-warning-text: #b45309;
-  --sirem-tint-danger-bg: #fef2f2;
-  --sirem-tint-danger-text: #b91c1c;
-  --sirem-tint-neutral-bg: #f1f5f9;
-  --sirem-tint-neutral-text: #475569;
+  --sirem-surface-alt: #f7f8fa;
+  --sirem-surface-hover: #eceef2;
+  /* Panel de aplicación (sidebar, barra fija): gris claro, ni blanco como las
+     tarjetas ni igual que la página, para que las fichas floten encima. */
+  --sirem-surface-panel: #eef0f4;
+  /* Fondo base de la referencia: gris muy claro, casi blanco roto. */
+  --sirem-page-bg: #f4f5f7;
+
+  --sirem-text: #1a1a1a;
+  --sirem-text-soft: #3c3d42;
+  --sirem-text-muted: #6a6b73;
+  --sirem-text-faint: #8a8a8e;
+
+  --sirem-border: #e2e3e8;
+  --sirem-border-soft: #edeef2;
+  --sirem-border-strong: #d2d4da;
+  --sirem-input-disabled: #f2f3f6;
+
+  /*
+   * Color primario del sistema (acción, estado activo, foco).
+   * En claro es TINTA; en oscuro invierte a LIMA para no perderse sobre el
+   * fondo. Usa SIEMPRE `--sirem-primary-text` encima, nunca `#fff` directo.
+   */
+  --sirem-primary: #26272b;
+  --sirem-primary-hover: #1c1d20;
+  --sirem-primary-active: #141518;
+  --sirem-primary-text: #ffffff;
+  --sirem-focus-ring: #26272b;
+  --sirem-control-accent: #26272b;
+
+  /* Tinte genérico = acento lima de marca. */
+  --sirem-tint-bg: #f3ffc7;
+  --sirem-tint-text: #3f4a00;
+  --sirem-tint-strong-bg: #e4ff42;
+  --sirem-tint-strong-text: #1a1a1a;
+
+  /* Acento de marca (lima) para tags, indicadores y resaltes. */
+  --sirem-accent: #e4ff42;
+  --sirem-accent-strong: #d3f524;
+  --sirem-accent-ink: #1a1a1a;
+  --sirem-accent-tint-bg: #f3ffc7;
+  --sirem-accent-tint-text: #3f4a00;
+  /* Acento secundario (salvia). */
+  --sirem-sage: #8cb396;
+
+  /* Superficies Bento: tintes pastel de las tarjetas del dashboard. */
+  --sirem-surface-muted: #f0f1f4;
+  --sirem-surface-sage: #e3efe5;
+  --sirem-surface-accent-soft: #f2ffae;
+  /* Rayado de disponibilidad (patrón reutilizable, se adapta al tema). */
+  --sirem-hatch: repeating-linear-gradient(
+    -45deg,
+    transparent 0 4px,
+    color-mix(in srgb, var(--sirem-text) 10%, transparent) 4px 5px
+  );
+
+  --sirem-surface-glass: color-mix(in srgb, var(--sirem-surface) 74%, transparent);
+  --sirem-surface-glass-strong: color-mix(in srgb, var(--sirem-surface) 88%, transparent);
+
+  /*
+   * Geometría Bento. Regla de uso (ver AGENTS.md §9), para que las superficies
+   * del mismo nivel nunca mezclen radios:
+   * - Contenedores (card, modal, drawer, popup, sidebar, topbar, tabla,
+   *   calendario, agenda, paneles y paletas) → `--sirem-radius-lg` (24px).
+   * - Interiores (campos, celdas de calendario, filas de menú, chips de
+   *   icono, paneles de editor, bloques dentro de una tarjeta) →
+   *   `--sirem-radius-md` (16px).
+   * - Controles redondos (botón, badge, switch, avatar, segmentado, puntos,
+   *   spinners, etiquetas de tecla) → `--sirem-radius-pill`.
+   * `sm`, `xl` y `2xl` se mantienen en la escala para consumidores que quieran
+   * un escalón extra, pero la librería no los usa.
+   */
+  --sirem-radius-sm: 0.75rem;
+  --sirem-radius-md: 1rem;
+  --sirem-radius-lg: 1.5rem;
+  --sirem-radius-xl: 2rem;
+  --sirem-radius-2xl: 2.5rem;
+  --sirem-radius-pill: 999px;
+
+  /* Elevación: sombras amplias, muy difusas y de baja opacidad. */
+  --sirem-shadow-xs: 0 1px 2px rgb(18 20 24 / 0.04);
+  --sirem-shadow-sm: 0 4px 16px rgb(18 20 24 / 0.05);
+  --sirem-shadow-md: 0 10px 30px rgb(18 20 24 / 0.06);
+  --sirem-shadow-lg: 0 24px 60px -12px rgb(18 20 24 / 0.14);
+
+  --sirem-tint-success-bg: #e8f3ea;
+  --sirem-tint-success-text: #2f6b47;
+  --sirem-tint-warning-bg: #fff8e6;
+  --sirem-tint-warning-text: #8a5a00;
+  --sirem-tint-danger-bg: #fdeeee;
+  --sirem-tint-danger-text: #b3261e;
+  --sirem-tint-neutral-bg: #f1f2f5;
+  --sirem-tint-neutral-text: #52535a;
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --sirem-surface: #0f172a;
-  --sirem-surface-alt: #1e293b;
-  --sirem-surface-hover: #243247;
-  --sirem-text: #f8fafc;
-  --sirem-text-soft: #cbd5e1;
-  --sirem-text-muted: #94a3b8;
-  --sirem-text-faint: #64748b;
-  --sirem-border: #3b4a63;
-  --sirem-border-soft: #243147;
-  --sirem-border-strong: #55647d;
-  --sirem-input-disabled: #1e293b;
-  --sirem-tint-bg: rgb(29 100 241 / 0.18);
-  --sirem-tint-text: #8ec5ff;
-  --sirem-tint-strong-bg: rgb(29 100 241 / 0.3);
-  --sirem-tint-strong-text: #bcdcff;
-  --sirem-page-bg: #080d16;
-  --sirem-surface-panel: #151d2e;
-  --sirem-surface-glass: color-mix(in srgb, var(--sirem-surface) 76%, transparent);
-  --sirem-surface-glass-strong: color-mix(in srgb, var(--sirem-surface) 90%, transparent);
+
+  --sirem-surface: #191b1f;
+  --sirem-surface-alt: #202329;
+  --sirem-surface-hover: #262a31;
+  --sirem-surface-panel: #141619;
+  --sirem-page-bg: #0b0c0e;
+
+  --sirem-text: #f5f6f7;
+  --sirem-text-soft: #cfd2d8;
+  --sirem-text-muted: #9aa0a8;
+  --sirem-text-faint: #6f757d;
+
+  --sirem-border: #2c3138;
+  --sirem-border-soft: #242830;
+  --sirem-border-strong: #3b4149;
+  --sirem-input-disabled: #202329;
+
+  /* Inversión del primario: lima vibrante sobre superficie oscura. */
+  --sirem-primary: #e4ff42;
+  --sirem-primary-hover: #d3f524;
+  --sirem-primary-active: #b4d80f;
+  --sirem-primary-text: #1a1a1a;
+  --sirem-focus-ring: #e4ff42;
+  --sirem-control-accent: #e4ff42;
+
+  --sirem-tint-bg: rgb(228 255 66 / 0.14);
+  --sirem-tint-text: #e4ff42;
+  --sirem-tint-strong-bg: rgb(228 255 66 / 0.28);
+  --sirem-tint-strong-text: #f5ffc2;
+
+  --sirem-accent: #e4ff42;
+  --sirem-accent-strong: #d3f524;
+  --sirem-accent-ink: #1a1a1a;
+  --sirem-accent-tint-bg: rgb(228 255 66 / 0.14);
+  --sirem-accent-tint-text: #e4ff42;
+  --sirem-sage: #a5d2a4;
+
+  --sirem-surface-muted: #202329;
+  --sirem-surface-sage: rgb(140 179 150 / 0.16);
+  --sirem-surface-accent-soft: rgb(228 255 66 / 0.16);
+
+  --sirem-surface-glass: color-mix(in srgb, var(--sirem-surface) 72%, transparent);
+  --sirem-surface-glass-strong: color-mix(in srgb, var(--sirem-surface) 88%, transparent);
+
   --sirem-shadow-xs: 0 1px 2px rgb(0 0 0 / 0.4);
-  --sirem-shadow-sm: 0 4px 12px rgb(0 0 0 / 0.45);
-  --sirem-shadow-md: 0 12px 28px rgb(0 0 0 / 0.5);
-  --sirem-shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.6);
-  --sirem-tint-success-bg: rgb(16 185 129 / 0.16);
-  --sirem-tint-success-text: #6ee7b7;
+  --sirem-shadow-sm: 0 4px 16px rgb(0 0 0 / 0.45);
+  --sirem-shadow-md: 0 12px 30px rgb(0 0 0 / 0.5);
+  --sirem-shadow-lg: 0 26px 60px -12px rgb(0 0 0 / 0.6);
+
+  --sirem-tint-success-bg: rgb(140 179 150 / 0.16);
+  --sirem-tint-success-text: #a5d2a4;
   --sirem-tint-warning-bg: rgb(245 158 11 / 0.16);
   --sirem-tint-warning-text: #fcd34d;
   --sirem-tint-danger-bg: rgb(239 68 68 / 0.16);
   --sirem-tint-danger-text: #fca5a5;
-  --sirem-tint-neutral-bg: #1e293b;
-  --sirem-tint-neutral-text: #cbd5e1;
+  --sirem-tint-neutral-bg: #202329;
+  --sirem-tint-neutral-text: #cfd2d8;
 }

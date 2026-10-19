@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremBadge, SiremButton, SiremConfirmDialog, SiremDataTable, SiremEmptyState, SiremModal,
-  SiremModalAction, SiremMoneyPipe, SiremPageHeader, SiremSelect, SiremSelectOption,
+  SiremBadge, SiremButton, SiremConfirmDialog, SiremDataTable, SiremEmptyState, SiremInput, SiremModal,
+  SiremModalAction, SiremMoneyPipe, SiremPageHeader, SiremSelectOption,
   SiremStatCard, SiremTableColumn, SiremTimeline, SiremTimelineItem,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
@@ -17,7 +17,7 @@ const ESTADOS: ErpEstadoPeriodo[] = ['Abierto', 'En cierre', 'Cerrado'];
   standalone: true,
   imports: [
     PageDemoShell, SiremBadge, SiremButton, SiremConfirmDialog, SiremDataTable, SiremEmptyState,
-    SiremModal, SiremPageHeader, SiremMoneyPipe, SiremSelect, SiremStatCard, SiremTimeline,
+    SiremInput, SiremModal, SiremPageHeader, SiremMoneyPipe, SiremStatCard, SiremTimeline,
   ],
   template: `
     <app-page-demo-shell label="Cierre contable" [files]="codeFiles">
@@ -37,7 +37,7 @@ const ESTADOS: ErpEstadoPeriodo[] = ['Abierto', 'En cierre', 'Cerrado'];
           </div>
 
           <div class="grid gap-3 md:grid-cols-[13rem_1fr]">
-            <sirem-select-field label="Estado del periodo" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+            <sirem-input-field [strictOptions]="true" label="Estado del periodo" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
             <p class="self-end text-xs text-slate-500 dark:text-slate-400">
               Un periodo cerrado queda en solo lectura: sus asientos no admiten movimientos.
             </p>
@@ -204,7 +204,7 @@ export class CierreContableDemoPage {
 </div>
 
 <div class="grid gap-3 md:grid-cols-[13rem_1fr]">
-  <sirem-select-field label="Estado del periodo" placeholder="Todos"
+  <sirem-input-field [strictOptions]="true" label="Estado del periodo" placeholder="Todos"
     [options]="estadoOptions" [(value)]="estado" />
 </div>
 

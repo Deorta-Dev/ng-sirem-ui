@@ -64,4 +64,27 @@ describe('SiremInput', () => {
     expect(c.value()).toBe(null);
     expect(c.showClear()).toBe(false);
   });
+
+  it('should mark free-text options with the pen indicator', () => {
+    const fixture = TestBed.createComponent(SiremInput);
+    fixture.componentRef.setInput('options', [{ value: 'A', label: 'Opción A' }]);
+    fixture.detectChanges();
+    const chev = fixture.nativeElement.querySelector('.sirem-input__chev') as HTMLElement;
+    expect(chev).toBeTruthy();
+    expect(chev.classList.contains('sirem-input__chev--free')).toBe(true);
+    expect(chev.querySelector('i')?.className).toContain('fi-rr-pen-field');
+    // Reserva sitio para el indicador (0.75rem + 1.25rem).
+    expect(fixture.componentInstance.padRight()).toBe(2);
+  });
+
+  it('should mark strict options with the dropdown indicator', () => {
+    const fixture = TestBed.createComponent(SiremInput);
+    fixture.componentRef.setInput('options', [{ value: 'A', label: 'Opción A' }]);
+    fixture.componentRef.setInput('strictOptions', true);
+    fixture.detectChanges();
+    const chev = fixture.nativeElement.querySelector('.sirem-input__chev') as HTMLElement;
+    expect(chev).toBeTruthy();
+    expect(chev.classList.contains('sirem-input__chev--free')).toBe(false);
+    expect(chev.querySelector('i')?.className).toContain('fi-rr-angle-small-down');
+  });
 });

@@ -3,11 +3,10 @@ import {
   SiremButton,
   SiremDataTable,
   SiremEmptyState,
-  SiremModal,
+  SiremInput, SiremModal,
   SiremMoneyPipe,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremStatCard,
   type SiremModalAction,
   type SiremSelectOption,
@@ -46,11 +45,10 @@ type LineaOrden = {
     SiremButton,
     SiremDataTable,
     SiremEmptyState,
-    SiremModal,
+    SiremInput, SiremModal,
     SiremMoneyPipe,
     SiremPageHeader,
     SiremSearchField,
-    SiremSelect,
     SiremStatCard,
   ],
   template: `
@@ -87,7 +85,7 @@ type LineaOrden = {
               placeholder="Número de orden o proveedor…"
               [(value)]="q"
             />
-            <sirem-select-field
+            <sirem-input-field [strictOptions]="true"
               label="Estado"
               placeholder="Todos"
               [options]="estadoOptions"
@@ -347,7 +345,7 @@ export class OrdenesCompraDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
   <sirem-search-field label="Buscar" placeholder="Número de orden o proveedor…" [(value)]="q" />
-  <sirem-select-field label="Estado" placeholder="Todos"
+  <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos"
     [options]="estadoOptions" [(value)]="estado" />
 </div>
 
@@ -376,7 +374,7 @@ export class OrdenesCompraDemoPage {
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremDataTable, SiremModal, SiremSelect,
+  SiremDataTable, SiremModal, SiremInput,
   type ErpEstadoOrden, type ErpOrdenCompra,
   type SiremModalAction, type SiremTableColumn,
 } from 'deorta-sirem-ui';

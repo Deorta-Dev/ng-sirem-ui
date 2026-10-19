@@ -3,11 +3,10 @@ import {
   SiremButton,
   SiremDataTable,
   SiremEmptyState,
-  SiremModal,
+  SiremInput, SiremModal,
   SiremMoneyPipe,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremStatCard,
   SiremTimeline,
   type SiremModalAction,
@@ -43,11 +42,10 @@ const ESTADOS_RADIAN: ErpEstadoRadian[] = [
     SiremButton,
     SiremDataTable,
     SiremEmptyState,
-    SiremModal,
+    SiremInput, SiremModal,
     SiremMoneyPipe,
     SiremPageHeader,
     SiremSearchField,
-    SiremSelect,
     SiremStatCard,
     SiremTimeline,
   ],
@@ -82,7 +80,7 @@ const ESTADOS_RADIAN: ErpEstadoRadian[] = [
               placeholder="Número, proveedor o NIT…"
               [(value)]="q"
             />
-            <sirem-select-field
+            <sirem-input-field [strictOptions]="true"
               label="Estado Radian"
               placeholder="Todos"
               [options]="estadoOptions"
@@ -331,7 +329,7 @@ export class FacturasProveedoresDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
   <sirem-search-field label="Buscar" placeholder="Número, proveedor o NIT…" [(value)]="q" />
-  <sirem-select-field label="Estado Radian" placeholder="Todos"
+  <sirem-input-field [strictOptions]="true" label="Estado Radian" placeholder="Todos"
     [options]="estadoOptions" [(value)]="estado" />
 </div>
 
@@ -351,7 +349,7 @@ export class FacturasProveedoresDemoPage {
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremDataTable, SiremModal, SiremSelect, SiremTimeline,
+  SiremDataTable, SiremModal, SiremInput, SiremTimeline,
   type ErpEstadoRadian, type ErpFacturaCompra,
   type SiremModalAction, type SiremTableColumn, type SiremTimelineItem,
 } from 'deorta-sirem-ui';

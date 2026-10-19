@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremButton, SiremCardList, SiremCardListField, SiremModal, SiremModalAction,
-  SiremPageHeader, SiremSearchField, SiremSelect, SiremSelectOption, SiremStatCard,
+  SiremButton, SiremCardList, SiremCardListField, SiremInput, SiremModal, SiremModalAction,
+  SiremPageHeader, SiremSearchField, SiremSelectOption, SiremStatCard,
   SiremTimeline, SiremTimelineItem,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
@@ -16,8 +16,8 @@ const ESTADOS: ErpFormatoTributario['estado'][] = ['Pendiente', 'Generado', 'Pre
   selector: 'app-informacion-exogena-demo-page',
   standalone: true,
   imports: [
-    PageDemoShell, SiremButton, SiremCardList, SiremModal, SiremPageHeader,
-    SiremSearchField, SiremSelect, SiremStatCard, SiremTimeline,
+    PageDemoShell, SiremButton, SiremCardList, SiremInput, SiremModal, SiremPageHeader,
+    SiremSearchField, SiremStatCard, SiremTimeline,
   ],
   template: `
     <app-page-demo-shell label="Información exógena" [files]="codeFiles">
@@ -36,7 +36,7 @@ const ESTADOS: ErpFormatoTributario['estado'][] = ['Pendiente', 'Generado', 'Pre
           </div>
 
           <div class="grid gap-3 md:grid-cols-[13rem_1fr]">
-            <sirem-select-field label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+            <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
             <sirem-search-field placeholder="Buscar por código o nombre…" [(value)]="q" />
           </div>
 
@@ -204,7 +204,7 @@ export class InformacionExogenaDemoPage {
 </div>
 
 <div class="grid gap-3 md:grid-cols-[13rem_1fr]">
-  <sirem-select-field label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+  <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
   <sirem-search-field placeholder="Buscar por código o nombre…" [(value)]="q" />
 </div>
 

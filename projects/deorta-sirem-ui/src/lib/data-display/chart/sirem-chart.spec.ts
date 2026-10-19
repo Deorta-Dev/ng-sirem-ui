@@ -48,4 +48,13 @@ describe('SiremChart', () => {
     expect(el.querySelector('.sirem-chart')?.getAttribute('style')).toContain('240');
     expect(el.querySelector('[role="status"]')).toBeTruthy();
   });
+
+  it('should claim the container height in fill mode', () => {
+    const fixture = TestBed.createComponent(SiremChart);
+    fixture.componentRef.setInput('height', '100%');
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('.sirem-chart')?.getAttribute('style')).toContain('100%');
+    expect(el.classList.contains('sirem-chart-host--fill')).toBe(true);
+  });
 });

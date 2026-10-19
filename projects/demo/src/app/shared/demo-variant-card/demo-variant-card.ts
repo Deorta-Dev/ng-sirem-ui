@@ -26,7 +26,7 @@ import { CodeViewer } from '../code-viewer/code-viewer';
     <section
       class="mb-8 overflow-visible border p-5 md:p-6"
       style="
-        border-radius: var(--sirem-radius-xl);
+        border-radius: var(--sirem-radius-lg);
         border-color: var(--sirem-border-soft);
         background: var(--sirem-surface);
         box-shadow: var(--sirem-shadow-sm);

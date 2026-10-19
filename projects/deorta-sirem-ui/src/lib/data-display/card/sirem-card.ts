@@ -49,6 +49,9 @@ export type SiremCardPart = 'header' | 'body' | 'footer';
       class="sirem-card"
       [class.sirem-card--glass]="surface() === 'glass'"
       [class.sirem-card--brand]="tone() === 'brand'"
+      [class.sirem-card--muted]="tone() === 'muted'"
+      [class.sirem-card--sage]="tone() === 'sage'"
+      [class.sirem-card--accent]="tone() === 'accent'"
     >
       @if (showHeader() && (title() || subtitle())) {
         <header [class]="'sirem-card__header ' + partClass('header')">
@@ -80,10 +83,13 @@ export class SiremCard {
   /** Superficie sólida (defecto) o translúcida tipo dashboard. */
   readonly surface = input<'solid' | 'glass'>('solid');
   /**
-   * Tono de la tarjeta. `brand` la pinta con el color de marca y el texto
-   * en blanco, para banners de bienvenida o avisos destacados.
+   * Tono de la tarjeta:
+   * - `brand`: color de marca con texto claro (banners destacados).
+   * - `sage`: tinte salvia, para bloques secundarios del dashboard.
+   * - `accent`: tinte lima suave, para el bloque protagonista.
+   * - `muted`: gris de panel, para datos neutros.
    */
-  readonly tone = input<'default' | 'brand'>('default');
+  readonly tone = input<'default' | 'brand' | 'sage' | 'accent' | 'muted'>('default');
   /**
    * Atajo de relleno para `body` y `footer`. Usa `none` para contenido que
    * toca los bordes (tablas, imágenes, mapas).

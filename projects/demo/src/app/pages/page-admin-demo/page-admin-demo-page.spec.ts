@@ -17,11 +17,36 @@ describe('PageAdminDemoPage', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    document.querySelectorAll('.sirem-overlay-layer').forEach((el) => el.remove());
+  });
+
   it('should create the admin workspace', () => {
     expect(fixture.componentInstance).toBeTruthy();
     expect(
       (fixture.nativeElement as HTMLElement).querySelector('.sirem-sidebar--pinned'),
     ).toBeTruthy();
+  });
+
+  it('should send the hierarchical nav to the overlay layer', () => {
+    const host = fixture.nativeElement as HTMLElement;
+    const trigger = [...host.querySelectorAll('button.sirem-sidebar__link')].find((b) =>
+      b.textContent?.includes('Pacientes'),
+    ) as HTMLButtonElement;
+    expect(trigger).toBeTruthy();
+
+    // Los hijos no se pintan dentro del rail: el padre es un disparador de overlay.
+    expect(trigger.getAttribute('aria-haspopup')).toBe('true');
+    expect(host.textContent).not.toContain('Ficha del paciente');
+
+    // jsdom mide 1024 px y el breakpoint es 1024 → banda móvil → gesto click.
+    trigger.click();
+    fixture.detectChanges();
+
+    expect(trigger.getAttribute('aria-expanded')).toBe('true');
+    const layer = document.querySelector('.sirem-overlay-layer');
+    expect(layer?.textContent).toContain('Listado');
+    expect(layer?.textContent).toContain('Ficha del paciente');
   });
 
   it('should open the search palette from the topbar', () => {

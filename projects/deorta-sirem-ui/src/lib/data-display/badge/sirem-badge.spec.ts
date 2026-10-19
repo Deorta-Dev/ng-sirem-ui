@@ -10,4 +10,14 @@ describe('SiremBadge', () => {
       'sirem-badge--success',
     );
   });
+
+  it('should support the accent (lime) tone with dot', () => {
+    const fixture = TestBed.createComponent(SiremBadge);
+    fixture.componentRef.setInput('tone', 'accent');
+    fixture.componentRef.setInput('dot', true);
+    fixture.detectChanges();
+    const span = fixture.nativeElement.querySelector('span') as HTMLElement;
+    expect(span.className).toContain('sirem-badge--accent');
+    expect(span.querySelector('.sirem-badge__dot--accent')).not.toBeNull();
+  });
 });

@@ -16,13 +16,14 @@
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  border-radius: var(--sirem-radius-sm);
+  /* Botones tipo píldora (referencia Bento). */
+  border-radius: var(--sirem-radius-pill, 999px);
   font-weight: 600;
   transition: all 0.15s ease;
 }
 
 .sirem-btn:focus-visible {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
   outline-offset: 2px;
 }
 
@@ -42,20 +43,38 @@
 }
 
 .sirem-btn--primary {
-  background: var(--color-sirem-600);
-  color: #fff;
+  background: var(--sirem-primary);
+  color: var(--sirem-primary-text, #fff);
   box-shadow:
-    0 4px 6px -1px color-mix(in srgb, var(--color-sirem-600) 18%, transparent),
-    0 2px 4px -2px color-mix(in srgb, var(--color-sirem-600) 18%, transparent);
+    0 4px 6px -1px color-mix(in srgb, var(--sirem-primary) 18%, transparent),
+    0 2px 4px -2px color-mix(in srgb, var(--sirem-primary) 18%, transparent);
 }
 
 .sirem-btn--primary:hover {
-  background: var(--color-sirem-700);
+  background: var(--sirem-primary-hover);
   box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-btn--primary:active {
-  background: var(--color-sirem-800);
+  background: var(--sirem-primary-active);
+}
+
+/* Acento de marca (lima): el brillo del sistema, siempre con texto tinta. */
+.sirem-btn--accent {
+  background: var(--sirem-accent);
+  color: var(--sirem-accent-ink);
+  box-shadow:
+    0 4px 6px -1px color-mix(in srgb, var(--sirem-accent) 40%, transparent),
+    0 2px 4px -2px color-mix(in srgb, var(--sirem-accent) 40%, transparent);
+}
+
+.sirem-btn--accent:hover {
+  background: var(--sirem-accent-strong);
+  box-shadow: var(--sirem-shadow-sm);
+}
+
+.sirem-btn--accent:active {
+  background: var(--color-sirem-accent-500, #b4d80f);
 }
 
 .sirem-btn--secondary {

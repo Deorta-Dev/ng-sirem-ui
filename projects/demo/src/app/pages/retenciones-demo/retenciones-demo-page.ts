@@ -8,7 +8,6 @@ import {
   SiremModal,
   SiremMoneyPipe,
   SiremPageHeader,
-  SiremSelect,
   SiremStatCard,
   SiremSwitch,
   type SiremBadgeTone,
@@ -80,7 +79,6 @@ function aFila(c: ErpConceptoRetencion, base: number): FilaRetencion {
     SiremModal,
     SiremMoneyPipe,
     SiremPageHeader,
-    SiremSelect,
     SiremStatCard,
     SiremSwitch,
   ],
@@ -103,7 +101,7 @@ function aFila(c: ErpConceptoRetencion, base: number): FilaRetencion {
             title="Configuración tributaria del proveedor"
             subtitle="Tributos que aplican según su régimen"
           >
-            <sirem-select-field
+            <sirem-input-field [strictOptions]="true"
               label="Proveedor"
               placeholder="Seleccionar proveedor"
               [options]="proveedorOptions"
@@ -129,7 +127,7 @@ function aFila(c: ErpConceptoRetencion, base: number): FilaRetencion {
 
           <sirem-card title="Calcular retención">
             <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-              <sirem-select-field
+              <sirem-input-field [strictOptions]="true"
                 label="Concepto"
                 placeholder="Seleccionar concepto"
                 [options]="conceptoOptions"
@@ -350,7 +348,7 @@ export class RetencionesDemoPage {
 
 <sirem-card title="Configuración tributaria del proveedor"
   subtitle="Tributos que aplican según su régimen">
-  <sirem-select-field label="Proveedor" placeholder="Seleccionar proveedor"
+  <sirem-input-field [strictOptions]="true" label="Proveedor" placeholder="Seleccionar proveedor"
     [options]="proveedorOptions" [(value)]="proveedor" />
   <div class="mt-4 flex flex-wrap items-center gap-2">
     @for (app of aplicaciones(); track app.nombre) {
@@ -362,7 +360,7 @@ export class RetencionesDemoPage {
 
 <sirem-card title="Calcular retención">
   <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-    <sirem-select-field label="Concepto" [options]="conceptoOptions" [(value)]="concepto" />
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Concepto" [options]="conceptoOptions" [(value)]="concepto" />
     <sirem-input-field label="Base gravable" type="number" [(value)]="base" />
     <sirem-switch-field label="Cálculo automático" [(checked)]="automatico" />
   </div>
@@ -391,7 +389,7 @@ export class RetencionesDemoPage {
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremBadge, SiremDataTable, SiremInput, SiremModal, SiremSelect, SiremSwitch,
+  SiremBadge, SiremDataTable, SiremInput, SiremModal, SiremSwitch,
   type ErpConceptoRetencion, type ErpProveedor,
   type SiremBadgeTone, type SiremModalAction, type SiremTableColumn,
 } from 'deorta-sirem-ui';

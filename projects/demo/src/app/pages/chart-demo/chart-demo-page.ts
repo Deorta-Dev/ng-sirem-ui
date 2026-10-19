@@ -5,7 +5,9 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 import { themeMode } from '../../shared/theme/theme';
 
 /** Paleta SIREM compartida por las demos (redondeada y estilizada). */
-const SIREM_COLORS = ['#1d64f1', '#59a5ff', '#8ec5ff', '#174fe1', '#3384fc'];
+const SIREM_COLORS = ['#26272b', '#8cb396', '#e4ff42', '#5f8a72', '#9aa1ac'];
+
+const LIME = '#e4ff42';
 
 const TOOLTIP = {
   backgroundColor: '#0f172a',
@@ -39,6 +41,30 @@ const AXIS = {
       </app-demo-variant-card>
       <app-demo-variant-card title="Loading" description="Capa de carga sobre la gráfica." [htmlCode]="h4" [tsCode]="t">
         <sirem-chart [option]="barras" [loading]="true" [dark]="isDark()" />
+      </app-demo-variant-card>
+      <app-demo-variant-card
+        title="Lollipop (referencia Bento)"
+        description="Barra fina + punto en la cabeza: el gráfico del bloque Indicators."
+        [htmlCode]="h5"
+        [tsCode]="t5"
+      >
+        <sirem-chart [option]="lollipop" [height]="220" [dark]="isDark()" />
+      </app-demo-variant-card>
+      <app-demo-variant-card
+        title="Área con píldoras"
+        description="Columnas translúcidas de fondo y línea suave con etiqueta de valor."
+        [htmlCode]="h6"
+        [tsCode]="t6"
+      >
+        <sirem-chart [option]="areaPildoras" [height]="220" [dark]="isDark()" />
+      </app-demo-variant-card>
+      <app-demo-variant-card
+        title="Ecualizador"
+        description="Barras alternas con marcador lima en el máximo (bloque Earnings)."
+        [htmlCode]="h7"
+        [tsCode]="t7"
+      >
+        <sirem-chart [option]="ecualizador" [height]="220" [dark]="isDark()" />
       </app-demo-variant-card>
     </app-demo-page-layout>
   `,
@@ -107,16 +133,193 @@ export class ChartDemoPage {
     ],
   };
 
+  /** Tinta del tema (el lollipop/área/ecualizador cambian de color con el modo). */
+  private tinta(): string {
+    return this.isDark() ? '#eceef1' : '#26272b';
+  }
+
+  /** Lollipop: barra fina + scatter en la cabeza. */
+  get lollipop() {
+    const datos = [42, 58, 36, 64, 50, 72];
+    return {
+      grid: { left: 4, right: 4, top: 16, bottom: 0, containLabel: true },
+      xAxis: {
+        type: 'category' as const,
+        data: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: { color: '#8b9098', fontSize: 10 },
+      },
+      yAxis: { type: 'value' as const, show: false, max: 88 },
+      series: [
+        {
+          type: 'bar' as const,
+          data: datos,
+          barWidth: 2,
+          itemStyle: { color: '#c6cbd3', borderRadius: [2, 2, 2, 2] },
+        },
+        {
+          type: 'scatter' as const,
+          data: datos,
+          symbolSize: 9,
+          itemStyle: { color: this.tinta() },
+          z: 3,
+        },
+      ],
+    };
+  }
+
+  /** Área con columnas translúcidas tipo píldora y línea suave etiquetada. */
+  get areaPildoras() {
+    const datos = [30, 44, 26, 52, 38, 60];
+    return {
+      grid: { left: 0, right: 0, top: 30, bottom: 0, containLabel: true },
+      xAxis: {
+        type: 'category' as const,
+        data: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: { color: '#8b9098', fontSize: 10 },
+      },
+      yAxis: { type: 'value' as const, show: false, max: 78 },
+      series: [
+        {
+          type: 'bar' as const,
+          data: datos,
+          barWidth: '22%',
+          itemStyle: { color: 'rgba(140,179,150,0.22)', borderRadius: [999, 999, 999, 999] },
+        },
+        {
+          type: 'line' as const,
+          data: datos,
+          smooth: true,
+          symbol: 'none',
+          lineStyle: { width: 3, color: this.tinta() },
+          markPoint: {
+            data: [{ type: 'max' as const }],
+            symbol: 'roundRect',
+            symbolSize: [46, 22],
+            itemStyle: { color: LIME },
+            label: { formatter: '$990', color: '#1a1a1a', fontSize: 11, fontWeight: 600 },
+          },
+        },
+      ],
+    };
+  }
+
+  /** Ecualizador: barras alternas con marcador lima en el máximo. */
+  get ecualizador() {
+    const muted = this.isDark() ? '#3a3d43' : '#d5d8de';
+    return {
+      grid: { left: 0, right: 0, top: 24, bottom: 0, containLabel: true },
+      xAxis: {
+        type: 'category' as const,
+        data: ['12 Ago', '19 Sep', '26 Oct'],
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: { color: '#8b9098', fontSize: 11 },
+      },
+      yAxis: {
+        type: 'value' as const,
+        show: false,
+        max: 64,
+        splitNumber: 2,
+        splitLine: { lineStyle: { type: 'dashed' as const, color: muted } },
+      },
+      series: [
+        {
+          type: 'bar' as const,
+          barWidth: 22,
+          data: [
+            { value: 38, itemStyle: { color: this.tinta() } },
+            { value: 54, itemStyle: { color: muted } },
+            { value: 44, itemStyle: { color: this.tinta() } },
+          ],
+          itemStyle: { borderRadius: [11, 11, 11, 11] },
+          markPoint: {
+            data: [{ type: 'max' as const }],
+            symbol: 'circle',
+            symbolSize: 10,
+            itemStyle: { color: LIME },
+            label: { show: false },
+          },
+        },
+      ],
+    };
+  }
+
   readonly h1 = '<sirem-chart [option]="barras" [dark]="isDark()" />';
   readonly h2 = '<sirem-chart [option]="lineas" [dark]="isDark()" />  <!-- smooth + área -->';
   readonly h3 = '<sirem-chart [option]="dona" [height]="260" [dark]="isDark()" />';
   readonly h4 = '<sirem-chart [option]="barras" [loading]="true" [dark]="isDark()" />';
+  readonly h5 = '<sirem-chart [option]="lollipop" [height]="220" [dark]="isDark()" />';
+  readonly h6 = '<sirem-chart [option]="areaPildoras" [height]="220" [dark]="isDark()" />';
+  readonly h7 = '<sirem-chart [option]="ecualizador" [height]="220" [dark]="isDark()" />';
+
+  readonly t5 = `/** Lollipop = barra fina (bar) + punto (scatter) con los mismos datos. */
+get lollipop() {
+  const datos = [42, 58, 36, 64, 50, 72];
+  return {
+    xAxis: { type: 'category', data: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'] },
+    yAxis: { type: 'value', show: false },
+    series: [
+      { type: 'bar', data: datos, barWidth: 2, itemStyle: { color: '#c6cbd3' } },
+      { type: 'scatter', data: datos, symbolSize: 9, itemStyle: { color: '#26272b' } },
+    ],
+  };
+}`;
+
+  readonly t6 = `/** Píldoras translúcidas de fondo + línea suave con markPoint. */
+get areaPildoras() {
+  const datos = [30, 44, 26, 52, 38, 60];
+  return {
+    xAxis: { type: 'category', data: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'] },
+    yAxis: { type: 'value', show: false },
+    series: [
+      {
+        type: 'bar', data: datos, barWidth: '22%',
+        itemStyle: { color: 'rgba(140,179,150,0.22)', borderRadius: [999, 999, 999, 999] },
+      },
+      {
+        type: 'line', data: datos, smooth: true, symbol: 'none',
+        lineStyle: { width: 3, color: '#26272b' },
+        markPoint: {
+          data: [{ type: 'max' }], symbol: 'roundRect', symbolSize: [46, 22],
+          itemStyle: { color: '#e4ff42' },
+          label: { formatter: '$990', color: '#1a1a1a', fontWeight: 600 },
+        },
+      },
+    ],
+  };
+}`;
+
+  readonly t7 = `/** Barras alternas con color por dato y marcador lima en el máximo. */
+get ecualizador() {
+  const muted = '#d5d8de';
+  return {
+    xAxis: { type: 'category', data: ['12 Ago', '19 Sep', '26 Oct'] },
+    yAxis: { type: 'value', show: false },
+    series: [{
+      type: 'bar', barWidth: '26%',
+      data: [
+        { value: 38, itemStyle: { color: '#26272b' } },
+        { value: 54, itemStyle: { color: muted } },
+        { value: 44, itemStyle: { color: '#26272b' } },
+      ],
+      itemStyle: { borderRadius: [8, 8, 8, 8] },
+      markPoint: {
+        data: [{ type: 'max' }], symbol: 'circle', symbolSize: 10,
+        itemStyle: { color: '#e4ff42' }, label: { show: false },
+      },
+    }],
+  };
+}`;
   readonly t = `import { SiremChart } from 'deorta-sirem-ui';
 import { themeMode } from '../../shared/theme/theme';
 
 isDark() { return themeMode() === 'dark'; }
 
-readonly SIREM_COLORS = ['#1d64f1', '#59a5ff', '#8ec5ff', '#174fe1', '#3384fc'];
+readonly SIREM_COLORS = ['#26272b', '#8cb396', '#e4ff42', '#5f8a72', '#9aa1ac'];
 
 readonly TOOLTIP = {
   backgroundColor: '#0f172a', borderWidth: 0, cornerRadius: 10,

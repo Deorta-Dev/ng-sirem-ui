@@ -20,7 +20,7 @@
 }
 
 .sirem-switch__track:focus-visible {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
   outline-offset: 2px;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .sirem-switch__track--on {
-  background: var(--color-sirem-600);
+  background: var(--sirem-primary);
 }
 
 .sirem-switch__thumb {

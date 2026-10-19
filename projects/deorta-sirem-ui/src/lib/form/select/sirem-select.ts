@@ -5,7 +5,20 @@ export interface SiremSelectOption {
   label: string;
 }
 
-/** Selector desplegable (especialidad, estado civil, tipo de documento…). */
+/**
+ * Selector desplegable (especialidad, estado civil, tipo de documento…)
+ * sobre un `<select>` nativo.
+ *
+ * Alternativa recomendada: `sirem-input-field` con `[strictOptions]="true"`
+ * comparte el look & feel del resto de campos, filtra al escribir y admite
+ * opciones remotas. Mantén `sirem-select-field` cuando necesites el control
+ * nativo (envío de formulario sin JS o teclado/selector del sistema).
+ *
+ * ```html
+ * <sirem-select-field label="EPS" [options]="eps" [(value)]="epsSel" />
+ * <sirem-input-field label="EPS" [options]="eps" [strictOptions]="true" [(value)]="epsSel" />
+ * ```
+ */
 @Component({
   selector: 'sirem-select-field',
   standalone: true,

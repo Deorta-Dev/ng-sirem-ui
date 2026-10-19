@@ -65,7 +65,7 @@ export interface SiremUserMenuGroup {
             [style.background]="avatarBg() || null"
             aria-hidden="true"
           >
-            {{ initials() }}
+            {{ avatarText() || initials() }}
           </span>
         }
       </button>
@@ -125,6 +125,11 @@ export class SiremUserMenu {
   readonly avatarSrc = input<string | null>(null);
   /** Color de fondo de las iniciales (opcional; usa el primario por defecto). */
   readonly avatarBg = input('');
+  /**
+   * Texto forzado del avatar (p. ej. iniciales `JP` de un nombre corto);
+   * si está vacío se derivan de `userName`.
+   */
+  readonly avatarText = input('');
   /** Grupos de acciones con iconos (alternativa a proyectar contenido). */
   readonly groups = input<SiremUserMenuGroup[]>([]);
 

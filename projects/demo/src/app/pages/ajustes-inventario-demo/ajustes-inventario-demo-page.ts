@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremBadge, SiremBadgeTone, SiremButton, SiremCard, SiremConfirmDialog,
-  SiremDataTable, SiremInput, SiremModal, SiremPageHeader, SiremSelect, SiremSelectOption,
+  SiremDataTable, SiremInput, SiremModal, SiremPageHeader, SiremSelectOption,
   SiremStatCard, SiremTableColumn, SiremTextarea,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
@@ -52,7 +52,7 @@ function numero(v: ValorCampo): number {
   selector: 'app-ajustes-inventario-demo-page',
   standalone: true,
   imports: [PageDemoShell, SiremBadge, SiremButton, SiremCard, SiremConfirmDialog,
-    SiremDataTable, SiremInput, SiremModal, SiremPageHeader, SiremSelect, SiremStatCard,
+    SiremDataTable, SiremInput, SiremModal, SiremPageHeader, SiremStatCard,
     SiremTextarea],
   template: `
     <app-page-demo-shell label="Ajustes de inventario" [files]="codeFiles">
@@ -76,8 +76,8 @@ function numero(v: ValorCampo): number {
 
           <sirem-card title="Registrar ajuste" subtitle="La cantidad se aplica con signo según el motivo">
             <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-              <sirem-select-field label="Motivo" [options]="motivoOptions" [(value)]="motivoSel" />
-              <sirem-select-field label="Producto" [options]="productoOptions()" [(value)]="skuSel" />
+              <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Motivo" [options]="motivoOptions" [(value)]="motivoSel" />
+              <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Producto" [options]="productoOptions()" [(value)]="skuSel" />
               <sirem-input-field label="Cantidad" type="number" placeholder="Ej. 6" [error]="errorCantidad()" [(value)]="cantidad" />
             </div>
 
@@ -302,8 +302,8 @@ export class AjustesInventarioDemoPage {
 
 <sirem-card title="Registrar ajuste" subtitle="La cantidad se aplica con signo según el motivo">
   <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-    <sirem-select-field label="Motivo" [options]="motivoOptions" [(value)]="motivoSel" />
-    <sirem-select-field label="Producto" [options]="productoOptions" [(value)]="skuSel" />
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Motivo" [options]="motivoOptions" [(value)]="motivoSel" />
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Producto" [options]="productoOptions" [(value)]="skuSel" />
     <sirem-input-field label="Cantidad" type="number" placeholder="Ej. 6"
       [error]="errorCantidad" [(value)]="cantidad" />
   </div>
@@ -351,7 +351,7 @@ export class AjustesInventarioDemoPage {
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremBadge, SiremButton, SiremCard, SiremConfirmDialog, SiremDataTable,
-  SiremInput, SiremModal, SiremPageHeader, SiremSelect, SiremStatCard, SiremTextarea,
+  SiremInput, SiremModal, SiremPageHeader, SiremStatCard, SiremTextarea,
   type SiremBadgeTone, type SiremSelectOption,
   type SiremTableColumn,
 } from 'deorta-sirem-ui';
@@ -384,8 +384,8 @@ function numero(v: ValorCampo): number {
 @Component({
   selector: 'app-ajustes-inventario-page',
   standalone: true,
-  imports: [SiremPageHeader, SiremButton, SiremStatCard, SiremCard, SiremSelect,
-    SiremInput, SiremTextarea, SiremBadge, SiremDataTable, SiremConfirmDialog,
+  imports: [SiremPageHeader, SiremButton, SiremStatCard, SiremCard, SiremInput,
+    SiremTextarea, SiremBadge, SiremDataTable, SiremConfirmDialog,
     SiremModal],
   templateUrl: './ajustes-inventario.html',
 })

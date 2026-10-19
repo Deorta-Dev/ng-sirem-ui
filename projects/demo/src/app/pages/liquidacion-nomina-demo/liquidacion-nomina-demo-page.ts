@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremButton, SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremModal,
-  SiremPageHeader, SiremSelect, SiremSelectOption, SiremStatCard, SiremTableColumn,
+  SiremButton, SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremInput, SiremModal,
+  SiremPageHeader, SiremSelectOption, SiremStatCard, SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { LIQUIDACION_NOMINA, type ErpLiquidacion } from '../../data/erp-mock';
@@ -27,7 +27,7 @@ type LiquidacionFila = {
   standalone: true,
   imports: [
     PageDemoShell, SiremButton, SiremDataTable, SiremEmptyState, SiremFieldGroup,
-    SiremModal, SiremPageHeader, SiremSelect, SiremStatCard,
+    SiremInput, SiremModal, SiremPageHeader, SiremStatCard,
   ],
   template: `
     <app-page-demo-shell label="Liquidación de nómina" [files]="codeFiles">
@@ -35,7 +35,7 @@ type LiquidacionFila = {
         <div class="mx-auto flex w-full max-w-screen-2xl flex-col gap-5">
           <sirem-page-header title="Liquidación de nómina" subtitle="Devengados y deducciones con neto a pagar por periodo">
             <div slot="actions" class="flex flex-wrap items-end gap-3">
-              <sirem-select-field label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
+              <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
               <sirem-button size="sm" (pressed)="generarNomina()">Generar nómina</sirem-button>
             </div>
           </sirem-page-header>
@@ -193,7 +193,7 @@ export class LiquidacionNominaDemoPage {
       language: 'html',
       code: `<sirem-page-header title="Liquidación de nómina" subtitle="Devengados y deducciones con neto a pagar por periodo">
   <div slot="actions" class="flex flex-wrap items-end gap-3">
-    <sirem-select-field label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
     <sirem-button size="sm" (pressed)="generarNomina()">Generar nómina</sirem-button>
   </div>
 </sirem-page-header>
@@ -236,7 +236,7 @@ export class LiquidacionNominaDemoPage {
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremButton, SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremModal,
-  SiremPageHeader, SiremSelect, SiremSelectOption, SiremStatCard, SiremTableColumn,
+  SiremPageHeader, SiremInput, SiremSelectOption, SiremStatCard, SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { LIQUIDACION_NOMINA, type ErpLiquidacion } from '../../data/erp-mock';

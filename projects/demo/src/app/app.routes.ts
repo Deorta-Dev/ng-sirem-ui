@@ -45,6 +45,12 @@ import { ConfirmDialogDemoPage } from './pages/confirm-dialog-demo/confirm-dialo
 import { DrawerDemoPage } from './pages/drawer-demo/drawer-demo-page';
 import { PopupCardDemoPage } from './pages/popup-card-demo/popup-card-demo-page';
 import { CalendarDemoPage } from './pages/calendar-demo/calendar-demo-page';
+import { AgendaDemoPage } from './pages/agenda-demo/agenda-demo-page';
+import { SparklineDemoPage } from './pages/sparkline-demo/sparkline-demo-page';
+import { DateChipDemoPage } from './pages/date-chip-demo/date-chip-demo-page';
+import { SegmentedDemoPage } from './pages/segmented-demo/segmented-demo-page';
+import { TooltipDemoPage } from './pages/tooltip-demo/tooltip-demo-page';
+import { BentoDashboardDemoPage } from './pages/bento-dashboard-demo/bento-dashboard-demo-page';
 import { AutofocusDemoPage } from './pages/autofocus-demo/autofocus-demo-page';
 import { ClickOutsideDemoPage } from './pages/click-outside-demo/click-outside-demo-page';
 import { NumbersOnlyDemoPage } from './pages/numbers-only-demo/numbers-only-demo-page';
@@ -120,6 +126,9 @@ export const routes: Routes = [
   { path: 'demo/list', component: ListDemoPage },
   { path: 'demo/card-list', component: CardListDemoPage },
   { path: 'demo/chart', component: ChartDemoPage },
+  { path: 'demo/sparkline', component: SparklineDemoPage },
+  { path: 'demo/date-chip', component: DateChipDemoPage },
+  { path: 'demo/segmented', component: SegmentedDemoPage },
   { path: 'demo/input', component: InputDemoPage },
   { path: 'demo/textarea', component: TextareaDemoPage },
   { path: 'demo/select', component: SelectDemoPage },
@@ -141,9 +150,11 @@ export const routes: Routes = [
   { path: 'demo/drawer', component: DrawerDemoPage },
   { path: 'demo/popup-card', component: PopupCardDemoPage },
   { path: 'demo/calendar', component: CalendarDemoPage },
+  { path: 'demo/agenda', component: AgendaDemoPage },
   { path: 'demo/autofocus', component: AutofocusDemoPage },
   { path: 'demo/click-outside', component: ClickOutsideDemoPage },
   { path: 'demo/numbers-only', component: NumbersOnlyDemoPage },
+  { path: 'demo/tooltip', component: TooltipDemoPage },
   { path: 'demo/money', component: MoneyDemoPage },
   { path: 'demo/phone', component: PhoneDemoPage },
   { path: 'demo/age', component: AgeDemoPage },
@@ -153,6 +164,7 @@ export const routes: Routes = [
   { path: 'demo/page-listado', component: PageListadoDemoPage },
   { path: 'demo/page-detalle', component: PageDetalleDemoPage },
   { path: 'demo/toast', component: ToastDemoPage },
+  { path: 'demo/page-bento', component: BentoDashboardDemoPage },
 
   // Módulos ERP — Ventas y Facturación Electrónica
   { path: 'demo/facturacion-electronica', component: FacturacionElectronicaDemoPage },

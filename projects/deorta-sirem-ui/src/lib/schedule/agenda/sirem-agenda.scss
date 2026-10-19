@@ -1,0 +1,681 @@
+/* Estilos de sirem-agenda: día, semana, mes y lista sobre tokens SIREM.
+   Sin scroll interno: la rejilla sigue el scroll de la página y las
+   cabeceras se pegan solo si el consumidor lo pide (`sticky`). */
+:host {
+  display: block;
+  width: 100%;
+}
+
+.sirem-agenda {
+  /* En línea: alto de hora, columnas y los dos offsets de pegado. */
+  --sirem-agenda-hour: 4rem;
+  --sirem-agenda-gutter: 3.5rem;
+  --sirem-agenda-cols: 7;
+  --sirem-agenda-gap: 0.5rem;
+  --sirem-agenda-pad: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sirem-agenda-gap);
+  width: 100%;
+  padding: var(--sirem-agenda-pad);
+  border: 1px solid var(--sirem-border);
+  border-radius: var(--sirem-radius-lg);
+  background: var(--sirem-surface);
+  box-shadow: var(--sirem-shadow-xs);
+}
+
+/* ------------------------------------------------------------- cabecera */
+
+.sirem-agenda__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--sirem-agenda-bar-bg, var(--sirem-surface));
+  backdrop-filter: var(--sirem-agenda-bar-filter, none);
+}
+
+.sirem-agenda__bar--sticky {
+  position: sticky;
+  top: var(--sirem-agenda-top, 0px);
+  z-index: 7;
+  box-sizing: border-box;
+  height: var(--sirem-agenda-bar-h, auto);
+  margin-bottom: calc(-1 * var(--sirem-agenda-gap));
+  padding-bottom: var(--sirem-agenda-gap);
+}
+
+.sirem-agenda__nav {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.sirem-agenda__navbtn,
+.sirem-agenda__today {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  border: 0;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: none;
+  color: var(--sirem-text-soft);
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.sirem-agenda__navbtn {
+  width: 2rem;
+  font-size: 1rem;
+}
+
+.sirem-agenda__today {
+  padding: 0 0.75rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  color: var(--sirem-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.sirem-agenda__navbtn:hover,
+.sirem-agenda__today:hover {
+  background: var(--sirem-surface-hover);
+  color: var(--sirem-text);
+}
+
+.sirem-agenda__navbtn:focus-visible,
+.sirem-agenda__today:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: 2px;
+}
+
+.sirem-agenda__heading {
+  display: flex;
+  flex: 1 1 9rem;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.sirem-agenda__title {
+  margin: 0;
+  overflow: hidden;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--sirem-text);
+}
+
+.sirem-agenda__subtitle {
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}
+
+/* --------------------------------------------------------- día y semana */
+
+.sirem-agenda__timeview {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.sirem-agenda__rail {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.125rem;
+  background: var(--sirem-agenda-days-bg, transparent);
+  backdrop-filter: var(--sirem-agenda-days-filter, none);
+  scrollbar-width: thin;
+}
+
+.sirem-agenda__rail sirem-date-chip {
+  flex: 0 0 auto;
+}
+
+.sirem-agenda__allday {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sirem-agenda__allday-label {
+  flex: none;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-agenda__allday-list {
+  display: flex;
+  gap: 0.375rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.sirem-agenda__allday-chip {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.375rem;
+  border: 1px solid color-mix(in srgb, var(--event-tone, var(--sirem-primary)) 30%, transparent);
+  border-radius: var(--sirem-radius-pill, 999px);
+  padding: 0.1875rem 0.625rem;
+  background: var(--event-bg, var(--sirem-surface-alt));
+  color: var(--event-text, var(--sirem-text));
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.sirem-agenda__allday-chip:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: 1px;
+}
+
+.sirem-agenda__grid {
+  display: grid;
+  grid-template-columns:
+    var(--sirem-agenda-gutter)
+    repeat(var(--sirem-agenda-cols), minmax(0, 1fr));
+}
+
+.sirem-agenda__corner,
+.sirem-agenda__head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-bottom: 1px solid var(--sirem-border);
+  background: var(--sirem-agenda-days-bg, var(--sirem-surface));
+  backdrop-filter: var(--sirem-agenda-days-filter, none);
+}
+
+.sirem-agenda__head {
+  border-left: 1px solid var(--sirem-border-soft);
+}
+
+.sirem-agenda__corner--sticky,
+.sirem-agenda__head--sticky,
+.sirem-agenda__weekhead--sticky,
+.sirem-agenda__rail--sticky,
+.sirem-agenda__group-head--sticky {
+  position: sticky;
+  top: var(--sirem-agenda-days-top, 0px);
+  z-index: 6;
+  box-sizing: border-box;
+  height: var(--sirem-agenda-days-h, auto);
+  background: var(--sirem-agenda-days-bg, var(--sirem-surface));
+}
+
+.sirem-agenda__hours {
+  display: flex;
+  flex-direction: column;
+}
+
+.sirem-agenda__hour {
+  flex: none;
+  padding: 0.125rem 0.625rem 0 0;
+  text-align: right;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-agenda__col {
+  position: relative;
+  border-left: 1px solid var(--sirem-border-soft);
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      var(--sirem-border-soft) 0 1px,
+      transparent 1px var(--sirem-agenda-hour)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--sirem-border) 40%, transparent) 0 1px,
+      transparent 1px calc(var(--sirem-agenda-hour) / 2)
+    );
+  cursor: pointer;
+}
+
+.sirem-agenda__col:last-child {
+  border-right: 1px solid var(--sirem-border-soft);
+}
+
+.sirem-agenda__col--weekend {
+  background-color: color-mix(in srgb, var(--sirem-surface-alt) 70%, transparent);
+}
+
+.sirem-agenda__col--selected {
+  background-color: color-mix(in srgb, var(--sirem-primary) 5%, transparent);
+}
+
+/* Bloques de cita: mini-tarjeta con tinte, borde del tono y punto. */
+.sirem-agenda__event {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--event-tone, var(--sirem-primary)) 30%, transparent);
+  border-radius: var(--sirem-radius-md, 1rem);
+  padding: 0.375rem 0.5rem;
+  background: var(--event-bg, var(--sirem-surface-alt));
+  color: var(--event-text, var(--sirem-text));
+  font-family: inherit;
+  text-align: left;
+  box-shadow: var(--sirem-shadow-xs);
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+
+.sirem-agenda__event:hover {
+  box-shadow: var(--sirem-shadow-sm);
+}
+
+.sirem-agenda__event:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: 1px;
+}
+
+.sirem-agenda__event--slim {
+  gap: 0;
+  padding: 0.1875rem 0.5rem;
+}
+
+.sirem-agenda__event--slim .sirem-agenda__event-time,
+.sirem-agenda__event--slim .sirem-agenda__event-location {
+  display: none;
+}
+
+.sirem-agenda__event-title {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.sirem-agenda__event-name {
+  overflow: hidden;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sirem-agenda__event-time,
+.sirem-agenda__event-location {
+  overflow: hidden;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: 0.75;
+}
+
+.sirem-agenda__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  flex: none;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: var(--event-tone, var(--sirem-primary));
+}
+
+.sirem-agenda__now {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  height: 2px;
+  background: var(--sirem-primary);
+  pointer-events: none;
+}
+
+.sirem-agenda__now::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: var(--sirem-primary);
+}
+
+/* ------------------------------------------------------------------ mes */
+
+.sirem-agenda__month {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.sirem-agenda__weekhead,
+.sirem-agenda__monthgrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+.sirem-agenda__weekhead span {
+  padding: 0.125rem 0;
+  text-align: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-agenda__weekhead {
+  padding-top: 0.125rem;
+  background: var(--sirem-agenda-days-bg, var(--sirem-surface));
+  backdrop-filter: var(--sirem-agenda-days-filter, none);
+}
+
+.sirem-agenda__weekhead--sticky {
+  padding-bottom: 0.375rem;
+  margin-bottom: -0.375rem;
+}
+
+.sirem-agenda__mcell {
+  display: flex;
+  min-height: 5.75rem;
+  flex-direction: column;
+  gap: 0.1875rem;
+  padding: 0.3125rem;
+  border: 1px solid var(--sirem-border-soft);
+  border-radius: var(--sirem-radius-md, 1rem);
+  background: var(--sirem-surface);
+}
+
+.sirem-agenda__mcell--out {
+  background: var(--sirem-surface-alt);
+  opacity: 0.55;
+}
+
+.sirem-agenda__mcell--today {
+  border-color: var(--sirem-border-strong);
+}
+
+.sirem-agenda__mcell--selected {
+  box-shadow: inset 0 0 0 1px var(--sirem-primary);
+}
+
+.sirem-agenda__mday {
+  display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: none;
+  color: var(--sirem-text);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.sirem-agenda__mday:hover {
+  background: var(--sirem-surface-hover);
+}
+
+.sirem-agenda__mday:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: 1px;
+}
+
+.sirem-agenda__mcell--today .sirem-agenda__mday {
+  background: var(--sirem-primary);
+  color: var(--sirem-primary-text);
+}
+
+.sirem-agenda__mevents {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.1875rem;
+}
+
+.sirem-agenda__mchip {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--event-tone, var(--sirem-primary)) 30%, transparent);
+  border-radius: var(--sirem-radius-pill, 999px);
+  padding: 0.0625rem 0.4375rem;
+  background: var(--event-bg, var(--sirem-surface-alt));
+  color: var(--event-text, var(--sirem-text));
+  font-family: inherit;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sirem-agenda__mchip:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: 1px;
+}
+
+.sirem-agenda__mchip-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sirem-agenda__mmore {
+  align-self: flex-start;
+  border: 0;
+  border-radius: var(--sirem-radius-pill, 999px);
+  padding: 0.0625rem 0.4375rem;
+  background: none;
+  color: var(--sirem-text-soft);
+  font-family: inherit;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sirem-agenda__mmore:hover {
+  background: var(--sirem-surface-hover);
+  color: var(--sirem-text);
+}
+
+.sirem-agenda__mmore:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: 1px;
+}
+
+/* ---------------------------------------------------------------- lista */
+
+.sirem-agenda__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sirem-agenda__empty {
+  margin: 0;
+  padding: 1.5rem 0.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-agenda__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.sirem-agenda__group-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem 0.375rem;
+  border-bottom: 1px solid var(--sirem-border-soft);
+  background: var(--sirem-agenda-days-bg, var(--sirem-surface));
+  backdrop-filter: var(--sirem-agenda-days-filter, none);
+}
+
+.sirem-agenda__group-head--sticky {
+  margin-bottom: -0.125rem;
+}
+
+.sirem-agenda__group-day {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--sirem-text);
+}
+
+.sirem-agenda__group-weekday {
+  font-size: 0.8125rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-agenda__badge {
+  padding: 0.0625rem 0.375rem;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: var(--sirem-surface-accent-soft);
+  color: var(--sirem-accent-ink);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sirem-agenda__row {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border: 0;
+  border-radius: var(--sirem-radius-md, 1rem);
+  padding: 0.5rem 0.625rem 0.5rem 0.9375rem;
+  background: none;
+  color: var(--sirem-text);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.sirem-agenda__row::before {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 0.375rem;
+  width: 3px;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: var(--event-tone, var(--sirem-primary));
+}
+
+.sirem-agenda__row:hover {
+  background: var(--sirem-surface-hover);
+}
+
+.sirem-agenda__row:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: -2px;
+}
+
+.sirem-agenda__row-time {
+  flex: none;
+  width: 4.75rem;
+  padding-top: 0.0625rem;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--sirem-text-soft);
+}
+
+.sirem-agenda__row-text {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.0625rem;
+}
+
+.sirem-agenda__row-title {
+  overflow: hidden;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sirem-agenda__row-location {
+  overflow: hidden;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-agenda__row-meta {
+  flex: none;
+  padding: 0.0625rem 0.4375rem;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: var(--sirem-surface-alt);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--sirem-text-soft);
+}
+
+/* ---------------------------------------------------------------- tonos */
+
+.sirem-agenda__tone--brand { --event-tone: var(--sirem-primary); --event-bg: color-mix(in srgb, var(--sirem-primary) 10%, var(--sirem-surface)); --event-text: var(--sirem-text); }
+.sirem-agenda__tone--sage { --event-tone: var(--sirem-sage); --event-bg: var(--sirem-surface-sage); --event-text: var(--sirem-text); }
+.sirem-agenda__tone--accent { --event-tone: var(--sirem-accent-strong, var(--sirem-accent)); --event-bg: var(--sirem-surface-accent-soft); --event-text: var(--sirem-accent-ink); }
+.sirem-agenda__tone--success { --event-tone: var(--sirem-tint-success-text); --event-bg: var(--sirem-tint-success-bg); --event-text: var(--sirem-tint-success-text); }
+.sirem-agenda__tone--warning { --event-tone: var(--sirem-tint-warning-text); --event-bg: var(--sirem-tint-warning-bg); --event-text: var(--sirem-tint-warning-text); }
+.sirem-agenda__tone--danger { --event-tone: var(--sirem-tint-danger-text); --event-bg: var(--sirem-tint-danger-bg); --event-text: var(--sirem-tint-danger-text); }
+.sirem-agenda__tone--muted { --event-tone: var(--sirem-text-muted); --event-bg: var(--sirem-surface-muted); --event-text: var(--sirem-text-soft); }
+
+/* ------------------------------------------------------------- compacto */
+
+.sirem-agenda--compact { --sirem-agenda-gutter: 3rem; --sirem-agenda-gap: 0.625rem; --sirem-agenda-pad: 0.75rem; }
+.sirem-agenda--compact .sirem-agenda__title { font-size: 1rem; }
+.sirem-agenda--compact .sirem-agenda__mcell { min-height: 3.5rem; padding: 0.1875rem; }
+.sirem-agenda--compact .sirem-agenda__mchip { justify-content: center; padding: 0; border: 0; background: none; }
+.sirem-agenda--compact .sirem-agenda__mchip-text { display: none; }
+.sirem-agenda--compact .sirem-agenda__dot { width: 0.4375rem; height: 0.4375rem; }
+.sirem-agenda--compact .sirem-agenda__row-time { width: 3.75rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sirem-agenda__navbtn,
+  .sirem-agenda__today,
+  .sirem-agenda__event,
+  .sirem-agenda__mday,
+  .sirem-agenda__row {
+    transition: none;
+  }
+}

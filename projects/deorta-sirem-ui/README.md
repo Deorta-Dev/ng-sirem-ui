@@ -19,16 +19,30 @@ npm i deorta-sirem-ui @flaticon/flaticon-uicons echarts
 @import '@flaticon/flaticon-uicons/css/brands/all.css';
 
 @theme {
-  --color-sirem-50: #eef6ff;
-  --color-sirem-100: #d9eaff;
-  --color-sirem-200: #bcdcff;
-  --color-sirem-300: #8ec5ff;
-  --color-sirem-400: #59a5ff;
-  --color-sirem-500: #3384fc;
-  --color-sirem-600: #1d64f1;
-  --color-sirem-700: #174fe1;
-  --color-sirem-800: #1943b4;
-  --color-sirem-900: #1a3c8b;
+  /* Rampa "ink" (neutros de marca; 600 = primario tinta). */
+  --color-sirem-50: #f7f8f9;
+  --color-sirem-100: #eceef1;
+  --color-sirem-200: #dfe2e7;
+  --color-sirem-300: #c6cbd3;
+  --color-sirem-400: #9aa1ac;
+  --color-sirem-500: #5c636e;
+  --color-sirem-600: #26272b;
+  --color-sirem-700: #1c1d20;
+  --color-sirem-800: #141518;
+  --color-sirem-900: #0c0d0f;
+  /* Acento de marca (lima) y secundario (salvia). */
+  --color-sirem-accent-100: #f5ffc2;
+  --color-sirem-accent-200: #eeff8f;
+  --color-sirem-accent-300: #e4ff42;
+  --color-sirem-accent-400: #d3f524;
+  --color-sirem-accent-500: #b4d80f;
+  --color-sirem-accent-ink: #1a1a1a;
+  --color-sirem-sage-100: #e7f1e8;
+  --color-sirem-sage-200: #cfe4d0;
+  --color-sirem-sage-300: #a5d2a4;
+  --color-sirem-sage-400: #8cb396;
+  --color-sirem-sage-500: #5f8a72;
+  --color-sirem-sage-700: #37624a;
 }
 ```
 
@@ -46,11 +60,14 @@ Tokens disponibles:
 
 | Grupo | Tokens |
 |---|---|
-| Superficie | `--sirem-page-bg`, `--sirem-surface`, `--sirem-surface-alt`, `--sirem-surface-hover`, `--sirem-surface-panel`, `--sirem-surface-glass`, `--sirem-surface-glass-strong` |
+| Superficie | `--sirem-page-bg`, `--sirem-surface`, `--sirem-surface-alt`, `--sirem-surface-hover`, `--sirem-surface-panel`, `--sirem-surface-glass`, `--sirem-surface-glass-strong`, `--sirem-surface-muted`, `--sirem-surface-sage`, `--sirem-surface-accent-soft` |
+| Patrones | `--sirem-hatch` (rayado diagonal de disponibilidad, se adapta al tema) |
 | Texto | `--sirem-text`, `--sirem-text-soft`, `--sirem-text-muted`, `--sirem-text-faint` |
 | Borde | `--sirem-border`, `--sirem-border-soft`, `--sirem-border-strong` |
+| Primario | `--sirem-primary`, `--sirem-primary-hover`, `--sirem-primary-active`, `--sirem-primary-text`, `--sirem-focus-ring`, `--sirem-control-accent` (tinta en claro, lima en oscuro) |
+| Acento | `--sirem-accent`, `--sirem-accent-strong`, `--sirem-accent-ink`, `--sirem-accent-tint-bg`, `--sirem-accent-tint-text`, `--sirem-sage` |
 | Tintes | `--sirem-tint-bg`, `--sirem-tint-text`, `--sirem-tint-strong-bg`, `--sirem-tint-strong-text`, `--sirem-tint-{success,warning,danger,neutral}-{bg,text}` |
-| Radios | `--sirem-radius-sm` (8px), `--sirem-radius-md` (12px), `--sirem-radius-lg` (16px), `--sirem-radius-xl` (18px) |
+| Radios | Contenedores `--sirem-radius-lg` (24px); interiores `--sirem-radius-md` (16px); redondos `--sirem-radius-pill`. `sm`/`xl`/`2xl` quedan en la escala para el consumidor, la librería no los usa (ver «Radios» en AGENTS.md §10) |
 | Sombras | `--sirem-shadow-xs`, `--sirem-shadow-sm`, `--sirem-shadow-md`, `--sirem-shadow-lg` |
 
 Todos salvo los radios tienen override en `:root[data-theme='dark']` (los radios

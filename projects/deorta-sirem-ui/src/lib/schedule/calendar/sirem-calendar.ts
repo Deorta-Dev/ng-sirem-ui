@@ -1,7 +1,7 @@
 import { Component, computed, input, model, output, signal } from '@angular/core';
 import { SiremOverlayTrigger } from '../../overlays/overlay/sirem-overlay-trigger';
 
-/** Evento de agenda. `color` acepta cualquier color CSS (p. ej. `#1d64f1`). */
+/** Evento de agenda. `color` acepta cualquier color CSS (p. ej. `#26272b`). */
 export interface SiremCalendarEvent {
   /** Día en ISO `yyyy-MM-dd`. */
   date: string;
@@ -10,12 +10,16 @@ export interface SiremCalendarEvent {
 }
 
 export type SiremCalendarSize = 'small' | 'medium' | 'large';
+/** Variante visual del calendario. */
+export type SiremCalendarVariant = 'card' | 'plain';
 
 interface DayCell {
   iso: string | null;
   day: number | null;
   today: boolean;
   selected: boolean;
+  /** Día marcado como no disponible (se pinta rayado). */
+  striped: boolean;
   dots: string[];
   events: SiremCalendarEvent[];
 }
@@ -39,9 +43,16 @@ const MONTHS_SHORT = [
  * Los tres navegan fácil entre meses y años: flechas ‹ ›, botón Hoy y
  * selector de mes/año (toca el título). Día seleccionado en doble vía.
  *
+ * ## Variante
+ * - `variant="card"` (defecto): caja con marco, fondo y cabecera de navegación.
+ * - `variant="plain"`: sin marco ni fondo, para incrustar sobre una tarjeta de
+ *   color. Los días se pintan en círculo: acento lima si el día tiene eventos,
+ *   tinta el seleccionado y rayado el no disponible.
+ *
  * Uso:
  * ```html
  * <sirem-calendar size="small" [events]="citas" [(selected)]="dia" (dayPressed)="ver($event)" />
+ * <sirem-calendar variant="plain" size="small" [events]="citas" />
  * ```
  */
 @Component({
@@ -55,6 +66,7 @@ const MONTHS_SHORT = [
       [class.sirem-cal--small]="size() === 'small'"
       [class.sirem-cal--medium]="size() === 'medium'"
       [class.sirem-cal--large]="size() === 'large'"
+      [class.sirem-cal--plain]="variant() === 'plain'"
     >
       <div class="sirem-cal__head">
         <button
@@ -110,6 +122,7 @@ const MONTHS_SHORT = [
                 [attr.aria-pressed]="cell.selected"
                 class="sirem-cal__cell"
                 [class.sirem-cal__cell--selected]="cell.selected"
+                [class.sirem-cal__cell--striped]="cell.striped"
               >
                 <span
                   class="sirem-cal__cell-day"
@@ -120,7 +133,7 @@ const MONTHS_SHORT = [
                 @for (ev of cell.events.slice(0, 2); track ev.label + ev.date) {
                   <span
                     class="sirem-cal__event"
-                    [style.background]="ev.color ?? '#1d64f1'"
+                    [style.background]="ev.color ?? '#26272b'"
                   >
                     {{ ev.label }}
                   </span>
@@ -141,9 +154,11 @@ const MONTHS_SHORT = [
                 class="sirem-cal__day"
                 [class.sirem-cal__day--selected]="cell.selected"
                 [class.sirem-cal__day--today]="cell.today && !cell.selected"
+                [class.sirem-cal__day--striped]="cell.striped"
+                [class.sirem-cal__day--has-events]="cell.dots.length > 0"
               >
                 {{ cell.day }}
-                @if (size() !== 'small') {
+                @if (size() !== 'small' && variant() !== 'plain') {
                   <span class="sirem-cal__dots" aria-hidden="true">
                     @for (dot of cell.dots; track dot + $index) {
                       <span class="sirem-cal__dot" [style.background]="dot"></span>
@@ -158,7 +173,7 @@ const MONTHS_SHORT = [
         }
       </div>
 
-      @if (legend().length && size() !== 'small') {
+      @if (legend().length && size() !== 'small' && variant() !== 'plain') {
         <div class="sirem-cal__legend">
           @for (entry of legend(); track entry.label) {
             <span class="sirem-cal__legend-item">
@@ -226,6 +241,16 @@ export class SiremCalendar {
   readonly legend = input<{ label: string; color: string }[]>([]);
   /** Tamaño: small (popups), medium (normal), large (tipo Google Calendar). */
   readonly size = input<SiremCalendarSize>('medium');
+  /**
+   * Variante visual: `card` (defecto, con marco y cabecera) o `plain` (sin
+   * marco ni fondo, días en círculo, para una tarjeta de color).
+   */
+  readonly variant = input<SiremCalendarVariant>('card');
+  /**
+   * Días no disponibles (`yyyy-MM-dd`): se pintan con el patrón rayado
+   * (`--sirem-hatch`), como la referencia de dashboard Bento.
+   */
+  readonly stripedDays = input<string[]>([]);
   /** Día seleccionado en ISO. */
   readonly selected = model<string | null>(null);
 
@@ -277,9 +302,18 @@ export class SiremCalendar {
     const todayIso = toIso(new Date());
     const selected = this.selected();
     const byDay = this.eventsByDay();
+    const striped = new Set(this.stripedDays());
     const cells: DayCell[] = [];
     for (let i = 0; i < lead; i++) {
-      cells.push({ iso: null, day: null, today: false, selected: false, dots: [], events: [] });
+      cells.push({
+        iso: null,
+        day: null,
+        today: false,
+        selected: false,
+        striped: false,
+        dots: [],
+        events: [],
+      });
     }
     for (let d = 1; d <= days; d++) {
       const iso = toIso(new Date(year, month, d));
@@ -289,7 +323,8 @@ export class SiremCalendar {
         day: d,
         today: iso === todayIso,
         selected: iso === selected,
-        dots: events.slice(0, 3).map((e) => e.color ?? '#1d64f1'),
+        striped: striped.has(iso),
+        dots: events.slice(0, 3).map((e) => e.color ?? '#26272b'),
         events,
       });
     }

@@ -14,7 +14,7 @@ import { themeMode, toggleTheme } from '../theme/theme';
       (click)="toggle()"
       [attr.aria-label]="isDark() ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
       [attr.title]="isDark() ? 'Modo claro' : 'Modo oscuro'"
-      class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+      class="rounded-full border border-slate-300 bg-white px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
     >
       {{ isDark() ? '☀ Claro' : '☾ Oscuro' }}
     </button>

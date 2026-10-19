@@ -1,4 +1,4 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, HostListener, input, output, signal } from '@angular/core';
 import { SiremFiIcon } from '../../icons/fi-icon/sirem-fi-icon';
 import { SiremButton } from '../../button/sirem-button';
 
@@ -49,6 +49,8 @@ export type SiremTopbarAppearance = 'default' | 'cards';
       class="sirem-topbar"
       [class.sirem-topbar--fixed]="fixed()"
       [class.sirem-topbar--blur]="blur()"
+      [class.sirem-topbar--transparent]="transparent()"
+      [class.sirem-topbar--shadow]="scrolled()"
       [class.sirem-topbar--floating]="floating()"
       [class.sirem-topbar--cards]="appearance() === 'cards'"
       [class.sirem-topbar--search-center]="searchAlign() === 'center'"
@@ -65,21 +67,23 @@ export type SiremTopbarAppearance = 'default' | 'cards';
           <sirem-fi-icon name="rr-menu" />
         </button>
 
-        <sirem-button
-          size="md"
-          variant="secondary"
-          (click)="spacePressed.emit()"
-          [attr.aria-label]="'Cambiar de ' + spaceAriaLabel()"
-          [title]="'Cambiar de ' + spaceAriaLabel()"
-        >
-          @if (showSpaceDot()) {
-            <span aria-hidden="true" class="sirem-topbar__space-dot">◉</span>
-          }
-          <span class="sirem-topbar__space-label">{{ spaceLabel() }}</span>
-          @if (showSpaceChevron()) {
-            <span aria-hidden="true" class="sirem-topbar__space-chev">▾</span>
-          }
-        </sirem-button>
+        @if (showSpace()) {
+          <sirem-button
+            size="md"
+            variant="secondary"
+            (click)="spacePressed.emit()"
+            [attr.aria-label]="'Cambiar de ' + spaceAriaLabel()"
+            [title]="'Cambiar de ' + spaceAriaLabel()"
+          >
+            @if (showSpaceDot()) {
+              <span aria-hidden="true" class="sirem-topbar__space-dot">◉</span>
+            }
+            <span class="sirem-topbar__space-label">{{ spaceLabel() }}</span>
+            @if (showSpaceChevron()) {
+              <span aria-hidden="true" class="sirem-topbar__space-chev">▾</span>
+            }
+          </sirem-button>
+        }
 
         @if (pageTitle()) {
           <div class="sirem-topbar__page">
@@ -151,6 +155,19 @@ export class SiremTopbar {
   /** Fondo translúcido con desenfoque (ideal con `fixed`). */
   readonly blur = input(false);
   /**
+   * Fondo transparente: el shell de la app se ve a través de la barra.
+   * Se puede combinar con `blur` (queda transparente + `backdrop-filter`,
+   * el clásico header cristal) o con `floating`/`appearance="cards"`.
+   */
+  readonly transparent = input(false);
+  /**
+   * Muestra la sombra al hacer scroll (`shadowOnScroll`): la barra gana
+   * elevación cuando el contenido pasa por debajo (útil con `fixed`).
+   */
+  readonly shadowOnScroll = input(false);
+  /** Muestra el botón de workspace/sucursal. */
+  readonly showSpace = input(true);
+  /**
    * Barra flotante: se separa de los bordes con margen y radio, con fondo
    * transparente (se ve el shell; borde + blur dan legibilidad). El margen
    * izquierdo lo puede fijar el shell con `--sirem-topbar-inset-left`.
@@ -177,6 +194,18 @@ export class SiremTopbar {
   readonly searchAriaLabel = computed(() =>
     this.searchHint() ? `Búsqueda global (${this.searchHint()})` : 'Búsqueda global',
   );
+
+  /** Posición de scroll actual (solo se observa con `shadowOnScroll`). */
+  readonly scrolled = signal(false);
+
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
+    if (!this.shadowOnScroll()) {
+      this.scrolled.set(false);
+      return;
+    }
+    this.scrolled.set(window.scrollY > 5);
+  }
 
   readonly menuPressed = output<void>();
   readonly searchPressed = output<void>();

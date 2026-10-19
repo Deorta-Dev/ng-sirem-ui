@@ -4,9 +4,8 @@ import {
   SiremCard,
   SiremChart,
   SiremDataTable,
-  SiremModal,
+  SiremInput, SiremModal,
   SiremPageHeader,
-  SiremSelect,
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
@@ -131,9 +130,8 @@ const BASE: Partida[] = partidasBase();
     SiremCard,
     SiremChart,
     SiremDataTable,
-    SiremModal,
+    SiremInput, SiremModal,
     SiremPageHeader,
-    SiremSelect,
     SiremStatCard,
   ],
   template: `
@@ -145,7 +143,7 @@ const BASE: Partida[] = partidasBase();
             subtitle="Proyección de ingresos y egresos a partir de la cartera por cobrar y las cuentas por pagar"
           >
             <div slot="actions" class="flex flex-wrap items-end gap-3">
-              <sirem-select-field label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
+              <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
               <sirem-button size="sm" variant="secondary" (pressed)="exportar()">
                 <i slot="icon" class="fi fi-rr-download" aria-hidden="true"></i>
                 Exportar proyección
@@ -346,7 +344,7 @@ export class FlujoDeCajaDemoPage {
   title="Flujo de caja (cash flow)"
   subtitle="Proyección de ingresos y egresos a partir de la cartera por cobrar y las cuentas por pagar">
   <div slot="actions" class="flex flex-wrap items-end gap-3">
-    <sirem-select-field label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
     <sirem-button size="sm" variant="secondary" (pressed)="exportar()">Exportar proyección</sirem-button>
   </div>
 </sirem-page-header>
@@ -379,7 +377,7 @@ export class FlujoDeCajaDemoPage {
       name: 'flujo-de-caja.component.ts',
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
-import { SiremChart, SiremDataTable, SiremModal, SiremSelect, SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremChart, SiremDataTable, SiremModal, SiremInput, SiremTableColumn } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   CUENTAS_TESORERIA, DOCUMENTOS_VENTA, FACTURAS_COMPRA, ORDENES_COMPRA,

@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremButton, SiremDataTable, SiremEmptyState, SiremModal, SiremPageHeader,
-  SiremSearchField, SiremSelect, SiremSelectOption, SiremStatCard, SiremTableColumn,
+  SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal, SiremPageHeader,
+  SiremSearchField, SiremSelectOption, SiremStatCard, SiremTableColumn,
   SiremTimeline, SiremTimelineItem,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
@@ -32,8 +32,8 @@ const PASOS = ['Validación de reglas', 'Transmisión', 'Acuse', 'Respuesta'];
   selector: 'app-nomina-dian-demo-page',
   standalone: true,
   imports: [
-    PageDemoShell, SiremButton, SiremDataTable, SiremEmptyState, SiremModal,
-    SiremPageHeader, SiremSearchField, SiremSelect, SiremStatCard, SiremTimeline,
+    PageDemoShell, SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal,
+    SiremPageHeader, SiremSearchField, SiremStatCard, SiremTimeline,
   ],
   template: `
     <app-page-demo-shell label="Nómina electrónica DIAN" [files]="codeFiles">
@@ -55,7 +55,7 @@ const PASOS = ['Validación de reglas', 'Transmisión', 'Acuse', 'Respuesta'];
 
           <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
             <sirem-search-field placeholder="Buscar por número o periodo…" [(value)]="q" />
-            <sirem-select-field label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+            <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
           </div>
 
           @if (filtrados().length) {
@@ -246,7 +246,7 @@ export class NominaDianDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
   <sirem-search-field placeholder="Buscar por número o periodo…" [(value)]="q" />
-  <sirem-select-field label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+  <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
 </div>
 
 @if (filtrados().length) {
@@ -270,7 +270,7 @@ export class NominaDianDemoPage {
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremDataTable, SiremEmptyState, SiremModal, SiremSelect, SiremSelectOption,
+  SiremDataTable, SiremEmptyState, SiremModal, SiremInput, SiremSelectOption,
   SiremStatCard, SiremTableColumn, SiremTimeline, SiremTimelineItem,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';

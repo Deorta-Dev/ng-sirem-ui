@@ -45,8 +45,10 @@ import { Component, input, model } from '@angular/core';
         }
         <main
           class="sirem-admin__main"
+          [class.sirem-admin__main--inset]="!!mainInsetLeft()"
           [class.sirem-admin__main--none]="mainPadding() === 'none'"
           [class.sirem-admin__main--sm]="mainPadding() === 'sm'"
+          [style.--sirem-main-inset]="mainInsetLeft() || null"
         >
           <!-- El header vive dentro del main: comparte ancho con la zona
                de contenido, consecuente con el navbar de al lado. -->
@@ -66,4 +68,12 @@ export class SiremAdminLayout {
    * contenido a sangre (la fachada gestiona su propio padding).
    */
   readonly mainPadding = input<'none' | 'sm' | 'md'>('md');
+  /**
+   * Desplazamiento izquierdo del main cuando el sidebar está fuera del flujo
+   * (`pinned`/fijo, p. ej. `15.75rem` = margen + ancho del rail flotante o
+   * `4.75rem` colapsado). Así el header y el contenido empiezan donde
+   * termina el navbar. Solo aplica en desktop; en móvil el sidebar es un
+   * drawer off-canvas y el main no se desplaza.
+   */
+  readonly mainInsetLeft = input<string | null>(null);
 }

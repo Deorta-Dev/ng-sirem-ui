@@ -1,6 +1,6 @@
 import { booleanAttribute, Component, computed, input } from '@angular/core';
 
-export type SiremBadgeTone = 'neutral' | 'info' | 'success' | 'warning' | 'danger';
+export type SiremBadgeTone = 'neutral' | 'info' | 'accent' | 'success' | 'warning' | 'danger';
 
 /**
  * Pastilla de estado (última visita, estado CUFE/DIAN, estado de cita,
@@ -27,6 +27,7 @@ export class SiremBadge {
   private readonly tones: Record<SiremBadgeTone, string> = {
     neutral: 'sirem-badge--neutral',
     info: 'sirem-badge--info',
+    accent: 'sirem-badge--accent',
     success: 'sirem-badge--success',
     warning: 'sirem-badge--warning',
     danger: 'sirem-badge--danger',
@@ -35,6 +36,7 @@ export class SiremBadge {
   private readonly dots: Record<SiremBadgeTone, string> = {
     neutral: 'sirem-badge__dot--neutral',
     info: 'sirem-badge__dot--info',
+    accent: 'sirem-badge__dot--accent',
     success: 'sirem-badge__dot--success',
     warning: 'sirem-badge__dot--warning',
     danger: 'sirem-badge__dot--danger',

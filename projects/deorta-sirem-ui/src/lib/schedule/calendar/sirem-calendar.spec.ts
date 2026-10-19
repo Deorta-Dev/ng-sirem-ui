@@ -25,7 +25,7 @@ describe('SiremCalendar', () => {
     const fixture = TestBed.createComponent(SiremCalendar);
     const iso = isoOfCurrentMonth(12);
     fixture.componentRef.setInput('events', [
-      { date: iso, label: 'Control', color: '#1d64f1' },
+      { date: iso, label: 'Control', color: '#26272b' },
     ]);
     fixture.detectChanges();
     const cells = fixture.componentInstance.cells();
@@ -64,12 +64,27 @@ describe('SiremCalendar', () => {
     const iso = isoOfCurrentMonth(12);
     fixture.componentRef.setInput('size', 'small');
     fixture.componentRef.setInput('events', [
-      { date: iso, label: 'Control', color: '#1d64f1' },
+      { date: iso, label: 'Control', color: '#26272b' },
     ]);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     // sin puntos de evento (spans con fondo en línea) y sin leyenda
     expect(el.querySelector('span[style]')).toBeNull();
     expect(el.textContent).not.toContain('Control');
+  });
+
+  it('should mark events with the accent circle in the plain variant', () => {
+    const fixture = TestBed.createComponent(SiremCalendar);
+    const iso = isoOfCurrentMonth(12);
+    fixture.componentRef.setInput('variant', 'plain');
+    fixture.componentRef.setInput('events', [{ date: iso, label: 'Control' }]);
+    fixture.componentRef.setInput('legend', [{ label: 'Control', color: '#26272b' }]);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('.sirem-cal--plain')).toBeTruthy();
+    expect(el.querySelector('.sirem-cal__day--has-events')).toBeTruthy();
+    // sin fila de puntos ni leyenda: el estado lo pinta el círculo
+    expect(el.querySelector('.sirem-cal__dots')).toBeNull();
+    expect(el.querySelector('.sirem-cal__legend')).toBeNull();
   });
 });

@@ -1,0 +1,90 @@
+/* Estilos de sirem-segmented: grupo de pastillas con la activa resaltada. */
+:host {
+  display: inline-flex;
+}
+
+.sirem-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: var(--sirem-surface-hover);
+  padding: 0.25rem;
+}
+
+.sirem-seg--stretch {
+  width: 100%;
+}
+
+.sirem-seg__item {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border: 0;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--sirem-text-muted);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.sirem-seg--stretch .sirem-seg__item {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.sirem-seg--sm .sirem-seg__item {
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+}
+
+.sirem-seg__item:hover {
+  color: var(--sirem-text);
+}
+
+.sirem-seg__item:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Activa: ficha blanca elevada sobre el carril. */
+.sirem-seg__item--active,
+.sirem-seg__item--active:hover {
+  background: var(--sirem-surface);
+  color: var(--sirem-text);
+  font-weight: 600;
+  box-shadow: var(--sirem-shadow-xs);
+}
+
+/* Acento: la activa se pinta en lima con texto tinta. */
+.sirem-seg--accent .sirem-seg__item--active,
+.sirem-seg--accent .sirem-seg__item--active:hover {
+  background: var(--sirem-accent);
+  color: var(--sirem-accent-ink, #1a1a1a);
+  box-shadow: none;
+}
+
+.sirem-seg__text {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+}
+
+.sirem-seg__label {
+  white-space: nowrap;
+}
+
+.sirem-seg__hint {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  opacity: 0.75;
+}

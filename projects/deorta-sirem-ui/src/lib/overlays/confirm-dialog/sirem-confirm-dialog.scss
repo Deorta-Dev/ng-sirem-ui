@@ -7,7 +7,7 @@
 
 .sirem-confirm__detail {
   margin-top: 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: var(--sirem-radius-md, 1rem);
   background: var(--sirem-surface-alt);
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;

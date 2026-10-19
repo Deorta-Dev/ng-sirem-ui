@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremButton, SiremDataTable, SiremEmptyState, SiremModal, SiremMoneyPipe, SiremPageHeader,
-  SiremSelect, SiremSelectOption, SiremStatCard, SiremTableColumn,
+  SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal, SiremMoneyPipe, SiremPageHeader,
+  SiremSelectOption, SiremStatCard, SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { ASIENTOS, CLIENTES, CUENTAS_PUC, PERIODOS, PROVEEDORES } from '../../data/erp-mock';
@@ -15,8 +15,8 @@ const ACTIVOS_TOTALES = 148_500_000;
   selector: 'app-reportes-financieros-demo-page',
   standalone: true,
   imports: [
-    PageDemoShell, SiremButton, SiremDataTable, SiremEmptyState, SiremModal, SiremMoneyPipe,
-    SiremPageHeader, SiremSelect, SiremStatCard,
+    PageDemoShell, SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal, SiremMoneyPipe,
+    SiremPageHeader, SiremStatCard,
   ],
   template: `
     <app-page-demo-shell label="Reportes financieros" [files]="codeFiles">
@@ -24,7 +24,7 @@ const ACTIVOS_TOTALES = 148_500_000;
         <div class="mx-auto flex w-full max-w-screen-2xl flex-col gap-5">
           <sirem-page-header title="Reportes financieros en tiempo real" subtitle="Estado de resultados, balance, libro mayor, balances y auxiliares">
             <div slot="actions" class="flex items-end gap-2">
-              <sirem-select-field label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
+              <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
               <sirem-button size="sm" (pressed)="exportar()">Exportar</sirem-button>
             </div>
           </sirem-page-header>
@@ -233,7 +233,7 @@ export class ReportesFinancierosDemoPage {
       code: `<sirem-page-header title="Reportes financieros en tiempo real"
   subtitle="Estado de resultados, balance, libro mayor, balances y auxiliares">
   <div slot="actions" class="flex items-end gap-2">
-    <sirem-select-field label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Periodo" [options]="periodoOptions" [(value)]="periodo" />
     <sirem-button size="sm" (pressed)="exportar()">Exportar</sirem-button>
   </div>
 </sirem-page-header>
@@ -266,7 +266,7 @@ export class ReportesFinancierosDemoPage {
       name: 'reportes-financieros.component.ts',
       language: 'typescript',
       code: `import { Component, computed, signal } from '@angular/core';
-import { SiremDataTable, SiremMoneyPipe, SiremSelect, type SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremDataTable, SiremMoneyPipe, SiremInput, type SiremTableColumn } from 'deorta-sirem-ui';
 import { ASIENTOS, CUENTAS_PUC, PERIODOS } from '../../data/erp-mock';
 
 export class ReportesFinancierosPage {

@@ -79,7 +79,7 @@ import { themeMode } from '../theme/theme';
         font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: #1d64f1;
+        color: #3f4a00;
       }
       .cm-copy {
         font-size: 0.72rem;

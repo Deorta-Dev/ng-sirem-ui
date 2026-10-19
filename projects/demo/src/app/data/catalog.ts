@@ -56,7 +56,7 @@ export const CATALOG: CatalogEntry[] = [
     name: 'Sidebar',
     selector: 'sirem-sidebar',
     category: 'Layout',
-    description: 'Navegación lateral colapsable, con panel flotante.',
+    description: 'Navegación lateral colapsable con submenús en overlay.',
   },
   {
     slug: 'topbar',
@@ -92,7 +92,14 @@ export const CATALOG: CatalogEntry[] = [
     name: 'Navbar',
     selector: 'sirem-navbar',
     category: 'Navegación',
-    description: 'Menú vertical / horizontal.',
+    description: 'Vertical / horizontal con submenús en overlay.',
+  },
+  {
+    slug: 'segmented',
+    name: 'Segmented',
+    selector: 'sirem-segmented',
+    category: 'Navegación',
+    description: 'Control de pastillas con la opción activa resaltada.',
   },
   // Datos
   {
@@ -128,7 +135,7 @@ export const CATALOG: CatalogEntry[] = [
     name: 'Overlay',
     selector: '[siremOverlay]',
     category: 'Overlays',
-    description: 'Panel que escapa al overflow y evita los bordes.',
+    description: 'Panel que escapa al overflow: clic, hover o clic derecho; nunca toca los bordes.',
   },
   {
     slug: 'avatar',
@@ -186,13 +193,27 @@ export const CATALOG: CatalogEntry[] = [
     category: 'Datos',
     description: 'ECharts barras / líneas / dona.',
   },
+  {
+    slug: 'sparkline',
+    name: 'Sparkline',
+    selector: 'sirem-sparkline',
+    category: 'Datos',
+    description: 'Minigráfico sin ejes para KPIs dentro de una tarjeta.',
+  },
+  {
+    slug: 'date-chip',
+    name: 'Date Chip',
+    selector: 'sirem-date-chip',
+    category: 'Datos',
+    description: 'Chip de día grande para un selector rápido de fechas.',
+  },
   // Formularios
   {
     slug: 'input',
     name: 'Input',
     selector: 'sirem-input-field',
     category: 'Formularios',
-    description: 'Texto, iconos y autocompletado.',
+    description: 'Texto, iconos, opciones (estrictas o libres) y selección múltiple.',
   },
   {
     slug: 'textarea',
@@ -206,7 +227,7 @@ export const CATALOG: CatalogEntry[] = [
     name: 'Select',
     selector: 'sirem-select-field',
     category: 'Formularios',
-    description: 'Lista desplegable.',
+    description: 'Lista desplegable nativa (alternativa: Input con opciones estrictas).',
   },
   {
     slug: 'datepicker',
@@ -343,6 +364,13 @@ export const CATALOG: CatalogEntry[] = [
     category: 'Agenda',
     description: 'Calendario small/medium/large.',
   },
+  {
+    slug: 'agenda',
+    name: 'Agenda',
+    selector: 'sirem-agenda',
+    category: 'Agenda',
+    description: 'Día, semana, mes y lista, con view-toggle + date-chip.',
+  },
   // Directivas
   {
     slug: 'autofocus',
@@ -366,6 +394,14 @@ export const CATALOG: CatalogEntry[] = [
     selector: 'input[siremNumbersOnly]',
     category: 'Formato',
     description: 'Solo dígitos, con decimal opcional.',
+    section: 'directivas',
+  },
+  {
+    slug: 'tooltip',
+    name: 'Tooltip',
+    selector: '[siremTooltip]',
+    category: 'Overlays',
+    description: 'Globo oscuro flotante al pasar el ratón o enfocar.',
     section: 'directivas',
   },
   // Pipes
@@ -433,6 +469,14 @@ export const CATALOG: CatalogEntry[] = [
     selector: 'page-detalle',
     category: 'Ejemplos',
     description: 'Ficha con KPIs y timeline.',
+    section: 'paginas',
+  },
+  {
+    slug: 'page-bento',
+    name: 'Dashboard Bento',
+    selector: 'page-bento',
+    category: 'Ejemplos',
+    description: 'Dashboard Bento: rail con tooltips, chips de fecha, sparklines y charts.',
     section: 'paginas',
   },
   // ---------------------------------------------------------------

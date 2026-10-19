@@ -53,7 +53,7 @@
 .sirem-drawer__close {
   border: 0;
   background: none;
-  border-radius: 0.5rem;
+  border-radius: var(--sirem-radius-pill, 999px);
   padding: 0.375rem;
   color: var(--sirem-text-muted);
   cursor: pointer;
@@ -64,7 +64,7 @@
 }
 
 .sirem-drawer__close:focus-visible {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
 }
 
 .sirem-drawer__body {

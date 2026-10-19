@@ -1,8 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremList, type SiremListItem,
-  SiremModal, type SiremModalAction, SiremPageHeader, SiremSelect,
-  type SiremSelectOption, SiremStatCard, SiremSwitch, type SiremTableColumn,
+  SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremInput, SiremList, type SiremListItem,
+  SiremModal, type SiremModalAction, SiremPageHeader, type SiremSelectOption, SiremStatCard, SiremSwitch, type SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { ALERTAS_SALUD, EMPRESAS_CLIENTES, type ErpAlerta } from '../../data/erp-mock';
@@ -16,8 +15,8 @@ import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/p
   selector: 'app-salud-clientes-demo-page',
   standalone: true,
   imports: [
-    PageDemoShell, SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremList,
-    SiremModal, SiremPageHeader, SiremSelect, SiremStatCard, SiremSwitch,
+    PageDemoShell, SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremInput, SiremList,
+    SiremModal, SiremPageHeader, SiremStatCard, SiremSwitch,
   ],
   template: `
     <app-page-demo-shell label="Salud de clientes" [files]="codeFiles">
@@ -27,7 +26,7 @@ import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/p
             subtitle="Alertas contables, bancarias y fiscales de todo el portafolio" />
 
           <div class="grid gap-3 md:grid-cols-[13rem_1fr] md:items-center">
-            <sirem-select-field label="Severidad" [options]="severidadOptions" [(value)]="severidad" />
+            <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Severidad" [options]="severidadOptions" [(value)]="severidad" />
             <sirem-switch-field label="Ocultar resueltas"
               description="Muestra solo las alertas pendientes de atender"
               [(checked)]="ocultarResueltas" />
@@ -192,7 +191,7 @@ export class SaludClientesDemoPage {
   subtitle="Alertas contables, bancarias y fiscales de todo el portafolio" />
 
 <div class="grid gap-3 md:grid-cols-[13rem_1fr] md:items-center">
-  <sirem-select-field label="Severidad" [options]="severidadOptions" [(value)]="severidad" />
+  <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Severidad" [options]="severidadOptions" [(value)]="severidad" />
   <sirem-switch-field label="Ocultar resueltas"
     description="Muestra solo las alertas pendientes de atender"
     [(checked)]="ocultarResueltas" />
@@ -239,7 +238,7 @@ export class SaludClientesDemoPage {
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremDataTable, SiremList, type SiremListItem, SiremModal, type SiremModalAction,
-  SiremSelect, type SiremSelectOption, SiremStatCard, SiremSwitch, type SiremTableColumn,
+  SiremInput, type SiremSelectOption, SiremStatCard, SiremSwitch, type SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { ALERTAS_SALUD, EMPRESAS_CLIENTES, type ErpAlerta } from '../../data/erp-mock';

@@ -1,8 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremButton, SiremDataTable, SiremDate, SiremEmptyState, SiremFieldGroup,
-  SiremInput, SiremModal, SiremPageHeader, SiremSearchField, SiremSelect,
-  SiremSelectOption, SiremStatCard, SiremTableColumn,
+  SiremInput, SiremModal, SiremPageHeader, SiremSearchField, SiremSelectOption, SiremStatCard, SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { EMPLEADOS, type ErpEmpleado } from '../../data/erp-mock';
@@ -22,7 +21,7 @@ const opciones = (...valores: string[]): SiremSelectOption[] =>
   imports: [
     PageDemoShell, SiremButton, SiremDataTable, SiremDate, SiremEmptyState,
     SiremFieldGroup, SiremInput, SiremModal, SiremPageHeader, SiremSearchField,
-    SiremSelect, SiremStatCard,
+    SiremStatCard,
   ],
   template: `
     <app-page-demo-shell label="Gestión de empleados" [files]="codeFiles">
@@ -43,7 +42,7 @@ const opciones = (...valores: string[]): SiremSelectOption[] =>
 
           <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
             <sirem-search-field placeholder="Buscar por nombre o documento…" [(value)]="q" />
-            <sirem-select-field label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+            <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
           </div>
 
           @if (filas().length) {
@@ -64,9 +63,9 @@ const opciones = (...valores: string[]): SiremSelectOption[] =>
               </sirem-field-group>
               <sirem-field-group title="Datos salariales y prestacionales" description="Salario y entidades vigentes del colaborador.">
                 <sirem-input-field class="col-span-12 sm:col-span-6" label="Salario mensual (COP)" type="number" [(value)]="salario" />
-                <sirem-select-field class="col-span-12 sm:col-span-6" label="EPS" [options]="epsOptions" [(value)]="eps" />
-                <sirem-select-field class="col-span-12 sm:col-span-6" label="Fondo de pensiones" [options]="pensionOptions" [(value)]="fondo" />
-                <sirem-select-field class="col-span-12 sm:col-span-6" label="ARL" [options]="arlOptions" [(value)]="arl" />
+                <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" class="col-span-12 sm:col-span-6" label="EPS" [options]="epsOptions" [(value)]="eps" />
+                <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" class="col-span-12 sm:col-span-6" label="Fondo de pensiones" [options]="pensionOptions" [(value)]="fondo" />
+                <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" class="col-span-12 sm:col-span-6" label="ARL" [options]="arlOptions" [(value)]="arl" />
               </sirem-field-group>
             </div>
           }
@@ -202,7 +201,7 @@ export class GestionEmpleadosDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
   <sirem-search-field placeholder="Buscar por nombre o documento…" [(value)]="q" />
-  <sirem-select-field label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+  <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
 </div>
 
 @if (filas().length) {
@@ -222,9 +221,9 @@ export class GestionEmpleadosDemoPage {
       </sirem-field-group>
       <sirem-field-group title="Datos salariales y prestacionales">
         <sirem-input-field class="col-span-12 sm:col-span-6" label="Salario mensual (COP)" type="number" [(value)]="salario" />
-        <sirem-select-field class="col-span-12 sm:col-span-6" label="EPS" [options]="epsOptions" [(value)]="eps" />
-        <sirem-select-field class="col-span-12 sm:col-span-6" label="Fondo de pensiones" [options]="pensionOptions" [(value)]="fondo" />
-        <sirem-select-field class="col-span-12 sm:col-span-6" label="ARL" [options]="arlOptions" [(value)]="arl" />
+        <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" class="col-span-12 sm:col-span-6" label="EPS" [options]="epsOptions" [(value)]="eps" />
+        <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" class="col-span-12 sm:col-span-6" label="Fondo de pensiones" [options]="pensionOptions" [(value)]="fondo" />
+        <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" class="col-span-12 sm:col-span-6" label="ARL" [options]="arlOptions" [(value)]="arl" />
       </sirem-field-group>
     </div>
   }
@@ -236,7 +235,7 @@ export class GestionEmpleadosDemoPage {
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremDataTable, SiremDate, SiremEmptyState, SiremFieldGroup, SiremInput,
-  SiremModal, SiremSelect, SiremSelectOption, SiremTableColumn,
+  SiremModal, SiremSelectOption, SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { EMPLEADOS, type ErpEmpleado } from '../../data/erp-mock';

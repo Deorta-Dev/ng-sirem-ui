@@ -11,7 +11,6 @@ import {
   SiremModal,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
@@ -70,7 +69,6 @@ const AGING: { label: string; buckets: ErpBucket[] }[] = [
     SiremModal,
     SiremPageHeader,
     SiremSearchField,
-    SiremSelect,
     SiremStatCard,
   ],
   template: `
@@ -100,7 +98,7 @@ const AGING: { label: string; buckets: ErpBucket[] }[] = [
 
           <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
             <sirem-search-field placeholder="Buscar por número, tercero o NIT…" [(value)]="q" />
-            <sirem-select-field
+            <sirem-input-field [strictOptions]="true"
               label="Antigüedad"
               placeholder="Todos"
               [options]="bucketOptions"
@@ -349,7 +347,7 @@ export class CuentasPorCobrarDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
   <sirem-search-field placeholder="Buscar por número, tercero o NIT…" [(value)]="q" />
-  <sirem-select-field label="Antigüedad" placeholder="Todos" [options]="bucketOptions" [(value)]="bucket" />
+  <sirem-input-field [strictOptions]="true" label="Antigüedad" placeholder="Todos" [options]="bucketOptions" [(value)]="bucket" />
 </div>
 
 @if (filtradas().length) {
@@ -372,7 +370,7 @@ export class CuentasPorCobrarDemoPage {
       name: 'cuentas-por-cobrar.component.ts',
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
-import { SiremChart, SiremDataTable, SiremModal, SiremSelect, SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremChart, SiremDataTable, SiremModal, SiremInput, SiremTableColumn } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   bucketVencimiento, DOCUMENTOS_VENTA, type ErpBucket, type ErpDocumentoVenta,

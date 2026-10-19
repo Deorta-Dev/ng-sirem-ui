@@ -5,16 +5,14 @@ import {
   SiremCardListField,
   SiremDataTable,
   SiremEmptyState,
-  SiremModal,
+  SiremInput, SiremModal,
   SiremModalAction,
   SiremMoneyPipe,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
-  SiremViewMode,
   SiremViewToggle,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
@@ -29,8 +27,8 @@ import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/p
 @Component({
   selector: 'app-multibodega-demo-page',
   standalone: true,
-  imports: [PageDemoShell, SiremCardList, SiremDataTable, SiremEmptyState, SiremModal,
-    SiremMoneyPipe, SiremPageHeader, SiremSearchField, SiremSelect, SiremStatCard,
+  imports: [PageDemoShell, SiremCardList, SiremDataTable, SiremEmptyState, SiremInput, SiremModal,
+    SiremMoneyPipe, SiremPageHeader, SiremSearchField, SiremStatCard,
     SiremViewToggle],
   template: `
     <app-page-demo-shell label="Multibodega" [files]="codeFiles">
@@ -38,7 +36,7 @@ import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/p
         <div class="mx-auto flex w-full max-w-screen-2xl flex-col gap-5">
           <sirem-page-header title="Multibodega" subtitle="Control de existencias en ubicaciones físicas o virtuales">
             <div slot="actions" class="w-full max-w-xs">
-              <sirem-select-field label="Bodega" [options]="bodegaOptions" [(value)]="bodegaSel" />
+              <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Bodega" [options]="bodegaOptions" [(value)]="bodegaSel" />
             </div>
           </sirem-page-header>
 
@@ -104,7 +102,7 @@ export class MultibodegaDemoPage {
 
   readonly q = signal('');
   readonly bodegaSel = signal<string | number | null>(BODEGAS[0].id);
-  readonly vista = signal<SiremViewMode>('table');
+  readonly vista = signal<string>('table');
   readonly detalleAbierto = signal(false);
   readonly seleccion = signal<ErpProducto | null>(null);
 
@@ -220,7 +218,7 @@ export class MultibodegaDemoPage {
       code: `<sirem-page-header title="Multibodega"
   subtitle="Control de existencias en ubicaciones físicas o virtuales">
   <div slot="actions" class="w-full max-w-xs">
-    <sirem-select-field label="Bodega" [options]="bodegaOptions" [(value)]="bodegaSel" />
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Bodega" [options]="bodegaOptions" [(value)]="bodegaSel" />
   </div>
 </sirem-page-header>
 
@@ -264,10 +262,9 @@ export class MultibodegaDemoPage {
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremCardList, SiremDataTable, SiremEmptyState, SiremModal, SiremMoneyPipe,
-  SiremPageHeader, SiremSearchField, SiremSelect, SiremStatCard, SiremViewToggle,
+  SiremPageHeader, SiremSearchField, SiremInput, SiremStatCard, SiremViewToggle,
   type SiremBadgeTone, type SiremCardListField, type SiremModalAction,
   type SiremSelectOption, type SiremTableColumn,
-  type SiremViewMode,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { BODEGAS, PRODUCTOS, type ErpProducto, stockTotal } from '../../data/erp-mock';
@@ -275,7 +272,7 @@ import { BODEGAS, PRODUCTOS, type ErpProducto, stockTotal } from '../../data/erp
 @Component({
   selector: 'app-multibodega-page',
   standalone: true,
-  imports: [SiremPageHeader, SiremSelect, SiremStatCard, SiremSearchField,
+  imports: [SiremPageHeader, SiremInput, SiremStatCard, SiremSearchField,
     SiremViewToggle, SiremDataTable, SiremCardList, SiremEmptyState, SiremModal,
     SiremMoneyPipe],
   templateUrl: './multibodega.html',
@@ -288,7 +285,7 @@ export class MultibodegaPage {
 
   readonly q = signal('');
   readonly bodegaSel = signal<string | number | null>(BODEGAS[0].id);
-  readonly vista = signal<SiremViewMode>('table');
+  readonly vista = signal<string>('table');
   readonly seleccion = signal<ErpProducto | null>(null);
   readonly detalleAbierto = signal(false);
 

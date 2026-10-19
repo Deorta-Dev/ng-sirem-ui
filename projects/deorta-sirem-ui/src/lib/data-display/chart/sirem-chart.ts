@@ -1,6 +1,7 @@
 import {
   afterNextRender,
   Component,
+  computed,
   DestroyRef,
   effect,
   ElementRef,
@@ -10,10 +11,13 @@ import {
   viewChild,
 } from '@angular/core';
 import * as echarts from 'echarts/core';
-import { BarChart, LineChart, PieChart } from 'echarts/charts';
+import { BarChart, LineChart, PieChart, ScatterChart } from 'echarts/charts';
 import {
   GridComponent,
   LegendComponent,
+  MarkAreaComponent,
+  MarkLineComponent,
+  MarkPointComponent,
   TitleComponent,
   TooltipComponent,
 } from 'echarts/components';
@@ -24,8 +28,12 @@ echarts.use([
   BarChart,
   LineChart,
   PieChart,
+  ScatterChart,
   GridComponent,
   LegendComponent,
+  MarkAreaComponent,
+  MarkLineComponent,
+  MarkPointComponent,
   TitleComponent,
   TooltipComponent,
   CanvasRenderer,
@@ -37,19 +45,26 @@ echarts.use([
  * dona…). Recibe la opción ECharts tal cual, por lo que sirve para casos
  * simples y compuestos sin cambiar de componente.
  *
+ * Registra barras, líneas, dona y dispersión, además de `markPoint`,
+ * `markLine` y `markArea`, así que las anotaciones de la opción se pintan.
+ *
  * Uso:
  * ```html
  * <sirem-chart [option]="ventasPorMes" [dark]="esOscuro()" />
  * <!-- simple: --> { xAxis: { data: [...] }, series: [{ type: 'bar', data: [...] }] }
  * <!-- múltiple: --> series: [{ name: 'A', type: 'line', ... }, { name: 'B', ... }]
+ * <!-- llena su contenedor: --> <sirem-chart [height]="'100%'" [option]="opt" />
  * ```
  */
 @Component({
   selector: 'sirem-chart',
   standalone: true,
   styleUrl: './sirem-chart.scss',
+  // Solo en modo «llenar» el host reclama el alto del contenedor; con un alto
+  // numérico se queda con el suyo para no alterar las páginas que ya lo usan.
+  host: { '[class.sirem-chart-host--fill]': 'isFill()' },
   template: `
-    <div class="sirem-chart" [style.height.px]="height()">
+    <div class="sirem-chart" [style.height]="heightStyle()">
       <div #box class="sirem-chart__box"></div>
       @if (loading()) {
         <div class="sirem-chart__loading" role="status" aria-label="Cargando gráfica">
@@ -62,8 +77,15 @@ echarts.use([
 export class SiremChart {
   /** Opción ECharts completa (título, ejes, series…). */
   readonly option = input<EChartsCoreOption>({});
-  /** Alto en px. */
-  readonly height = input(320);
+  /** Alto: número en px (320 por defecto) o longitud CSS (`'100%'`). */
+  readonly height = input<number | string>(320);
+  /** `true` cuando el alto es una longitud (p. ej. `100%`): llena su contenedor. */
+  readonly isFill = computed(() => typeof this.height() !== 'number');
+  /** Alto resuelto para el contenedor. */
+  readonly heightStyle = computed(() => {
+    const h = this.height();
+    return typeof h === 'number' ? `${h}px` : h;
+  });
   /** Capa de carga sobre la gráfica. */
   readonly loading = input(false);
   /** Tema oscuro integrado de ECharts. */

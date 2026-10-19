@@ -10,7 +10,6 @@ import {
   SiremModal,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
@@ -61,7 +60,6 @@ const BANCOS = [
     SiremModal,
     SiremPageHeader,
     SiremSearchField,
-    SiremSelect,
     SiremStatCard,
   ],
   template: `
@@ -89,7 +87,7 @@ const BANCOS = [
 
           <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
             <sirem-search-field label="Buscar cuenta" placeholder="Nombre, banco o número…" [(value)]="q" />
-            <sirem-select-field label="Tipo" placeholder="Todas" [options]="tipoOptions" [(value)]="tipo" />
+            <sirem-input-field [strictOptions]="true" label="Tipo" placeholder="Todas" [options]="tipoOptions" [(value)]="tipo" />
           </div>
 
           <sirem-card-list
@@ -135,8 +133,8 @@ const BANCOS = [
               [(value)]="nombreCuenta"
             />
             <sirem-input-field label="Número" placeholder="0000000000" [(value)]="numeroCuenta" />
-            <sirem-select-field label="Banco" [options]="bancoOptions" [(value)]="bancoCuenta" />
-            <sirem-select-field label="Moneda" [options]="monedaOptions" [(value)]="monedaCuenta" />
+            <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Banco" [options]="bancoOptions" [(value)]="bancoCuenta" />
+            <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Moneda" [options]="monedaOptions" [(value)]="monedaCuenta" />
           </div>
           <p class="mt-4 text-xs text-slate-500 dark:text-slate-400">
             La cuenta queda disponible de inmediato en tesorería con saldo inicial cero.
@@ -331,7 +329,7 @@ export class CuentasBancariasDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
   <sirem-search-field label="Buscar cuenta" placeholder="Nombre, banco o número…" [(value)]="q" />
-  <sirem-select-field label="Tipo" placeholder="Todas" [options]="tipoOptions" [(value)]="tipo" />
+  <sirem-input-field [strictOptions]="true" label="Tipo" placeholder="Todas" [options]="tipoOptions" [(value)]="tipo" />
 </div>
 
 <sirem-card-list
@@ -362,8 +360,8 @@ export class CuentasBancariasDemoPage {
     <sirem-input-field label="Nombre de la cuenta" placeholder="Ej. Bancolombia operativo"
       [(value)]="nombreCuenta" />
     <sirem-input-field label="Número" placeholder="0000000000" [(value)]="numeroCuenta" />
-    <sirem-select-field label="Banco" [options]="bancoOptions" [(value)]="bancoCuenta" />
-    <sirem-select-field label="Moneda" [options]="monedaOptions" [(value)]="monedaCuenta" />
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Banco" [options]="bancoOptions" [(value)]="bancoCuenta" />
+    <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Moneda" [options]="monedaOptions" [(value)]="monedaCuenta" />
   </div>
 </sirem-modal>`,
     },
@@ -373,7 +371,7 @@ export class CuentasBancariasDemoPage {
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremBadgeTone, SiremCard, SiremCardList, SiremDataTable, SiremInput,
-  SiremModal, SiremSearchField, SiremSelect, SiremSelectOption,
+  SiremModal, SiremSearchField, SiremSelectOption,
   SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';

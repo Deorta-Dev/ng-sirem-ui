@@ -44,7 +44,7 @@
 }
 
 .sirem-list__row:focus-visible {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
   outline-offset: -2px;
 }
 
@@ -60,7 +60,7 @@
   justify-content: center;
   width: 2.25rem;
   height: 2.25rem;
-  border-radius: 0.625rem;
+  border-radius: var(--sirem-radius-md, 1rem);
   background: var(--sirem-tint-bg);
   color: var(--sirem-tint-text);
   font-size: 1.125rem;

@@ -7,11 +7,10 @@ import {
   SiremConfirmDialog,
   SiremDataTable,
   SiremEmptyState,
-  SiremModal,
+  SiremInput, SiremModal,
   SiremModalAction,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
@@ -47,10 +46,9 @@ type LineaRemision = { sku: string; nombre: string; cantidad: number; valor: num
     SiremConfirmDialog,
     SiremDataTable,
     SiremEmptyState,
-    SiremModal,
+    SiremInput, SiremModal,
     SiremPageHeader,
     SiremSearchField,
-    SiremSelect,
     SiremStatCard,
   ],
   template: `
@@ -87,7 +85,7 @@ type LineaRemision = { sku: string; nombre: string; cantidad: number; valor: num
 
           <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
             <sirem-search-field placeholder="Buscar por número, cliente o bodega…" [(value)]="q" />
-            <sirem-select-field
+            <sirem-input-field [strictOptions]="true"
               label="Estado"
               placeholder="Todos"
               [options]="estadoOptions"
@@ -309,7 +307,7 @@ export class RemisionesDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
   <sirem-search-field placeholder="Buscar por número, cliente o bodega…" [(value)]="q" />
-  <sirem-select-field label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+  <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
 </div>
 
 @if (filtradas().length) {
@@ -346,7 +344,7 @@ export class RemisionesDemoPage {
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SiremBadgeTone, SiremDataTable, SiremModal, SiremModalAction, SiremSelect,
+  SiremBadgeTone, SiremDataTable, SiremModal, SiremModalAction, SiremInput,
   SiremSelectOption, SiremTableColumn,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';

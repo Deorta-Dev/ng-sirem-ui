@@ -26,7 +26,13 @@ import {
 const PANEL_CLASS = 'sirem-overlay-panel';
 
 /** Evento que abre el overlay. */
-export type SiremOverlayTriggerType = 'click' | 'dblclick' | 'longpress' | 'hover' | 'manual';
+export type SiremOverlayTriggerType =
+  | 'click'
+  | 'dblclick'
+  | 'contextmenu'
+  | 'longpress'
+  | 'hover'
+  | 'manual';
 
 /**
  * Abre un overlay (menú contextual, lista de opciones, ficha de detalle,
@@ -41,6 +47,8 @@ export type SiremOverlayTriggerType = 'click' | 'dblclick' | 'longpress' | 'hove
  * ## Eventos
  * `siremOverlayTrigger` elige cómo se abre:
  * - `click` (defecto) · `dblclick` · `longpress` (mantener pulsado)
+ * - `contextmenu` (clic derecho; el panel sale **bajo el puntero** y el menú
+ *   del navegador no aparece)
  * - `hover` (entra el puntero y se queda un momento)
  * - `manual` (solo con `[(open)]`, para abrir desde código)
  *
@@ -72,6 +80,10 @@ export type SiremOverlayTriggerType = 'click' | 'dblclick' | 'longpress' | 'hove
  *   Mantener para el detalle
  * </button>
  *
+ * <div [siremOverlay]="menu" siremOverlayTrigger="contextmenu">
+ *   Clic derecho para el menú contextual
+ * </div>
+ *
  * <ng-template #menu>
  *   <sirem-card title="Opciones">…</sirem-card>
  * </ng-template>
@@ -81,7 +93,8 @@ export type SiremOverlayTriggerType = 'click' | 'dblclick' | 'longpress' | 'hove
   selector: '[siremOverlay]',
   host: {
     '[attr.aria-expanded]': 'open()',
-    '[attr.aria-haspopup]': 'siremOverlay() ? "true" : null',
+    '[attr.aria-haspopup]':
+      'siremOverlay() ? (siremOverlayTrigger() === "contextmenu" ? "menu" : "true") : null',
   },
 })
 export class SiremOverlayTrigger {
@@ -137,16 +150,27 @@ export class SiremOverlayTrigger {
   private viewRef: ViewRef | null = null;
   private panelEl: HTMLElement | null = null;
   private detachTimer: ReturnType<typeof setTimeout> | null = null;
+  private detachHandler: (() => void) | null = null;
   private pressTimer: ReturnType<typeof setTimeout> | null = null;
   private clickTimer: ReturnType<typeof setTimeout> | null = null;
   private hoverTimer: ReturnType<typeof setTimeout> | null = null;
+  /** Punto del viewport donde se pulsó con el botón derecho (`contextmenu`). */
+  private anchorPoint: { x: number; y: number } | null = null;
+  /** `true` mientras el panel está en la transición de salida. */
+  private closing = false;
 
   constructor() {
     // `open` es la única fuente de verdad: el clic y el control externo pasan
     // por aquí, así no hay dos caminos que se desincronicen.
     effect(() => {
-      if (this.open() && !this.panelEl) this.mount();
-      else if (!this.open() && this.panelEl) this.unmountWithTransition();
+      if (this.open()) {
+        // Reabrir durante la transición de salida (frecuente con `hover`)
+        // debe retomar el panel, no montar otro encima ni quedarse sin él.
+        if (this.closing) this.cancelUnmount();
+        else if (!this.panelEl) this.mount();
+      } else if (this.panelEl) {
+        this.unmountWithTransition();
+      }
     });
 
     const el = this.host.nativeElement;
@@ -218,12 +242,37 @@ export class SiremOverlayTrigger {
   };
 
   private readonly onContextMenu = (event: MouseEvent) => {
-    // El clic derecho no dispara `click`, pero sí `pointerdown`.
-    if (this.siremOverlayTrigger() !== 'manual') return;
+    const trigger = this.siremOverlayTrigger();
+    // Con `manual` el clic derecho también se anula: el panel lo gobierna el
+    // consumidor y el menú del navegador no debe salir por encima.
+    if (trigger === 'manual') {
+      event.preventDefault();
+      return;
+    }
+    if (trigger !== 'contextmenu' || !this.siremOverlay()) return;
     event.preventDefault();
+    event.stopPropagation();
+    // Un menú contextual sale bajo el puntero, no pegado a la caja del
+    // disparador: se guarda el punto y el motor ancla ahí (0×0 de tamaño).
+    // El teclado (Menú / Mayús+F10) dispara `contextmenu` sin coordenadas
+    // útiles (0,0): en ese caso se ancla al centro del elemento.
+    const hostRect = this.host.nativeElement.getBoundingClientRect();
+    this.anchorPoint =
+      event.clientX !== 0 || event.clientY !== 0
+        ? { x: event.clientX, y: event.clientY }
+        : {
+            x: hostRect.left + hostRect.width / 2,
+            y: hostRect.top + hostRect.height / 2,
+          };
+    // Reabrir en plena transición de salida reutiliza el panel que aún vive
+    // (`cancelUnmount`), así que hay que reanclarlo al punto nuevo.
+    if (this.closing) this.reposition();
+    this.toggle();
   };
 
   private readonly onPointerDown = (event: PointerEvent) => {
+    // Solo el botón principal: el derecho pertenece a `contextmenu`.
+    if (event.button !== 0) return;
     if (this.siremOverlayTrigger() !== 'longpress' || !this.siremOverlay()) return;
     this.clearPress();
     this.pressTimer = setTimeout(() => this.show(), this.siremOverlayLongPressMs());
@@ -321,10 +370,34 @@ export class SiremOverlayTrigger {
     if (!node) return;
 
     node.classList.remove(`${PANEL_CLASS}--visible`);
+    this.closing = true;
     this.closed.emit();
 
-    node.addEventListener('transitionend', () => this.destroyView(), { once: true });
+    this.detachHandler = () => this.destroyView();
+    node.addEventListener('transitionend', this.detachHandler, { once: true });
     this.detachTimer = setTimeout(() => this.destroyView(), 180);
+  }
+
+  /**
+   * Reabre un panel que sigue en la transición de salida: se anula la
+   * retirada programada y se recupera tal cual (misma vista y posición).
+   */
+  private cancelUnmount(): void {
+    const node = this.panelEl;
+    if (!node || !this.closing) return;
+
+    if (this.detachTimer) {
+      clearTimeout(this.detachTimer);
+      this.detachTimer = null;
+    }
+    if (this.detachHandler) {
+      node.removeEventListener('transitionend', this.detachHandler);
+      this.detachHandler = null;
+    }
+    this.closing = false;
+    node.classList.add(`${PANEL_CLASS}--visible`);
+    this.listen();
+    this.opened.emit();
   }
 
   /** Quita el panel del DOM de inmediato (sin transición). */
@@ -333,9 +406,16 @@ export class SiremOverlayTrigger {
       clearTimeout(this.detachTimer);
       this.detachTimer = null;
     }
+    if (this.panelEl && this.detachHandler) {
+      this.panelEl.removeEventListener('transitionend', this.detachHandler);
+    }
+    this.detachHandler = null;
+    this.closing = false;
     this.clearPress();
     this.clearHover();
     this.clearClick();
+    // El punto del clic derecho solo vale para esta apertura.
+    this.anchorPoint = null;
     this.panelEl?.remove();
     this.panelEl = null;
     this.position.set(null);
@@ -344,6 +424,13 @@ export class SiremOverlayTrigger {
       this.viewRef.destroy();
       this.viewRef = null;
     }
+  }
+
+  ngOnDestroy(): void {
+    // El panel vive en la capa de overlays, fuera del árbol de la vista: si
+    // el disparador se destruye con él abierto (navegación, *ngIf…), hay que
+    // retirarlo a mano o quedaría flotando sobre la nueva vista.
+    this.destroyView();
   }
 
   // ---------------------------------------------------------- posicionamiento
@@ -358,14 +445,20 @@ export class SiremOverlayTrigger {
 
     const pad = this.siremOverlayViewportPadding();
     const hostRect = this.host.nativeElement.getBoundingClientRect();
+    // `contextmenu` ancla al punto pulsado (0×0) para que el menú salga bajo
+    // el puntero; el resto de eventos se anclan a la caja del disparador.
+    const anchor =
+      this.siremOverlayTrigger() === 'contextmenu' && this.anchorPoint
+        ? { top: this.anchorPoint.y, left: this.anchorPoint.x, width: 0, height: 0 }
+        : {
+            top: hostRect.top,
+            left: hostRect.left,
+            width: hostRect.width,
+            height: hostRect.height,
+          };
     const result = computeOverlayPosition(
       {
-        trigger: {
-          top: hostRect.top,
-          left: hostRect.left,
-          width: hostRect.width,
-          height: hostRect.height,
-        },
+        trigger: anchor,
         overlay: { width: panel.offsetWidth, height: panel.offsetHeight },
         viewport: { width: window.innerWidth, height: window.innerHeight },
       },

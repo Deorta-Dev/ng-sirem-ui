@@ -9,7 +9,6 @@ import {
   SiremModal,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
@@ -46,7 +45,6 @@ type TransferenciaLocal = ErpTransferencia & { nota: string };
     SiremModal,
     SiremPageHeader,
     SiremSearchField,
-    SiremSelect,
     SiremStatCard,
     SiremTextarea,
   ],
@@ -62,13 +60,13 @@ type TransferenciaLocal = ErpTransferencia & { nota: string };
           <div class="grid lg:grid-cols-[22rem_1fr] gap-5">
             <sirem-card title="Nueva transferencia" subtitle="Entre cuentas de tesorería">
               <div class="flex flex-col gap-4">
-                <sirem-select-field
+                <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…"
                   label="Cuenta origen"
                   [options]="cuentaOptions()"
                   [(value)]="origen"
                   [error]="errorOrigen()"
                 />
-                <sirem-select-field
+                <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…"
                   label="Cuenta destino"
                   [options]="cuentaOptions()"
                   [(value)]="destino"
@@ -326,9 +324,9 @@ export class TransferenciasFondosDemoPage {
       code: `<div class="grid lg:grid-cols-[22rem_1fr] gap-5">
   <sirem-card title="Nueva transferencia" subtitle="Entre cuentas de tesorería">
     <div class="flex flex-col gap-4">
-      <sirem-select-field label="Cuenta origen" [options]="cuentaOptions()"
+      <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Cuenta origen" [options]="cuentaOptions()"
         [(value)]="origen" [error]="errorOrigen()" />
-      <sirem-select-field label="Cuenta destino" [options]="cuentaOptions()"
+      <sirem-input-field [strictOptions]="true" placeholder="Seleccionar…" label="Cuenta destino" [options]="cuentaOptions()"
         [(value)]="destino" [error]="errorDestino()" />
       <sirem-input-field type="number" label="Monto" placeholder="0"
         hint="Sin decimales, en la moneda de la cuenta."
@@ -372,7 +370,7 @@ export class TransferenciasFondosDemoPage {
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremConfirmDialog, SiremDataTable, SiremInput, SiremModal, SiremSearchField,
-  SiremSelect, SiremSelectOption, SiremTableColumn, SiremTextarea,
+  SiremSelectOption, SiremTableColumn, SiremTextarea,
 } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {

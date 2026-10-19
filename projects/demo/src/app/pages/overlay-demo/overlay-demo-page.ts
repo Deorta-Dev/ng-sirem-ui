@@ -44,11 +44,11 @@ interface MenuItem {
         [tsCode]="t1"
       >
         <div class="w-full max-w-sm">
-          <div class="h-44 overflow-hidden rounded-xl border border-slate-200 p-4">
+          <div class="h-44 overflow-hidden rounded-2xl border border-slate-200 p-4">
             <p class="text-sm text-slate-600">Contenedor con <code>overflow: hidden</code>.</p>
             <button
               type="button"
-              class="mt-3 rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              class="mt-3 rounded-full border border-slate-300 px-3 py-2 text-sm"
               [siremOverlay]="menu"
               siremOverlayPlacement="bottom-start"
             >
@@ -67,7 +67,7 @@ interface MenuItem {
         <div class="grid w-full max-w-2xl gap-3 sm:grid-cols-2">
           <button
             type="button"
-            class="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            class="rounded-full border border-slate-300 px-3 py-2 text-sm"
             [siremOverlay]="detailCard"
             siremOverlayTrigger="hover"
             [siremOverlayHoverDelayMs]="150"
@@ -77,7 +77,7 @@ interface MenuItem {
           </button>
           <button
             type="button"
-            class="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            class="rounded-full border border-slate-300 px-3 py-2 text-sm"
             [siremOverlay]="detailList"
             siremOverlayTrigger="longpress"
             [siremOverlayLongPressMs]="450"
@@ -89,8 +89,25 @@ interface MenuItem {
       </app-demo-variant-card>
 
       <app-demo-variant-card
+        title="Clic derecho (menú contextual)"
+        description="Con siremOverlayTrigger='contextmenu' el panel se abre bajo el puntero y el menú del navegador no aparece."
+        [htmlCode]="h8"
+        [tsCode]="t1"
+      >
+        <div
+          class="flex h-32 w-full max-w-md select-none flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-slate-300 text-sm text-slate-500"
+          [siremOverlay]="menu"
+          siremOverlayTrigger="contextmenu"
+          siremOverlayPlacement="bottom-start"
+        >
+          <i class="fi fi-rr-cursor" aria-hidden="true"></i>
+          <span>Haz clic derecho aquí</span>
+        </div>
+      </app-demo-variant-card>
+
+      <app-demo-variant-card
         title="Tipos de evento"
-        description="click, dblclick, longpress, hover y manual; cada uno con su retardo."
+        description="click, dblclick, contextmenu, longpress, hover y manual; cada uno con su retardo."
         [htmlCode]="h3"
         [tsCode]="t1"
       >
@@ -112,6 +129,15 @@ interface MenuItem {
             siremOverlayPlacement="bottom"
           >
             dblclick
+          </sirem-button>
+          <sirem-button
+            size="sm"
+            variant="secondary"
+            [siremOverlay]="menu"
+            siremOverlayTrigger="contextmenu"
+            siremOverlayPlacement="bottom-start"
+          >
+            contextmenu
           </sirem-button>
           <sirem-button
             size="sm"
@@ -149,6 +175,10 @@ interface MenuItem {
           <code>manual</code> ignora los eventos del ratón y solo responde a
           <code>[(open)]</code>: útil para abrir desde código.
         </p>
+        <p class="w-full text-xs text-slate-500">
+          <code>contextmenu</code> abre con el botón derecho, anula el menú del
+          navegador y coloca el panel bajo el puntero.
+        </p>
       </app-demo-variant-card>
 
       <app-demo-variant-card
@@ -180,7 +210,7 @@ interface MenuItem {
         <div class="w-full max-w-sm">
           <button
             type="button"
-            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-left text-sm"
+            class="w-full rounded-full border border-slate-300 px-3 py-2 text-left text-sm"
             [siremOverlay]="menu"
             siremOverlayPlacement="bottom"
             [siremOverlayMatchTriggerWidth]="true"
@@ -203,7 +233,7 @@ interface MenuItem {
         <div class="flex w-full max-w-lg justify-end">
           <button
             type="button"
-            class="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            class="rounded-full border border-slate-300 px-3 py-2 text-sm"
             [siremOverlay]="menu"
             siremOverlayPlacement="bottom-end"
           >
@@ -221,7 +251,7 @@ interface MenuItem {
         <div class="flex w-full max-w-lg justify-center">
           <button
             type="button"
-            class="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            class="rounded-full border border-slate-300 px-3 py-2 text-sm"
             [siremOverlay]="tallPanel"
             siremOverlayPlacement="top-start"
           >
@@ -316,7 +346,7 @@ export class OverlayDemoPage {
   /** Filas para el panel que no cabe en la pantalla. */
   readonly manyRows = Array.from({ length: 40 }, (_, i) => i);
 
-  readonly h1 = `<div class="h-44 overflow-hidden rounded-xl border p-4">
+  readonly h1 = `<div class="h-44 overflow-hidden rounded-2xl border p-4">
   <button [siremOverlay]="menu" siremOverlayPlacement="bottom-start">
     Abrir menú
   </button>
@@ -343,6 +373,7 @@ export class OverlayDemoPage {
 
   readonly h3 = `<sirem-button [siremOverlay]="menu" siremOverlayTrigger="click">click</sirem-button>
 <sirem-button [siremOverlay]="menu" siremOverlayTrigger="dblclick">dblclick</sirem-button>
+<sirem-button [siremOverlay]="menu" siremOverlayTrigger="contextmenu">contextmenu</sirem-button>
 <sirem-button [siremOverlay]="menu" siremOverlayTrigger="longpress"
               [siremOverlayLongPressMs]="500">longpress</sirem-button>
 <sirem-button [siremOverlay]="menu" siremOverlayTrigger="hover"
@@ -378,6 +409,13 @@ export class OverlayDemoPage {
 <button [siremOverlay]="largo" siremOverlayPlacement="top-start">
   Lista muy larga
 </button>`;
+
+  readonly h8 = `<!-- Clic derecho: el panel sale bajo el puntero (no pegado a la
+     caja del elemento) y el menú del navegador no aparece. -->
+<div [siremOverlay]="menu" siremOverlayTrigger="contextmenu"
+     siremOverlayPlacement="bottom-start">
+  Haz clic derecho aquí
+</div>`;
 
   readonly t1 = `import { SiremOverlayTrigger } from 'deorta-sirem-ui';
 

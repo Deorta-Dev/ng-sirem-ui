@@ -1,14 +1,35 @@
 /* Estilos de sirem-card: contenedor genérico con encabezado opcional. */
 :host {
   display: block;
+  /* 100 % de un contenedor sin alto definido se resuelve como `auto`, así que
+     esto solo estira la tarjeta cuando la colocas en una fila de grid o en un
+     contenedor con alto (Bento). */
+  height: 100%;
 }
 
+/*
+ * La tarjeta es una columna flexible: el cuerpo crece para llenar el alto del
+ * contenedor (contenido proyectado a `h-full`), mientras encabezado y pie
+ * conservan su tamaño. Sin alto impuesto, se comporta como un bloque normal.
+ */
 .sirem-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
   overflow: hidden;
   border-radius: var(--sirem-radius-lg);
   border: 1px solid var(--sirem-border);
   background: var(--sirem-surface);
   box-shadow: var(--sirem-shadow-xs);
+}
+
+.sirem-card__header,
+.sirem-card__footer {
+  flex: none;
+}
+
+.sirem-card__body {
+  flex: 1 0 auto;
 }
 
 .sirem-card--glass {
@@ -25,21 +46,43 @@
 /* Tono de marca: fondo con el color primario y texto blanco. */
 .sirem-card--brand {
   border-color: transparent;
-  background: var(--color-sirem-600);
+  background: var(--sirem-primary);
   box-shadow: var(--sirem-shadow-sm);
 }
 
 .sirem-card--brand .sirem-card__header {
-  border-bottom-color: rgb(255 255 255 / 0.2);
+  border-bottom-color: color-mix(in srgb, var(--sirem-primary-text, #fff) 20%, transparent);
 }
 
 .sirem-card--brand .sirem-card__title {
-  color: #fff;
+  color: var(--sirem-primary-text, #fff);
 }
 
 .sirem-card--brand .sirem-card__subtitle,
 .sirem-card--brand .sirem-card__footer {
-  color: rgb(255 255 255 / 0.85);
+  color: color-mix(in srgb, var(--sirem-primary-text, #fff) 85%, transparent);
+}
+
+/* Tonos pastel Bento: tinte de superficie, sin borde ni sombra dura. */
+.sirem-card--muted {
+  border-color: transparent;
+  background: var(--sirem-surface-muted);
+}
+
+.sirem-card--sage {
+  border-color: transparent;
+  background: var(--sirem-surface-sage);
+}
+
+.sirem-card--accent {
+  border-color: transparent;
+  background: var(--sirem-surface-accent-soft);
+}
+
+.sirem-card--muted .sirem-card__header,
+.sirem-card--sage .sirem-card__header,
+.sirem-card--accent .sirem-card__header {
+  border-bottom-color: color-mix(in srgb, var(--sirem-text) 8%, transparent);
 }
 
 .sirem-card__title {

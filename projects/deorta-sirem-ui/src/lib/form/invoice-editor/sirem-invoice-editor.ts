@@ -4,7 +4,7 @@ import { SiremBadge, SiremBadgeTone } from '../../data-display/badge/sirem-badge
 import { SiremMoneyPipe } from '../../pipes/money/sirem-money.pipe';
 import { SiremDate } from '../date/sirem-date';
 import { SiremInput } from '../input/sirem-input';
-import { SiremSelect, SiremSelectOption } from '../select/sirem-select';
+import { SiremSelectOption } from '../select/sirem-select';
 import { SiremTextarea } from '../textarea/sirem-textarea';
 
 /** Estado fiscal del documento. */
@@ -152,7 +152,6 @@ const STATUS_TONES: Record<SiremInvoiceStatus, SiremBadgeTone> = {
     SiremDate,
     SiremInput,
     SiremMoneyPipe,
-    SiremSelect,
     SiremTextarea,
   ],
   styleUrl: './sirem-invoice-editor.scss',
@@ -183,11 +182,12 @@ const STATUS_TONES: Record<SiremInvoiceStatus, SiremBadgeTone> = {
 
       <section class="sirem-invoice-editor__grid" aria-label="Cabecera de la factura">
         <div class="sirem-invoice-editor__field sirem-invoice-editor__field--6">
-          <sirem-select-field
+          <sirem-input-field
             label="Cliente"
             [required]="true"
             placeholder="Selecciona el cliente."
             [options]="customerOptions()"
+            [strictOptions]="true"
             [value]="draft().customerId"
             (valueChange)="setCustomer($event)"
             [error]="err('customerId')"
@@ -543,8 +543,8 @@ export class SiremInvoiceEditor {
     return siremLineTotals(line).total;
   }
 
-  setCustomer(value: string | number | null): void {
-    this.draft.update((draft) => ({ ...draft, customerId: value }));
+  setCustomer(value: string | number | (string | number)[] | null): void {
+    this.draft.update((draft) => ({ ...draft, customerId: Array.isArray(value) ? null : value }));
   }
 
   setDocumentNumber(value: string | number | (string | number)[] | null): void {

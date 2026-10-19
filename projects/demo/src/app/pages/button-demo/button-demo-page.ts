@@ -9,8 +9,9 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
   imports: [DemoPageLayout, DemoVariantCard, SiremButton],
   template: `
     <app-demo-page-layout title="Button" category="Botones" subtitle="sirem-button — variantes, tamaños, iconos y async.">
-      <app-demo-variant-card title="Variantes" description="Seis tonos semánticos del sistema." [htmlCode]="h1" [tsCode]="t1">
+      <app-demo-variant-card title="Variantes" description="Siete tonos semánticos; accent es el lima de marca." [htmlCode]="h1" [tsCode]="t1">
         <sirem-button variant="primary">Primario</sirem-button>
+        <sirem-button variant="accent">Acento</sirem-button>
         <sirem-button variant="secondary">Secundario</sirem-button>
         <sirem-button variant="success">Éxito</sirem-button>
         <sirem-button variant="warning">Aviso</sirem-button>
@@ -55,7 +56,7 @@ export class ButtonDemoPage {
   readonly cargando = signal(false);
   readonly msg = signal('');
   readonly guardar = () => new Promise((r) => setTimeout(r, 1200));
-  readonly h1 = '<sirem-button variant="primary">Primario</sirem-button>\n<sirem-button variant="secondary">Secundario</sirem-button>\n<sirem-button variant="success">Éxito</sirem-button>\n<sirem-button variant="warning">Aviso</sirem-button>\n<sirem-button variant="ghost">Fantasma</sirem-button>\n<sirem-button variant="danger">Peligro</sirem-button>';
+  readonly h1 = '<sirem-button variant="primary">Primario</sirem-button>\n<sirem-button variant="accent">Acento</sirem-button>\n<sirem-button variant="secondary">Secundario</sirem-button>\n<sirem-button variant="success">Éxito</sirem-button>\n<sirem-button variant="warning">Aviso</sirem-button>\n<sirem-button variant="ghost">Fantasma</sirem-button>\n<sirem-button variant="danger">Peligro</sirem-button>';
   readonly h2 = '<sirem-button size="sm">Pequeño</sirem-button>\n<sirem-button size="md">Mediano</sirem-button>\n<sirem-button size="lg">Grande</sirem-button>';
   readonly h3 = '<sirem-button variant="primary">\n  <i slot="icon" class="fi fi-rr-check"></i>Guardar\n</sirem-button>\n<sirem-button variant="secondary" iconOnly aria-label="Buscar">\n  <i slot="icon" class="fi fi-rr-search"></i>\n</sirem-button>';
   readonly h4 = '<sirem-button variant="primary" [(loading)]="cargando">Guardar</sirem-button>\n<sirem-button variant="secondary" [disabled]="true">Deshabilitado</sirem-button>';

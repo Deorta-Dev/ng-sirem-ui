@@ -9,9 +9,10 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
   imports: [DemoPageLayout, DemoVariantCard, SiremBadge],
   template: `
     <app-demo-page-layout title="Badge" category="Datos" subtitle="sirem-badge — tonos y punto de estado.">
-      <app-demo-variant-card title="Tonos" description="Cinco tonos semánticos." [htmlCode]="h1" [tsCode]="t">
+      <app-demo-variant-card title="Tonos" description="Seis tonos semánticos; accent es el lima de marca." [htmlCode]="h1" [tsCode]="t">
         <sirem-badge tone="neutral">Neutral</sirem-badge>
         <sirem-badge tone="info">Info</sirem-badge>
+        <sirem-badge tone="accent">Acento</sirem-badge>
         <sirem-badge tone="success">Éxito</sirem-badge>
         <sirem-badge tone="warning">Aviso</sirem-badge>
         <sirem-badge tone="danger">Peligro</sirem-badge>
@@ -30,7 +31,7 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
   `,
 })
 export class BadgeDemoPage {
-  readonly h1 = '<sirem-badge tone="neutral">Neutral</sirem-badge>\n<sirem-badge tone="info">Info</sirem-badge>\n<sirem-badge tone="success">Éxito</sirem-badge>\n<sirem-badge tone="warning">Aviso</sirem-badge>\n<sirem-badge tone="danger">Peligro</sirem-badge>';
+  readonly h1 = '<sirem-badge tone="neutral">Neutral</sirem-badge>\n<sirem-badge tone="info">Info</sirem-badge>\n<sirem-badge tone="accent">Acento</sirem-badge>\n<sirem-badge tone="success">Éxito</sirem-badge>\n<sirem-badge tone="warning">Aviso</sirem-badge>\n<sirem-badge tone="danger">Peligro</sirem-badge>';
   readonly h2 = '<sirem-badge tone="success" dot>Activo</sirem-badge>\n<sirem-badge tone="danger" dot>Inactivo</sirem-badge>\n<sirem-badge tone="warning" dot>Pendiente</sirem-badge>';
   readonly h3 = '<sirem-badge tone="info">En consulta</sirem-badge>\n<sirem-badge tone="success">Facturada</sirem-badge>\n<sirem-badge tone="neutral">Anulada</sirem-badge>';
   readonly t = "import { SiremBadge } from 'deorta-sirem-ui';";

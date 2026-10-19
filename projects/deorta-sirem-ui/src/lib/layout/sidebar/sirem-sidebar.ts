@@ -5,6 +5,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SiremFiIcon } from '../../icons/fi-icon/sirem-fi-icon';
 import { SiremButton } from '../../button/sirem-button';
 import { SiremOverlayTrigger } from '../../overlays/overlay/sirem-overlay-trigger';
+import { SiremTooltipDirective } from '../../directives/tooltip/sirem-tooltip.directive';
+import {
+  injectSiremViewportWidth,
+  resolveSiremSubmenu,
+  type SiremSubmenuConfig,
+  type SiremSubmenuResolved,
+} from '../../overlays/overlay/sirem-submenu';
 
 /** Ítem de navegación jerárquica del sidebar / navbar. */
 export interface SiremNavItem {
@@ -22,14 +29,23 @@ export interface SiremNavItem {
   badge?: string | number;
   /** Permiso requerido; se oculta si no está en `permissions`. */
   permission?: string;
+  /**
+   * Texto del tooltip flotante al pasar el ratón con el sidebar colapsado
+   * (solo iconos). Por defecto usa `label`.
+   */
+  tooltip?: string;
   children?: SiremNavItem[];
 }
 
 /**
  * Menú lateral jerárquico, colapsable y responsivo.
- * - Expande/colapsa submenús; colapso total (solo iconos) en desktop
- *   para vistas de mapa (módulo inmobiliario). El botón ⇤/⇥ queda
- *   siempre visible para restaurar.
+ * - Los ítems con hijos abren sus submenús en la **capa de overlays**
+ *   (`SiremOverlayTrigger`), también con el sidebar colapsado (solo iconos)
+ *   y en el drawer móvil: ningún `overflow` los recorta.
+ * - El gesto se configura con `submenu` según el ancho de pantalla; por
+ *   defecto `hover` en escritorio y `click` en móvil (breakpoint 768 px).
+ * - Colapso total (solo iconos) en desktop para vistas de mapa (módulo
+ *   inmobiliario). El botón ⇤/⇥ queda siempre visible para restaurar.
  * - `layout="horizontal"` lo vuelve barra superior con desplegables.
  * - `fixed` lo hace sticky; `pinned` lo mantiene fijo en escritorio.
  * - `blur` le da fondo translúcido.
@@ -40,11 +56,20 @@ export interface SiremNavItem {
  * - Iconos por clase `icon` (`fi fi-rr-users`) o SVG inline `svg`
  *   (duotone / streamline, con prioridad sobre `icon`).
  *
+ * Inputs: `items` (obligatorio), `permissions`, `layout`, `fixed`, `pinned`,
+ * `centerNav`, `blur`, `floating`, `brand`, `submenu`; models `collapsed` y
+ * `mobileOpen`; output `itemPressed`.
+ *
  * ```html
  * <sirem-sidebar [items]="items" [(collapsed)]="collapsed" [pinned]="true">
  *   <sirem-button slot="apps" iconOnly aria-label="Aplicaciones" />
  *   <sirem-user-menu slot="user" userName="Ana Pérez" />
  * </sirem-sidebar>
+ *
+ * <sirem-sidebar
+ *   [items]="items"
+ *   [submenu]="{ breakpoint: 1024, desktop: { trigger: 'hover' }, mobile: { trigger: 'click' } }"
+ * />
  * ```
  */
 @Component({
@@ -57,6 +82,7 @@ export interface SiremNavItem {
     SiremFiIcon,
     SiremButton,
     SiremOverlayTrigger,
+    SiremTooltipDirective,
   ],
   host: { '[class.is-collapsed]': 'collapsed()' },
   template: `
@@ -81,8 +107,13 @@ export interface SiremNavItem {
                   type="button"
                   [siremOverlay]="dropTpl"
                   [siremOverlayData]="{ item: item }"
-                  siremOverlayTrigger="click"
-                  siremOverlayPlacement="bottom-start"
+                  [siremOverlayTrigger]="submenuResolved().trigger"
+                  [siremOverlayPlacement]="submenuResolved().placement"
+                  [siremOverlayOffset]="submenuResolved().offset"
+                  [siremOverlayHoverDelayMs]="submenuResolved().hoverDelayMs"
+                  [siremOverlayHoverHideDelayMs]="submenuResolved().hoverHideDelayMs"
+                  [open]="submenuOpen(item.label)"
+                  (openChange)="setSubmenuOpen(item.label, $event)"
                   class="sirem-sidebar__link"
                 >
                   @if (item.img) {
@@ -97,7 +128,9 @@ export interface SiremNavItem {
                     <i [class]="item.icon + ' sirem-sidebar__icon'" aria-hidden="true"></i>
                   }
                   <span>{{ item.label }}</span>
-                  <span class="sirem-sidebar__chev" aria-hidden="true">▾</span>
+                  <span class="sirem-sidebar__chev" aria-hidden="true">
+                    {{ submenuOpen(item.label) ? '▴' : '▾' }}
+                  </span>
                 </button>
               } @else {
                 <ng-container
@@ -164,8 +197,15 @@ export interface SiremNavItem {
             @if (item.children?.length) {
               <button
                 type="button"
-                (click)="toggle(item.label)"
-                [attr.aria-expanded]="isExpanded(item.label)"
+                [siremOverlay]="dropTpl"
+                [siremOverlayData]="{ item: item, showTitle: collapsed() }"
+                [siremOverlayTrigger]="submenuResolved().trigger"
+                [siremOverlayPlacement]="submenuResolved().placement"
+                [siremOverlayOffset]="submenuResolved().offset"
+                [siremOverlayHoverDelayMs]="submenuResolved().hoverDelayMs"
+                [siremOverlayHoverHideDelayMs]="submenuResolved().hoverHideDelayMs"
+                [open]="submenuOpen(item.label)"
+                (openChange)="setSubmenuOpen(item.label, $event)"
                 class="sirem-sidebar__link"
                 [attr.title]="collapsed() ? item.label : null"
               >
@@ -187,18 +227,9 @@ export interface SiremNavItem {
                   </span>
                 }
                 <span class="sirem-sidebar__label sirem-sidebar__chev" aria-hidden="true">
-                  {{ isExpanded(item.label) ? '▾' : '▸' }}
+                  {{ submenuOpen(item.label) ? '▾' : '▸' }}
                 </span>
               </button>
-              @if (isExpanded(item.label)) {
-                <div class="sirem-sidebar__label sirem-sidebar__children">
-                  @for (child of visibleChildren(item); track child.label) {
-                    <ng-container
-                      *ngTemplateOutlet="linkTpl; context: { $implicit: child }"
-                    ></ng-container>
-                  }
-                </div>
-              }
             } @else {
               <ng-container
                 *ngTemplateOutlet="linkTpl; context: { $implicit: item }"
@@ -214,23 +245,31 @@ export interface SiremNavItem {
     }
 
     <!--
-      Desplegable del layout horizontal: se pinta en la capa de overlays, no
-      dentro del navbar, para que ningun overflow lo recorte.
+      Desplegable en la capa de overlays: asi no lo recorta ningun overflow
+      de la barra, del rail colapsado ni del drawer movil. El gesto (hover/
+      click) y el lado salen de submenuResolved(), segun el ancho de pantalla.
     -->
     <ng-template #dropTpl let-data>
       <div class="sirem-overlay__panel" role="menu">
+        @if (data.showTitle) {
+          <p class="sirem-sidebar__panel-title">{{ data.item.label }}</p>
+        }
         @for (child of visibleChildren(data.item); track child.label) {
-          <ng-container *ngTemplateOutlet="linkTpl; context: { $implicit: child }" />
+          <ng-container
+            *ngTemplateOutlet="linkTpl; context: { $implicit: child, inPanel: true }"
+          />
         }
       </div>
     </ng-template>
 
-    <ng-template #linkTpl let-item>
+    <ng-template #linkTpl let-item let-inPanel="inPanel">
       @if (item.route) {
         <a
           [routerLink]="item.route"
           routerLinkActive="sirem-sidebar__link--active"
-          (click)="mobileOpen.set(false)"
+          (click)="closeMenus(inPanel)"
+          [siremTooltip]="linkTooltip(item)"
+          siremTooltipPlacement="right"
           class="sirem-sidebar__link"
           [attr.title]="collapsed() ? item.label : null"
         >
@@ -255,7 +294,9 @@ export interface SiremNavItem {
       } @else if (item.href) {
         <a
           [href]="item.href"
-          (click)="mobileOpen.set(false)"
+          (click)="closeMenus(inPanel)"
+          [siremTooltip]="linkTooltip(item)"
+          siremTooltipPlacement="right"
           class="sirem-sidebar__link"
           [attr.title]="collapsed() ? item.label : null"
         >
@@ -280,7 +321,9 @@ export interface SiremNavItem {
       } @else {
         <button
           type="button"
-          (click)="itemPressed.emit(item); mobileOpen.set(false)"
+          (click)="itemPressed.emit(item); closeMenus(inPanel)"
+          [siremTooltip]="linkTooltip(item)"
+          siremTooltipPlacement="right"
           class="sirem-sidebar__link"
           [attr.title]="collapsed() ? item.label : null"
         >
@@ -324,6 +367,17 @@ export class SiremSidebar {
   readonly mobileOpen = model(false);
   readonly brand = input('SIREM UI');
 
+  /**
+   * Gesto y colocación de los submenús, por franja de ancho de pantalla.
+   *
+   * - `[submenu]="{ trigger: 'hover' }"` → el mismo gesto en todas las franjas.
+   * - `[submenu]="{ breakpoint: 1024, desktop: { trigger: 'hover' }, mobile: { trigger: 'click' } }"`
+   *   → hover por encima de 1024 px y click por debajo.
+   *
+   * Sin configurar: `hover` en escritorio, `click` en móvil y `breakpoint` 768.
+   */
+  readonly submenu = input<SiremSubmenuConfig>({});
+
   readonly itemPressed = output<SiremNavItem>();
 
   private readonly sanitizer = inject(DomSanitizer);
@@ -333,9 +387,15 @@ export class SiremSidebar {
     return this.sanitizer.bypassSecurityTrustHtml(svg);
   }
 
-  private readonly expandedSet = signal<ReadonlySet<string>>(new Set());
-
   readonly brandInitial = computed(() => this.brand().trim().charAt(0).toUpperCase() || 'S');
+
+  /**
+   * Texto del tooltip de un enlace: solo con el sidebar colapsado (rail de
+   * iconos), donde la etiqueta queda oculta. `null` desactiva el tooltip.
+   */
+  linkTooltip(item: SiremNavItem): string | null {
+    return this.collapsed() ? (item.tooltip ?? item.label) : null;
+  }
 
   private readonly permissionSet = computed<Set<string> | null>(() => {
     const p = this.permissions();
@@ -356,14 +416,53 @@ export class SiremSidebar {
     return (item.children ?? []).filter((c) => this.canSee(c));
   }
 
-  isExpanded(label: string): boolean {
-    return this.expandedSet().has(label);
+  // ------------------------------------------------------------ submenús
+
+  /** Ancho del viewport; define qué banda (`mobile` / `desktop`) está activa. */
+  private readonly viewportWidth = injectSiremViewportWidth();
+
+  /**
+   * Opciones del overlay efectivas para el ancho actual: fusiona la banda
+   * activa, los valores comunes y los defectos (`hover` en escritorio,
+   * `click` en móvil; `bottom-start` en la barra horizontal y `right-start`
+   * en el rail lateral).
+   */
+  readonly submenuResolved = computed<SiremSubmenuResolved>(() =>
+    resolveSiremSubmenu(
+      this.submenu(),
+      this.viewportWidth(),
+      this.layout() === 'horizontal' ? 'bottom-start' : 'right-start',
+    ),
+  );
+
+  /** Ítems con el overlay abierto; mueve el chevron y sincroniza la directiva. */
+  private readonly openSet = signal<ReadonlySet<string>>(new Set());
+
+  /** Estado abierto del submenú de un ítem. */
+  submenuOpen(label: string): boolean {
+    return this.openSet().has(label);
   }
 
-  toggle(label: string): void {
-    const next = new Set(this.expandedSet());
-    if (next.has(label)) next.delete(label);
-    else next.add(label);
-    this.expandedSet.set(next);
+  /** Sincroniza el estado del submenú con `[(open)]` de la directiva. */
+  setSubmenuOpen(label: string, open: boolean): void {
+    const next = new Set(this.openSet());
+    if (open) next.add(label);
+    else next.delete(label);
+    this.openSet.set(next);
+  }
+
+  /** Cierra todos los submenús (al elegir un enlace del panel). */
+  closeSubmenus(): void {
+    this.openSet.set(new Set());
+  }
+
+  /**
+   * Pulsación de un enlace: cierra el drawer móvil y, si el enlace estaba
+   * dentro de un panel de overlay, también su submenú, para no dejarlo
+   * flotando sobre la vista recién abierta.
+   */
+  closeMenus(inPanel?: boolean): void {
+    this.mobileOpen.set(false);
+    if (inPanel) this.closeSubmenus();
   }
 }

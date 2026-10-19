@@ -268,6 +268,73 @@ describe('SiremOverlayTrigger · eventos', () => {
   standalone: true,
   imports: [SiremOverlayTrigger],
   template: `
+    <div
+      [siremOverlay]="panel"
+      siremOverlayTrigger="contextmenu"
+      siremOverlayPlacement="bottom-start"
+    >
+      Clic derecho
+    </div>
+    <ng-template #panel><div>PANEL-CONTEXTO</div></ng-template>
+  `,
+})
+class ContextMenuHost {}
+
+describe('SiremOverlayTrigger · click derecho', () => {
+  afterEach(() => {
+    document.querySelectorAll('.sirem-overlay-layer').forEach((el) => el.remove());
+  });
+
+  /** Abre con el botón derecho en un punto concreto del viewport. */
+  const rightClick = (el: HTMLElement, x = 250, y = 160) => {
+    const event = new MouseEvent('contextmenu', {
+      bubbles: true,
+      cancelable: true,
+      clientX: x,
+      clientY: y,
+    });
+    el.dispatchEvent(event);
+    return event;
+  };
+
+  it('should open on right click and swallow the native menu', () => {
+    const fixture = TestBed.createComponent(ContextMenuHost);
+    fixture.detectChanges();
+    const area = (fixture.nativeElement as HTMLElement).querySelector('div') as HTMLElement;
+
+    const event = rightClick(area);
+    fixture.detectChanges();
+
+    // Sin `preventDefault` saldría el menú del navegador por encima.
+    expect(event.defaultPrevented).toBe(true);
+    expect(document.querySelector('.sirem-overlay-panel')).toBeTruthy();
+    expect(document.body.textContent).toContain('PANEL-CONTEXTO');
+    // Un menú contextual se anuncia como `menu`, no como popup genérico.
+    expect(area.getAttribute('aria-haspopup')).toBe('menu');
+  });
+
+  it('should anchor the panel at the pointer, not at the trigger box', () => {
+    const fixture = TestBed.createComponent(ContextMenuHost);
+    fixture.detectChanges();
+    const area = (fixture.nativeElement as HTMLElement).querySelector('div') as HTMLElement;
+
+    rightClick(area, 250, 160);
+    fixture.detectChanges();
+
+    const panel = document.querySelector('.sirem-overlay-panel') as HTMLElement;
+    const m = /translate3d\((-?[\d.]+)px,\s*(-?[\d.]+)px/.exec(panel.style.transform);
+    expect(m).toBeTruthy();
+    // El disparador mide 0×0 en jsdom: si se anclara a su caja saldría en 0,0.
+    expect(Number(m![1])).toBe(250);
+    // `bottom-start` con offset 8 respecto al punto pulsado.
+    expect(Number(m![2])).toBe(168);
+  });
+});
+
+@Component({
+  standalone: true,
+  imports: [SiremOverlayTrigger],
+  template: `
     <button type="button" [siremOverlay]="panel" siremOverlayPlacement="bottom-start">
       Abrir
     </button>

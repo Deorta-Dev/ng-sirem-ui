@@ -6,10 +6,9 @@ import {
   SiremCodeEditor,
   SiremDataTable,
   SiremEmptyState,
-  SiremModal,
+  SiremInput, SiremModal,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
@@ -48,10 +47,9 @@ const ESTADOS_DIAN: ErpEstadoDian[] = [
     SiremCodeEditor,
     SiremDataTable,
     SiremEmptyState,
-    SiremModal,
+    SiremInput, SiremModal,
     SiremPageHeader,
     SiremSearchField,
-    SiremSelect,
     SiremStatCard,
     SiremTimeline,
   ],
@@ -81,13 +79,13 @@ const ESTADOS_DIAN: ErpEstadoDian[] = [
               placeholder="Buscar por número, cliente o NIT…"
               [(value)]="q"
             />
-            <sirem-select-field
+            <sirem-input-field [strictOptions]="true"
               label="Tipo"
               placeholder="Todos"
               [options]="tipoOptions"
               [(value)]="tipo"
             />
-            <sirem-select-field
+            <sirem-input-field [strictOptions]="true"
               label="Estado DIAN"
               placeholder="Todos"
               [options]="estadoOptions"
@@ -329,8 +327,8 @@ export class FacturacionElectronicaDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_12rem_13rem]">
   <sirem-search-field placeholder="Buscar por número, cliente o NIT…" [(value)]="q" />
-  <sirem-select-field label="Tipo" placeholder="Todos" [options]="tipoOptions" [(value)]="tipo" />
-  <sirem-select-field label="Estado DIAN" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+  <sirem-input-field [strictOptions]="true" label="Tipo" placeholder="Todos" [options]="tipoOptions" [(value)]="tipo" />
+  <sirem-input-field [strictOptions]="true" label="Estado DIAN" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
 </div>
 
 @if (filtrados().length) {
@@ -353,7 +351,7 @@ export class FacturacionElectronicaDemoPage {
 import {
   SiremDataTable,
   SiremModal,
-  SiremSelect,
+  SiremInput,
   SiremStatCard,
   type ErpDocumentoVenta,
   type ErpEstadoDian,

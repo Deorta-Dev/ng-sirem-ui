@@ -19,10 +19,11 @@ export * from './lib/layout/sidebar/sirem-sidebar';
 export * from './lib/layout/topbar/sirem-topbar';
 export * from './lib/layout/breadcrumbs/sirem-breadcrumbs';
 
-// Navegación (perfil, paleta Ctrl+K)
+// Navegación (perfil, paleta Ctrl+K, control segmentado)
 export * from './lib/navigation/user-menu/sirem-user-menu';
 export * from './lib/navigation/search-palette/sirem-search-palette';
 export * from './lib/navigation/navbar/sirem-navbar';
+export * from './lib/navigation/segmented/sirem-segmented';
 
 // Datos (listados lo-resource-set-list, tarjetas, estados)
 export * from './lib/data-display/page-header/sirem-page-header';
@@ -37,6 +38,8 @@ export * from './lib/data-display/empty-state/sirem-empty-state';
 export * from './lib/data-display/chart/sirem-chart';
 export * from './lib/data-display/list/sirem-list';
 export * from './lib/data-display/card-list/sirem-card-list';
+export * from './lib/data-display/sparkline/sirem-sparkline';
+export * from './lib/data-display/date-chip/sirem-date-chip';
 
 // Campos de formulario (doble vía con [(value)] / [(checked)])
 export * from './lib/form/field-box';
@@ -68,14 +71,17 @@ export * from './lib/overlays/overlay/sirem-overlay-position';
 export * from './lib/overlays/overlay/sirem-overlay-layer';
 export * from './lib/overlays/overlay/sirem-overlay-viewport';
 export * from './lib/overlays/overlay/sirem-overlay-trigger';
+export * from './lib/overlays/overlay/sirem-submenu';
 
 // Agenda (calendario con estados por colores)
 export * from './lib/schedule/calendar/sirem-calendar';
+export * from './lib/schedule/agenda/sirem-agenda';
 
 // Directivas
 export * from './lib/directives/autofocus/sirem-autofocus.directive';
 export * from './lib/directives/click-outside/sirem-click-outside.directive';
 export * from './lib/directives/numbers-only/sirem-numbers-only.directive';
+export * from './lib/directives/tooltip/sirem-tooltip.directive';
 
 // Pipes
 export * from './lib/pipes/money/sirem-money.pipe';

@@ -3,10 +3,9 @@ import {
   SiremButton,
   SiremDataTable,
   SiremEmptyState,
-  SiremModal,
+  SiremInput, SiremModal,
   SiremPageHeader,
   SiremSearchField,
-  SiremSelect,
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
@@ -33,10 +32,9 @@ function etiquetaEstado(m: ErpMovimientoBancario): 'Conciliado' | 'Pendiente' {
     SiremButton,
     SiremDataTable,
     SiremEmptyState,
-    SiremModal,
+    SiremInput, SiremModal,
     SiremPageHeader,
     SiremSearchField,
-    SiremSelect,
     SiremStatCard,
   ],
   template: `
@@ -76,7 +74,7 @@ function etiquetaEstado(m: ErpMovimientoBancario): 'Conciliado' | 'Pendiente' {
               placeholder="Descripción o referencia…"
               [(value)]="q"
             />
-            <sirem-select-field
+            <sirem-input-field [strictOptions]="true"
               label="Estado"
               placeholder="Todos"
               [options]="estadoOptions"
@@ -301,7 +299,7 @@ export class ConciliacionBancariaDemoPage {
 
 <div class="grid gap-3 md:grid-cols-[1fr_13rem]">
   <sirem-search-field label="Buscar movimiento" placeholder="Descripción o referencia…" [(value)]="q" />
-  <sirem-select-field label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
+  <sirem-input-field [strictOptions]="true" label="Estado" placeholder="Todos" [options]="estadoOptions" [(value)]="estado" />
 </div>
 
 @if (ultimoExtracto(); as archivo) {
@@ -330,7 +328,7 @@ export class ConciliacionBancariaDemoPage {
       name: 'conciliacion-bancaria.component.ts',
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
-import { SiremDataTable, SiremModal, SiremSelect, SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremDataTable, SiremModal, SiremInput, SiremTableColumn } from 'deorta-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { MOVIMIENTOS_BANCARIOS, type ErpMovimientoBancario } from '../../data/erp-mock';
 

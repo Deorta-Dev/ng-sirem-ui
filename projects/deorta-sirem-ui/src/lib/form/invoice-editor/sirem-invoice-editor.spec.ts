@@ -42,6 +42,29 @@ describe('SiremInvoiceEditor', () => {
     expect(fixture.componentInstance.totals().total).toBe(119000);
   });
 
+  it('should pick the customer from the strict combobox', () => {
+    const fixture = TestBed.createComponent(SiremInvoiceEditor);
+    fixture.componentRef.setInput('draft', { ...siremEmptyInvoice('FV-1004'), customerId: null });
+    fixture.componentRef.setInput('customers', [
+      { value: 7, label: 'Óptica Visión SAS' },
+      { value: 8, label: 'Clínica del Norte' },
+    ]);
+    fixture.detectChanges();
+
+    const field = (fixture.nativeElement as HTMLElement).querySelector(
+      'sirem-input-field',
+    ) as HTMLElement;
+    expect(field).toBeTruthy();
+    // Estricto → indicador ▾ (no el ✎ de las opciones libres).
+    expect(field.querySelector('.sirem-input__chev')).toBeTruthy();
+    expect(field.querySelector('.sirem-input__chev--free')).toBeNull();
+
+    fixture.componentInstance.setCustomer(7);
+    fixture.detectChanges();
+    expect(fixture.componentInstance.draft().customerId).toBe(7);
+    expect(fixture.componentInstance.selectedCustomer()?.label).toBe('Óptica Visión SAS');
+  });
+
   it('should add and remove concept lines', () => {
     const fixture = TestBed.createComponent(SiremInvoiceEditor);
     fixture.componentRef.setInput('draft', draftFixture());

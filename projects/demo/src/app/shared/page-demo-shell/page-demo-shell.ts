@@ -38,7 +38,7 @@ export interface DemoCodeFile {
         <div class="mx-auto flex min-h-8 max-w-screen-2xl items-center gap-2">
           <a
             routerLink="/"
-            class="inline-flex h-8 items-center gap-1 rounded-md px-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sirem-600 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+            class="inline-flex h-8 items-center gap-1 rounded-full px-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sirem-600 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
             aria-label="Volver al catálogo"
           >
             <span aria-hidden="true">←</span>
@@ -64,7 +64,7 @@ export interface DemoCodeFile {
 
       <sirem-modal [(open)]="codeOpen" [title]="modalTitle()" size="xl">
         <div
-          class="flex h-[62dvh] min-h-[18rem] flex-col overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-950"
+          class="flex h-[62dvh] min-h-[18rem] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-950"
         >
           <div
             class="flex min-h-11 items-end overflow-hidden border-b border-slate-700 bg-slate-900"

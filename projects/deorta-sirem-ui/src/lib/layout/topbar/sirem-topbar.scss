@@ -27,6 +27,18 @@
   backdrop-filter: blur(12px) saturate(1.4);
 }
 
+/* Fondo transparente: el shell se ve a través de la barra. Va tras --blur
+   para ganarle al background translúcido cuando ambas clases conviven
+   (queda transparente + backdrop-filter). */
+.sirem-topbar--transparent {
+  background: transparent;
+}
+
+/* Elevación al hacer scroll (shadowOnScroll). */
+.sirem-topbar--shadow {
+  box-shadow: var(--sirem-shadow-sm);
+}
+
 /* Barra flotante: tarjeta redondeada separada de los bordes. */
 .sirem-topbar--floating {
   height: 3.5rem;
@@ -49,7 +61,7 @@
 .sirem-topbar__icon-btn {
   border: 0;
   background: none;
-  border-radius: 0.5rem;
+  border-radius: var(--sirem-radius-pill, 999px);
   padding: 0.5rem;
   color: var(--sirem-text-soft);
   cursor: pointer;
@@ -60,7 +72,7 @@
 }
 
 .sirem-topbar__icon-btn:focus-visible {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
 }
 
 .sirem-topbar__icon-btn--menu {
@@ -93,7 +105,7 @@
 }
 
 .sirem-topbar__search:focus-visible {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
 }
 
 .sirem-topbar__search-text {
@@ -132,7 +144,7 @@
   gap: 0.5rem;
   border: 0;
   background: none;
-  border-radius: 0.5rem;
+  border-radius: var(--sirem-radius-md, 1rem);
   padding: 0 0.5rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -145,7 +157,7 @@
 }
 
 .sirem-topbar__space:focus-visible {
-  outline: 2px solid var(--color-sirem-600);
+  outline: 2px solid var(--sirem-focus-ring);
 }
 
 .sirem-topbar__space-dot {
@@ -232,7 +244,6 @@
 .sirem-topbar--cards .sirem-topbar__icon-btn {
   height: 2.5rem;
   border: 1px solid var(--sirem-border-soft);
-  border-radius: var(--sirem-radius-md);
   background: var(--sirem-surface);
   box-shadow: var(--sirem-shadow-sm);
 }
