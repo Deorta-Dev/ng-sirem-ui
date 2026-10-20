@@ -27,7 +27,7 @@ export const STREAMLINE_ICON_REGISTRY = new InjectionToken<StreamlineIconMap>(
  *
  * ```ts
  * // app.config.ts
- * import { provideStreamlineIcons } from 'deorta-sirem-ui';
+ * import { provideStreamlineIcons } from '@deorta-dev/ng-sirem-ui';
  * import { STREAMLINE_HOME, STREAMLINE_USER } from './icons/streamline.icons';
  *
  * export const appConfig: ApplicationConfig = {

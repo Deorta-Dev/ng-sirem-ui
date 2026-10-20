@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremTopbar, SiremButton, SiremCard, SiremSticky, SiremUserMenu } from 'deorta-sirem-ui';
+import { SiremTopbar, SiremButton, SiremCard, SiremSticky, SiremUserMenu } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -194,7 +194,7 @@ export class TopbarDemoPage {
   <!-- contenido alto para poder desplazar -->
 </div>
 <span>stuck: {{ stuck() }}</span>`;
-  readonly tSticky = "import { signal } from '@angular/core';\nimport { SiremTopbar, SiremSticky } from 'deorta-sirem-ui';\n\nreadonly stuck = signal(false);";
+  readonly tSticky = "import { signal } from '@angular/core';\nimport { SiremTopbar, SiremSticky } from '@deorta-dev/ng-sirem-ui';\n\nreadonly stuck = signal(false);";
   readonly hCards = `<sirem-topbar
   appearance="cards"
   searchAlign="center"
@@ -217,5 +217,5 @@ export class TopbarDemoPage {
   readonly h1 = '<sirem-topbar />';
   readonly h2 = '<sirem-topbar spaceLabel="Óptica Norte">\n  <div slot="actions" class="flex gap-2">\n    <sirem-button size="sm" variant="secondary">Buscar</sirem-button>\n  </div>\n</sirem-topbar>';
   readonly h3 = '<sirem-topbar spaceLabel="SIREM">\n  <sirem-user-menu slot="user" userName="María Torres" userDetail="Optómetra" />\n</sirem-topbar>\n<span class="text-sm text-slate-600">Menú: {{ msg() }}</span>';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremTopbar, SiremButton, SiremUserMenu } from 'deorta-sirem-ui';\n\nreadonly msg = signal('');";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremTopbar, SiremButton, SiremUserMenu } from '@deorta-dev/ng-sirem-ui';\n\nreadonly msg = signal('');";
 }

@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremInput, SiremList, type SiremListItem,
   SiremModal, type SiremModalAction, SiremPageHeader, type SiremSelectOption, SiremStatCard, SiremSwitch, type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { ALERTAS_SALUD, EMPRESAS_CLIENTES, type ErpAlerta } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -239,7 +239,7 @@ export class SaludClientesDemoPage {
 import {
   SiremDataTable, SiremList, type SiremListItem, SiremModal, type SiremModalAction,
   SiremInput, type SiremSelectOption, SiremStatCard, SiremSwitch, type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { ALERTAS_SALUD, EMPRESAS_CLIENTES, type ErpAlerta } from '../../data/erp-mock';
 

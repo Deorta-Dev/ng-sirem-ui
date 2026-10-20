@@ -3,7 +3,7 @@ import {
   SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal, SiremPageHeader,
   SiremSearchField, SiremSelectOption, SiremStatCard, SiremTableColumn,
   SiremTimeline, SiremTimelineItem,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   DOCUMENTOS_NOMINA,
@@ -272,7 +272,7 @@ export class NominaDianDemoPage {
 import {
   SiremDataTable, SiremEmptyState, SiremModal, SiremInput, SiremSelectOption,
   SiremStatCard, SiremTableColumn, SiremTimeline, SiremTimelineItem,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   DOCUMENTOS_NOMINA, type ErpDocumentoNomina, type ErpEstadoNominaDian,

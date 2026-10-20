@@ -3,7 +3,7 @@ import {
   SiremButton, SiremCardList, SiremCardListField, SiremInput, SiremModal, SiremModalAction,
   SiremPageHeader, SiremSearchField, SiremSelectOption, SiremStatCard,
   SiremTimeline, SiremTimelineItem,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { FORMATOS_TRIBUTARIOS, type ErpFormatoTributario } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -233,7 +233,7 @@ export class InformacionExogenaDemoPage {
       name: 'informacion-exogena.component.ts',
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
-import { SiremCardList, SiremModal, SiremTimeline, type SiremModalAction } from 'deorta-sirem-ui';
+import { SiremCardList, SiremModal, SiremTimeline, type SiremModalAction } from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { FORMATOS_TRIBUTARIOS, type ErpFormatoTributario } from '../../data/erp-mock';
 

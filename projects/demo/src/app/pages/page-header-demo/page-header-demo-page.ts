@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremPageHeader, SiremButton, SiremSticky } from 'deorta-sirem-ui';
+import { SiremPageHeader, SiremButton, SiremSticky } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -175,6 +175,6 @@ export class PageHeaderDemoPage {
   <div #fin>Fin del área fija</div>
   <!-- más contenido -->
 </div>`;
-  readonly t = "import { SiremPageHeader, SiremButton } from 'deorta-sirem-ui';";
-  readonly tSticky = "import { signal } from '@angular/core';\nimport { SiremPageHeader, SiremButton, SiremSticky } from 'deorta-sirem-ui';\n\nreadonly stuck = signal(false);";
+  readonly t = "import { SiremPageHeader, SiremButton } from '@deorta-dev/ng-sirem-ui';";
+  readonly tSticky = "import { signal } from '@angular/core';\nimport { SiremPageHeader, SiremButton, SiremSticky } from '@deorta-dev/ng-sirem-ui';\n\nreadonly stuck = signal(false);";
 }

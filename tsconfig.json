@@ -4,7 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "deorta-sirem-ui": ["./projects/deorta-sirem-ui/src/public-api.ts"]
+      "@deorta-dev/ng-sirem-ui": ["./projects/deorta-sirem-ui/src/public-api.ts"]
     },
     "strict": true,
     "noImplicitOverride": true,

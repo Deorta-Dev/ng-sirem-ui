@@ -6,7 +6,7 @@ import {
   SiremPageHeader,
   SiremSearchField,
   SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
 
 @Component({
@@ -117,7 +117,7 @@ import {
   SiremDataTable,
   SiremSearchField,
   type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 
 export class PageListadoPage {
   readonly q = signal('');

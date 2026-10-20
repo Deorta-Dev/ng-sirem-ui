@@ -14,7 +14,7 @@ import {
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   bucketVencimiento,
@@ -370,7 +370,7 @@ export class CuentasPorCobrarDemoPage {
       name: 'cuentas-por-cobrar.component.ts',
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
-import { SiremChart, SiremDataTable, SiremModal, SiremInput, SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremChart, SiremDataTable, SiremModal, SiremInput, SiremTableColumn } from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   bucketVencimiento, DOCUMENTOS_VENTA, type ErpBucket, type ErpDocumentoVenta,

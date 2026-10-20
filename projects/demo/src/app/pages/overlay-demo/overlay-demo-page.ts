@@ -7,7 +7,7 @@ import {
   SiremListItem,
   SiremOverlayTrigger,
   SiremStatCard,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -417,14 +417,14 @@ export class OverlayDemoPage {
   Haz clic derecho aquí
 </div>`;
 
-  readonly t1 = `import { SiremOverlayTrigger } from 'deorta-sirem-ui';
+  readonly t1 = `import { SiremOverlayTrigger } from '@deorta-dev/ng-sirem-ui';
 
 @Component({ imports: [SiremOverlayTrigger], /* … */ })
 export class MiPagina {}`;
 
   readonly t2 = `// computeOverlayPosition es una función pura y se puede usar
 // por separado si necesitas calcular la posición a mano.
-import { computeOverlayPosition } from 'deorta-sirem-ui';
+import { computeOverlayPosition } from '@deorta-dev/ng-sirem-ui';
 
 const { x, y, placement, flipped, shifted, maxWidth, maxHeight } =
   computeOverlayPosition(

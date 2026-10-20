@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremCheckbox } from 'deorta-sirem-ui';
+import { SiremCheckbox } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -27,5 +27,5 @@ export class CheckboxDemoPage {
   readonly h1 = '<sirem-checkbox-field label="Acepto términos" [(checked)]="a" />';
   readonly h2 = '<sirem-checkbox-field label="Consentimiento informado"\n  description="Autorizo el examen visual." [(checked)]="b" />';
   readonly h3 = '<sirem-checkbox-field label="Verificado" [disabled]="true" [(checked)]="c" />\n<sirem-checkbox-field label="Pendiente" [disabled]="true" [(checked)]="d" />';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremCheckbox } from 'deorta-sirem-ui';\n\nreadonly a = signal(false);\nreadonly b = signal(true);\nreadonly c = signal(true);\nreadonly d = signal(false);";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremCheckbox } from '@deorta-dev/ng-sirem-ui';\n\nreadonly a = signal(false);\nreadonly b = signal(true);\nreadonly c = signal(true);\nreadonly d = signal(false);";
 }

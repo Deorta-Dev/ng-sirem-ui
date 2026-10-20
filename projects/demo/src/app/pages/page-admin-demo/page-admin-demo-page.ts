@@ -27,7 +27,7 @@ import {
   SiremTopbar,
   SiremUserMenu,
   SiremUserMenuGroup,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
 
@@ -759,7 +759,7 @@ import {
   SiremSubmenuConfig,
   SiremTopbar,
   SiremUserMenu,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 
 @Component({
   selector: 'app-page-admin',

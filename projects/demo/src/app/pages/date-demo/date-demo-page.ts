@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremDate } from 'deorta-sirem-ui';
+import { SiremDate } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -27,5 +27,5 @@ export class DateDemoPage {
   readonly h1 = '<sirem-date-field label="Nacimiento" [(value)]="a" />';
   readonly h2 = '<sirem-date-field label="Cita" [(value)]="b" />  <!-- ISO yyyy-MM-dd -->';
   readonly h3 = '<sirem-date-field label="Control" min="2026-01-01" max="2026-12-31" [(value)]="c" />\n<sirem-date-field label="Cirugía" error="Fecha fuera de agenda." [(value)]="d" />';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremDate } from 'deorta-sirem-ui';\n\nreadonly a = signal(null);\nreadonly b = signal('2026-09-24');\nreadonly c = signal(null);\nreadonly d = signal(null);";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremDate } from '@deorta-dev/ng-sirem-ui';\n\nreadonly a = signal(null);\nreadonly b = signal('2026-09-24');\nreadonly c = signal(null);\nreadonly d = signal(null);";
 }

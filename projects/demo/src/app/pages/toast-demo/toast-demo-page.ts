@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { DynamicToastPosition, DynamicToastService, DynamicToastState } from 'ngx-dynamic-toast';
-import { SiremButton } from 'deorta-sirem-ui';
+import { SiremButton } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 

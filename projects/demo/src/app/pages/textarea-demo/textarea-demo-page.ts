@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremTextarea } from 'deorta-sirem-ui';
+import { SiremTextarea } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -27,5 +27,5 @@ export class TextareaDemoPage {
   readonly h1 = '<sirem-textarea-field label="Motivo de consulta"\n  placeholder="Describa…" [(value)]="a" />';
   readonly h2 = '<sirem-textarea-field label="Evolución" [rows]="6"\n  hint="Incluya AV y RX." [(value)]="b" />';
   readonly h3 = '<sirem-textarea-field label="Observaciones"\n  error="Mínimo 10 caracteres." [(value)]="c" />\n<sirem-textarea-field label="Cerrada" [disabled]="true" [(value)]="d" />';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremTextarea } from 'deorta-sirem-ui';\n\nreadonly a = signal('');\nreadonly b = signal('');\nreadonly c = signal('');\nreadonly d = signal('Nota cerrada.');";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremTextarea } from '@deorta-dev/ng-sirem-ui';\n\nreadonly a = signal('');\nreadonly b = signal('');\nreadonly c = signal('');\nreadonly d = signal('Nota cerrada.');";
 }

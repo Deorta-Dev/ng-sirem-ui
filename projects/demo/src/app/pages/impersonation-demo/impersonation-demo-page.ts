@@ -3,7 +3,7 @@ import {
   SiremBadge, SiremBreadcrumbs, SiremCard, SiremCardList, type SiremCardListField,
   SiremConfirmDialog, SiremList, type SiremListItem, SiremModal, SiremPageHeader,
   SiremSearchField, type SiremBadgeTone, type SiremCrumb,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { EMPRESAS_CLIENTES, type ErpEmpresa } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -235,7 +235,7 @@ export class ImpersonationDemoPage {
 import {
   SiremBreadcrumbs, SiremConfirmDialog, SiremList, type SiremListItem, SiremModal,
   SiremSearchField, type SiremCrumb,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { EMPRESAS_CLIENTES, type ErpEmpresa } from '../../data/erp-mock';
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremBreadcrumbs } from 'deorta-sirem-ui';
+import { SiremBreadcrumbs } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -28,5 +28,5 @@ export class BreadcrumbsDemoPage {
   ];
   readonly h1 = '<sirem-breadcrumbs [items]="dos" />';
   readonly h2 = '<sirem-breadcrumbs [items]="cuatro" />  <!-- último sin link = actual -->';
-  readonly t = "import { SiremBreadcrumbs } from 'deorta-sirem-ui';\n\nreadonly dos = [{ label: 'Inicio', link: '/' }, { label: 'Pacientes' }];\n\nreadonly cuatro = [\n  { label: 'Inicio', link: '/' },\n  { label: 'Pacientes', link: '/demo/data-table' },\n  { label: 'HC-2026-001', link: '/demo/card' },\n  { label: 'Evolución' },\n];";
+  readonly t = "import { SiremBreadcrumbs } from '@deorta-dev/ng-sirem-ui';\n\nreadonly dos = [{ label: 'Inicio', link: '/' }, { label: 'Pacientes' }];\n\nreadonly cuatro = [\n  { label: 'Inicio', link: '/' },\n  { label: 'Pacientes', link: '/demo/data-table' },\n  { label: 'HC-2026-001', link: '/demo/card' },\n  { label: 'Evolución' },\n];";
 }

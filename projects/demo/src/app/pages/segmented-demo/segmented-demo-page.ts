@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremSegmented, type SiremSegmentedItem } from 'deorta-sirem-ui';
+import { SiremSegmented, type SiremSegmentedItem } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -105,13 +105,13 @@ export class SegmentedDemoPage {
   ];
 
   readonly t0 = `import { signal } from '@angular/core';
-import { SiremSegmented } from 'deorta-sirem-ui';
+import { SiremSegmented } from '@deorta-dev/ng-sirem-ui';
 
 /** 'table' | 'cards' (SiremViewMode); sin items = preset Tabla ⇄ Tarjetas. */
 readonly vista = signal<string | null>('table');`;
 
   readonly t1 = `import { signal } from '@angular/core';
-import { SiremSegmented, type SiremSegmentedItem } from 'deorta-sirem-ui';
+import { SiremSegmented, type SiremSegmentedItem } from '@deorta-dev/ng-sirem-ui';
 
 readonly divisa = signal<string | null>('btc');
 readonly divisas: SiremSegmentedItem[] = [

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremAvatar } from 'deorta-sirem-ui';
+import { SiremAvatar } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -33,5 +33,5 @@ export class AvatarDemoPage {
   readonly h1 = '<sirem-avatar name="María Torres" />\n<sirem-avatar name="Juan Pérez" />\n<sirem-avatar name="Óptica SIREM" />';
   readonly h2 = '<sirem-avatar name="Ana Ruiz" size="xs" />\n<sirem-avatar name="Ana Ruiz" size="sm" />\n<sirem-avatar name="Ana Ruiz" size="md" />\n<sirem-avatar name="Ana Ruiz" size="lg" />';
   readonly h3 = '<sirem-avatar name="Luis Gómez" presence="success" />\n<sirem-avatar name="Luis Gómez" presence="warning" />\n<sirem-avatar name="Luis Gómez" presence="danger" />\n<sirem-avatar name="Luis Gómez" presence="neutral" />';
-  readonly t = "import { SiremAvatar } from 'deorta-sirem-ui';";
+  readonly t = "import { SiremAvatar } from '@deorta-dev/ng-sirem-ui';";
 }

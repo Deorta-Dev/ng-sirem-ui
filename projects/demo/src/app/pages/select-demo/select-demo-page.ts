@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremInput, SiremSelect } from 'deorta-sirem-ui';
+import { SiremInput, SiremSelect } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -38,12 +38,12 @@ export class SelectDemoPage {
   readonly h3 = '<sirem-select-field label="Médico" [options]="med"\n  [required]="true" [(value)]="d" />\n<sirem-select-field label="Bloqueado" [options]="med"\n  [disabled]="true" [(value)]="e" />';
   readonly h4 = '<sirem-input-field label="EPS" [options]="eps" [strictOptions]="true"\n  [(value)]="f" />';
   readonly t4 = `import { signal } from '@angular/core';
-import { SiremInput } from 'deorta-sirem-ui';
+import { SiremInput } from '@deorta-dev/ng-sirem-ui';
 
 readonly f = signal<string | number | null>(null);
 readonly eps = [
   { value: 'sura', label: 'Sura' },
   { value: 'sanitas', label: 'Sanitas' },
 ];`;
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremSelect } from 'deorta-sirem-ui';\n\nreadonly a = signal(null);\nreadonly b = signal(null);\nreadonly c = signal(null);\nreadonly d = signal(null);\nreadonly e = signal(null);\nreadonly eps = [{ value: 'sura', label: 'Sura' }, { value: 'sanitas', label: 'Sanitas' }];\nreadonly docs = [{ value: 'cc', label: 'CC' }, { value: 'ti', label: 'TI' }];\nreadonly sedes = [{ value: 'norte', label: 'Norte' }, { value: 'sur', label: 'Sur' }];\nreadonly med = [{ value: 'm1', label: 'Dra. Ruiz' }, { value: 'm2', label: 'Dr. Pérez' }];";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremSelect } from '@deorta-dev/ng-sirem-ui';\n\nreadonly a = signal(null);\nreadonly b = signal(null);\nreadonly c = signal(null);\nreadonly d = signal(null);\nreadonly e = signal(null);\nreadonly eps = [{ value: 'sura', label: 'Sura' }, { value: 'sanitas', label: 'Sanitas' }];\nreadonly docs = [{ value: 'cc', label: 'CC' }, { value: 'ti', label: 'TI' }];\nreadonly sedes = [{ value: 'norte', label: 'Norte' }, { value: 'sur', label: 'Sur' }];\nreadonly med = [{ value: 'm1', label: 'Dra. Ruiz' }, { value: 'm2', label: 'Dr. Pérez' }];";
 }

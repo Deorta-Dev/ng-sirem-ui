@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremClickOutsideDirective, SiremButton } from 'deorta-sirem-ui';
+import { SiremClickOutsideDirective, SiremButton } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -33,7 +33,7 @@ export class ClickOutsideDemoPage {
   </div>
 }`;
   readonly t = `import { signal } from '@angular/core';
-import { SiremClickOutsideDirective, SiremButton } from 'deorta-sirem-ui';
+import { SiremClickOutsideDirective, SiremButton } from '@deorta-dev/ng-sirem-ui';
 
 readonly open = signal(false);`;
 }

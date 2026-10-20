@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremPopupCard, SiremPopupRow } from 'deorta-sirem-ui';
+import { SiremPopupCard, SiremPopupRow } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -28,7 +28,7 @@ export class PopupCardDemoPage {
   nada() {}
   readonly h1 = '<sirem-popup-card title="Vehículo 12" [rows]="gps" (closed)="nada()" />';
   readonly h2 = '<sirem-popup-card title="Sede Norte" [rows]="sede" [closable]="false" />';
-  readonly t = `import { SiremPopupCard, SiremPopupRow } from 'deorta-sirem-ui';
+  readonly t = `import { SiremPopupCard, SiremPopupRow } from '@deorta-dev/ng-sirem-ui';
 
 readonly gps: SiremPopupRow[] = [
   { label: 'Placa', value: 'ABC-123' },

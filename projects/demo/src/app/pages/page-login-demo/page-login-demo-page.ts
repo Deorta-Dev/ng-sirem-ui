@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremButton, SiremCard, SiremInput } from 'deorta-sirem-ui';
+import { SiremButton, SiremCard, SiremInput } from '@deorta-dev/ng-sirem-ui';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
 
 @Component({
@@ -91,7 +91,7 @@ export class PageLoginDemoPage {
       name: 'page-login.component.ts',
       language: 'typescript',
       code: `import { signal } from '@angular/core';
-import { SiremButton, SiremCard, SiremInput } from 'deorta-sirem-ui';
+import { SiremButton, SiremCard, SiremInput } from '@deorta-dev/ng-sirem-ui';
 
 export class PageLoginPage {
   readonly user = signal('');

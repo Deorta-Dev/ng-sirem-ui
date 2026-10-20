@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremRichText } from 'deorta-sirem-ui';
+import { SiremRichText } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -33,7 +33,7 @@ export class RichTextDemoPage {
   readonly h2 = '<sirem-rich-text label="Fórmula" [(value)]="formula" />\n<div class="w-full rounded-lg border border-slate-200 p-3 text-sm text-slate-600">\n  <p class="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">HTML generado</p>\n  <code class="break-all">{{ formula() }}</code>\n</div>';
   readonly h3 = '<sirem-rich-text label="Consentimiento"\n  error="Describe el consentimiento informado." [(value)]="vacio" />';
   readonly t = `import { signal } from '@angular/core';
-import { SiremRichText } from 'deorta-sirem-ui';
+import { SiremRichText } from '@deorta-dev/ng-sirem-ui';
 
 readonly evo = signal('');
 readonly vacio = signal('');

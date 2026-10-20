@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremMoneyPipe } from 'deorta-sirem-ui';
+import { SiremMoneyPipe } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -26,5 +26,5 @@ export class MoneyDemoPage {
   readonly h1 = '<p class="text-2xl font-bold">{{ 250000 | siremMoney }}</p>';
   readonly h2 = '<p>{{ 99 | siremMoney:\'USD\' }}</p>';
   readonly h3 = '<p>{{ null | siremMoney }}</p>';
-  readonly t = "import { SiremMoneyPipe } from 'deorta-sirem-ui';";
+  readonly t = "import { SiremMoneyPipe } from '@deorta-dev/ng-sirem-ui';";
 }

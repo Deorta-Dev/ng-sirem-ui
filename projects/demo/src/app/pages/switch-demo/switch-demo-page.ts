@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremSwitch } from 'deorta-sirem-ui';
+import { SiremSwitch } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -27,5 +27,5 @@ export class SwitchDemoPage {
   readonly h1 = '<sirem-switch-field label="Recordatorios" [(checked)]="a" />\n<sirem-switch-field label="Telemedicina" [(checked)]="b" />';
   readonly h2 = '<sirem-switch-field label="Consentimiento"\n  description="Autoriza tratamiento de datos." [(checked)]="c" />';
   readonly h3 = '<sirem-switch-field label="Bloqueado" [disabled]="true" [(checked)]="d" />';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremSwitch } from 'deorta-sirem-ui';\n\nreadonly a = signal(false);\nreadonly b = signal(true);\nreadonly c = signal(false);\nreadonly d = signal(true);";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremSwitch } from '@deorta-dev/ng-sirem-ui';\n\nreadonly a = signal(false);\nreadonly b = signal(true);\nreadonly c = signal(false);\nreadonly d = signal(true);";
 }

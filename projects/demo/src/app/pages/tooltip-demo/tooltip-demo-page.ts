@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremButton, SiremFiIcon, SiremTooltipDirective } from 'deorta-sirem-ui';
+import { SiremButton, SiremFiIcon, SiremTooltipDirective } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -78,7 +78,7 @@ export class TooltipDemoPage {
     { label: 'Equipo', icon: 'rr-users' },
   ];
 
-  readonly t1 = `import { SiremTooltipDirective } from 'deorta-sirem-ui';`;
+  readonly t1 = `import { SiremTooltipDirective } from '@deorta-dev/ng-sirem-ui';`;
 
   readonly t2 = `readonly rail = [
   { label: 'Inicio', icon: 'rr-home' },
@@ -86,7 +86,7 @@ export class TooltipDemoPage {
   { label: 'Equipo', icon: 'rr-users' },
 ];`;
 
-  readonly t3 = `import { SiremTooltipDirective } from 'deorta-sirem-ui';`;
+  readonly t3 = `import { SiremTooltipDirective } from '@deorta-dev/ng-sirem-ui';`;
 
   readonly h1 = `<sirem-button [siremTooltip]="'Arriba'">Top</sirem-button>
 <sirem-button [siremTooltip]="'Abajo'" siremTooltipPlacement="bottom">Bottom</sirem-button>

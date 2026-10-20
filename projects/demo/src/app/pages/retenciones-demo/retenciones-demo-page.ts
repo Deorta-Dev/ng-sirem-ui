@@ -14,7 +14,7 @@ import {
   type SiremModalAction,
   type SiremSelectOption,
   type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   CONCEPTOS_RETENCION,
@@ -392,7 +392,7 @@ import {
   SiremBadge, SiremDataTable, SiremInput, SiremModal, SiremSwitch,
   type ErpConceptoRetencion, type ErpProveedor,
   type SiremBadgeTone, type SiremModalAction, type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { CONCEPTOS_RETENCION, PROVEEDORES } from '../../data/erp-mock';
 

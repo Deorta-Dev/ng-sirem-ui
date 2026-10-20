@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SiremNumbersOnlyDirective } from 'deorta-sirem-ui';
+import { SiremNumbersOnlyDirective } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -31,7 +31,7 @@ export class NumbersOnlyDemoPage {
   readonly h2 = `<input siremNumbersOnly siremNumbersAllowDecimal [(ngModel)]="peso" placeholder="0.00"
   class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" />`;
   readonly t = `import { FormsModule } from '@angular/forms';
-import { SiremNumbersOnlyDirective } from 'deorta-sirem-ui';
+import { SiremNumbersOnlyDirective } from '@deorta-dev/ng-sirem-ui';
 
 doc = '';
 peso = '';`;

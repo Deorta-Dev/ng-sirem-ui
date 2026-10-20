@@ -13,7 +13,7 @@ import {
   SiremSearchField,
   SiremSelectOption,
   SiremStatCard,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { CUENTAS_TESORERIA, PRODUCTOS, type ErpProducto } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -402,7 +402,7 @@ export class PosDemoPage {
       name: 'pos.component.ts',
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
-import { SiremList, SiremListItem, SiremModal, SiremSelectOption } from 'deorta-sirem-ui';
+import { SiremList, SiremListItem, SiremModal, SiremSelectOption } from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { CUENTAS_TESORERIA, PRODUCTOS, type ErpProducto } from '../../data/erp-mock';
 

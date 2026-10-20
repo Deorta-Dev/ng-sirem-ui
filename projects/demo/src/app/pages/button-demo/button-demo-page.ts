@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremButton } from 'deorta-sirem-ui';
+import { SiremButton } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -62,7 +62,7 @@ export class ButtonDemoPage {
   readonly h4 = '<sirem-button variant="primary" [(loading)]="cargando">Guardar</sirem-button>\n<sirem-button variant="secondary" [disabled]="true">Deshabilitado</sirem-button>';
   readonly h5 = '<sirem-button variant="success" [action]="guardar"\n  (finished)="msg.set(\'Guardado ✓\')" (failed)="msg.set(\'Falló\')">\n  Guardar historia\n</sirem-button>';
   readonly h6 = '<sirem-button variant="secondary">Con borde</sirem-button>\n<sirem-button variant="secondary" [bordered]="false">Sin borde</sirem-button>\n<sirem-button variant="secondary" iconOnly [bordered]="false" aria-label="Buscar">\n  <i slot="icon" class="fi fi-rr-search"></i>\n</sirem-button>';
-  readonly t1 = "import { SiremButton } from 'deorta-sirem-ui';";
-  readonly t2 = "import { signal } from '@angular/core';\nimport { SiremButton } from 'deorta-sirem-ui';\n\nreadonly cargando = signal(false);";
-  readonly t3 = "import { signal } from '@angular/core';\nimport { SiremButton } from 'deorta-sirem-ui';\n\nreadonly msg = signal('');\nreadonly guardar = () => new Promise((r) => setTimeout(r, 1200));";
+  readonly t1 = "import { SiremButton } from '@deorta-dev/ng-sirem-ui';";
+  readonly t2 = "import { signal } from '@angular/core';\nimport { SiremButton } from '@deorta-dev/ng-sirem-ui';\n\nreadonly cargando = signal(false);";
+  readonly t3 = "import { signal } from '@angular/core';\nimport { SiremButton } from '@deorta-dev/ng-sirem-ui';\n\nreadonly msg = signal('');\nreadonly guardar = () => new Promise((r) => setTimeout(r, 1200));";
 }

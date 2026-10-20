@@ -3,7 +3,7 @@ import {
   SiremBadge, SiremButton, SiremConfirmDialog, SiremDataTable, SiremEmptyState, SiremInput, SiremModal,
   SiremModalAction, SiremMoneyPipe, SiremPageHeader, SiremSelectOption,
   SiremStatCard, SiremTableColumn, SiremTimeline, SiremTimelineItem,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { PERIODOS, type ErpEstadoPeriodo, type ErpPeriodo } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -232,7 +232,7 @@ export class CierreContableDemoPage {
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
 import { SiremConfirmDialog, SiremDataTable, SiremModal, SiremMoneyPipe, SiremStatCard, SiremTimeline,
-  type SiremModalAction, type SiremTableColumn } from 'deorta-sirem-ui';
+  type SiremModalAction, type SiremTableColumn } from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { PERIODOS, type ErpPeriodo } from '../../data/erp-mock';
 

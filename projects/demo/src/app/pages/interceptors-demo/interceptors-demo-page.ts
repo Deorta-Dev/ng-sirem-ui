@@ -27,7 +27,7 @@ providers: [
 // La petición sale así:
 // GET /api/pacientes  →  Authorization: Bearer abc123`;
   readonly t1 = `import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { provideSiremAuth, siremAuthInterceptor } from 'deorta-sirem-ui';`;
+import { provideSiremAuth, siremAuthInterceptor } from '@deorta-dev/ng-sirem-ui';`;
   readonly h2 = `// app.config.ts
 providers: [
   provideHttpClient(withInterceptors([siremBaseUrlInterceptor])),
@@ -36,5 +36,5 @@ providers: [
 
 // GET /api/pacientes  →  GET https://api.sirem.com/api/pacientes`;
   readonly t2 = `import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { provideSiremApiUrl, siremBaseUrlInterceptor } from 'deorta-sirem-ui';`;
+import { provideSiremApiUrl, siremBaseUrlInterceptor } from '@deorta-dev/ng-sirem-ui';`;
 }

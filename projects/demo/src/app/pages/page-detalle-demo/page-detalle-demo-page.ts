@@ -8,7 +8,7 @@ import {
   SiremStatCard,
   SiremTimeline,
   SiremTimelineItem,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
 
 @Component({
@@ -106,7 +106,7 @@ export class PageDetalleDemoPage {
       code: `import {
   SiremTimelineItem,
   SiremBreadcrumbs,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 
 export class PageDetallePage {
   readonly migas = [

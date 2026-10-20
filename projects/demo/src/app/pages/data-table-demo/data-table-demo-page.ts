@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremDataTable, SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremDataTable, SiremTableColumn } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -62,7 +62,7 @@ export class DataTableDemoPage {
   readonly h4 = '<sirem-data-table [columns]="cols" [rows]="[]" emptyText="Sin pacientes con ese filtro." />';
   readonly h5 = '<sirem-data-table [columns]="cols3" [rows]="rows3" />';
   readonly t = `import { signal } from '@angular/core';
-import { SiremDataTable, SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremDataTable, SiremTableColumn } from '@deorta-dev/ng-sirem-ui';
 
 readonly cols: SiremTableColumn[] = [
   { key: 'nombre', label: 'Paciente' },

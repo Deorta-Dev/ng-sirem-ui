@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremSidebar, type SiremSubmenuConfig } from 'deorta-sirem-ui';
+import { SiremSidebar, type SiremSubmenuConfig } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -101,11 +101,11 @@ export class SidebarDemoPage {
   };
   /** El mismo gesto en todas las franjas (valor común, sin `breakpoint`). */
   readonly submenuClick: SiremSubmenuConfig = { trigger: 'click' };
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremSidebar } from 'deorta-sirem-ui';\n\nreadonly col = signal(false);\nreadonly items = [\n  { label: 'Pacientes', icon: 'fi fi-rr-users', route: '/demo/data-table' },\n  { label: 'Agenda', icon: 'fi fi-rr-calendar', route: '/demo/calendar' },\n  { label: 'Facturación', icon: 'fi fi-rr-receipt', route: '/demo/data-table' },\n];\nreadonly itemsMenu = [\n  { label: 'Pacientes', icon: 'fi fi-rr-users', route: '/demo/data-table' },\n  { label: 'Clínica', icon: 'fi fi-rr-stethoscope', children: [\n    { label: 'Historias', route: '/demo/card-list' },\n    { label: 'Evoluciones', route: '/demo/rich-text' },\n  ] },\n  { label: 'Agenda', icon: 'fi fi-rr-calendar', route: '/demo/calendar' },\n];\nreadonly itemsMix = [\n  { label: 'Pacientes', svg: DUO_USERS, route: '/demo/data-table' },\n  { label: 'Agenda', icon: 'fi fi-rr-calendar', route: '/demo/calendar' },\n];\nreadonly DUO_USERS = '<svg viewBox=\"0 0 256 256\" fill=\"currentColor\"><path opacity=\"0.2\" d=\"M168 128a40 40 0 1 0-40-40\"/><path d=\"M168 128a40 40 0 1 0-40-40 40 40 0 0 0 40 40Zm40 88a88 95 0 0 0-80-51.6A88 95 0 0 0 48 216a8 8 0 0 0 8 8h144a8 8 0 0 0 8-8Z\"/></svg>';";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremSidebar } from '@deorta-dev/ng-sirem-ui';\n\nreadonly col = signal(false);\nreadonly items = [\n  { label: 'Pacientes', icon: 'fi fi-rr-users', route: '/demo/data-table' },\n  { label: 'Agenda', icon: 'fi fi-rr-calendar', route: '/demo/calendar' },\n  { label: 'Facturación', icon: 'fi fi-rr-receipt', route: '/demo/data-table' },\n];\nreadonly itemsMenu = [\n  { label: 'Pacientes', icon: 'fi fi-rr-users', route: '/demo/data-table' },\n  { label: 'Clínica', icon: 'fi fi-rr-stethoscope', children: [\n    { label: 'Historias', route: '/demo/card-list' },\n    { label: 'Evoluciones', route: '/demo/rich-text' },\n  ] },\n  { label: 'Agenda', icon: 'fi fi-rr-calendar', route: '/demo/calendar' },\n];\nreadonly itemsMix = [\n  { label: 'Pacientes', svg: DUO_USERS, route: '/demo/data-table' },\n  { label: 'Agenda', icon: 'fi fi-rr-calendar', route: '/demo/calendar' },\n];\nreadonly DUO_USERS = '<svg viewBox=\"0 0 256 256\" fill=\"currentColor\"><path opacity=\"0.2\" d=\"M168 128a40 40 0 1 0-40-40\"/><path d=\"M168 128a40 40 0 1 0-40-40 40 40 0 0 0 40 40Zm40 88a88 95 0 0 0-80-51.6A88 95 0 0 0 48 216a8 8 0 0 0 8 8h144a8 8 0 0 0 8-8Z\"/></svg>';";
   readonly t2 = 'readonly permisos = ["ver-pacientes", "ver-agenda"];\nreadonly itemsPerm = [\n  { label: "Pacientes", icon: "fi fi-rr-users", permission: "ver-pacientes" },\n  { label: "Nómina", icon: "fi fi-rr-wallet", permission: "ver-nomina" },\n];';
   readonly t3 = "import { signal } from '@angular/core';\n\nreadonly col = signal(false);";
   readonly t4 =
-    "import { SiremSidebar, type SiremSubmenuConfig } from 'deorta-sirem-ui';\n\n" +
+    "import { SiremSidebar, type SiremSubmenuConfig } from '@deorta-dev/ng-sirem-ui';\n\n" +
     'readonly itemsMenu = [\n' +
     "  { label: 'Pacientes', icon: 'fi fi-rr-users', route: '/demo/data-table' },\n" +
     "  { label: 'Clínica', icon: 'fi fi-rr-stethoscope', children: [\n" +
@@ -121,11 +121,11 @@ export class SidebarDemoPage {
     "  mobile: { trigger: 'click' },\n" +
     '};';
   readonly t5 =
-    "import { SiremSidebar, type SiremSubmenuConfig } from 'deorta-sirem-ui';\n\n" +
+    "import { SiremSidebar, type SiremSubmenuConfig } from '@deorta-dev/ng-sirem-ui';\n\n" +
     '// valor común: el mismo gesto en mobile y desktop\n' +
     "readonly submenuClick: SiremSubmenuConfig = { trigger: 'click' };";
   readonly t6 =
-    "import { SiremSidebar } from 'deorta-sirem-ui';\n\n" +
+    "import { SiremSidebar } from '@deorta-dev/ng-sirem-ui';\n\n" +
     '// Con el sidebar colapsado, cada ítem muestra su label (o su tooltip) al pasar el ratón.\n' +
     "readonly itemsRail = [\n" +
     "  { label: 'Inicio', icon: 'fi fi-rr-home', route: '/inicio' },\n" +

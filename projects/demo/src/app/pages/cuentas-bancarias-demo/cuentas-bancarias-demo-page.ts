@@ -13,7 +13,7 @@ import {
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { CUENTAS_TESORERIA, MOVIMIENTOS_BANCARIOS, type ErpCuenta } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -373,7 +373,7 @@ import {
   SiremBadgeTone, SiremCard, SiremCardList, SiremDataTable, SiremInput,
   SiremModal, SiremSearchField, SiremSelectOption,
   SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { CUENTAS_TESORERIA, MOVIMIENTOS_BANCARIOS, type ErpCuenta } from '../../data/erp-mock';
 

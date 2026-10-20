@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremFiIcon } from 'deorta-sirem-ui';
+import { SiremFiIcon } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -30,5 +30,5 @@ export class FiIconDemoPage {
   readonly h1 = '<sirem-fi-icon name="rr-user" />\n<sirem-fi-icon name="br-user" />\n<sirem-fi-icon name="sr-user" />';
   readonly h2 = '<sirem-fi-icon name="rr-bell" [size]="16" />\n<sirem-fi-icon name="rr-bell" [size]="24" />\n<sirem-fi-icon name="rr-bell" [size]="32" />';
   readonly h3 = '<sirem-fi-icon name="rr-calendar" label="Agenda" />';
-  readonly t = "import { SiremFiIcon } from 'deorta-sirem-ui';";
+  readonly t = "import { SiremFiIcon } from '@deorta-dev/ng-sirem-ui';";
 }

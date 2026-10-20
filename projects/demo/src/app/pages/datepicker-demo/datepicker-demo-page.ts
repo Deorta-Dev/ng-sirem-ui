@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremDatepicker } from 'deorta-sirem-ui';
+import { SiremDatepicker } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -23,5 +23,5 @@ export class DatepickerDemoPage {
   readonly a = signal(null); readonly b = signal(null); readonly c = signal(null);
   readonly h1 = '<sirem-datepicker-field label="Cita" [(value)]="a" />';
   readonly h2 = '<sirem-datepicker-field label="Control" hint="Lun–Vie 8–17h." [(value)]="b" />\n<sirem-datepicker-field label="Cirugía" error="Quirófano ocupado." [(value)]="c" />';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremDatepicker } from 'deorta-sirem-ui';\n\nreadonly a = signal(null);\nreadonly b = signal(null);\nreadonly c = signal(null);";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremDatepicker } from '@deorta-dev/ng-sirem-ui';\n\nreadonly a = signal(null);\nreadonly b = signal(null);\nreadonly c = signal(null);";
 }

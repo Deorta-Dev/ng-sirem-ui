@@ -14,7 +14,7 @@ import {
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   PRODUCTOS,
@@ -346,7 +346,7 @@ export class RemisionesDemoPage {
 import {
   SiremBadgeTone, SiremDataTable, SiremModal, SiremModalAction, SiremInput,
   SiremSelectOption, SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { PRODUCTOS, REMISIONES, type ErpEstadoRemision, type ErpRemision } from '../../data/erp-mock';
 

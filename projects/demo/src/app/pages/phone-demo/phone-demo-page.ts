@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremPhonePipe } from 'deorta-sirem-ui';
+import { SiremPhonePipe } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -21,5 +21,5 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 export class PhoneDemoPage {
   readonly h1 = '<p>{{ \'3001112233\' | siremPhone }}</p>';
   readonly h2 = '<p>{{ \'601234\' | siremPhone }}</p>';
-  readonly t = "import { SiremPhonePipe } from 'deorta-sirem-ui';";
+  readonly t = "import { SiremPhonePipe } from '@deorta-dev/ng-sirem-ui';";
 }

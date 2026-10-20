@@ -4,7 +4,7 @@ import {
   SiremModalAction, SiremMoneyPipe, SiremMultiSelect, SiremMultiSelectOption,
   SiremPageHeader, SiremSearchField, SiremSelectOption, SiremStatCard,
   SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { LISTAS_PRECIOS, PRODUCTOS, type ErpLista, type ErpProducto } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -314,7 +314,7 @@ import {
   SiremMultiSelect, SiremPageHeader, SiremSearchField, SiremStatCard,
   type SiremModalAction, type SiremMultiSelectOption, type SiremSelectOption,
   type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { LISTAS_PRECIOS, PRODUCTOS, type ErpLista, type ErpProducto } from '../../data/erp-mock';
 

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremDateChip } from 'deorta-sirem-ui';
+import { SiremDateChip } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -54,7 +54,7 @@ export class DateChipDemoPage {
   ];
 
   readonly t1 = `import { signal } from '@angular/core';
-import { SiremDateChip } from 'deorta-sirem-ui';
+import { SiremDateChip } from '@deorta-dev/ng-sirem-ui';
 
 readonly seleccionado = signal<string | number>('19');
 readonly dias = [

@@ -51,6 +51,7 @@ import { SparklineDemoPage } from './pages/sparkline-demo/sparkline-demo-page';
 import { DateChipDemoPage } from './pages/date-chip-demo/date-chip-demo-page';
 import { SegmentedDemoPage } from './pages/segmented-demo/segmented-demo-page';
 import { TooltipDemoPage } from './pages/tooltip-demo/tooltip-demo-page';
+import { StickyDemoPage } from './pages/sticky-demo/sticky-demo-page';
 import { BentoDashboardDemoPage } from './pages/bento-dashboard-demo/bento-dashboard-demo-page';
 import { AutofocusDemoPage } from './pages/autofocus-demo/autofocus-demo-page';
 import { ClickOutsideDemoPage } from './pages/click-outside-demo/click-outside-demo-page';
@@ -157,6 +158,7 @@ export const routes: Routes = [
   { path: 'demo/click-outside', component: ClickOutsideDemoPage },
   { path: 'demo/numbers-only', component: NumbersOnlyDemoPage },
   { path: 'demo/tooltip', component: TooltipDemoPage },
+  { path: 'demo/sticky', component: StickyDemoPage },
   { path: 'demo/money', component: MoneyDemoPage },
   { path: 'demo/phone', component: PhoneDemoPage },
   { path: 'demo/age', component: AgeDemoPage },

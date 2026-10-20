@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal, SiremMoneyPipe, SiremPageHeader,
   SiremSelectOption, SiremStatCard, SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { ASIENTOS, CLIENTES, CUENTAS_PUC, PERIODOS, PROVEEDORES } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -266,7 +266,7 @@ export class ReportesFinancierosDemoPage {
       name: 'reportes-financieros.component.ts',
       language: 'typescript',
       code: `import { Component, computed, signal } from '@angular/core';
-import { SiremDataTable, SiremMoneyPipe, SiremInput, type SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremDataTable, SiremMoneyPipe, SiremInput, type SiremTableColumn } from '@deorta-dev/ng-sirem-ui';
 import { ASIENTOS, CUENTAS_PUC, PERIODOS } from '../../data/erp-mock';
 
 export class ReportesFinancierosPage {

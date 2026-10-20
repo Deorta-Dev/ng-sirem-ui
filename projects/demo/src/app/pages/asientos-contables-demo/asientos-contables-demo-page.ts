@@ -3,7 +3,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremBadge, SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal, SiremModalAction,
   SiremPageHeader, SiremSearchField, SiremSelectOption, SiremStatCard, SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { ASIENTOS, type ErpAsiento, totalesAsiento } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -262,7 +262,7 @@ export class AsientosContablesDemoPage {
       language: 'typescript',
       code: `import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
-import { SiremBadge, SiremDataTable, SiremModal, SiremStatCard, type SiremModalAction, type SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremBadge, SiremDataTable, SiremModal, SiremStatCard, type SiremModalAction, type SiremTableColumn } from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { ASIENTOS, type ErpAsiento, totalesAsiento } from '../../data/erp-mock';
 

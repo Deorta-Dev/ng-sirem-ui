@@ -1,6 +1,6 @@
 import { Component, ElementRef, computed, input, signal, viewChildren } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { SiremButton, SiremModal } from 'deorta-sirem-ui';
+import { SiremButton, SiremModal } from '@deorta-dev/ng-sirem-ui';
 import { CodeViewer } from '../code-viewer/code-viewer';
 import { DemoGlossary } from '../demo-glossary/demo-glossary';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';

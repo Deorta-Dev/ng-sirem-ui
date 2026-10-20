@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremModal, SiremModalAction, SiremButton, SiremInput } from 'deorta-sirem-ui';
+import { SiremModal, SiremModalAction, SiremButton, SiremInput } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -88,7 +88,7 @@ export class ModalDemoPage {
   readonly h5 = '<sirem-button size="sm" variant="secondary" (pressed)="noFondo.set(true)">Abrir sin fondo</sirem-button>\n<sirem-modal [(open)]="noFondo" title="Sin cerrar al fondo" [backdropClose]="false">\n  <p class="text-sm text-slate-600">Pulsa fuera: no se cierra.</p>\n</sirem-modal>';
   readonly h4 = '<sirem-button size="sm" variant="secondary" (pressed)="free.set(true)">Abrir libre</sirem-button>\n<sirem-modal [(open)]="free" title="Recordatorio" size="sm">\n  <p class="text-sm text-slate-600">Tu fórmula está lista para descargar.</p>\n  <div slot="footer" class="flex items-center justify-between gap-2">\n    <span class="text-xs text-slate-500">Válida por 30 días</span>\n    <sirem-button size="sm" (pressed)="free.set(false)">Descargar</sirem-button>\n  </div>\n</sirem-modal>';
   readonly t = `import { signal } from '@angular/core';
-import { SiremModal, SiremModalAction, SiremButton, SiremInput } from 'deorta-sirem-ui';
+import { SiremModal, SiremModalAction, SiremButton, SiremInput } from '@deorta-dev/ng-sirem-ui';
 
 readonly sm = signal(false);
 readonly md = signal(false);

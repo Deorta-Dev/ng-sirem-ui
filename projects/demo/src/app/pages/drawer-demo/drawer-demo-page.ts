@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremDrawer, SiremButton, SiremInput } from 'deorta-sirem-ui';
+import { SiremDrawer, SiremButton, SiremInput } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -28,5 +28,5 @@ export class DrawerDemoPage {
   readonly r = signal(false); readonly l = signal(false); readonly nombre = signal('');
   readonly h1 = '<sirem-button size="sm" (pressed)="r.set(true)">Abrir derecha</sirem-button>\n<sirem-drawer [(open)]="r" title="Detalle paciente">\n  <sirem-input-field label="Nombres" [(value)]="nombre" />\n</sirem-drawer>';
   readonly h2 = '<sirem-button size="sm" variant="secondary" (pressed)="l.set(true)">Abrir izquierda</sirem-button>\n<sirem-drawer [(open)]="l" title="Menú" side="left">\n  <p class="text-sm text-slate-600">Contenido de navegación.</p>\n</sirem-drawer>';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremDrawer, SiremButton, SiremInput } from 'deorta-sirem-ui';\n\nreadonly r = signal(false);\nreadonly l = signal(false);\nreadonly nombre = signal('');";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremDrawer, SiremButton, SiremInput } from '@deorta-dev/ng-sirem-ui';\n\nreadonly r = signal(false);\nreadonly l = signal(false);\nreadonly nombre = signal('');";
 }

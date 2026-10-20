@@ -13,7 +13,7 @@ import {
   type SiremSelectOption,
   type SiremTableColumn,
   type SiremTimelineItem,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   FACTURAS_COMPRA,
@@ -352,7 +352,7 @@ import {
   SiremDataTable, SiremModal, SiremInput, SiremTimeline,
   type ErpEstadoRadian, type ErpFacturaCompra,
   type SiremModalAction, type SiremTableColumn, type SiremTimelineItem,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { FACTURAS_COMPRA } from '../../data/erp-mock';
 

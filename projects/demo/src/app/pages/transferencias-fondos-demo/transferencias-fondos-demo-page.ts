@@ -13,7 +13,7 @@ import {
   SiremStatCard,
   SiremTableColumn,
   SiremTextarea,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   CUENTAS_TESORERIA,
@@ -371,7 +371,7 @@ export class TransferenciasFondosDemoPage {
 import {
   SiremConfirmDialog, SiremDataTable, SiremInput, SiremModal, SiremSearchField,
   SiremSelectOption, SiremTableColumn, SiremTextarea,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   CUENTAS_TESORERIA, TRANSFERENCIAS, type ErpCuenta, type ErpTransferencia,

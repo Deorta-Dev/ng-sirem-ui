@@ -3,7 +3,7 @@ import {
   SiremBadge, SiremBadgeTone, SiremButton, SiremCard, SiremConfirmDialog,
   SiremDataTable, SiremInput, SiremModal, SiremPageHeader, SiremSelectOption,
   SiremStatCard, SiremTableColumn, SiremTextarea,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { BODEGAS, PRODUCTOS, type ErpProducto, stockTotal } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -354,7 +354,7 @@ import {
   SiremInput, SiremModal, SiremPageHeader, SiremStatCard, SiremTextarea,
   type SiremBadgeTone, type SiremSelectOption,
   type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { BODEGAS, PRODUCTOS, type ErpProducto, stockTotal } from '../../data/erp-mock';
 

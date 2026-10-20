@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremSparkline } from 'deorta-sirem-ui';
+import { SiremSparkline } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 

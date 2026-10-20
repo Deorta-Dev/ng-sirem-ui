@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremImageUpload } from 'deorta-sirem-ui';
+import { SiremImageUpload } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -23,5 +23,5 @@ export class ImageUploadDemoPage {
   readonly a = signal(null); readonly b = signal(null); readonly c = signal(null);
   readonly h1 = '<sirem-image-upload-field label="Foto paciente" [(value)]="a" />';
   readonly h2 = '<sirem-image-upload-field label="Consentimiento"\n  error="Solo PNG o JPG." [(value)]="b" />\n<sirem-image-upload-field label="Solo PNG" accept="image/png" [(value)]="c" />';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremImageUpload } from 'deorta-sirem-ui';\n\nreadonly a = signal(null);\nreadonly b = signal(null);\nreadonly c = signal(null);";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremImageUpload } from '@deorta-dev/ng-sirem-ui';\n\nreadonly a = signal(null);\nreadonly b = signal(null);\nreadonly c = signal(null);";
 }

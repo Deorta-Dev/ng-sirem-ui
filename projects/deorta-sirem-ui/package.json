@@ -1,6 +1,6 @@
 {
-  "name": "deorta-sirem-ui",
-  "version": "0.1.0",
+  "name": "@deorta-dev/ng-sirem-ui",
+  "version": "0.1.1",
   "description": "SIREM design-system component library for Angular 21: standalone components, Tailwind CSS v4 design tokens, icons and dark mode.",
   "keywords": [
     "angular",

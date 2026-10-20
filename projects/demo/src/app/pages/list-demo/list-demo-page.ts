@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremList } from 'deorta-sirem-ui';
+import { SiremList } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -44,7 +44,7 @@ export class ListDemoPage {
   readonly h3 = '<sirem-list [items]="ajustes" [dividers]="false" />';
   readonly h4 = '<sirem-list [items]="[]" emptyText="Sin notificaciones." />';
   readonly t = `import { signal } from '@angular/core';
-import { SiremList } from 'deorta-sirem-ui';
+import { SiremList } from '@deorta-dev/ng-sirem-ui';
 
 readonly sel = signal('');
 readonly pacientes = [

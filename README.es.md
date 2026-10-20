@@ -1,4 +1,4 @@
-# deorta-sirem-ui
+# @deorta-dev/ng-sirem-ui
 
 **Librería Angular de componentes SIREM** · 🇬🇧 [English version](./README.md)
 
@@ -11,7 +11,7 @@ Librería de componentes **Angular 21 standalone** con **Tailwind CSS v4**, icon
 La librería no empaqueta CSS: el consumidor define los tokens SIREM. Snippet mínimo en el `styles.css` de la app:
 
 ```bash
-npm i deorta-sirem-ui @flaticon/flaticon-uicons echarts
+npm i @deorta-dev/ng-sirem-ui @flaticon/flaticon-uicons echarts
 ```
 
 ```css
@@ -21,7 +21,7 @@ npm i deorta-sirem-ui @flaticon/flaticon-uicons echarts
 @import '@flaticon/flaticon-uicons/css/bold/all.css';
 @import '@flaticon/flaticon-uicons/css/solid/all.css';
 @import '@flaticon/flaticon-uicons/css/brands/all.css';
-@import 'deorta-sirem-ui/src/lib/theme/sirem-theme.css';
+@import '@deorta-dev/ng-sirem-ui/src/lib/theme/sirem-theme.css';
 ```
 
 ```ts
@@ -35,7 +35,7 @@ providers: [provideHttpClient()];
 Los estilos de la librería usan **solo** tokens `--sirem-*`. La forma más corta de tenerlos todos (con su variante oscura) es importar el fichero de tema:
 
 ```css
-@import 'deorta-sirem-ui/src/lib/theme/sirem-theme.css';
+@import '@deorta-dev/ng-sirem-ui/src/lib/theme/sirem-theme.css';
 ```
 
 ### Modo oscuro
@@ -2519,7 +2519,7 @@ Abre un overlay (menú contextual, lista de opciones, ficha de detalle, sub-elem
 
 ### `SiremSticky`
 
-Selector: `[siremSticky]`
+Selector: `[siremSticky]` · [Demo](projects/demo/src/app/pages/sticky-demo)
 
 Convierte cualquier elemento o componente en **sticky** (`position: sticky`), de forma abierta o acotada a un límite…
 
@@ -2668,9 +2668,9 @@ npm login            # una vez por máquina (navegador; OTP si tienes 2FA)
 npm run publish:lib  # compila la librería y publica dist/ (versión del package.json)
 ```
 
-El paquete se publica como `deorta-sirem-ui` y solo contiene la librería
+El paquete se publica como `@deorta-dev/ng-sirem-ui` y solo contiene la librería
 (`dist/deorta-sirem-ui`), no la demo. Incluye la hoja de tokens en
-`src/lib/theme/sirem-theme.css` (alias corto: `deorta-sirem-ui/theme.css`);
+`src/lib/theme/sirem-theme.css` (alias corto: `@deorta-dev/ng-sirem-ui/theme.css`);
 las dependencias de Angular, `codemirror`, `rxjs` y `echarts` van como
 `peerDependencies`, así que el consumidor solo instala el paquete y sus
 pares. Para revisar el contenido antes de publicar: `npm run pack:lib`.

@@ -15,7 +15,7 @@ import {
   SiremSidebar,
   SiremSparkline,
   SiremStatCard,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
 import { themeMode } from '../../shared/theme/theme';
 
@@ -669,7 +669,7 @@ export class BentoDashboardDemoPage {
 import {
   SiremCalendar, type SiremCalendarEvent, SiremCard, SiremChart, SiremDateChip,
   SiremSegmented, SiremSidebar, SiremSparkline, SiremStatCard, type SiremNavItem,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 
 readonly railItems: SiremNavItem[] = [
   { label: 'Inicio', icon: 'fi fi-rr-home' },

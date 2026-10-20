@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
-import { SiremTopbar } from 'deorta-sirem-ui';
+import { SiremTopbar } from '@deorta-dev/ng-sirem-ui';
 import { PageAdminDemoPage } from './page-admin-demo-page';
 
 describe('PageAdminDemoPage', () => {

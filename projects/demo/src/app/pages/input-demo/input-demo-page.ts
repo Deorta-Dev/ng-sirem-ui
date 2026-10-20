@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremInput } from 'deorta-sirem-ui';
+import { SiremInput } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -63,7 +63,7 @@ export class InputDemoPage {
   readonly h4 = '<sirem-input-field label="Requerido" [required]="true"\n  placeholder="Obligatorio" [(value)]="req" />\n<sirem-input-field label="Deshabilitado" [disabled]="true"\n  placeholder="No editable" [(value)]="dis" />';
   readonly h5 = '<sirem-input-field label="Diagnóstico" [options]="dx" [(value)]="dxCon" />\n<span class="text-sm text-slate-600 w-full">Valor: {{ dxCon() || \'—\' }}</span>';
   readonly t1 = `import { signal } from '@angular/core';
-import { SiremInput } from 'deorta-sirem-ui';
+import { SiremInput } from '@deorta-dev/ng-sirem-ui';
 
 readonly nombre = signal('');
 readonly correo = signal('');
@@ -71,7 +71,7 @@ readonly doc = signal('');
 readonly req = signal('');
 readonly dis = signal('');`;
   readonly t2 = `import { signal } from '@angular/core';
-import { SiremInput } from 'deorta-sirem-ui';
+import { SiremInput } from '@deorta-dev/ng-sirem-ui';
 
 readonly dxSel = signal('');
 readonly dxCon = signal<string | number | (string | number)[] | null>('H52.1');
@@ -89,7 +89,7 @@ readonly dx = [
   readonly t3 = `import { signal } from '@angular/core';
 import { HttpInterceptorFn, HttpResponse, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { delay, of } from 'rxjs';
-import { SiremInput } from 'deorta-sirem-ui';
+import { SiremInput } from '@deorta-dev/ng-sirem-ui';
 
 // Simula GET /api-demo/eps → { result: { objects: [{ nombre, valor }] } }
 export const mockEpsInterceptor: HttpInterceptorFn = (req, next) => {
@@ -110,7 +110,7 @@ export const mockEpsInterceptor: HttpInterceptorFn = (req, next) => {
 
 readonly epsRemota = signal('');`;
   readonly t4 = `import { signal } from '@angular/core';
-import { SiremInput } from 'deorta-sirem-ui';
+import { SiremInput } from '@deorta-dev/ng-sirem-ui';
 
 // multiple → el value es un array con las opciones seleccionadas (chips)
 readonly dxMulti = signal<(string | number)[]>(['H52.1', 'H52.0']);

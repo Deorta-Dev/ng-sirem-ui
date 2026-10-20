@@ -411,6 +411,14 @@ export const CATALOG: CatalogEntry[] = [
     description: 'Globo oscuro flotante al pasar el ratón o enfocar.',
     section: 'directivas',
   },
+  {
+    slug: 'sticky',
+    name: 'Sticky',
+    selector: '[siremSticky]',
+    category: 'Scroll',
+    description: 'Fija cualquier elemento abierto, con límite numérico o por boundary, y emite el estado.',
+    section: 'directivas',
+  },
   // Pipes
   {
     slug: 'money',

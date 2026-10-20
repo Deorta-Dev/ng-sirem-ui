@@ -4,7 +4,7 @@ import {
   type SiremAgendaEvent,
   type SiremAgendaMode,
   type SiremAgendaSlot,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -297,7 +297,7 @@ export class AgendaDemoPage {
   readonly h7 = `<!-- Por debajo de 40rem la agenda oculta la semana
      y compacta el resto de vistas. -->\n<div class="w-[20rem]">\n  <sirem-agenda [events]="citas" [(mode)]="modo" [(date)]="dia" />\n</div>`;
 
-  readonly t1 = `import { SiremAgenda, type SiremAgendaEvent } from 'deorta-sirem-ui';
+  readonly t1 = `import { SiremAgenda, type SiremAgendaEvent } from '@deorta-dev/ng-sirem-ui';
 
 readonly citas: SiremAgendaEvent[] = [
   { title: 'Revisión', start: '2026-10-19T09:00', end: '2026-10-19T09:45',

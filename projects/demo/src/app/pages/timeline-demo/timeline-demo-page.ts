@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremTimeline, SiremTimelineItem } from 'deorta-sirem-ui';
+import { SiremTimeline, SiremTimelineItem } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -36,7 +36,7 @@ export class TimelineDemoPage {
   readonly h1 = '<sirem-timeline [items]="base" />';
   readonly h2 = '<sirem-timeline [items]="tonos" />';
   readonly h3 = '<sirem-timeline [items]="[]" />';
-  readonly t = `import { SiremTimeline, SiremTimelineItem } from 'deorta-sirem-ui';
+  readonly t = `import { SiremTimeline, SiremTimelineItem } from '@deorta-dev/ng-sirem-ui';
 
 readonly base = [
   { title: 'Registro creado', description: 'Recepción genera la HC.', time: '08:10' },

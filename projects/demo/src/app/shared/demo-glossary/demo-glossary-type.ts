@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { SiremOverlayTrigger } from 'deorta-sirem-ui';
+import { SiremOverlayTrigger } from '@deorta-dev/ng-sirem-ui';
 import { glossaryKindLabel } from './demo-glossary';
 import type { GlossaryType } from './demo-glossary';
 

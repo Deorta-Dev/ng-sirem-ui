@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremBadge } from 'deorta-sirem-ui';
+import { SiremBadge } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -34,5 +34,5 @@ export class BadgeDemoPage {
   readonly h1 = '<sirem-badge tone="neutral">Neutral</sirem-badge>\n<sirem-badge tone="info">Info</sirem-badge>\n<sirem-badge tone="accent">Acento</sirem-badge>\n<sirem-badge tone="success">Éxito</sirem-badge>\n<sirem-badge tone="warning">Aviso</sirem-badge>\n<sirem-badge tone="danger">Peligro</sirem-badge>';
   readonly h2 = '<sirem-badge tone="success" dot>Activo</sirem-badge>\n<sirem-badge tone="danger" dot>Inactivo</sirem-badge>\n<sirem-badge tone="warning" dot>Pendiente</sirem-badge>';
   readonly h3 = '<sirem-badge tone="info">En consulta</sirem-badge>\n<sirem-badge tone="success">Facturada</sirem-badge>\n<sirem-badge tone="neutral">Anulada</sirem-badge>';
-  readonly t = "import { SiremBadge } from 'deorta-sirem-ui';";
+  readonly t = "import { SiremBadge } from '@deorta-dev/ng-sirem-ui';";
 }

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremSearchField } from 'deorta-sirem-ui';
+import { SiremSearchField } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -27,5 +27,5 @@ export class SearchFieldDemoPage {
   readonly h1 = '<sirem-search-field placeholder="Buscar pacientes…" [(value)]="a" />';
   readonly h2 = '<sirem-search-field label="Pacientes" [(value)]="b" />';
   readonly h3 = '<sirem-search-field error="Sin coincidencias." [(value)]="c" />\n<sirem-search-field [disabled]="true" [(value)]="d" />';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremSearchField } from 'deorta-sirem-ui';\n\nreadonly a = signal('');\nreadonly b = signal('María');\nreadonly c = signal('zzz');\nreadonly d = signal('');";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremSearchField } from '@deorta-dev/ng-sirem-ui';\n\nreadonly a = signal('');\nreadonly b = signal('María');\nreadonly c = signal('zzz');\nreadonly d = signal('');";
 }

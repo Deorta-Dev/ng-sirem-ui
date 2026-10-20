@@ -12,7 +12,7 @@ import {
   type SiremModalAction,
   type SiremSelectOption,
   type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   CUENTAS_TESORERIA,
@@ -365,7 +365,7 @@ export class CuentasPorPagarDemoPage {
 import {
   SiremDataTable, SiremModal, SiremInput,
   type ErpFacturaCompra, type SiremModalAction, type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { CUENTAS_TESORERIA, FACTURAS_COMPRA } from '../../data/erp-mock';
 

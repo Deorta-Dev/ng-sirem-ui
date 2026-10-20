@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremAutofocusDirective, SiremInput } from 'deorta-sirem-ui';
+import { SiremAutofocusDirective, SiremInput } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -23,7 +23,7 @@ export class AutofocusDemoPage {
   n = '';
   readonly h1 = '<sirem-input-field label="Buscar"\n  placeholder="Ya estoy enfocado" siremAutofocus [(value)]="q" />';
   readonly h2 = '<sirem-input-field label="Nombres" siremAutofocus\n  [siremAutofocusDelay]="600" [(value)]="n" />';
-  readonly t = `import { SiremAutofocusDirective, SiremInput } from 'deorta-sirem-ui';
+  readonly t = `import { SiremAutofocusDirective, SiremInput } from '@deorta-dev/ng-sirem-ui';
 
 q = '';
 n = '';`;

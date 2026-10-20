@@ -12,7 +12,7 @@ import {
   SiremTableColumn,
   SiremTimeline,
   SiremTimelineItem,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { CUENTAS_PUC, type ErpCuentaPuc, type ErpTipoCuentaPuc } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -247,7 +247,7 @@ export class PlanCuentasDemoPage {
       name: 'plan-cuentas.component.ts',
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
-import { SiremDataTable, SiremModal, SiremInput, SiremStatCard, type SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremDataTable, SiremModal, SiremInput, SiremStatCard, type SiremTableColumn } from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { CUENTAS_PUC, type ErpCuentaPuc, type ErpTipoCuentaPuc } from '../../data/erp-mock';
 

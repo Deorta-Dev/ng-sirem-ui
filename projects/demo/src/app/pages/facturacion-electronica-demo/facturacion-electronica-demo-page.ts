@@ -14,7 +14,7 @@ import {
   SiremTableColumn,
   SiremTimeline,
   SiremTimelineItem,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   DOCUMENTOS_VENTA,
@@ -356,7 +356,7 @@ import {
   type ErpDocumentoVenta,
   type ErpEstadoDian,
   type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 
 const ESTADOS_DIAN: ErpEstadoDian[] = [

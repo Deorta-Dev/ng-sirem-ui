@@ -11,7 +11,7 @@ import {
   type SiremModalAction,
   type SiremSelectOption,
   type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   ORDENES_COMPRA,
@@ -377,7 +377,7 @@ import {
   SiremDataTable, SiremModal, SiremInput,
   type ErpEstadoOrden, type ErpOrdenCompra,
   type SiremModalAction, type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { ORDENES_COMPRA, PRODUCTOS } from '../../data/erp-mock';
 

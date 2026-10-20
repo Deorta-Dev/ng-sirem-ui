@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremButton, SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremInput, SiremModal,
   SiremPageHeader, SiremSelectOption, SiremStatCard, SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { LIQUIDACION_NOMINA, type ErpLiquidacion } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -237,7 +237,7 @@ export class LiquidacionNominaDemoPage {
 import {
   SiremButton, SiremDataTable, SiremEmptyState, SiremFieldGroup, SiremModal,
   SiremPageHeader, SiremInput, SiremSelectOption, SiremStatCard, SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { LIQUIDACION_NOMINA, type ErpLiquidacion } from '../../data/erp-mock';
 

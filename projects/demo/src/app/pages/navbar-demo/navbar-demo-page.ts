@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremNavbar, SiremSticky, type SiremSubmenuConfig } from 'deorta-sirem-ui';
+import { SiremNavbar, SiremSticky, type SiremSubmenuConfig } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -159,15 +159,15 @@ export class NavbarDemoPage {
   />
   <!-- contenido alto para poder desplazar -->
 </div>`;
-  readonly tSticky = "import { signal } from '@angular/core';\nimport { SiremNavbar, SiremSticky } from 'deorta-sirem-ui';\n\nreadonly stuck = signal(false);";
+  readonly tSticky = "import { signal } from '@angular/core';\nimport { SiremNavbar, SiremSticky } from '@deorta-dev/ng-sirem-ui';\n\nreadonly stuck = signal(false);";
   readonly h4 = '<div class="w-56"><sirem-navbar [items]="itemsSvg" /></div>';
   readonly h5 = '<sirem-navbar layout="horizontal" [items]="itemsTree"\n  [submenu]="submenuCfg" />';
   readonly h6 = '<div class="flex h-56">\n  <sirem-navbar layout="minibar" [items]="itemsTree" />\n</div>';
   readonly h7 = '<div class="w-56"><sirem-navbar [items]="itemsTree" /></div>';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremNavbar } from 'deorta-sirem-ui';\n\nreadonly msg = signal('');\nreadonly itemsFi = [\n  { label: 'Inicio', icon: 'fi fi-rr-home', route: '/' },\n  { label: 'Pacientes', icon: 'fi fi-rr-users', route: '/demo/data-table' },\n  { label: 'Agenda', icon: 'fi fi-rr-calendar', route: '/demo/calendar' },\n];";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremNavbar } from '@deorta-dev/ng-sirem-ui';\n\nreadonly msg = signal('');\nreadonly itemsFi = [\n  { label: 'Inicio', icon: 'fi fi-rr-home', route: '/' },\n  { label: 'Pacientes', icon: 'fi fi-rr-users', route: '/demo/data-table' },\n  { label: 'Agenda', icon: 'fi fi-rr-calendar', route: '/demo/calendar' },\n];";
   readonly t2 = "readonly itemsSvg = [\n  { label: 'Inicio', svg: DUO_HOME, route: '/' },\n  { label: 'Agenda', svg: DUO_CAL, route: '/demo/calendar' },\n];\nreadonly DUO_HOME = '<svg viewBox=\"0 0 256 256\" fill=\"currentColor\"><path opacity=\"0.2\" d=\"M224 120 128 24 32 120v96a8 8 0 0 0 8 8h176a8 8 0 0 0 8-8Z\"/><path d=\"M224 120 128 24 32 120v96a8 8 0 0 0 8 8h48V152h80v72h48a8 8 0 0 0 8-8Z\"/></svg>';\nreadonly DUO_CAL = '<svg viewBox=\"0 0 256 256\" fill=\"currentColor\"><path opacity=\"0.2\" d=\"M200 32h-24v-8a8 8 0 0 0-16 0v8H96v-8a8 8 0 0 0-16 0v8H56a16 16 0 0 0-16 16v136a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16Z\"/><path d=\"M200 32h-24v-8a8 8 0 0 0-16 0v8H96v-8a8 8 0 0 0-16 0v8H56a16 16 0 0 0-16 16v136a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16Zm-144 48h144v8H56Z\"/></svg>';";
   readonly t3 =
-    "import { SiremNavbar, type SiremSubmenuConfig } from 'deorta-sirem-ui';\n\n" +
+    "import { SiremNavbar, type SiremSubmenuConfig } from '@deorta-dev/ng-sirem-ui';\n\n" +
     'readonly itemsTree = [\n' +
     "  { label: 'Inicio', icon: 'fi fi-rr-home', route: '/' },\n" +
     "  { label: 'Pacientes', icon: 'fi fi-rr-users', children: [\n" +

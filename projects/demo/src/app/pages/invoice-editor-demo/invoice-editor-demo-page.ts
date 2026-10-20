@@ -6,7 +6,7 @@ import {
   siremEmptyInvoice,
   siremInvoiceLine,
   siremLineTotals,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
@@ -143,7 +143,7 @@ import {
   SiremInvoiceDraft,
   SiremInvoiceEditor,
   siremEmptyInvoice,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { CLIENTES } from './erp-mock';
 

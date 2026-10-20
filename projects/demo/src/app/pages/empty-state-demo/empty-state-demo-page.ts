@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremEmptyState, SiremButton } from 'deorta-sirem-ui';
+import { SiremEmptyState, SiremButton } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -28,5 +28,5 @@ export class EmptyStateDemoPage {
   readonly h1 = '<sirem-empty-state />';
   readonly h2 = '<sirem-empty-state title="Sin pacientes"\n  description="No hay registros con ese filtro. Prueba con otro criterio." />';
   readonly h3 = '<sirem-empty-state title="Sin resultados"\n  description="Crea el primer paciente para empezar.">\n  <i slot="icon" class="fi fi-rr-users"></i>\n  <sirem-button slot="action" size="sm">Crear paciente</sirem-button>\n</sirem-empty-state>';
-  readonly t = "import { SiremEmptyState, SiremButton } from 'deorta-sirem-ui';";
+  readonly t = "import { SiremEmptyState, SiremButton } from '@deorta-dev/ng-sirem-ui';";
 }

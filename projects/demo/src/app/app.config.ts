@@ -5,7 +5,7 @@ import { provideDynamicToast } from 'ngx-dynamic-toast';
 
 import { routes } from './app.routes';
 import { mockEpsInterceptor } from './data/mock-api.interceptor';
-import { provideStreamlineIcons } from 'deorta-sirem-ui';
+import { provideStreamlineIcons } from '@deorta-dev/ng-sirem-ui';
 
 const DEMO_STREAMLINE =
   '<svg viewBox="0 0 24 24" fill="currentColor"><path opacity="0.2" d="M12 3 3 11v9a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-9Z"/><path d="M12 3 3 11v9a1 1 0 0 0 1 1h5v-6h6v6h5a1 1 0 0 0 1-1v-9Z"/></svg>';

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremCalendar } from 'deorta-sirem-ui';
+import { SiremCalendar } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -65,5 +65,5 @@ export class CalendarDemoPage {
   readonly h4 = '<sirem-calendar size="small" [stripedDays]="bloqueados" [(selected)]="sel4" />';
   readonly h5 =
     '<sirem-calendar variant="plain" size="small" [events]="eventos"\n  [stripedDays]="bloqueados" [(selected)]="sel5" />';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremCalendar } from 'deorta-sirem-ui';\n\nreadonly sel = signal<string | null>(null);\nreadonly dia = signal('');\nreadonly eventos = [\n  { date: '2026-09-24', label: 'Control María', color: '#26272b' },\n  { date: '2026-09-25', label: 'Cirugía Juan', color: '#dc2626' },\n];\nreadonly leyenda = [\n  { label: 'Consulta', color: '#26272b' },\n  { label: 'Cirugía', color: '#dc2626' },\n];\nreadonly bloqueados = ['2026-09-08', '2026-09-12', '2026-09-17'];";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremCalendar } from '@deorta-dev/ng-sirem-ui';\n\nreadonly sel = signal<string | null>(null);\nreadonly dia = signal('');\nreadonly eventos = [\n  { date: '2026-09-24', label: 'Control María', color: '#26272b' },\n  { date: '2026-09-25', label: 'Cirugía Juan', color: '#dc2626' },\n];\nreadonly leyenda = [\n  { label: 'Consulta', color: '#26272b' },\n  { label: 'Cirugía', color: '#dc2626' },\n];\nreadonly bloqueados = ['2026-09-08', '2026-09-12', '2026-09-17'];";
 }

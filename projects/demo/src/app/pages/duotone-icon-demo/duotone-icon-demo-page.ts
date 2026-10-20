@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremDuotoneIcon } from 'deorta-sirem-ui';
+import { SiremDuotoneIcon } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -33,7 +33,7 @@ export class DuotoneIconDemoPage {
   readonly h1 = '<span class="text-sirem-600"><sirem-duotone-icon [svg]="casa" /></span>\n<span class="text-amber-600"><sirem-duotone-icon [svg]="campana" /></span>';
   readonly h2 = '<sirem-duotone-icon [svg]="casa" [size]="16" />\n<sirem-duotone-icon [svg]="casa" [size]="32" />\n<sirem-duotone-icon [svg]="casa" [size]="48" />';
   readonly h3 = '<sirem-duotone-icon [svg]="campana" label="Notificaciones" />';
-  readonly t = `import { SiremDuotoneIcon } from 'deorta-sirem-ui';
+  readonly t = `import { SiremDuotoneIcon } from '@deorta-dev/ng-sirem-ui';
 
 // SVG de dos capas: opacity 0.2 + sólida, fill currentColor (Phosphor duotone).
 readonly casa = '<svg viewBox="0 0 256 256" fill="currentColor"><path opacity="0.2" d="M224 120 128 24 32 120v96a8 8 0 0 0 8 8h176a8 8 0 0 0 8-8Z"/><path d="M224 120 128 24 32 120v96a8 8 0 0 0 8 8h48V152h80v72h48a8 8 0 0 0 8-8Z"/></svg>';

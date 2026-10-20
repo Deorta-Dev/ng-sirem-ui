@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremConfirmDialog, SiremButton } from 'deorta-sirem-ui';
+import { SiremConfirmDialog, SiremButton } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -25,5 +25,5 @@ export class ConfirmDialogDemoPage {
   readonly a = signal(false); readonly b = signal(false); readonly msg = signal('');
   readonly h1 = '<sirem-button size="sm" (pressed)="a.set(true)">Guardar cambios</sirem-button>\n<sirem-confirm-dialog [(open)]="a" title="Guardar" message="¿Guardar los cambios?"\n  (confirmed)="msg.set(\'Guardado\')" (cancelled)="msg.set(\'Cancelado\')" />';
   readonly h2 = '<sirem-button size="sm" variant="danger" (pressed)="b.set(true)">Eliminar</sirem-button>\n<sirem-confirm-dialog [(open)]="b" variant="danger"\n  title="Eliminar factura" message="¿Eliminar FAC-1042?"\n  detail="Esta acción no se puede deshacer." confirmLabel="Sí, eliminar"\n  (confirmed)="msg.set(\'Eliminada\')" />';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremConfirmDialog, SiremButton } from 'deorta-sirem-ui';\n\nreadonly a = signal(false);\nreadonly b = signal(false);\nreadonly msg = signal('');";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremConfirmDialog, SiremButton } from '@deorta-dev/ng-sirem-ui';\n\nreadonly a = signal(false);\nreadonly b = signal(false);\nreadonly msg = signal('');";
 }

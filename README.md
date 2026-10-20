@@ -1,4 +1,4 @@
-# deorta-sirem-ui
+# @deorta-dev/ng-sirem-ui
 
 **SIREM Angular component library** · 🇪🇸 [Versión en español](./README.es.md)
 
@@ -11,7 +11,7 @@
 The library ships no CSS: the consuming app defines the SIREM tokens. Minimal `styles.css`:
 
 ```bash
-npm i deorta-sirem-ui @flaticon/flaticon-uicons echarts
+npm i @deorta-dev/ng-sirem-ui @flaticon/flaticon-uicons echarts
 ```
 
 ```css
@@ -21,7 +21,7 @@ npm i deorta-sirem-ui @flaticon/flaticon-uicons echarts
 @import '@flaticon/flaticon-uicons/css/bold/all.css';
 @import '@flaticon/flaticon-uicons/css/solid/all.css';
 @import '@flaticon/flaticon-uicons/css/brands/all.css';
-@import 'deorta-sirem-ui/src/lib/theme/sirem-theme.css';
+@import '@deorta-dev/ng-sirem-ui/src/lib/theme/sirem-theme.css';
 ```
 
 ```ts
@@ -35,7 +35,7 @@ providers: [provideHttpClient()];
 Library styles use **only** `--sirem-*` tokens. The shortest way to get them all (including the dark overrides) is importing the theme file:
 
 ```css
-@import 'deorta-sirem-ui/src/lib/theme/sirem-theme.css';
+@import '@deorta-dev/ng-sirem-ui/src/lib/theme/sirem-theme.css';
 ```
 
 ### Dark mode
@@ -2519,7 +2519,7 @@ Opens an overlay (context menu, option list, detail card, sidebar/navbar sub-ite
 
 ### `SiremSticky`
 
-Selector: `[siremSticky]`
+Selector: `[siremSticky]` · [Demo](projects/demo/src/app/pages/sticky-demo)
 
 Turns any element or component into **sticky** (`position: sticky`), either open or bounded by a limit…
 
@@ -2668,9 +2668,9 @@ npm login            # once per machine (browser; OTP if 2FA is on)
 npm run publish:lib  # build the library and publish dist/ (version from package.json)
 ```
 
-The package is published as `deorta-sirem-ui` and contains the library only
+The package is published as `@deorta-dev/ng-sirem-ui` and contains the library only
 (`dist/deorta-sirem-ui`), not the demo. It ships the token stylesheet at
-`src/lib/theme/sirem-theme.css` (short alias: `deorta-sirem-ui/theme.css`);
+`src/lib/theme/sirem-theme.css` (short alias: `@deorta-dev/ng-sirem-ui/theme.css`);
 Angular, `codemirror`, `rxjs` and `echarts` are `peerDependencies`, so a
 consumer only installs the package plus its peers. To inspect the tarball
 before publishing: `npm run pack:lib`.

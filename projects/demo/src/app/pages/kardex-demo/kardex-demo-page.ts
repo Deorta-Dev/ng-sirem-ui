@@ -3,7 +3,7 @@ import {
   SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal,
   SiremModalAction, SiremMoneyPipe, SiremPageHeader, SiremSelectOption,
   SiremStatCard, SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { BODEGAS, PRODUCTOS, type ErpProducto, stockTotal } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -330,7 +330,7 @@ import {
   SiremButton, SiremDataTable, SiremEmptyState, SiremInput, SiremModal, SiremMoneyPipe,
   SiremPageHeader, SiremStatCard,
   type SiremModalAction, type SiremSelectOption, type SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { BODEGAS, PRODUCTOS, type ErpProducto, stockTotal } from '../../data/erp-mock';
 

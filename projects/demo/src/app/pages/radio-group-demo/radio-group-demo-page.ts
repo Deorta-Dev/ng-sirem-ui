@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremRadioGroup } from 'deorta-sirem-ui';
+import { SiremRadioGroup } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -29,5 +29,5 @@ export class RadioGroupDemoPage {
   readonly h1 = '<sirem-radio-group-field label="Género" [options]="genero" [(value)]="a" />';
   readonly h2 = '<sirem-radio-group-field label="Régimen" [options]="regimen"\n  orientation="vertical" hint="Según afiliación." [(value)]="b" />';
   readonly h3 = '<sirem-radio-group-field label="Sede" [options]="sedes"\n  [disabled]="true" [(value)]="c" />';
-  readonly t = "import { signal } from '@angular/core';\nimport { SiremRadioGroup } from 'deorta-sirem-ui';\n\nreadonly a = signal(null);\nreadonly b = signal(null);\nreadonly c = signal('norte');\nreadonly genero = [{ value: 'f', label: 'F' }, { value: 'm', label: 'M' }];\nreadonly regimen = [{ value: 'c', label: 'Contributivo' }, { value: 's', label: 'Subsidiado' }];\nreadonly sedes = [{ value: 'norte', label: 'Norte' }, { value: 'sur', label: 'Sur' }];";
+  readonly t = "import { signal } from '@angular/core';\nimport { SiremRadioGroup } from '@deorta-dev/ng-sirem-ui';\n\nreadonly a = signal(null);\nreadonly b = signal(null);\nreadonly c = signal('norte');\nreadonly genero = [{ value: 'f', label: 'F' }, { value: 'm', label: 'M' }];\nreadonly regimen = [{ value: 'c', label: 'Contributivo' }, { value: 's', label: 'Subsidiado' }];\nreadonly sedes = [{ value: 'norte', label: 'Norte' }, { value: 'sur', label: 'Sur' }];";
 }

@@ -3,7 +3,7 @@ import {
   SiremButton, SiremCardList, SiremCardListField, SiremEmptyState, SiremFieldGroup,
   SiremInput, SiremModal, type SiremModalAction, SiremPageHeader, SiremSearchField, type SiremSelectOption, SiremStatCard, SiremTimeline, type SiremTimelineItem,
   type SiremBadgeTone,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   ALERTAS_SALUD, EMPRESAS_CLIENTES, type ErpEmpresa, type ErpSeveridad,
@@ -265,7 +265,7 @@ export class PortafolioClientesDemoPage {
 import {
   SiremCardList, SiremFieldGroup, SiremModal, type SiremModalAction, SiremInput,
   type SiremSelectOption, SiremStatCard, SiremTimeline, type SiremTimelineItem,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { ALERTAS_SALUD, EMPRESAS_CLIENTES, type ErpEmpresa } from '../../data/erp-mock';
 

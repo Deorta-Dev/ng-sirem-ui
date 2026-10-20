@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremButton, SiremDataTable, SiremDate, SiremEmptyState, SiremFieldGroup,
   SiremInput, SiremModal, SiremPageHeader, SiremSearchField, SiremSelectOption, SiremStatCard, SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { EMPLEADOS, type ErpEmpleado } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -236,7 +236,7 @@ export class GestionEmpleadosDemoPage {
 import {
   SiremDataTable, SiremDate, SiremEmptyState, SiremFieldGroup, SiremInput,
   SiremModal, SiremSelectOption, SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { EMPLEADOS, type ErpEmpleado } from '../../data/erp-mock';
 

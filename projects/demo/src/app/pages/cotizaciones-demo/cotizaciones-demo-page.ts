@@ -13,7 +13,7 @@ import {
   SiremStatCard,
   SiremTableColumn,
   SiremSegmented,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   COTIZACIONES,
@@ -360,7 +360,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import {
   SiremBadgeTone, SiremCardList, SiremDataTable, SiremEmptyState, SiremModal,
   SiremInput, SiremSelectOption, SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { COTIZACIONES, PRODUCTOS, type ErpCotizacion, type ErpEstadoCotizacion } from '../../data/erp-mock';
 

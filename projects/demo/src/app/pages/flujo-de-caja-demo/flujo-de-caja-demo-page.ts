@@ -9,7 +9,7 @@ import {
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   CUENTAS_TESORERIA,
@@ -377,7 +377,7 @@ export class FlujoDeCajaDemoPage {
       name: 'flujo-de-caja.component.ts',
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
-import { SiremChart, SiremDataTable, SiremModal, SiremInput, SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremChart, SiremDataTable, SiremModal, SiremInput, SiremTableColumn } from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import {
   CUENTAS_TESORERIA, DOCUMENTOS_VENTA, FACTURAS_COMPRA, ORDENES_COMPRA,

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremSearchPalette, SiremButton } from 'deorta-sirem-ui';
+import { SiremSearchPalette, SiremButton } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -33,7 +33,7 @@ export class SearchPaletteDemoPage {
   readonly h1 = '<sirem-button size="sm" (pressed)="abierta.set(true)">Abrir (Ctrl+K)</sirem-button>\n<sirem-search-palette [items]="items"\n  [(open)]="abierta" (selected)="sel.set($event.label)" />\n<span class="text-sm text-slate-600">Seleccionado: {{ sel() }}</span>';
   readonly h2 = '<sirem-search-palette [items]="grupos"\n  [(open)]="gAbierta" placeholder="Buscar…" />\n<sirem-button size="sm" variant="secondary" (pressed)="gAbierta.set(true)">Ver grupos</sirem-button>';
   readonly t = `import { signal } from '@angular/core';
-import { SiremSearchPalette, SiremButton } from 'deorta-sirem-ui';
+import { SiremSearchPalette, SiremButton } from '@deorta-dev/ng-sirem-ui';
 
 readonly abierta = signal(false);
 readonly gAbierta = signal(false);

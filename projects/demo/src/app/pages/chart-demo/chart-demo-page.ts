@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremChart } from 'deorta-sirem-ui';
+import { SiremChart } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 import { themeMode } from '../../shared/theme/theme';
@@ -314,7 +314,7 @@ get ecualizador() {
     }],
   };
 }`;
-  readonly t = `import { SiremChart } from 'deorta-sirem-ui';
+  readonly t = `import { SiremChart } from '@deorta-dev/ng-sirem-ui';
 import { themeMode } from '../../shared/theme/theme';
 
 isDark() { return themeMode() === 'dark'; }

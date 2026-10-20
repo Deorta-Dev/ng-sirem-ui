@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremAgePipe } from 'deorta-sirem-ui';
+import { SiremAgePipe } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -21,5 +21,5 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 export class AgeDemoPage {
   readonly h1 = '<p>{{ \'1990-05-01\' | siremAge }}</p>';
   readonly h2 = '<p>{{ \'no-fecha\' | siremAge }}</p>';
-  readonly t = "import { SiremAgePipe } from 'deorta-sirem-ui';";
+  readonly t = "import { SiremAgePipe } from '@deorta-dev/ng-sirem-ui';";
 }

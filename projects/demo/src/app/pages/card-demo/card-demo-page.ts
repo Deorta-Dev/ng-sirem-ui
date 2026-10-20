@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiremCard, SiremButton } from 'deorta-sirem-ui';
+import { SiremCard, SiremButton } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -119,6 +119,6 @@ export class CardDemoPage {
   readonly h6 = '<sirem-card title="Historial" subtitle="Sin aire en el encabezado"\n  headerPadding="none" bodyPadding="lg" footerPadding="sm">\n  <p class="text-sm text-slate-600">Cuerpo con relleno amplio.</p>\n  <div slot="footer" class="flex justify-end">\n    <sirem-button size="sm" variant="secondary">Cerrar</sirem-button>\n  </div>\n</sirem-card>';
   readonly h7 = '<sirem-card title="Se oculta" subtitle="También esto"\n  [showHeader]="false" [showFooter]="false">\n  <p class="text-sm text-slate-600">Solo el cuerpo.</p>\n  <div slot="footer" class="text-xs text-slate-400">Pie oculto</div>\n</sirem-card>';
   readonly h8 = '<sirem-card title="Pacientes" subtitle="1.240 activos" bodyPadding="sm">\n  <span slot="header" class="ml-auto">\n    <sirem-button size="sm" variant="ghost" iconOnly aria-label="Filtrar">\n      <i slot="icon" class="fi fi-rr-filter"></i>\n    </sirem-button>\n  </span>\n  <p class="text-sm text-slate-600">Listado de pacientes.</p>\n</sirem-card>';
-  readonly t = "import { SiremCard, SiremButton } from 'deorta-sirem-ui';";
+  readonly t = "import { SiremCard, SiremButton } from '@deorta-dev/ng-sirem-ui';";
   readonly h9 = '<sirem-card tone="sage" title="Total Spend" subtitle="Bloque secundario" />\n<sirem-card tone="accent" title="Ahorro" subtitle="Bloque protagonista" />\n<sirem-card tone="muted" title="Balance" subtitle="Datos neutros" />';
 }

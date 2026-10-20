@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremDynamicForm, SiremFormNode } from 'deorta-sirem-ui';
+import { SiremDynamicForm, SiremFormNode } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -46,7 +46,7 @@ export class DynamicFormDemoPage {
   readonly h2 = '<sirem-dynamic-form [fields]="conGrupo" [(values)]="v2" />';
   readonly h3 = '<sirem-dynamic-form [fields]="conHtml" [(values)]="v3" [showActions]="false" />';
   readonly t = `import { signal } from '@angular/core';
-import { SiremDynamicForm, SiremFormNode } from 'deorta-sirem-ui';
+import { SiremDynamicForm, SiremFormNode } from '@deorta-dev/ng-sirem-ui';
 
 readonly v1 = signal<Record<string, unknown>>({});
 readonly v2 = signal<Record<string, unknown>>({});

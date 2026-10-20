@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremBadge, SiremCollapsible, SiremCollapsibleGroup } from 'deorta-sirem-ui';
+import { SiremBadge, SiremCollapsible, SiremCollapsibleGroup } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -101,7 +101,7 @@ export class CollapsibleDemoPage {
   readonly filtros = signal(false);
 
   readonly t1 = `import { signal } from '@angular/core';
-import { SiremCollapsible } from 'deorta-sirem-ui';
+import { SiremCollapsible } from '@deorta-dev/ng-sirem-ui';
 
 readonly datos = signal(true);`;
 
@@ -111,7 +111,7 @@ readonly datos = signal(true);`;
 </sirem-collapsible>`;
 
   readonly t2 = `import { signal } from '@angular/core';
-import { SiremCollapsible } from 'deorta-sirem-ui';
+import { SiremCollapsible } from '@deorta-dev/ng-sirem-ui';
 
 readonly filtros = signal(false);`;
 
@@ -119,7 +119,7 @@ readonly filtros = signal(false);`;
   …
 </sirem-collapsible>`;
 
-  readonly t3 = `import { SiremCollapsible, SiremCollapsibleGroup } from 'deorta-sirem-ui';`;
+  readonly t3 = `import { SiremCollapsible, SiremCollapsibleGroup } from '@deorta-dev/ng-sirem-ui';`;
 
   readonly h3 = `<sirem-collapsible-group>
   <sirem-collapsible title="Motivo de consulta">…</sirem-collapsible>
@@ -127,7 +127,7 @@ readonly filtros = signal(false);`;
   <sirem-collapsible title="Examen">…</sirem-collapsible>
 </sirem-collapsible-group>`;
 
-  readonly t4 = `import { SiremCollapsible, SiremCollapsibleGroup } from 'deorta-sirem-ui';`;
+  readonly t4 = `import { SiremCollapsible, SiremCollapsibleGroup } from '@deorta-dev/ng-sirem-ui';`;
 
   readonly h4 = `<sirem-collapsible-group [accordion]="false">
   <sirem-collapsible title="Cobertura" variant="plain">…</sirem-collapsible>

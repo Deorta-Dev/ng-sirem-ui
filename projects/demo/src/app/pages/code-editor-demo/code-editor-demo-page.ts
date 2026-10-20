@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremCodeEditor } from 'deorta-sirem-ui';
+import { SiremCodeEditor } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 import { themeMode } from '../../shared/theme/theme';
@@ -33,7 +33,7 @@ export class CodeEditorDemoPage {
   readonly h2 = '<sirem-code-editor language="html" [(code)]="html"\n  [dark]="isDark()" [height]="160" />';
   readonly h3 = '<sirem-code-editor language="json" [(code)]="payload"\n  [dark]="isDark()" [readonly]="true" [height]="160" />';
   readonly t = `import { signal } from '@angular/core';
-import { SiremCodeEditor } from 'deorta-sirem-ui';
+import { SiremCodeEditor } from '@deorta-dev/ng-sirem-ui';
 import { themeMode } from '../../shared/theme/theme';
 
 readonly ts = signal('const esferaOD = -1.25;\\nconst cilindroOD = -0.5;\\n\\nfunction diagnostico() {\\n  return "H52.1 Miopía";\\n}');

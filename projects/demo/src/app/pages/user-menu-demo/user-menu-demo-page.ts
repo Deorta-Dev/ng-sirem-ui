@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremUserMenu, SiremUserMenuGroup, SiremButton } from 'deorta-sirem-ui';
+import { SiremUserMenu, SiremUserMenuGroup, SiremButton } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -49,9 +49,9 @@ export class UserMenuDemoPage {
   readonly h2 = '<sirem-user-menu userName="Juan Pérez" userDetail="juan@sirem.com" />';
   readonly h3 = '<sirem-user-menu userName="Ana Ruiz" userDetail="Administradora">\n  <div class="flex flex-col gap-1">\n    <sirem-button size="sm" variant="ghost">Mi perfil</sirem-button>\n    <sirem-button size="sm" variant="ghost">Salir</sirem-button>\n  </div>\n</sirem-user-menu>';
   readonly h4 = '<sirem-user-menu userName="Luis Gómez" userDetail="luis@sirem.com"\n  [groups]="grupos" (actionPressed)="msg.set($event.label)" />\n<span class="text-sm text-slate-600">Acción: {{ msg() }}</span>';
-  readonly t = "import { SiremUserMenu, SiremButton } from 'deorta-sirem-ui';";
+  readonly t = "import { SiremUserMenu, SiremButton } from '@deorta-dev/ng-sirem-ui';";
   readonly t2 = `import { signal } from '@angular/core';
-import { SiremUserMenu, SiremUserMenuGroup } from 'deorta-sirem-ui';
+import { SiremUserMenu, SiremUserMenuGroup } from '@deorta-dev/ng-sirem-ui';
 
 readonly msg = signal('');
 readonly grupos: SiremUserMenuGroup[] = [

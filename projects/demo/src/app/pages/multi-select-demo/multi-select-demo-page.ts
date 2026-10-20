@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SiremMultiSelect } from 'deorta-sirem-ui';
+import { SiremMultiSelect } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
@@ -45,7 +45,7 @@ export class MultiSelectDemoPage {
   readonly h2 = '<sirem-multi-select label="Plan" [options]="planes"\n  [(value)]="sel2" hint="Se facturan al cierre del mes." />';
   readonly h3 = '<sirem-multi-select label="Sedes" [options]="sedes"\n  [(value)]="sel3" [selectAll]="false" />';
   readonly t = `import { signal } from '@angular/core';
-import { SiremMultiSelect } from 'deorta-sirem-ui';
+import { SiremMultiSelect } from '@deorta-dev/ng-sirem-ui';
 
 readonly sel = signal<(string | number)[]>(['citas.crear']);
 readonly sel2 = signal<(string | number)[]>([]);

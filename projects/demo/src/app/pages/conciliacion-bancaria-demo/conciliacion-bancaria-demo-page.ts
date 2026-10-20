@@ -9,7 +9,7 @@ import {
   SiremSelectOption,
   SiremStatCard,
   SiremTableColumn,
-} from 'deorta-sirem-ui';
+} from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { MOVIMIENTOS_BANCARIOS, type ErpMovimientoBancario } from '../../data/erp-mock';
 import { PageDemoShell, type DemoCodeFile } from '../../shared/page-demo-shell/page-demo-shell';
@@ -328,7 +328,7 @@ export class ConciliacionBancariaDemoPage {
       name: 'conciliacion-bancaria.component.ts',
       language: 'typescript',
       code: `import { Component, computed, inject, signal } from '@angular/core';
-import { SiremDataTable, SiremModal, SiremInput, SiremTableColumn } from 'deorta-sirem-ui';
+import { SiremDataTable, SiremModal, SiremInput, SiremTableColumn } from '@deorta-dev/ng-sirem-ui';
 import { DynamicToastService } from 'ngx-dynamic-toast';
 import { MOVIMIENTOS_BANCARIOS, type ErpMovimientoBancario } from '../../data/erp-mock';
 
