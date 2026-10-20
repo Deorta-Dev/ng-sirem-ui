@@ -4,6 +4,8 @@
 
 Librería de componentes **Angular 21 standalone** con **Tailwind CSS v4**, iconos Flaticon UIcons, iconos duotone (Phosphor) y registro de iconos Streamline Ultimate Duotone. Incluye modo claro/oscuro por tokens y un catálogo de demo con una página en vivo por componente (`npm start`).
 
+🌐 **Demo en vivo:** https://deorta-dev.github.io/ng-sirem-ui/
+
 ## Instalación
 
 ### Consumir en otro proyecto
@@ -137,7 +139,7 @@ Contenedor maestro de la app autenticada (equivale a `lo-admin-layout`)…
 
 ### `SiremAgenda`
 
-Selector: `sirem-agenda` · [Demo](projects/demo/src/app/pages/agenda-demo)
+Selector: `sirem-agenda` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/agenda)
 
 Agenda multi-vista tipo Google Calendar (`sirem-agenda`).
 
@@ -275,7 +277,7 @@ Agenda multi-vista tipo Google Calendar (`sirem-agenda`).
 
 ### `SiremAvatar`
 
-Selector: `sirem-avatar` · [Demo](projects/demo/src/app/pages/avatar-demo)
+Selector: `sirem-avatar` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/avatar)
 
 Avatar con imagen o iniciales + punto de presencia/estado. (Listas de pacientes, terceros, usuarios.)
 
@@ -323,7 +325,7 @@ Avatar con imagen o iniciales + punto de presencia/estado. (Listas de pacientes,
 
 ### `SiremBadge`
 
-Selector: `sirem-badge` · [Demo](projects/demo/src/app/pages/badge-demo)
+Selector: `sirem-badge` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/badge)
 
 Pastilla de estado (última visita, estado CUFE/DIAN, estado de cita, sincronización Xubio…). Con o sin punto.
 
@@ -357,7 +359,7 @@ Pastilla de estado (última visita, estado CUFE/DIAN, estado de cita, sincroniza
 
 ### `SiremBreadcrumbs`
 
-Selector: `sirem-breadcrumbs` · [Demo](projects/demo/src/app/pages/breadcrumbs-demo)
+Selector: `sirem-breadcrumbs` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/breadcrumbs)
 
 Ubicación jerárquica (p. ej. Inicio › Clínica › Pacientes).
 
@@ -376,7 +378,7 @@ Ubicación jerárquica (p. ej. Inicio › Clínica › Pacientes).
 
 ### `SiremButton`
 
-Selector: `sirem-button` · [Demo](projects/demo/src/app/pages/button-demo)
+Selector: `sirem-button` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/button)
 
 Botón base del design system SIREM (estética Bento: píldoras de esquinas completamente redondeadas, sombras difusas y semántica de color; escala compacta: el tamaño md mide h-10 (40px) como los campos)…
 
@@ -445,7 +447,7 @@ Botón base del design system SIREM (estética Bento: píldoras de esquinas comp
 
 ### `SiremCalendar`
 
-Selector: `sirem-calendar` · [Demo](projects/demo/src/app/pages/calendar-demo)
+Selector: `sirem-calendar` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/calendar)
 
 Calendario mensual único de agenda (`ScheduleListComponent`) con tres tamaños: - `small`: compacto para popups (p. ej. `sirem-date-field`) y vistas densas. - `medium`: vista normal con puntos de estado por día…
 
@@ -499,7 +501,7 @@ Calendario mensual único de agenda (`ScheduleListComponent`) con tres tamaños:
 
 ### `SiremCard`
 
-Selector: `sirem-card` · [Demo](projects/demo/src/app/pages/card-demo)
+Selector: `sirem-card` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/card)
 
 Tarjeta contenedora genérica (fichas de paciente, tarjetas de inventario, paneles de configuración…). Encabezado opcional + contenido proyectado.
 
@@ -557,7 +559,7 @@ Tarjeta contenedora genérica (fichas de paciente, tarjetas de inventario, panel
 
 ### `SiremCardList`
 
-Selector: `sirem-card-list` · [Demo](projects/demo/src/app/pages/card-list-demo)
+Selector: `sirem-card-list` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/card-list)
 
 Lista de tarjetas: alternativa visual a la tabla para registros con varios datos (pacientes, facturas, equipos…). Uso:
 
@@ -614,7 +616,7 @@ Lista de tarjetas: alternativa visual a la tabla para registros con varios datos
 
 ### `SiremChart`
 
-Selector: `sirem-chart` · [Demo](projects/demo/src/app/pages/chart-demo)
+Selector: `sirem-chart` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/chart)
 
 Gráfica estadística con Apache ECharts (barras simples, series múltiples, dona…). Recibe la opción ECharts tal cual, por lo que sirve para casos simples y compuestos sin cambiar de componente…
 
@@ -642,7 +644,7 @@ Gráfica estadística con Apache ECharts (barras simples, series múltiples, don
 
 ### `SiremCheckbox`
 
-Selector: `sirem-checkbox-field` · [Demo](projects/demo/src/app/pages/checkbox-demo)
+Selector: `sirem-checkbox-field` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/checkbox)
 
 Casilla de verificación con etiqueta y descripción opcional.
 
@@ -661,7 +663,7 @@ Casilla de verificación con etiqueta y descripción opcional.
 
 ### `SiremCodeEditor`
 
-Selector: `sirem-code-editor` · [Demo](projects/demo/src/app/pages/code-editor-demo)
+Selector: `sirem-code-editor` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/code-editor)
 
 Editor de código con CodeMirror 6. Sigue el tema con `dark` (igual que `sirem-chart`): claro por defecto, One Dark en oscuro. Uso:
 
@@ -701,7 +703,7 @@ Editor de código con CodeMirror 6. Sigue el tema con `dark` (igual que `sirem-c
 
 ### `SiremCollapsible`
 
-Selector: `sirem-collapsible` · [Demo](projects/demo/src/app/pages/collapsible-demo)
+Selector: `sirem-collapsible` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/collapsible)
 
 Sección plegable con cabecera pulsable y contenido proyectado. - `variant="card"` (defecto) dibuja el marco Bento: borde, radio y sombra. `variant="plain"` deja solo la cabecera y el contenido, sin marco…
 
@@ -744,7 +746,7 @@ Sección plegable con cabecera pulsable y contenido proyectado. - `variant="card
 
 ### `SiremCollapsibleGroup`
 
-Selector: `sirem-collapsible-group`
+Selector: `sirem-collapsible-group` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/collapsible)
 
 Agrupador de secciones `sirem-collapsible`. - Con `[accordion]="true"` (defecto) solo queda **una sección abierta**: al abrir una, el grupo cierra las demás…
 
@@ -755,7 +757,7 @@ Agrupador de secciones `sirem-collapsible`. - Con `[accordion]="true"` (defecto)
 
 ### `SiremConfirmDialog`
 
-Selector: `sirem-confirm-dialog` · [Demo](projects/demo/src/app/pages/confirm-dialog-demo)
+Selector: `sirem-confirm-dialog` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/confirm-dialog)
 
 Diálogo de confirmación sí/no (equivale a `BoolModalFormDynamicComponent`): eliminar paciente, anular factura, confirmar envío masivo… Uso:
 
@@ -790,7 +792,7 @@ Diálogo de confirmación sí/no (equivale a `BoolModalFormDynamicComponent`): e
 
 ### `SiremDataTable`
 
-Selector: `sirem-data-table` · [Demo](projects/demo/src/app/pages/data-table-demo)
+Selector: `sirem-data-table` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/data-table)
 
 Tabla estandarizada de listados (pacientes, terceros, facturas, productos, amortizaciones…). Ordenable, con selección opcional, scroll horizontal en móvil y celdas tipadas (avatar, badge, moneda…). Uso:
 
@@ -853,7 +855,7 @@ Tabla estandarizada de listados (pacientes, terceros, facturas, productos, amort
 
 ### `SiremDate`
 
-Selector: `sirem-date-field` · [Demo](projects/demo/src/app/pages/date-demo)
+Selector: `sirem-date-field` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/date)
 
 Campo de fecha con calendario emergente (valor ISO `yyyy-MM-dd`). Muestra la fecha en formato local, admite escritura (`dd/mm/aaaa` o ISO) y abre `sirem-calendar` en tamaño `small` para elegir el día. Uso:
 
@@ -880,7 +882,7 @@ Campo de fecha con calendario emergente (valor ISO `yyyy-MM-dd`). Muestra la fec
 
 ### `SiremDateChip`
 
-Selector: `sirem-date-chip` · [Demo](projects/demo/src/app/pages/date-chip-demo)
+Selector: `sirem-date-chip` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/date-chip)
 
 Chip de fecha grande (referencia Bento): inicial del día de la semana arriba y el número destacado debajo. Se usa en fila, como selector rápido de días…
 
@@ -918,7 +920,7 @@ Chip de fecha grande (referencia Bento): inicial del día de la semana arriba y 
 
 ### `SiremDatepicker`
 
-Selector: `sirem-datepicker-field` · [Demo](projects/demo/src/app/pages/datepicker-demo)
+Selector: `sirem-datepicker-field` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/datepicker)
 
 Selector de fecha (citas, nacimiento, vencimientos…). Valor ISO `yyyy-MM-dd`.
 
@@ -943,7 +945,7 @@ Selector de fecha (citas, nacimiento, vencimientos…). Valor ISO `yyyy-MM-dd`.
 
 ### `SiremDrawer`
 
-Selector: `sirem-drawer` · [Demo](projects/demo/src/app/pages/drawer-demo)
+Selector: `sirem-drawer` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/drawer)
 
 Panel lateral deslizante (navegación de la agenda, detalle de paciente, filtros avanzados…). En móvil ocupa casi todo el ancho.
 
@@ -967,7 +969,7 @@ Panel lateral deslizante (navegación de la agenda, detalle de paciente, filtros
 
 ### `SiremDuotoneIcon`
 
-Selector: `sirem-duotone-icon` · [Demo](projects/demo/src/app/pages/duotone-icon-demo)
+Selector: `sirem-duotone-icon` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/duotone-icon)
 
 Icono duotone genérico (SVG inline de dos capas). Patrón duotone (igual en Streamline Ultimate Duotone y Phosphor Duotone): - Capa 1 con `opacity="0.2"` (relleno tenue). - Capa 2 sólida (trazo/forma principal)…
 
@@ -982,7 +984,7 @@ Icono duotone genérico (SVG inline de dos capas). Patrón duotone (igual en Str
 
 ### `SiremDynamicForm`
 
-Selector: `sirem-dynamic-form` · [Demo](projects/demo/src/app/pages/dynamic-form-demo)
+Selector: `sirem-dynamic-form` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/dynamic-form)
 
 Formulario dinámico dirigido por configuración (equivale a `lo-form-dynamic`, compatible con el JSON del form-builder de Lion)…
 
@@ -1097,7 +1099,7 @@ Formulario dinámico dirigido por configuración (equivale a `lo-form-dynamic`, 
 
 ### `SiremEmptyState`
 
-Selector: `sirem-empty-state` · [Demo](projects/demo/src/app/pages/empty-state-demo)
+Selector: `sirem-empty-state` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/empty-state)
 
 Estado vacío de listados (sin pacientes, sin resultados de filtro…).
 
@@ -1110,7 +1112,7 @@ Estado vacío de listados (sin pacientes, sin resultados de filtro…).
 
 ### `SiremFiIcon`
 
-Selector: `sirem-fi-icon` · [Demo](projects/demo/src/app/pages/fi-icon-demo)
+Selector: `sirem-fi-icon` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/fi-icon)
 
 Wrapper de Flaticon UIcons (icon font)…
 
@@ -1125,7 +1127,7 @@ Wrapper de Flaticon UIcons (icon font)…
 
 ### `SiremFieldGroup`
 
-Selector: `sirem-field-group` · [Demo](projects/demo/src/app/pages/field-group-demo)
+Selector: `sirem-field-group` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/field-group)
 
 Grupo de campos con título (equivale a `lib-group-field-dynamic`): agrupa campos relacionados dentro de un formulario y los distribuye en la cuadrícula de 12 columnas mediante el `span` de cada campo (ver `sirem-dynamic-…
 
@@ -1138,7 +1140,7 @@ Grupo de campos con título (equivale a `lib-group-field-dynamic`): agrupa campo
 
 ### `SiremImageUpload`
 
-Selector: `sirem-image-upload-field` · [Demo](projects/demo/src/app/pages/image-upload-demo)
+Selector: `sirem-image-upload-field` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/image-upload)
 
 Carga de imagen con vista previa (foto del paciente, logo, QR…). El valor es la imagen como data-URL lista para previsualizar/enviar.
 
@@ -1163,7 +1165,7 @@ Carga de imagen con vista previa (foto del paciente, logo, QR…). El valor es l
 
 ### `SiremInput`
 
-Selector: `sirem-input-field` · [Demo](projects/demo/src/app/pages/input-demo)
+Selector: `sirem-input-field` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/input)
 
 Campo de texto con autocompletado integrado (doble vía con `[(value)]`). - Sin `options`: input normal…
 
@@ -1247,7 +1249,7 @@ Campo de texto con autocompletado integrado (doble vía con `[(value)]`). - Sin 
 
 ### `SiremInvoiceEditor`
 
-Selector: `sirem-invoice-editor` · [Demo](projects/demo/src/app/pages/invoice-editor-demo)
+Selector: `sirem-invoice-editor` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/invoice-editor)
 
 Editor de factura de venta: cabecera (cliente, N°, fechas, notas), conceptos editables con IVA y descuento por línea y resumen de totales.
 
@@ -1322,7 +1324,7 @@ Editor de factura de venta: cabecera (cliente, N°, fechas, notas), conceptos ed
 
 ### `SiremList`
 
-Selector: `sirem-list` · [Demo](projects/demo/src/app/pages/list-demo)
+Selector: `sirem-list` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/list)
 
 Lista simple de filas (título + subtítulo + icono/avatar + badge). Alternativa ligera a la tabla para móviles y paneles. Uso:
 
@@ -1382,7 +1384,7 @@ Lista simple de filas (título + subtítulo + icono/avatar + badge). Alternativa
 
 ### `SiremModal`
 
-Selector: `sirem-modal` · [Demo](projects/demo/src/app/pages/modal-demo)
+Selector: `sirem-modal` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/modal)
 
 Diálogo modal genérico (CRUD sin recargar página: equivale a `ElementModalFormDynamicComponent`)…
 
@@ -1474,7 +1476,7 @@ Diálogo modal genérico (CRUD sin recargar página: equivale a `ElementModalFor
 
 ### `SiremMultiSelect`
 
-Selector: `sirem-multi-select` · [Demo](projects/demo/src/app/pages/multi-select-demo)
+Selector: `sirem-multi-select` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/multi-select)
 
 Selector de opciones múltiples con buscador, grupos e iconos. Ideal para características, permisos y roles. Uso:
 
@@ -1518,7 +1520,7 @@ Selector de opciones múltiples con buscador, grupos e iconos. Ideal para caract
 
 ### `SiremNavbar`
 
-Selector: `sirem-navbar` · [Demo](projects/demo/src/app/pages/navbar-demo)
+Selector: `sirem-navbar` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/navbar)
 
 Barra de navegación con cuatro disposiciones: - `vertical`: lista apilada en panel (módulos, ajustes). - `horizontal`: fila superior con submenús desplegables. - `minibar`: riel solo-iconos con submenús flotantes…
 
@@ -1632,7 +1634,7 @@ Barra de navegación con cuatro disposiciones: - `vertical`: lista apilada en pa
 
 ### `SiremOverlayViewport`
 
-Selector: `sirem-overlay-viewport` · [Demo](projects/demo/src/app/pages/overlay-demo)
+Selector: `sirem-overlay-viewport` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/overlay)
 
 Configurador opcional de la capa de overlays. **No hace falta montarlo**: `[siremOverlay]` crea la capa por sí sola la primera vez que se usa, con estilos y `z-index` por defecto…
 
@@ -1643,7 +1645,7 @@ Configurador opcional de la capa de overlays. **No hace falta montarlo**: `[sire
 
 ### `SiremPageHeader`
 
-Selector: `sirem-page-header` · [Demo](projects/demo/src/app/pages/page-header-demo)
+Selector: `sirem-page-header` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/page-header)
 
 Cabecera estandarizada de listados (`lo-resource-set-list`): título + subtítulo descriptivo + acciones proyectadas.
 
@@ -1675,7 +1677,7 @@ Cabecera estandarizada de listados (`lo-resource-set-list`): título + subtítul
 
 ### `SiremPopupCard`
 
-Selector: `sirem-popup-card` · [Demo](projects/demo/src/app/pages/popup-card-demo)
+Selector: `sirem-popup-card` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/popup-card)
 
 Tarjeta flotante ligera para ventanas emergentes de mapa (telemetría GPS: velocidad, batería, última posición…)…
 
@@ -1714,7 +1716,7 @@ Tarjeta flotante ligera para ventanas emergentes de mapa (telemetría GPS: veloc
 
 ### `SiremRadioGroup`
 
-Selector: `sirem-radio-group-field` · [Demo](projects/demo/src/app/pages/radio-group-demo)
+Selector: `sirem-radio-group-field` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/radio-group)
 
 Grupo de opciones excluyentes (tipo de persona, régimen…).
 
@@ -1750,7 +1752,7 @@ Grupo de opciones excluyentes (tipo de persona, régimen…).
 
 ### `SiremRichText`
 
-Selector: `sirem-rich-text` · [Demo](projects/demo/src/app/pages/rich-text-demo)
+Selector: `sirem-rich-text` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/rich-text)
 
 Editor de texto enriquecido liviano (contenteditable + barra de formato). Devuelve HTML en doble vía; sin dependencias externas. Uso:
 
@@ -1771,7 +1773,7 @@ Editor de texto enriquecido liviano (contenteditable + barra de formato). Devuel
 
 ### `SiremSearchField`
 
-Selector: `sirem-search-field` · [Demo](projects/demo/src/app/pages/search-field-demo)
+Selector: `sirem-search-field` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/search-field)
 
 Campo de búsqueda con lupa y botón limpiar (filtros de listados).
 
@@ -1790,7 +1792,7 @@ Campo de búsqueda con lupa y botón limpiar (filtros de listados).
 
 ### `SiremSearchPalette`
 
-Selector: `sirem-search-palette` · [Demo](projects/demo/src/app/pages/search-palette-demo)
+Selector: `sirem-search-palette` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/search-palette)
 
 Buscador global estilo paleta de comandos (equivale a `SearchPalettesComponent`). Se abre con `Ctrl+K` / `Cmd+K` desde cualquier vista; filtra por texto, navega con ↑↓ + Enter y se cierra con Escape. Uso:
 
@@ -1823,7 +1825,7 @@ Buscador global estilo paleta de comandos (equivale a `SearchPalettesComponent`)
 
 ### `SiremSegmented`
 
-Selector: `sirem-segmented` · [Demo](projects/demo/src/app/pages/segmented-demo)
+Selector: `sirem-segmented` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/segmented)
 
 Control segmentado de pastillas (referencia Bento): un grupo de opciones excluyentes donde la activa se resalta con una ficha que **se desliza** hasta la opción elegida…
 
@@ -1867,7 +1869,7 @@ Control segmentado de pastillas (referencia Bento): un grupo de opciones excluye
 
 ### `SiremSelect`
 
-Selector: `sirem-select-field` · [Demo](projects/demo/src/app/pages/select-demo)
+Selector: `sirem-select-field` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/select)
 
 Selector desplegable (especialidad, estado civil, tipo de documento…) sobre un `<select>` nativo…
 
@@ -1900,7 +1902,7 @@ Selector desplegable (especialidad, estado civil, tipo de documento…) sobre un
 
 ### `SiremSheet`
 
-Selector: `sirem-sheet` · [Demo](projects/demo/src/app/pages/sheet-demo)
+Selector: `sirem-sheet` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/sheet)
 
 Hoja inferior (bottom sheet) redimensionable con presets y pantalla completa.
 
@@ -1970,7 +1972,7 @@ Hoja inferior (bottom sheet) redimensionable con presets y pantalla completa.
 
 ### `SiremSidebar`
 
-Selector: `sirem-sidebar` · [Demo](projects/demo/src/app/pages/sidebar-demo)
+Selector: `sirem-sidebar` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/sidebar)
 
 Menú lateral jerárquico, colapsable y responsivo…
 
@@ -2073,7 +2075,7 @@ Menú lateral jerárquico, colapsable y responsivo…
 
 ### `SiremSparkline`
 
-Selector: `sirem-sparkline` · [Demo](projects/demo/src/app/pages/sparkline-demo)
+Selector: `sirem-sparkline` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/sparkline)
 
 Minigráfico sin ejes (sparkline) para KPIs dentro de una tarjeta. - `variant="bar"` (defecto): barras tipo píldora, ideal para el Bento. - `variant="line"`: polilínea suave, para tendencias…
 
@@ -2117,7 +2119,7 @@ Minigráfico sin ejes (sparkline) para KPIs dentro de una tarjeta. - `variant="b
 
 ### `SiremStatCard`
 
-Selector: `sirem-stat-card` · [Demo](projects/demo/src/app/pages/stat-card-demo)
+Selector: `sirem-stat-card` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/stat-card)
 
 Tarjeta KPI (total pacientes, facturado del mes, cartera vencida…). - `variant="soft"` (defecto): tarjeta clara habitual. - `variant="tint"`: fondo pastel del tono `color` con icono en chip…
 
@@ -2159,7 +2161,7 @@ Tarjeta KPI (total pacientes, facturado del mes, cartera vencida…). - `variant
 
 ### `SiremStreamlineIcon`
 
-Selector: `sirem-streamline-icon` · [Demo](projects/demo/src/app/pages/streamline-icon-demo)
+Selector: `sirem-streamline-icon` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/streamline-icon)
 
 Icono Streamline (SVG inline registrado por nombre). Diseñado para Streamline Ultimate Duotone: respeta las dos capas del SVG (relleno `opacity="0.2"` + forma sólida) y hereda `currentColor`…
 
@@ -2176,7 +2178,7 @@ Icono Streamline (SVG inline registrado por nombre). Diseñado para Streamline U
 
 ### `SiremSwitch`
 
-Selector: `sirem-switch-field` · [Demo](projects/demo/src/app/pages/switch-demo)
+Selector: `sirem-switch-field` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/switch)
 
 Interruptor booleano (sincronización Xubio, estado activo…).
 
@@ -2193,7 +2195,7 @@ Interruptor booleano (sincronización Xubio, estado activo…).
 
 ### `SiremTextarea`
 
-Selector: `sirem-textarea-field` · [Demo](projects/demo/src/app/pages/textarea-demo)
+Selector: `sirem-textarea-field` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/textarea)
 
 Área de texto multilínea (observaciones, notas clínicas…).
 
@@ -2218,7 +2220,7 @@ Selector: `sirem-textarea-field` · [Demo](projects/demo/src/app/pages/textarea-
 
 ### `SiremTimeline`
 
-Selector: `sirem-timeline` · [Demo](projects/demo/src/app/pages/timeline-demo)
+Selector: `sirem-timeline` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/timeline)
 
 Línea de tiempo vertical (histórico del paciente, trazabilidad de documentos, eventos de un dispositivo GPS…).
 
@@ -2248,7 +2250,7 @@ Línea de tiempo vertical (histórico del paciente, trazabilidad de documentos, 
 
 ### `SiremTopbar`
 
-Selector: `sirem-topbar` · [Demo](projects/demo/src/app/pages/topbar-demo)
+Selector: `sirem-topbar` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/topbar)
 
 Barra superior: hamburguesa (móvil), workspace a la izquierda, buscador global (Ctrl+K), acciones especiales y pantalla completa. El menú de usuario se proyecta en `slot="user"`.
 
@@ -2335,7 +2337,7 @@ Barra superior: hamburguesa (móvil), workspace a la izquierda, buscador global 
 
 ### `SiremUserMenu`
 
-Selector: `sirem-user-menu` · [Demo](projects/demo/src/app/pages/user-menu-demo)
+Selector: `sirem-user-menu` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/user-menu)
 
 Menú desplegable del perfil (datos del usuario + acciones). Las acciones pueden declararse con `groups` (agrupadas y con iconos) o proyectarse libremente; cualquier clic dentro del panel lo cierra. Uso:
 
@@ -2389,7 +2391,7 @@ Directivas standalone que se aplican a elementos existentes.
 
 ### `SiremAutofocusDirective`
 
-Selector: `[siremAutofocus]` · [Demo](projects/demo/src/app/pages/autofocus-demo)
+Selector: `[siremAutofocus]` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/autofocus)
 
 Enfoca el elemento anfitrión al aparecer en vista. Uso:
 
@@ -2402,7 +2404,7 @@ Enfoca el elemento anfitrión al aparecer en vista. Uso:
 
 ### `SiremClickOutsideDirective`
 
-Selector: `[siremClickOutside]` · [Demo](projects/demo/src/app/pages/click-outside-demo)
+Selector: `[siremClickOutside]` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/click-outside)
 
 Emite cuando el usuario pulsa fuera del elemento anfitrión. Ideal para cerrar menús, paletas y desplegables. Uso:
 
@@ -2414,7 +2416,7 @@ Emite cuando el usuario pulsa fuera del elemento anfitrión. Ideal para cerrar m
 
 ### `SiremNumbersOnlyDirective`
 
-Selector: `input[siremNumbersOnly]` · [Demo](projects/demo/src/app/pages/numbers-only-demo)
+Selector: `input[siremNumbersOnly]` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/numbers-only)
 
 Restringe un `<input>` a dígitos (opcionalmente un decimal). Útil para documentos, teléfonos y valores numéricos. Uso:
 
@@ -2425,7 +2427,7 @@ Restringe un `<input>` a dígitos (opcionalmente un decimal). Útil para documen
 
 ### `SiremOverlayTrigger`
 
-Selector: `[siremOverlay]` · [Demo](projects/demo/src/app/pages/overlay-demo)
+Selector: `[siremOverlay]` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/overlay)
 
 Abre un overlay (menú contextual, lista de opciones, ficha de detalle, sub-elementos de un sidebar o navbar) en una **capa superior**, de forma que ningún `overflow: hidden` de un ancestro lo recorte.
 
@@ -2519,7 +2521,7 @@ Abre un overlay (menú contextual, lista de opciones, ficha de detalle, sub-elem
 
 ### `SiremSticky`
 
-Selector: `[siremSticky]` · [Demo](projects/demo/src/app/pages/sticky-demo)
+Selector: `[siremSticky]` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/sticky)
 
 Convierte cualquier elemento o componente en **sticky** (`position: sticky`), de forma abierta o acotada a un límite…
 
@@ -2549,7 +2551,7 @@ Convierte cualquier elemento o componente en **sticky** (`position: sticky`), de
 
 ### `SiremTooltipDirective`
 
-Selector: `[siremTooltip]` · [Demo](projects/demo/src/app/pages/tooltip-demo)
+Selector: `[siremTooltip]` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/tooltip)
 
 Tooltip oscuro flotante con flecha (referencia Bento). Aparece al pasar el ratón o al enfocar el elemento y se anuncia a lectores de pantalla vía `aria-describedby` + `role="tooltip"`…
 
@@ -2585,7 +2587,7 @@ Pipes standalone para plantillas.
 
 ### `SiremAgePipe`
 
-Selector: `pipe siremAge` · [Demo](projects/demo/src/app/pages/age-demo)
+Selector: `pipe siremAge` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/age)
 
 Calcula la edad en años desde una fecha de nacimiento ISO. Uso: `{{ '1990-05-01' | siremAge }}` → `35 años`
 
@@ -2596,7 +2598,7 @@ Calcula la edad en años desde una fecha de nacimiento ISO. Uso: `{{ '1990-05-01
 
 ### `SiremMoneyPipe`
 
-Selector: `pipe siremMoney` · [Demo](projects/demo/src/app/pages/money-demo)
+Selector: `pipe siremMoney` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/money)
 
 Formatea un valor como moneda es-CO sin decimales. Uso: `{{ 250000 | siremMoney }}` → `$ 250.000`
 
@@ -2609,7 +2611,7 @@ Formatea un valor como moneda es-CO sin decimales. Uso: `{{ 250000 | siremMoney 
 
 ### `SiremPhonePipe`
 
-Selector: `pipe siremPhone` · [Demo](projects/demo/src/app/pages/phone-demo)
+Selector: `pipe siremPhone` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/phone)
 
 Formatea un teléfono colombiano de 10 dígitos en bloques 3-3-4. Uso: `{{ '3001112233' | siremPhone }}` → `300 111 2233`
 
