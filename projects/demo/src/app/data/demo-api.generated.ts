@@ -3785,6 +3785,13 @@ export const API_SECTIONS: GlossarySection[] = [
         description: 'Muestra el botón de pantalla completa.',
       },
       {
+        name: 'showMenu',
+        kind: 'Input',
+        type: 'boolean',
+        default: 'true',
+        description: 'Muestra el botón de menú (hamburguesa) del modo responsive (< 768 px); en escritorio se oculta siempre por CSS. Ponlo en `false` si el menú móvil lo abre otro control del shell, para no dejar un botón sin acción.',
+      },
+      {
         name: 'showSpaceDot',
         kind: 'Input',
         type: 'boolean',

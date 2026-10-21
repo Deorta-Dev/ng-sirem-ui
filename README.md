@@ -2297,6 +2297,8 @@ Top bar: hamburger (mobile), workspace on the left, global search (Ctrl+K), spec
     Suggested key; an empty string hides it.
 - **`showFullscreen`** · `boolean` · _default `true`_
     Shows the fullscreen button.
+- **`showMenu`** · `boolean` · _default `true`_
+    Shows the menu (hamburger) button in responsive mode (< 768 px); on desktop it is always hidden by CSS. Set it to `false` if the mobile menu is opened by another shell control, so you don't leave a button without an action.
 - **`showSpaceDot`** · `boolean` · _default `true`_
     Shows the decorative dot next to the workspace.
 - **`showSpaceChevron`** · `boolean` · _default `true`_

@@ -45,6 +45,11 @@ export type SiremTopbarAppearance = 'cards' | SiremStickyAppearance;
  * negrita dentro del texto atenuado. `searchHint` es la tecla sugerida y se
  * oculta si va vacía.
  *
+ * ## Responsive
+ * El botón de menú (hamburguesa) solo se muestra en pantallas pequeñas y
+ * emite `menuPressed`. Con `[showMenu]="false"` desaparece también en móvil,
+ * útil cuando el menú lo abre otro control del shell.
+ *
  * Uso:
  * ```html
  * <sirem-topbar
@@ -83,14 +88,16 @@ export type SiremTopbarAppearance = 'cards' | SiremStickyAppearance;
       <!-- Cabezal izquierdo: menú + workspace + chip de página agrupados en
            una sola celda, para que el buscador centrado no los desplace. -->
       <div class="sirem-topbar__left">
-        <button
-          type="button"
-          (click)="menuPressed.emit()"
-          class="sirem-topbar__icon-btn sirem-topbar__icon-btn--menu"
-          aria-label="Abrir menú"
-        >
-          <sirem-fi-icon name="rr-menu" />
-        </button>
+        @if (showMenu()) {
+          <button
+            type="button"
+            (click)="menuPressed.emit()"
+            class="sirem-topbar__icon-btn sirem-topbar__icon-btn--menu"
+            aria-label="Abrir menú"
+          >
+            <sirem-fi-icon name="rr-menu" />
+          </button>
+        }
 
         @if (showSpace()) {
           <sirem-button
@@ -221,6 +228,13 @@ export class SiremTopbar {
   readonly searchHint = input('Ctrl K');
   /** Muestra el botón de pantalla completa. */
   readonly showFullscreen = input(true);
+  /**
+   * Muestra el botón de menú (hamburguesa) del modo responsive
+   * (< 768 px); en escritorio se oculta siempre por CSS. Ponlo en `false`
+   * si el menú móvil lo abre otro control del shell, para no dejar un
+   * botón sin acción.
+   */
+  readonly showMenu = input(true);
   /** Muestra el punto decorativo junto al workspace. */
   readonly showSpaceDot = input(true);
   /** Muestra la flecha del workspace (indica que abre un selector). */

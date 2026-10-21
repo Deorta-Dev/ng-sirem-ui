@@ -13,6 +13,14 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
         <sirem-topbar />
       </app-demo-variant-card>
       <app-demo-variant-card
+        title="Sin botón de menú"
+        description="showMenu=false oculta la hamburguesa también en móvil (en escritorio ya no se muestra). Útil si el menú lo abre otro control del shell."
+        [htmlCode]="hNoMenu"
+        [tsCode]="t"
+      >
+        <sirem-topbar [showMenu]="false" spaceLabel="Sin hamburguesa" [showFullscreen]="false" />
+      </app-demo-variant-card>
+      <app-demo-variant-card
         title="Apariencia cards"
         description="Barra transparente con cada pieza como tarjeta flotante y buscador centrado."
         [htmlCode]="hCards"
@@ -215,6 +223,7 @@ export class TopbarDemoPage {
 </sirem-card>`;
 
   readonly h1 = '<sirem-topbar />';
+  readonly hNoMenu = '<sirem-topbar [showMenu]="false" spaceLabel="Sin hamburguesa" [showFullscreen]="false" />';
   readonly h2 = '<sirem-topbar spaceLabel="Óptica Norte">\n  <div slot="actions" class="flex gap-2">\n    <sirem-button size="sm" variant="secondary">Buscar</sirem-button>\n  </div>\n</sirem-topbar>';
   readonly h3 = '<sirem-topbar spaceLabel="SIREM">\n  <sirem-user-menu slot="user" userName="María Torres" userDetail="Optómetra" />\n</sirem-topbar>\n<span class="text-sm text-slate-600">Menú: {{ msg() }}</span>';
   readonly t = "import { signal } from '@angular/core';\nimport { SiremTopbar, SiremButton, SiremUserMenu } from '@deorta-dev/ng-sirem-ui';\n\nreadonly msg = signal('');";

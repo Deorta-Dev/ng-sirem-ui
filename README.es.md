@@ -2297,6 +2297,8 @@ Barra superior: hamburguesa (móvil), workspace a la izquierda, buscador global 
     Tecla sugerida; cadena vacía la oculta.
 - **`showFullscreen`** · `boolean` · _por defecto `true`_
     Muestra el botón de pantalla completa.
+- **`showMenu`** · `boolean` · _por defecto `true`_
+    Muestra el botón de menú (hamburguesa) del modo responsive (< 768 px); en escritorio se oculta siempre por CSS. Ponlo en `false` si el menú móvil lo abre otro control del shell, para no dejar un botón sin acción.
 - **`showSpaceDot`** · `boolean` · _por defecto `true`_
     Muestra el punto decorativo junto al workspace.
 - **`showSpaceChevron`** · `boolean` · _por defecto `true`_

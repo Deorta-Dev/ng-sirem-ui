@@ -30,6 +30,7 @@ const rect = (top: number, bottom: number) =>
       [searchHighlight]="searchHighlight()"
       [searchHint]="searchHint()"
       [showFullscreen]="showFullscreen()"
+      [showMenu]="showMenu()"
       [spaceLabel]="'Panel principal'"
     />
   `,
@@ -41,6 +42,7 @@ class Host {
   readonly searchHighlight = signal('Soeimn Lion Master');
   readonly searchHint = signal('Ctrl + K');
   readonly showFullscreen = signal(true);
+  readonly showMenu = signal(true);
 }
 
 describe('SiremTopbar', () => {
@@ -93,6 +95,25 @@ describe('SiremTopbar', () => {
     expect(
       host(fixture).querySelector('[aria-label="Pantalla completa"]'),
     ).toBeNull();
+  });
+
+  it('should toggle the menu button and emit when pressed', () => {
+    const fixture = TestBed.createComponent(Host);
+    fixture.detectChanges();
+
+    const menu = host(fixture).querySelector<HTMLButtonElement>('.sirem-topbar__icon-btn--menu');
+    expect(menu).toBeTruthy();
+
+    const topbar = fixture.debugElement.query(By.directive(SiremTopbar))
+      .componentInstance as SiremTopbar;
+    const pressed: string[] = [];
+    topbar.menuPressed.subscribe(() => pressed.push('ok'));
+    menu?.click();
+    expect(pressed).toEqual(['ok']);
+
+    fixture.componentInstance.showMenu.set(false);
+    fixture.detectChanges();
+    expect(host(fixture).querySelector('.sirem-topbar__icon-btn--menu')).toBeNull();
   });
 
   it('should apply the cards appearance class', () => {
