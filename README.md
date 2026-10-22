@@ -2669,8 +2669,24 @@ npm test             # vitest (library + demo)
 
 ```bash
 npm login            # once per machine (browser; OTP if 2FA is on)
-npm run publish:lib  # build the library and publish dist/ (version from package.json)
+npm run publish:lib  # build, bump the version (patch) and publish dist/
 ```
+
+`publish:lib` bumps the version automatically before publishing (`0.1.2` →
+`0.1.3`). If the build or the publish fails, the version is restored, so no
+number is wasted. To choose the bump:
+
+```bash
+npm run publish:lib -- minor        # 0.1.2 → 0.2.0
+npm run publish:lib -- major        # 0.1.2 → 1.0.0
+npm run publish:lib -- 1.0.0-rc.1   # exact version
+npm run publish:lib -- --dry-run    # rehearsal: builds, does not publish
+npm run publish:lib -- --no-bump    # republish the current version
+```
+
+Shortcuts `npm run publish:lib:minor` and `npm run publish:lib:major` are also
+available. The script creates no commit or tag: after publishing, commit the
+library `package.json` (and tag `vX.Y.Z` if you use tags).
 
 The package is published as `@deorta-dev/ng-sirem-ui` and contains the library only
 (`dist/deorta-sirem-ui`), not the demo. It ships the token stylesheet at

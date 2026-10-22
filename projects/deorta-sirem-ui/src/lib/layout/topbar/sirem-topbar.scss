@@ -103,6 +103,13 @@
   display: block;
 }
 
+/* `showMenu=false`: la hamburguesa no se pinta (el `@if` del template ya la
+   quita) y, por si un estilo externo la forzara, se oculta en cualquier
+   ancho, también en responsive. */
+.sirem-topbar--no-menu .sirem-topbar__icon-btn--menu {
+  display: none !important;
+}
+
 .sirem-topbar__glyph {
   font-size: 1.25rem;
   line-height: 1;

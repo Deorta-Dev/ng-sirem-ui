@@ -75,6 +75,7 @@ export type SiremTopbarAppearance = 'cards' | SiremStickyAppearance;
   template: `
     <header
       class="sirem-topbar"
+      [class.sirem-topbar--no-menu]="!showMenu()"
       [class.sirem-topbar--blur]="blur()"
       [class.sirem-topbar--transparent]="transparent()"
       [class.sirem-topbar--shadow]="scrolled()"
@@ -95,7 +96,7 @@ export type SiremTopbarAppearance = 'cards' | SiremStickyAppearance;
             class="sirem-topbar__icon-btn sirem-topbar__icon-btn--menu"
             aria-label="Abrir menú"
           >
-            <sirem-fi-icon name="rr-menu" />
+            <sirem-fi-icon name="rr-menu-burger" />
           </button>
         }
 

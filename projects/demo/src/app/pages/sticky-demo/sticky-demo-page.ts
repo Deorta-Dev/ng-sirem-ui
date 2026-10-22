@@ -1,12 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { SiremSticky } from '@deorta-dev/ng-sirem-ui';
+import { SiremCard, SiremSticky } from '@deorta-dev/ng-sirem-ui';
 import { DemoVariantCard } from '../../shared/demo-variant-card/demo-variant-card';
 import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 
 @Component({
   selector: 'app-sticky-demo-page',
   standalone: true,
-  imports: [DemoPageLayout, DemoVariantCard, SiremSticky],
+  imports: [DemoPageLayout, DemoVariantCard, SiremSticky, SiremCard],
   template: `
     <app-demo-page-layout
       title="Sticky"
@@ -87,6 +87,34 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
       </app-demo-variant-card>
 
       <app-demo-variant-card
+        title="Cards de una lista (la 5ª se fija)"
+        description="15 cards dentro de un panel con scroll; solo la 5ª lleva siremSticky, así que se queda pegada arriba al pasar y el resto sigue desplazándose."
+        [htmlCode]="h5"
+        [tsCode]="tCards"
+      >
+        <div class="h-96 w-full overflow-auto rounded-xl border border-slate-300">
+          <div class="space-y-3 p-4">
+            @for (n of cards; track n) {
+              <sirem-card
+                [siremSticky]="n === 5"
+                [title]="'Card ' + n"
+                [subtitle]="n === 5 ? 'Esta card se fija al llegar arriba' : 'Contenido de la card ' + n"
+                padding="sm"
+              >
+                <p class="text-sm text-slate-600">
+                  @if (n === 5) {
+                    Desplaza el panel: esta card se queda pegada arriba mientras el resto pasa por detrás.
+                  } @else {
+                    Filas de ejemplo de la card {{ n }} dentro de la lista.
+                  }
+                </p>
+              </sirem-card>
+            }
+          </div>
+        </div>
+      </app-demo-variant-card>
+
+      <app-demo-variant-card
         title="Evento de estado"
         description="(siremStickyChange) avisa al fijarse y al soltarse; útil para cambiar la piel del host."
         [htmlCode]="h4"
@@ -117,6 +145,8 @@ import { DemoPageLayout } from '../../shared/demo-page-layout/demo-page-layout';
 })
 export class StickyDemoPage {
   readonly items = Array.from({ length: 14 }, (_, i) => i + 1);
+  /** 15 cards; la 5ª es la que lleva `siremSticky`. */
+  readonly cards = Array.from({ length: 15 }, (_, i) => i + 1);
   readonly pinned = signal(false);
   readonly changes = signal(0);
 
@@ -150,6 +180,26 @@ export class StickyDemoPage {
   class="bg-amber-600 px-4 py-3 text-white">
   Escucha de siremStickyChange
 </div>`;
+
+  readonly h5 = `<div class="h-96 overflow-auto rounded-xl border">
+  <div class="space-y-3 p-4">
+    @for (n of cards; track n) {
+      <sirem-card
+        [siremSticky]="n === 5"
+        [title]="'Card ' + n">
+        …contenido…
+      </sirem-card>
+    }
+  </div>
+</div>`;
+
+  readonly tCards = `import { SiremCard, SiremSticky } from '@deorta-dev/ng-sirem-ui';
+
+// 15 cards; solo la 5ª activa la directiva.
+readonly cards = Array.from({ length: 15 }, (_, i) => i + 1);
+
+// En la plantilla:
+// <sirem-card [siremSticky]="n === 5" [title]="'Card ' + n" />`;
 
   readonly t = `import { signal } from '@angular/core';
 import { SiremSticky } from '@deorta-dev/ng-sirem-ui';

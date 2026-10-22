@@ -2669,8 +2669,24 @@ npm test             # vitest (librería + demo)
 
 ```bash
 npm login            # una vez por máquina (navegador; OTP si tienes 2FA)
-npm run publish:lib  # compila la librería y publica dist/ (versión del package.json)
+npm run publish:lib  # compila, sube la versión (patch) y publica dist/
 ```
+
+`publish:lib` sube la versión automáticamente antes de publicar (`0.1.2` →
+`0.1.3`). Si el build o el publish fallan, la versión se restaura, de modo que
+no se pierde ningún número. Para elegir el salto:
+
+```bash
+npm run publish:lib -- minor        # 0.1.2 → 0.2.0
+npm run publish:lib -- major        # 0.1.2 → 1.0.0
+npm run publish:lib -- 1.0.0-rc.1   # versión exacta
+npm run publish:lib -- --dry-run    # ensayo: compila y no publica
+npm run publish:lib -- --no-bump    # republica la versión actual
+```
+
+También hay atajos `npm run publish:lib:minor` y `npm run publish:lib:major`.
+El script no crea commit ni tag: tras publicar, haz commit del
+`package.json` de la librería (y etiqueta `vX.Y.Z` si lo usas).
 
 El paquete se publica como `@deorta-dev/ng-sirem-ui` y solo contiene la librería
 (`dist/deorta-sirem-ui`), no la demo. Incluye la hoja de tokens en

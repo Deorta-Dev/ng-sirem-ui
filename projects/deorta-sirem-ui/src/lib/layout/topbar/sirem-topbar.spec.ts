@@ -114,6 +114,9 @@ describe('SiremTopbar', () => {
     fixture.componentInstance.showMenu.set(false);
     fixture.detectChanges();
     expect(host(fixture).querySelector('.sirem-topbar__icon-btn--menu')).toBeNull();
+    // Guarda extra: la clase permite ocultarla por CSS en cualquier ancho
+    // (responsive incluido) si algo externo forzara su display.
+    expect(host(fixture).querySelector('.sirem-topbar--no-menu')).toBeTruthy();
   });
 
   it('should apply the cards appearance class', () => {
