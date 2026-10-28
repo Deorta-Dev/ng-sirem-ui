@@ -404,6 +404,14 @@ export const CATALOG: CatalogEntry[] = [
     section: 'directivas',
   },
   {
+    slug: 'mask',
+    name: 'Mask',
+    selector: 'input[siremMask]',
+    category: 'Formato',
+    description: 'Máscara para inputs por tokens o expresión regular.',
+    section: 'directivas',
+  },
+  {
     slug: 'tooltip',
     name: 'Tooltip',
     selector: '[siremTooltip]',

@@ -1,4 +1,4 @@
-import { Component, computed, input, model, output, signal } from '@angular/core';
+import { Component, computed, effect, input, model, output, signal } from '@angular/core';
 import { SiremOverlayTrigger } from '../../overlays/overlay/sirem-overlay-trigger';
 
 /** Evento de agenda. `color` acepta cualquier color CSS (p. ej. `#26272b`). */
@@ -271,6 +271,26 @@ export class SiremCalendar {
 
   private readonly cursor = signal(startOfMonth(new Date()));
   readonly pickerOpen = signal(false);
+
+  constructor() {
+    effect(() => {
+      const sel = this.selected();
+      if (sel) {
+        const parts = sel.split('-');
+        if (parts.length === 3) {
+          const y = Number(parts[0]);
+          const m = Number(parts[1]) - 1;
+          const d = Number(parts[2]);
+          if (!Number.isNaN(y) && !Number.isNaN(m) && !Number.isNaN(d)) {
+            const date = new Date(y, m, d);
+            if (!Number.isNaN(date.getTime())) {
+              this.cursor.set(startOfMonth(date));
+            }
+          }
+        }
+      }
+    });
+  }
 
   readonly monthLabel = computed(() =>
     new Intl.DateTimeFormat('es-CO', { month: 'long', year: 'numeric' }).format(this.cursor()),

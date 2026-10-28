@@ -1,7 +1,11 @@
 import { Component, computed, signal } from '@angular/core';
 import {
   SiremAgenda,
+  SiremAgendaBody,
+  SiremAgendaModeSwitcher,
+  SiremAgendaNav,
   type SiremAgendaEvent,
+  type SiremAgendaLazyLoadEvent,
   type SiremAgendaMode,
   type SiremAgendaSlot,
 } from '@deorta-dev/ng-sirem-ui';
@@ -25,7 +29,14 @@ const at = (dayOffset: number, hour: number, minute = 0): Date => {
 @Component({
   selector: 'app-agenda-demo-page',
   standalone: true,
-  imports: [DemoPageLayout, DemoVariantCard, SiremAgenda],
+  imports: [
+    DemoPageLayout,
+    DemoVariantCard,
+    SiremAgenda,
+    SiremAgendaNav,
+    SiremAgendaModeSwitcher,
+    SiremAgendaBody,
+  ],
   template: `
     <app-demo-page-layout
       title="Agenda"
@@ -156,6 +167,55 @@ const at = (dayOffset: number, hour: number, minute = 0): Date => {
           <sirem-agenda [events]="citas" [(mode)]="modoCompacto" [(date)]="diaSemana" />
         </div>
       </app-demo-variant-card>
+
+      <app-demo-variant-card
+        title="Navegador de días con Scroll Infinito (sirem-agenda-nav)"
+        description="Módulo desacoplado para navegación temporal. Desplaza horizontalmente la franja de chips: al llegar a los bordes añade días en el pasado o futuro y emite eventos reachStart/reachEnd/lazyLoad."
+        [htmlCode]="h8"
+        [tsCode]="t8"
+      >
+        <div class="w-full flex flex-col gap-3">
+          <sirem-agenda-nav
+            [(date)]="navStandaloneDate"
+            [events]="citas"
+            [showChips]="true"
+            (reachStart)="onNavStart($event)"
+            (reachEnd)="onNavEnd($event)"
+            (lazyLoad)="onNavLazy($event)"
+            (dayPressed)="ultimoNav.set($event.toLocaleDateString('es-ES'))"
+          />
+          <p class="text-xs text-slate-600 dark:text-zinc-400">
+            Día elegido: <b>{{ ultimoNav() || '—' }}</b> · Última acción de scroll: <b>{{ scrollLog() || 'Desplaza horizontalmente para cargar más días' }}</b>
+          </p>
+        </div>
+      </app-demo-variant-card>
+
+      <app-demo-variant-card
+        title="Piezas modulares coordinadas (Switcher + Nav + Body)"
+        description="Construye tu propio diseño combinando libremente sirem-agenda-mode-switcher, sirem-agenda-nav y sirem-agenda-body."
+        [htmlCode]="h9"
+        [tsCode]="t9"
+      >
+        <div class="w-full flex flex-col gap-4 border border-slate-200 dark:border-zinc-800 p-4 rounded-2xl bg-white dark:bg-zinc-900">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <sirem-agenda-nav
+              class="flex-1"
+              [(date)]="modularDate"
+              [mode]="modularMode()"
+              [showChips]="false"
+            />
+            <sirem-agenda-mode-switcher [(mode)]="modularMode" />
+          </div>
+
+          <sirem-agenda-body
+            [mode]="modularMode()"
+            [date]="modularDate()"
+            [events]="citas"
+            [showRail]="modularMode() === 'day'"
+            (eventPressed)="ultimo.set($event.title)"
+          />
+        </div>
+      </app-demo-variant-card>
     </app-demo-page-layout>
   `,
 })
@@ -261,6 +321,25 @@ export class AgendaDemoPage {
     },
   ];
 
+  readonly navStandaloneDate = signal(new Date());
+  readonly ultimoNav = signal('');
+  readonly scrollLog = signal('');
+
+  readonly modularDate = signal(new Date());
+  readonly modularMode = signal<SiremAgendaMode>('week');
+
+  onNavStart(range: { start: Date; end: Date }): void {
+    this.scrollLog.set(`Límite izquierdo alcanzado: cargados días anteriores hasta ${range.start.toLocaleDateString('es-ES')}`);
+  }
+
+  onNavEnd(range: { start: Date; end: Date }): void {
+    this.scrollLog.set(`Límite derecho alcanzado: cargados días posteriores hasta ${range.end.toLocaleDateString('es-ES')}`);
+  }
+
+  onNavLazy(event: SiremAgendaLazyLoadEvent): void {
+    this.scrollLog.set(`LazyLoad [${event.direction}]: fecha ${event.date.toLocaleDateString('es-ES')}`);
+  }
+
   readonly h1 = `<sirem-agenda
   [events]="citas"
   [(mode)]="modo"
@@ -296,6 +375,29 @@ export class AgendaDemoPage {
 
   readonly h7 = `<!-- Por debajo de 40rem la agenda oculta la semana
      y compacta el resto de vistas. -->\n<div class="w-[20rem]">\n  <sirem-agenda [events]="citas" [(mode)]="modo" [(date)]="dia" />\n</div>`;
+
+  readonly h8 = `<sirem-agenda-nav
+  [(date)]="fecha"
+  [events]="citas"
+  [showChips]="true"
+  (reachStart)="onStart($event)"
+  (reachEnd)="onEnd($event)"
+  (lazyLoad)="onLazy($event)"
+/>`;
+
+  readonly t8 = `import { SiremAgendaNav } from '@deorta-dev/ng-sirem-ui';\n\nfecha = signal(new Date());\n// Emite reachStart y reachEnd al deslizar horizontalmente la franja de chips`;
+
+  readonly h9 = `<div class="flex items-center justify-between">
+  <sirem-agenda-nav [(date)]="dia" [mode]="vista()" [showChips]="false" />
+  <sirem-agenda-mode-switcher [(mode)]="vista" />
+</div>
+<sirem-agenda-body [mode]="vista()" [date]="dia()" [events]="citas" />`;
+
+  readonly t9 = `import {
+  SiremAgendaNav,
+  SiremAgendaModeSwitcher,
+  SiremAgendaBody,
+} from '@deorta-dev/ng-sirem-ui';\n\ndia = signal(new Date());\nvista = signal<SiremAgendaMode>('week');`;
 
   readonly t1 = `import { SiremAgenda, type SiremAgendaEvent } from '@deorta-dev/ng-sirem-ui';
 

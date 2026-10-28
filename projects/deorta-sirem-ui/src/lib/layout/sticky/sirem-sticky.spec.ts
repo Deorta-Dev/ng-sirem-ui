@@ -108,12 +108,11 @@ describe('SiremSticky', () => {
 
   it('should release after the numeric limit', async () => {
     const fixture = setup();
+    const el = target(fixture);
+    vi.spyOn(el, 'getBoundingClientRect').mockReturnValue(rect(0, 48));
     fixture.componentInstance.limit.set(50);
     fixture.detectChanges();
     await flush();
-
-    const el = target(fixture);
-    vi.spyOn(el, 'getBoundingClientRect').mockReturnValue(rect(0, 48));
 
     // 40 px de recorrido: aún dentro del límite, se mantiene en top 0.
     Object.defineProperty(window, 'scrollY', { value: 40, configurable: true });

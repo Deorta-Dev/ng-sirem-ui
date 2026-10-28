@@ -1,10 +1,14 @@
 import { Component, input, linkedSignal, model, signal } from '@angular/core';
 import { SiremCalendar } from '../../schedule/calendar/sirem-calendar';
+import {
+  SiremMaskDirective,
+  type SiremMaskPattern,
+} from '../../directives/mask/sirem-mask.directive';
 
 /**
  * Campo de fecha con calendario emergente (valor ISO `yyyy-MM-dd`).
- * Muestra la fecha en formato local, admite escritura (`dd/mm/aaaa` o ISO)
- * y abre `sirem-calendar` en tamaño `small` para elegir el día.
+ * Muestra la fecha en formato local, admite escritura manual con máscara
+ * (`dd/mm/aaaa` o personalizada) y sitúa automáticamente el calendario en la fecha válida.
  *
  * Uso:
  * ```html
@@ -14,7 +18,7 @@ import { SiremCalendar } from '../../schedule/calendar/sirem-calendar';
 @Component({
   selector: 'sirem-date-field',
   standalone: true,
-  imports: [SiremCalendar],
+  imports: [SiremCalendar, SiremMaskDirective],
   styleUrl: './sirem-date.scss',
   template: `
     <div class="sirem-field">
@@ -28,8 +32,10 @@ import { SiremCalendar } from '../../schedule/calendar/sirem-calendar';
       }
       <div class="sirem-date__wrap" (focusout)="onBoxBlur()" (keydown.enter)="commitBox(); close()">
         <input
+          [siremMask]="mask()"
           [value]="box()"
           (input)="onBoxInput($event)"
+          (maskedChange)="onMaskedChange($event)"
           (focus)="toggle(true)"
           [placeholder]="placeholder()"
           [disabled]="disabled()"
@@ -77,6 +83,8 @@ export class SiremDate {
   readonly value = model<string | null>(null);
   /** Etiqueta visible sobre el control. */
   readonly label = input('');
+  /** Máscara de entrada para la fecha manual (por defecto '00/00/0000'). */
+  readonly mask = input<SiremMaskPattern | null>('00/00/0000');
   /** Texto de ayuda cuando no hay fecha (`dd/mm/aaaa`). */
   readonly placeholder = input('dd/mm/aaaa');
   /** Nota de ayuda bajo el campo; la sustituye `error` cuando lo hay. */
@@ -114,9 +122,23 @@ export class SiremDate {
     return !!this.error() || !!this.dateError();
   }
 
+  onMaskedChange(v: string): void {
+    this.onBox(v);
+  }
+
   onBox(v: string): void {
     this.box.set(v);
-    this.dateError.set('');
+    const raw = v.trim();
+    if (!raw) {
+      this.value.set(null);
+      this.dateError.set('');
+      return;
+    }
+    const iso = parseDate(raw);
+    if (iso && this.inRange(iso)) {
+      this.dateError.set('');
+      this.value.set(iso);
+    }
   }
 
   onBoxInput(event: Event): void {

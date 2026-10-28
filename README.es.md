@@ -53,6 +53,9 @@ Todas las propiedades documentadas de cada artefacto: tipo, valor por defecto, p
 - **Componentes**
     - [`SiremAdminLayout`](#siremadminlayout)
     - [`SiremAgenda`](#siremagenda)
+    - [`SiremAgendaBody`](#siremagendabody)
+    - [`SiremAgendaModeSwitcher`](#siremagendamodeswitcher)
+    - [`SiremAgendaNav`](#siremagendanav)
     - [`SiremAvatar`](#siremavatar)
     - [`SiremBadge`](#sirembadge)
     - [`SiremBreadcrumbs`](#sirembreadcrumbs)
@@ -105,6 +108,7 @@ Todas las propiedades documentadas de cada artefacto: tipo, valor por defecto, p
 - **Directivas**
     - [`SiremAutofocusDirective`](#siremautofocusdirective)
     - [`SiremClickOutsideDirective`](#siremclickoutsidedirective)
+    - [`SiremMaskDirective`](#siremmaskdirective)
     - [`SiremNumbersOnlyDirective`](#siremnumbersonlydirective)
     - [`SiremOverlayTrigger`](#siremoverlaytrigger)
     - [`SiremSticky`](#siremsticky)
@@ -141,7 +145,7 @@ Contenedor maestro de la app autenticada (equivale a `lo-admin-layout`)…
 
 Selector: `sirem-agenda` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/agenda)
 
-Agenda multi-vista tipo Google Calendar (`sirem-agenda`).
+Agenda multi-vista tipo Google Calendar (`sirem-agenda`). Compuesta por tres submódulos independientes y reutilizables: - `sirem-agenda-nav`: Barra de navegación temporal y franja de días con scroll infinito…
 
 #### Entradas
 
@@ -168,6 +172,8 @@ Agenda multi-vista tipo Google Calendar (`sirem-agenda`).
     Hora final de la rejilla (exclusiva).
 - **`hourHeight`** · `number` · _por defecto `64`_
     Alto en px de cada celda de hora (1 h de rejilla).
+- **`cellHeight`** · `number | string | null`
+    Altura de las celdas (en px o unidad CSS, ej. 96, '6rem', '120px'). Aplica al mes y a la rejilla horaria.
 - **`maxPerDay`** · `number` · _por defecto `2`_
     Eventos visibles por día en el mes antes de «+N más».
 - **`listDays`** · `number` · _por defecto `30`_
@@ -207,6 +213,8 @@ Agenda multi-vista tipo Google Calendar (`sirem-agenda`).
     Desenfoque de la fila de días pegada; `null` hereda `daysBlur`.
 - **`daysStickyHeight`** · `number` · _por defecto `0`_
     Alto de la fila de días mientras está pegada, en px (`0` = natural).
+- **`infiniteScroll`** · `boolean` · _por defecto `true`_
+    Activa la carga perezosa y scroll infinito.
 
 #### Salidas
 
@@ -230,6 +238,16 @@ Agenda multi-vista tipo Google Calendar (`sirem-agenda`).
 - **`dayPressed`** · `Date`
     Día elegido por el usuario.
     - **Devuelve:** Día pulsado, a medianoche local.
+- **`reachEnd`** · `{ date?: Date }`
+    Se emite cuando el scroll llega al límite final.
+- **`reachStart`** · `{ date?: Date }`
+    Se emite cuando el scroll llega al límite inicial.
+- **`lazyLoad`** · `SiremAgendaLazyLoadEvent`
+    Solicitud de carga perezosa unificada.
+    - **Devuelve:**
+      - `direction` · `'prev' | 'next'`
+      - `date` · `Date`
+      - `count?` · `number`
 
 #### Tipos y esquemas
 
@@ -274,6 +292,319 @@ Agenda multi-vista tipo Google Calendar (`sirem-agenda`).
         - `date` · `Date` — Día del hueco.
         - `hour` · `number` — Hora (0–23).
         - `minute` · `number` — Minuto (0–59).
+- **`SiremAgendaLazyLoadEvent`** · _interfaz_
+    Evento de carga perezosa de fechas / rango.
+    - **Campos:**
+        - `direction` · `'prev' | 'next'`
+        - `date` · `Date`
+        - `count?` · `number`
+
+### `SiremAgendaBody`
+
+Selector: `sirem-agenda-body`
+
+Cuerpo principal multi-vista de la agenda (`sirem-agenda-body`)…
+
+#### Entradas
+
+- **`mode`** · `SiremAgendaMode` · _por defecto `'week'`_
+    Vista activa (`day`, `week`, `month`, `list`).
+    - **Valores:**
+      - `day` — Un día, con las horas en columnas.
+      - `week` — La semana completa, con los 7 días.
+      - `month` — Rejilla del mes.
+      - `list` — Lista cronológica sin rejilla.
+- **`date`** · `Date` · _por defecto `new Date()`_
+    Fecha central enfocada.
+- **`events`** · `SiremAgendaEvent[]` · _por defecto `[]`_
+    Eventos a posicionar en la agenda.
+- **`locale`** · `string` · _por defecto `'es-ES'`_
+    Idioma de rótulos.
+- **`weekStartsOn`** · `0 | 1` · _por defecto `1`_
+    Primer día de la semana (`1` = lunes).
+- **`startHour`** · `number` · _por defecto `7`_
+    Primera hora visible de la rejilla horaria.
+- **`endHour`** · `number` · _por defecto `21`_
+    Hora final de la rejilla (exclusiva).
+- **`hourHeight`** · `number` · _por defecto `64`_
+    Alto en px de cada hora en la rejilla.
+- **`cellHeight`** · `number | string | null`
+    Altura de las celdas (en px o unidad CSS, ej. 96, '6rem', '120px'). Aplica a las celdas del mes y a la rejilla horaria.
+- **`maxPerDay`** · `number` · _por defecto `2`_
+    Máximo de eventos visibles por día en el mes.
+- **`listDays`** · `number` · _por defecto `30`_
+    Días iniciales para la vista de lista.
+- **`now`** · `Date | null`
+    Reloj fijo opcional (para tests).
+- **`compact`** · `boolean` · _por defecto `false`_
+    Modo compacto para anchos estrechos.
+- **`showRail`** · `boolean` · _por defecto `false`_
+    Muestra el riel de chips en la vista de día cuando no se use un nav externo.
+- **`scrollable`** · `boolean` · _por defecto `false`_
+    Envoltura desplazable con scroll interno.
+- **`maxHeight`** · `string | null`
+    Alto máximo cuando `scrollable` es true.
+- **`infiniteScroll`** · `boolean` · _por defecto `true`_
+    Habilita la detección de scroll infinito para carga perezosa.
+- **`threshold`** · `number` · _por defecto `100`_
+    Umbral en px para disparar la carga perezosa.
+- **`autoExtendList`** · `boolean` · _por defecto `true`_
+    Auto-amplía los días visibles de la lista al llegar al final.
+- **`stickyDays`** · `boolean` · _por defecto `false`_
+    Sin documentacion.
+- **`daysTop`** · `string` · _por defecto `'0px'`_
+    Sin documentacion.
+- **`daysSurface`** · `string | null`
+    Sin documentacion.
+- **`daysFilter`** · `string | null`
+    Sin documentacion.
+- **`daysStickyHeight`** · `number` · _por defecto `0`_
+    Sin documentacion.
+
+#### Salidas
+
+- **`eventPressed`** · `SiremAgendaEvent`
+    Evento pulsado.
+    - **Devuelve:**
+      - `id?` · `string | number` — Identificador estable; si falta se usa la posición en el array.
+      - `title` · `string` — Título visible.
+      - `start` · `Date | string` — Inicio (`Date` o texto ISO).
+      - `end?` · `Date | string` — Fin (`Date` o texto ISO). Sin fin dura 30 minutos.
+      - `allDay?` · `boolean` — Ocupa el día completo y va a la franja superior.
+      - `tone?` · `SiremAgendaTone` — Color semántico; por defecto `brand`.
+      - `location?` · `string` — Lugar o sala, en segunda línea.
+      - `meta?` · `string` — Etiqueta corta a la derecha (profesional, estado…).
+- **`slotPressed`** · `SiremAgendaSlot`
+    Hueco horario pulsado.
+    - **Devuelve:**
+      - `date` · `Date` — Día del hueco.
+      - `hour` · `number` — Hora (0–23).
+      - `minute` · `number` — Minuto (0–59).
+- **`dayPressed`** · `Date`
+    Día seleccionado al pulsar una celda o chip.
+- **`modeChange`** · `SiremAgendaMode`
+    Se emite cuando se necesita cambiar de modo (ej. al abrir un día desde el mes).
+    - **Valores:**
+      - `day` — Un día, con las horas en columnas.
+      - `week` — La semana completa, con los 7 días.
+      - `month` — Rejilla del mes.
+      - `list` — Lista cronológica sin rejilla.
+- **`reachEnd`** · `{ date: Date }`
+    Se emite al llegar cerca del final del scroll.
+- **`reachStart`** · `{ date: Date }`
+    Se emite al llegar cerca del inicio del scroll.
+- **`lazyLoad`** · `SiremAgendaLazyLoadEvent`
+    Solicitud de carga perezosa de datos.
+    - **Devuelve:**
+      - `direction` · `'prev' | 'next'`
+      - `date` · `Date`
+      - `count?` · `number`
+- **`scrollNearBottom`** · `void`
+    Notificación de scroll próximo al fondo.
+    - **Devuelve:** No emite datos: el evento no lleva carga útil.
+- **`scrollNearTop`** · `void`
+    Notificación de scroll próximo al tope.
+    - **Devuelve:** No emite datos: el evento no lleva carga útil.
+
+#### Tipos y esquemas
+
+- **`SiremAgendaMode`** · _unión_
+    Vistas de la agenda.
+    - **Definición:** `'day' | 'week' | 'month' | 'list'`
+    - `day` — Un día, con las horas en columnas.
+    - `week` — La semana completa, con los 7 días.
+    - `month` — Rejilla del mes.
+    - `list` — Lista cronológica sin rejilla.
+- **`SiremAgendaEvent`** · _interfaz_
+    Evento de la agenda.
+    - **Campos:**
+        - `id?` · `string | number` — Identificador estable; si falta se usa la posición en el array.
+        - `title` · `string` — Título visible.
+        - `start` · `Date | string` — Inicio (`Date` o texto ISO).
+        - `end?` · `Date | string` — Fin (`Date` o texto ISO). Sin fin dura 30 minutos.
+        - `allDay?` · `boolean` — Ocupa el día completo y va a la franja superior.
+        - `tone?` · `SiremAgendaTone` — Color semántico; por defecto `brand`.
+        - `location?` · `string` — Lugar o sala, en segunda línea.
+        - `meta?` · `string` — Etiqueta corta a la derecha (profesional, estado…).
+- **`SiremAgendaTone`** · _unión_
+    Semántica de color de un evento.
+    - **Definición:** `'brand' | 'sage' | 'accent' | 'success' | 'warning' | 'danger' | 'muted'`
+    - `brand`
+    - `sage`
+    - `accent`
+    - `success`
+    - `warning`
+    - `danger`
+    - `muted`
+- **`SiremAgendaSlot`** · _interfaz_
+    Hueco pulsado en la rejilla horaria.
+    - **Campos:**
+        - `date` · `Date` — Día del hueco.
+        - `hour` · `number` — Hora (0–23).
+        - `minute` · `number` — Minuto (0–59).
+- **`SiremAgendaLazyLoadEvent`** · _interfaz_
+    Evento de carga perezosa de fechas / rango.
+    - **Campos:**
+        - `direction` · `'prev' | 'next'`
+        - `date` · `Date`
+        - `count?` · `number`
+
+### `SiremAgendaModeSwitcher`
+
+Selector: `sirem-agenda-mode-switcher`
+
+Selector de vistas de la agenda (`sirem-agenda-mode-switcher`). Permite conmutar el modo de visualización entre día, semana, mes y lista para sincronizar tanto el cuerpo de la agenda como el navegador de fechas. Uso:
+
+#### Entradas
+
+- **`mode`** · `SiremAgendaMode` · _por defecto `'week'`_
+    Vista activa en doble vía (`day`, `week`, `month`, `list`).
+    - **Valores:**
+      - `day` — Un día, con las horas en columnas.
+      - `week` — La semana completa, con los 7 días.
+      - `month` — Rejilla del mes.
+      - `list` — Lista cronológica sin rejilla.
+- **`modes`** · `SiremAgendaMode[]` · _por defecto `['day', 'week', 'month', 'list']`_
+    Vistas disponibles en el selector.
+- **`compact`** · `boolean` · _por defecto `false`_
+    Tamaño compacto para anchos reducidos.
+- **`size`** · `'sm' | 'md'` · _por defecto `'md'`_
+    Tamaño del control segmented (`sm` o `md`).
+- **`ariaLabel`** · `string` · _por defecto `'Vista de agenda'`_
+    Etiqueta de accesibilidad del grupo.
+
+#### Salidas
+
+- **`modeChange`** · `SiremAgendaMode`
+    Se emite cuando cambia la vista.
+    - **Valores:**
+      - `day` — Un día, con las horas en columnas.
+      - `week` — La semana completa, con los 7 días.
+      - `month` — Rejilla del mes.
+      - `list` — Lista cronológica sin rejilla.
+
+#### Tipos y esquemas
+
+- **`SiremAgendaMode`** · _unión_
+    Vistas de la agenda.
+    - **Definición:** `'day' | 'week' | 'month' | 'list'`
+    - `day` — Un día, con las horas en columnas.
+    - `week` — La semana completa, con los 7 días.
+    - `month` — Rejilla del mes.
+    - `list` — Lista cronológica sin rejilla.
+
+### `SiremAgendaNav`
+
+Selector: `sirem-agenda-nav`
+
+Navegador de días y fechas para la agenda (`sirem-agenda-nav`)…
+
+#### Entradas
+
+- **`date`** · `Date` · _por defecto `new Date()`_
+    Día seleccionado en doble vía.
+- **`mode`** · `SiremAgendaMode` · _por defecto `'week'`_
+    Vista activa asociada (día, semana, mes, lista).
+    - **Valores:**
+      - `day` — Un día, con las horas en columnas.
+      - `week` — La semana completa, con los 7 días.
+      - `month` — Rejilla del mes.
+      - `list` — Lista cronológica sin rejilla.
+- **`events`** · `SiremAgendaEvent[]` · _por defecto `[]`_
+    Eventos para mostrar indicadores de puntos en los chips.
+- **`title`** · `string | null`
+    Título personalizado (si se omite, se formatea automáticamente).
+- **`subtitle`** · `string | null`
+    Subtítulo descriptivo opcional.
+- **`locale`** · `string` · _por defecto `'es-ES'`_
+    Idioma de formateo de fechas.
+- **`weekStartsOn`** · `0 | 1` · _por defecto `1`_
+    Primer día de la semana (`1` = lunes).
+- **`showChips`** · `boolean` · _por defecto `true`_
+    Muestra la fila desplazable de date-chips.
+- **`infiniteScroll`** · `boolean` · _por defecto `true`_
+    Habilita la carga perezosa infinita al llegar a los extremos del scroll.
+- **`threshold`** · `number` · _por defecto `80`_
+    Distancia en px desde el borde para activar la carga perezosa.
+- **`pageSize`** · `number` · _por defecto `14`_
+    Cantidad de días añadidos en cada carga perezosa.
+
+#### Salidas
+
+- **`dayPressed`** · `Date`
+    Se emite al pulsar un día concreto.
+- **`prevPressed`** · `void`
+    Se emite al pulsar el botón anterior.
+    - **Devuelve:** No emite datos: el evento no lleva carga útil.
+- **`nextPressed`** · `void`
+    Se emite al pulsar el botón siguiente.
+    - **Devuelve:** No emite datos: el evento no lleva carga útil.
+- **`todayPressed`** · `void`
+    Se emite al pulsar el botón hoy.
+    - **Devuelve:** No emite datos: el evento no lleva carga útil.
+- **`reachStart`** · `SiremAgendaDateRange`
+    Se emite cuando el scroll llega cerca del límite izquierdo.
+    - **Devuelve:**
+      - `start` · `Date`
+      - `end` · `Date`
+- **`reachEnd`** · `SiremAgendaDateRange`
+    Se emite cuando el scroll llega cerca del límite derecho.
+    - **Devuelve:**
+      - `start` · `Date`
+      - `end` · `Date`
+- **`lazyLoad`** · `SiremAgendaLazyLoadEvent`
+    Solicitud de carga perezosa hacia atrás o hacia adelante.
+    - **Devuelve:**
+      - `direction` · `'prev' | 'next'`
+      - `date` · `Date`
+      - `count?` · `number`
+- **`rangeChange`** · `SiremAgendaDateRange`
+    Se emite cuando cambia el rango visible o cargado.
+    - **Devuelve:**
+      - `start` · `Date`
+      - `end` · `Date`
+
+#### Tipos y esquemas
+
+- **`SiremAgendaMode`** · _unión_
+    Vistas de la agenda.
+    - **Definición:** `'day' | 'week' | 'month' | 'list'`
+    - `day` — Un día, con las horas en columnas.
+    - `week` — La semana completa, con los 7 días.
+    - `month` — Rejilla del mes.
+    - `list` — Lista cronológica sin rejilla.
+- **`SiremAgendaEvent`** · _interfaz_
+    Evento de la agenda.
+    - **Campos:**
+        - `id?` · `string | number` — Identificador estable; si falta se usa la posición en el array.
+        - `title` · `string` — Título visible.
+        - `start` · `Date | string` — Inicio (`Date` o texto ISO).
+        - `end?` · `Date | string` — Fin (`Date` o texto ISO). Sin fin dura 30 minutos.
+        - `allDay?` · `boolean` — Ocupa el día completo y va a la franja superior.
+        - `tone?` · `SiremAgendaTone` — Color semántico; por defecto `brand`.
+        - `location?` · `string` — Lugar o sala, en segunda línea.
+        - `meta?` · `string` — Etiqueta corta a la derecha (profesional, estado…).
+- **`SiremAgendaDateRange`** · _interfaz_
+    Rango de fechas visible o cargado.
+    - **Campos:**
+        - `start` · `Date`
+        - `end` · `Date`
+- **`SiremAgendaLazyLoadEvent`** · _interfaz_
+    Evento de carga perezosa de fechas / rango.
+    - **Campos:**
+        - `direction` · `'prev' | 'next'`
+        - `date` · `Date`
+        - `count?` · `number`
+- **`SiremAgendaTone`** · _unión_
+    Semántica de color de un evento.
+    - **Definición:** `'brand' | 'sage' | 'accent' | 'success' | 'warning' | 'danger' | 'muted'`
+    - `brand`
+    - `sage`
+    - `accent`
+    - `success`
+    - `warning`
+    - `danger`
+    - `muted`
 
 ### `SiremAvatar`
 
@@ -857,7 +1188,7 @@ Tabla estandarizada de listados (pacientes, terceros, facturas, productos, amort
 
 Selector: `sirem-date-field` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/date)
 
-Campo de fecha con calendario emergente (valor ISO `yyyy-MM-dd`). Muestra la fecha en formato local, admite escritura (`dd/mm/aaaa` o ISO) y abre `sirem-calendar` en tamaño `small` para elegir el día. Uso:
+Campo de fecha con calendario emergente (valor ISO `yyyy-MM-dd`)…
 
 #### Entradas
 
@@ -865,6 +1196,8 @@ Campo de fecha con calendario emergente (valor ISO `yyyy-MM-dd`). Muestra la fec
     Fecha en ISO `yyyy-MM-dd`.
 - **`label`** · `string` · _por defecto `''`_
     Etiqueta visible sobre el control.
+- **`mask`** · `SiremMaskPattern | null` · _por defecto `'00/00/0000'`_
+    Máscara de entrada para la fecha manual (por defecto '00/00/0000').
 - **`placeholder`** · `string` · _por defecto `'dd/mm/aaaa'`_
     Texto de ayuda cuando no hay fecha (`dd/mm/aaaa`).
 - **`hint`** · `string` · _por defecto `''`_
@@ -879,6 +1212,18 @@ Campo de fecha con calendario emergente (valor ISO `yyyy-MM-dd`). Muestra la fec
     Marca el campo como obligatorio (`aria-required` e indicador visual).
 - **`disabled`** · `boolean` · _por defecto `false`_
     Deshabilita el control: no se puede enfocar ni editar.
+
+#### Tipos y esquemas
+
+- **`SiremMaskPattern`** · _alias_
+    Patrón de máscara: texto con tokens, RegExp o configuración avanzada.
+    - **Definición:** `string | RegExp | SiremMaskConfig`
+- **`SiremMaskConfig`** · _interfaz_
+    Configuración avanzada de la máscara para inputs.
+    - **Campos:**
+        - `pattern` · `string | RegExp` — Patrón de máscara con tokens (ej. '00/00/0000', '(000) 000-0000') o RegExp.
+        - `tokens?` · `Record<string, RegExp>` — Mapa personalizado de tokens comodín a RegExp.
+        - `unmask?` · `boolean` — Si es true, el valor sin caracteres fijos se sincroniza.
 
 ### `SiremDateChip`
 
@@ -1173,6 +1518,8 @@ Campo de texto con autocompletado integrado (doble vía con `[(value)]`). - Sin 
 
 - **`value`** · `string | number | (string | number)[] | null`
     Valor del campo (texto, número o array en multiselección), con enlace de dos vías.
+- **`mask`** · `SiremMaskPattern | null`
+    Máscara configurable para el campo (patrón string con tokens, RegExp o SiremMaskConfig).
 - **`type`** · `SiremInputType` · _por defecto `'text'`_
     Tipo de control nativo: `text`, `number`, `email`, `password`, `tel` o `url`.
     - **Valores:**
@@ -1229,6 +1576,9 @@ Campo de texto con autocompletado integrado (doble vía con `[(value)]`). - Sin 
 
 #### Tipos y esquemas
 
+- **`SiremMaskPattern`** · _alias_
+    Patrón de máscara: texto con tokens, RegExp o configuración avanzada.
+    - **Definición:** `string | RegExp | SiremMaskConfig`
 - **`SiremInputType`** · _unión_
     Tipo nativo del campo (atributo `type` del input HTML).
     - **Definición:** `'text' | 'number' | 'email' | 'password' | 'tel' | 'url'`
@@ -1246,6 +1596,12 @@ Campo de texto con autocompletado integrado (doble vía con `[(value)]`). - Sin 
 - **`SiremOptionsMapper`** · _alias_
     Convierte cada elemento de `objects` en una opción del listado.
     - **Definición:** `(item: unknown) => SiremSelectOption`
+- **`SiremMaskConfig`** · _interfaz_
+    Configuración avanzada de la máscara para inputs.
+    - **Campos:**
+        - `pattern` · `string | RegExp` — Patrón de máscara con tokens (ej. '00/00/0000', '(000) 000-0000') o RegExp.
+        - `tokens?` · `Record<string, RegExp>` — Mapa personalizado de tokens comodín a RegExp.
+        - `unmask?` · `boolean` — Si es true, el valor sin caracteres fijos se sincroniza.
 
 ### `SiremInvoiceEditor`
 
@@ -1794,12 +2150,12 @@ Campo de búsqueda con lupa y botón limpiar (filtros de listados).
 
 Selector: `sirem-search-palette` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/search-palette)
 
-Buscador global estilo paleta de comandos (equivale a `SearchPalettesComponent`). Se abre con `Ctrl+K` / `Cmd+K` desde cualquier vista; filtra por texto, navega con ↑↓ + Enter y se cierra con Escape. Uso:
+Buscador global estilo paleta de comandos (`sirem-search-palette`). Se abre con `Ctrl+K` / `Cmd+K` desde cualquier vista. Admite: - Iconos y descripciones personalizadas por ítem…
 
 #### Entradas
 
 - **`items`** · `SiremPaletteItem[]` · _por defecto `[]`_
-    Entradas buscables (título, sección, icono, ruta).
+    Entradas buscables (título, sección, icono, ruta, descripción, sub-ítems).
 - **`placeholder`** · `string` · _por defecto `'Buscar pacientes, facturas, placas…'`_
     Texto de ejemplo del buscador.
 - **`open`** · `boolean` · _por defecto `false`_
@@ -1811,8 +2167,16 @@ Buscador global estilo paleta de comandos (equivale a `SearchPalettesComponent`)
     Se emite con la entrada elegida.
     - **Devuelve:**
       - `label` · `string` — Texto principal del resultado.
+      - `icon?` · `string` — Icono del resultado (clase de Flaticon UIcons, ej. 'fi fi-rr-user').
+      - `description?` · `string` — Descripción detallada bajo el título.
       - `hint?` · `string` — Contexto secundario (ruta, tipo, sede…).
       - `group?` · `string` — Sección a la que pertenece el resultado.
+      - `subItems?` · `SiremPaletteSubItem[]` — Sub-ítems o acciones secundarias asociadas al ítem.
+      - `subItemsLayout?` · `SiremPaletteSubItemsLayout` — Disposición de los sub-ítems ('horizontal' por defecto o 'vertical'). En horizontal, las flechas ← y → navegan entre los sub-ítems del ítem activo.
+      - `selectedSubItem?` · `SiremPaletteSubItem` — Sub-ítem seleccionado activamente al confirmar.
+      - `data?` · `unknown` — Datos arbitrarios asociados al ítem.
+- **`subItemSelected`** · `unknown`
+    Se emite cuando se elige específicamente un sub-ítem.
 
 #### Tipos y esquemas
 
@@ -1820,8 +2184,28 @@ Buscador global estilo paleta de comandos (equivale a `SearchPalettesComponent`)
     Resultado seleccionable de la paleta (paciente, factura, placa, acción…).
     - **Campos:**
         - `label` · `string` — Texto principal del resultado.
+        - `icon?` · `string` — Icono del resultado (clase de Flaticon UIcons, ej. 'fi fi-rr-user').
+        - `description?` · `string` — Descripción detallada bajo el título.
         - `hint?` · `string` — Contexto secundario (ruta, tipo, sede…).
         - `group?` · `string` — Sección a la que pertenece el resultado.
+        - `subItems?` · `SiremPaletteSubItem[]` — Sub-ítems o acciones secundarias asociadas al ítem.
+        - `subItemsLayout?` · `SiremPaletteSubItemsLayout` — Disposición de los sub-ítems ('horizontal' por defecto o 'vertical'). En horizontal, las flechas ← y → navegan entre los sub-ítems del ítem activo.
+        - `selectedSubItem?` · `SiremPaletteSubItem` — Sub-ítem seleccionado activamente al confirmar.
+        - `data?` · `unknown` — Datos arbitrarios asociados al ítem.
+- **`SiremPaletteSubItem`** · _interfaz_
+    Sub-ítem o acción secundaria dentro de un resultado de la paleta.
+    - **Campos:**
+        - `id?` · `string | number` — Identificador único opcional.
+        - `label` · `string` — Texto del sub-ítem.
+        - `icon?` · `string` — Icono opcional (clase de Flaticon UIcons, ej. 'fi fi-rr-eye').
+        - `description?` · `string` — Descripción secundaria o aclaratoria.
+        - `hint?` · `string` — Contexto o badge adicional.
+        - `data?` · `unknown` — Datos adicionales asociados.
+- **`SiremPaletteSubItemsLayout`** · _unión_
+    Disposición de los sub-ítems dentro del ítem.
+    - **Definición:** `'horizontal' | 'vertical'`
+    - `horizontal`
+    - `vertical`
 
 ### `SiremSegmented`
 
@@ -2415,6 +2799,40 @@ Emite cuando el usuario pulsa fuera del elemento anfitrión. Ideal para cerrar m
 - **`siremClickOutside`** · `PointerEvent`
     Se emite con el `PointerEvent` cuando se pulsa fuera del anfitrión.
     - **Devuelve:** Evento nativo del puntero.
+
+### `SiremMaskDirective`
+
+Selector: `input[siremMask]` · [Demo](https://deorta-dev.github.io/ng-sirem-ui/demo/mask)
+
+Directiva de máscara para campos de texto `<input>` (`siremMask`). Admite máscaras estructuradas con tokens comodín (`00/00/0000`, `(000) 000-0000`) o expresiones regulares (`/^[0-9]*$/`).
+
+#### Entradas
+
+- **`siremMask`** · `SiremMaskPattern | null`
+    Patrón de máscara (string con tokens, RegExp o configuración).
+- **`siremMaskUnmask`** · `boolean` · _por defecto `false`_
+    Emite el valor limpio sin caracteres separadores fijos.
+- **`siremMaskTokens`** · `Record<string, RegExp>`
+    Mapa de tokens adicionales o de reemplazo.
+
+#### Salidas
+
+- **`maskedChange`** · `string`
+    Emite el valor con formato de máscara aplicado.
+- **`rawChange`** · `string`
+    Emite el valor crudo/limpio sin caracteres literales de máscara.
+
+#### Tipos y esquemas
+
+- **`SiremMaskPattern`** · _alias_
+    Patrón de máscara: texto con tokens, RegExp o configuración avanzada.
+    - **Definición:** `string | RegExp | SiremMaskConfig`
+- **`SiremMaskConfig`** · _interfaz_
+    Configuración avanzada de la máscara para inputs.
+    - **Campos:**
+        - `pattern` · `string | RegExp` — Patrón de máscara con tokens (ej. '00/00/0000', '(000) 000-0000') o RegExp.
+        - `tokens?` · `Record<string, RegExp>` — Mapa personalizado de tokens comodín a RegExp.
+        - `unmask?` · `boolean` — Si es true, el valor sin caracteres fijos se sincroniza.
 
 ### `SiremNumbersOnlyDirective`
 

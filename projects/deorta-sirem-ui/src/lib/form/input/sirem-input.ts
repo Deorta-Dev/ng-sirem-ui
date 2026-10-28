@@ -1,6 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { SiremOverlayTrigger } from '../../overlays/overlay/sirem-overlay-trigger';
 import {
+  SiremMaskDirective,
+  type SiremMaskPattern,
+} from '../../directives/mask/sirem-mask.directive';
+import {
   booleanAttribute,
   Component,
   computed,
@@ -54,7 +58,7 @@ export type SiremOptionsMapper = (item: unknown) => SiremSelectOption;
 @Component({
   selector: 'sirem-input-field',
   standalone: true,
-  imports: [SiremOverlayTrigger],
+  imports: [SiremOverlayTrigger, SiremMaskDirective],
   styleUrl: './sirem-input.scss',
   template: `
     <!--
@@ -88,6 +92,8 @@ export type SiremOptionsMapper = (item: unknown) => SiremSelectOption;
             [type]="type()"
             [value]="textValue()"
             (input)="onInput($event)"
+            [siremMask]="mask()"
+            (maskedChange)="onMaskedChange($event)"
             [placeholder]="placeholder()"
             [disabled]="disabled()"
             [readOnly]="readonly()"
@@ -278,6 +284,8 @@ export type SiremOptionsMapper = (item: unknown) => SiremSelectOption;
 export class SiremInput {
   /** Valor del campo (texto, número o array en multiselección), con enlace de dos vías. */
   readonly value = model<string | number | (string | number)[] | null>(null);
+  /** Máscara configurable para el campo (patrón string con tokens, RegExp o SiremMaskConfig). */
+  readonly mask = input<SiremMaskPattern | null>(null);
   /** Tipo de control nativo: `text`, `number`, `email`, `password`, `tel` o `url`. */
   readonly type = input<SiremInputType>('text');
   /** Etiqueta visible sobre el control. */
@@ -467,6 +475,12 @@ export class SiremInput {
     this.value.set(
       this.type() === 'number' ? (el.value === '' ? null : Number(el.value)) : el.value,
     );
+  }
+
+  onMaskedChange(masked: string): void {
+    if (this.type() !== 'number') {
+      this.value.set(masked);
+    }
   }
 
   // ---- combobox ----

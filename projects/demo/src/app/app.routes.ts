@@ -56,6 +56,7 @@ import { BentoDashboardDemoPage } from './pages/bento-dashboard-demo/bento-dashb
 import { AutofocusDemoPage } from './pages/autofocus-demo/autofocus-demo-page';
 import { ClickOutsideDemoPage } from './pages/click-outside-demo/click-outside-demo-page';
 import { NumbersOnlyDemoPage } from './pages/numbers-only-demo/numbers-only-demo-page';
+import { MaskDemoPage } from './pages/mask-demo/mask-demo-page';
 import { MoneyDemoPage } from './pages/money-demo/money-demo-page';
 import { PhoneDemoPage } from './pages/phone-demo/phone-demo-page';
 import { AgeDemoPage } from './pages/age-demo/age-demo-page';
@@ -157,6 +158,7 @@ export const routes: Routes = [
   { path: 'demo/autofocus', component: AutofocusDemoPage },
   { path: 'demo/click-outside', component: ClickOutsideDemoPage },
   { path: 'demo/numbers-only', component: NumbersOnlyDemoPage },
+  { path: 'demo/mask', component: MaskDemoPage },
   { path: 'demo/tooltip', component: TooltipDemoPage },
   { path: 'demo/sticky', component: StickyDemoPage },
   { path: 'demo/money', component: MoneyDemoPage },

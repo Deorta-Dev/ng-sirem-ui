@@ -1,0 +1,107 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.sirem-agenda-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.sirem-agenda-nav__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sirem-agenda-nav__controls {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.sirem-agenda-nav__btn,
+.sirem-agenda-nav__today {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  border: 0;
+  border-radius: var(--sirem-radius-pill, 999px);
+  background: none;
+  color: var(--sirem-text-soft);
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease),
+    color var(--sirem-duration-fast, 120ms) var(--sirem-ease, ease);
+}
+
+.sirem-agenda-nav__btn {
+  width: 2rem;
+  font-size: 1rem;
+}
+
+.sirem-agenda-nav__today {
+  padding: 0 0.75rem;
+  border: 1px solid var(--sirem-border);
+  background: var(--sirem-surface);
+  color: var(--sirem-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.sirem-agenda-nav__btn:hover,
+.sirem-agenda-nav__today:hover {
+  background: var(--sirem-surface-hover);
+  color: var(--sirem-text);
+}
+
+.sirem-agenda-nav__btn:focus-visible,
+.sirem-agenda-nav__today:focus-visible {
+  outline: 2px solid var(--sirem-focus-ring);
+  outline-offset: 2px;
+}
+
+.sirem-agenda-nav__heading {
+  display: flex;
+  flex: 1 1 9rem;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.sirem-agenda-nav__title {
+  margin: 0;
+  overflow: hidden;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--sirem-text);
+}
+
+.sirem-agenda-nav__subtitle {
+  font-size: 0.75rem;
+  color: var(--sirem-text-muted);
+}
+
+.sirem-agenda-nav__rail {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  user-select: none;
+}
+
+.sirem-agenda-nav__rail sirem-date-chip {
+  flex: 0 0 auto;
+}

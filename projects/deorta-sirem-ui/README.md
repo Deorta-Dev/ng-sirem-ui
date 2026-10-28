@@ -109,7 +109,10 @@ export class PacientesPage {
 | Componente | Selector | Para qué sirve |
 |---|---|---|
 | `SiremAdminLayout` | `sirem-admin-layout` | Contenedor maestro de la app autenticada (equivale a `lo-admin-layout`)… |
-| [`SiremAgenda`](https://deorta-dev.github.io/ng-sirem-ui/demo/agenda) | `sirem-agenda` | Agenda multi-vista tipo Google Calendar (`sirem-agenda`) |
+| [`SiremAgenda`](https://deorta-dev.github.io/ng-sirem-ui/demo/agenda) | `sirem-agenda` | Agenda multi-vista tipo Google Calendar (`sirem-agenda`). Compuesta por tres submódulos independientes y reutilizables… |
+| `SiremAgendaBody` | `sirem-agenda-body` | Cuerpo principal multi-vista de la agenda (`sirem-agenda-body`)… |
+| `SiremAgendaModeSwitcher` | `sirem-agenda-mode-switcher` | Selector de vistas de la agenda (`sirem-agenda-mode-switcher`). Permite conmutar el modo de visualización entre día, semana, mes y lista para sincronizar tanto el cuerpo de la… |
+| `SiremAgendaNav` | `sirem-agenda-nav` | Navegador de días y fechas para la agenda (`sirem-agenda-nav`)… |
 | [`SiremAvatar`](https://deorta-dev.github.io/ng-sirem-ui/demo/avatar) | `sirem-avatar` | Avatar con imagen o iniciales + punto de presencia/estado. (Listas de pacientes, terceros, usuarios.) |
 | [`SiremBadge`](https://deorta-dev.github.io/ng-sirem-ui/demo/badge) | `sirem-badge` | Pastilla de estado (última visita, estado CUFE/DIAN, estado de cita, sincronización Xubio…). Con o sin punto |
 | [`SiremBreadcrumbs`](https://deorta-dev.github.io/ng-sirem-ui/demo/breadcrumbs) | `sirem-breadcrumbs` | Ubicación jerárquica (p. ej. Inicio › Clínica › Pacientes) |
@@ -124,7 +127,7 @@ export class PacientesPage {
 | [`SiremCollapsibleGroup`](https://deorta-dev.github.io/ng-sirem-ui/demo/collapsible) | `sirem-collapsible-group` | Agrupador de secciones `sirem-collapsible`… |
 | [`SiremConfirmDialog`](https://deorta-dev.github.io/ng-sirem-ui/demo/confirm-dialog) | `sirem-confirm-dialog` | Diálogo de confirmación sí/no (equivale a `BoolModalFormDynamicComponent`): eliminar paciente, anular factura, confirmar envío masivo…… |
 | [`SiremDataTable`](https://deorta-dev.github.io/ng-sirem-ui/demo/data-table) | `sirem-data-table` | Tabla estandarizada de listados (pacientes, terceros, facturas, productos, amortizaciones…). Ordenable, con selección opcional, scroll horizontal en móvil y celdas tipadas… |
-| [`SiremDate`](https://deorta-dev.github.io/ng-sirem-ui/demo/date) | `sirem-date-field` | Campo de fecha con calendario emergente (valor ISO `yyyy-MM-dd`). Muestra la fecha en formato local, admite escritura (`dd/mm/aaaa` o ISO) y abre `sirem-calendar` en tamaño… |
+| [`SiremDate`](https://deorta-dev.github.io/ng-sirem-ui/demo/date) | `sirem-date-field` | Campo de fecha con calendario emergente (valor ISO `yyyy-MM-dd`)… |
 | [`SiremDateChip`](https://deorta-dev.github.io/ng-sirem-ui/demo/date-chip) | `sirem-date-chip` | Chip de fecha grande (referencia Bento): inicial del día de la semana arriba y el número destacado debajo. Se usa en fila, como selector rápido de días… |
 | [`SiremDatepicker`](https://deorta-dev.github.io/ng-sirem-ui/demo/datepicker) | `sirem-datepicker-field` | Selector de fecha (citas, nacimiento, vencimientos…). Valor ISO `yyyy-MM-dd` |
 | [`SiremDrawer`](https://deorta-dev.github.io/ng-sirem-ui/demo/drawer) | `sirem-drawer` | Panel lateral deslizante (navegación de la agenda, detalle de paciente, filtros avanzados…). En móvil ocupa casi todo el ancho |
@@ -146,7 +149,7 @@ export class PacientesPage {
 | [`SiremRadioGroup`](https://deorta-dev.github.io/ng-sirem-ui/demo/radio-group) | `sirem-radio-group-field` | Grupo de opciones excluyentes (tipo de persona, régimen…) |
 | [`SiremRichText`](https://deorta-dev.github.io/ng-sirem-ui/demo/rich-text) | `sirem-rich-text` | Editor de texto enriquecido liviano (contenteditable + barra de formato). Devuelve HTML en doble vía; sin dependencias externas… |
 | [`SiremSearchField`](https://deorta-dev.github.io/ng-sirem-ui/demo/search-field) | `sirem-search-field` | Campo de búsqueda con lupa y botón limpiar (filtros de listados) |
-| [`SiremSearchPalette`](https://deorta-dev.github.io/ng-sirem-ui/demo/search-palette) | `sirem-search-palette` | Buscador global estilo paleta de comandos (equivale a `SearchPalettesComponent`). Se abre con `Ctrl+K` / `Cmd+K` desde cualquier vista; filtra por texto, navega con ↑↓ + Enter y… |
+| [`SiremSearchPalette`](https://deorta-dev.github.io/ng-sirem-ui/demo/search-palette) | `sirem-search-palette` | Buscador global estilo paleta de comandos (`sirem-search-palette`). Se abre con `Ctrl+K` / `Cmd+K` desde cualquier vista. Admite… |
 | [`SiremSegmented`](https://deorta-dev.github.io/ng-sirem-ui/demo/segmented) | `sirem-segmented` | Control segmentado de pastillas (referencia Bento): un grupo de opciones excluyentes donde la activa se resalta con una ficha que **se desliza** hasta la opción elegida… |
 | [`SiremSelect`](https://deorta-dev.github.io/ng-sirem-ui/demo/select) | `sirem-select-field` | Selector desplegable (especialidad, estado civil, tipo de documento…) sobre un `<select>` nativo… |
 | [`SiremSheet`](https://deorta-dev.github.io/ng-sirem-ui/demo/sheet) | `sirem-sheet` | Hoja inferior (bottom sheet) redimensionable con presets y pantalla completa |
@@ -166,6 +169,7 @@ export class PacientesPage {
 |---|---|---|
 | [`SiremAutofocusDirective`](https://deorta-dev.github.io/ng-sirem-ui/demo/autofocus) | `[siremAutofocus]` | Enfoca el elemento anfitrión al aparecer en vista… |
 | [`SiremClickOutsideDirective`](https://deorta-dev.github.io/ng-sirem-ui/demo/click-outside) | `[siremClickOutside]` | Emite cuando el usuario pulsa fuera del elemento anfitrión. Ideal para cerrar menús, paletas y desplegables… |
+| [`SiremMaskDirective`](https://deorta-dev.github.io/ng-sirem-ui/demo/mask) | `input[siremMask]` | Directiva de máscara para campos de texto `<input>` (`siremMask`). Admite máscaras estructuradas con tokens comodín (`00/00/0000`, `(000) 000-0000`) o expresiones regulares… |
 | [`SiremNumbersOnlyDirective`](https://deorta-dev.github.io/ng-sirem-ui/demo/numbers-only) | `input[siremNumbersOnly]` | Restringe un `<input>` a dígitos (opcionalmente un decimal). Útil para documentos, teléfonos y valores numéricos… |
 | [`SiremOverlayTrigger`](https://deorta-dev.github.io/ng-sirem-ui/demo/overlay) | `[siremOverlay]` | Abre un overlay (menú contextual, lista de opciones, ficha de detalle, sub-elementos de un sidebar o navbar) en una **capa superior**, de forma que ningún `overflow: hidden` de un… |
 | [`SiremSticky`](https://deorta-dev.github.io/ng-sirem-ui/demo/sticky) | `[siremSticky]` | Convierte cualquier elemento o componente en **sticky** (`position: sticky`), de forma abierta o acotada a un límite… |

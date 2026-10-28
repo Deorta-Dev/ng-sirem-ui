@@ -52,4 +52,19 @@ describe('SiremDate', () => {
     c.commitBox();
     expect(c.dateError()).toContain('inválida');
   });
+
+  it('should automatically set valid date and position calendar while typing', () => {
+    const fixture = TestBed.createComponent(SiremDate);
+    fixture.detectChanges();
+    const c = fixture.componentInstance;
+    c.toggle(true);
+    fixture.detectChanges();
+
+    // Escribir fecha válida
+    c.onBox('15/08/2026');
+    fixture.detectChanges();
+
+    expect(c.value()).toBe('2026-08-15');
+    expect(c.dateError()).toBe('');
+  });
 });

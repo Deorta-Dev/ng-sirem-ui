@@ -78,11 +78,16 @@ export * from './lib/overlays/overlay/sirem-submenu';
 
 // Agenda (calendario con estados por colores)
 export * from './lib/schedule/calendar/sirem-calendar';
+export * from './lib/schedule/agenda/sirem-agenda-types';
+export * from './lib/schedule/agenda/sirem-agenda-mode-switcher';
+export * from './lib/schedule/agenda/sirem-agenda-nav';
+export * from './lib/schedule/agenda/sirem-agenda-body';
 export * from './lib/schedule/agenda/sirem-agenda';
 
 // Directivas
 export * from './lib/directives/autofocus/sirem-autofocus.directive';
 export * from './lib/directives/click-outside/sirem-click-outside.directive';
+export * from './lib/directives/mask/sirem-mask.directive';
 export * from './lib/directives/numbers-only/sirem-numbers-only.directive';
 export * from './lib/directives/tooltip/sirem-tooltip.directive';
 
