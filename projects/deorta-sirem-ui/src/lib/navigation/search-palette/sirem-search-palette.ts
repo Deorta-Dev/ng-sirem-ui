@@ -9,6 +9,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { SiremAutofocusDirective } from '../../directives/autofocus/sirem-autofocus.directive';
 
 /** Sub-ítem o acción secundaria dentro de un resultado de la paleta. */
 export interface SiremPaletteSubItem {
@@ -25,6 +26,21 @@ export interface SiremPaletteSubItem {
   /** Datos adicionales asociados. */
   data?: unknown;
 }
+
+/** Configuración de badges para la paleta. */
+export interface SiremPaletteBadge {
+  /** Texto del badge. */
+  label: string;
+  /** Icono opcional. */
+  icon?: string;
+  /** Variante o estilo del badge. */
+  variant?: 'primary' | 'success' | 'warning' | 'danger' | 'neutral' | 'accent';
+  /** Datos adicionales. */
+  data?: unknown;
+}
+
+/** Disposición de los badges dentro de la paleta. */
+export type SiremPaletteBadgePosition = 'above-title' | 'above-input' | 'below-input';
 
 /** Disposición de los sub-ítems dentro del ítem. */
 export type SiremPaletteSubItemsLayout = 'horizontal' | 'vertical';
@@ -62,6 +78,7 @@ export interface SiremPaletteItem {
  * - Sub-ítems configurables con disposición horizontal o vertical por cada ítem.
  * - En sub-ítems horizontales, navegación gestual con flechas laterales (← y →).
  * - En sub-ítems verticales, navegación continua con flechas ↑ y ↓.
+ * - El buscador recibe el foco automáticamente al abrirse la paleta.
  *
  * Uso:
  * ```html
@@ -76,6 +93,7 @@ export interface SiremPaletteItem {
 @Component({
   selector: 'sirem-search-palette',
   standalone: true,
+  imports: [SiremAutofocusDirective],
   styleUrl: './sirem-search-palette.scss',
   template: `
     @if (open()) {
@@ -91,18 +109,67 @@ export interface SiremPaletteItem {
           aria-label="Búsqueda global"
           class="sirem-palette__panel"
         >
+          @if (badges() && badges().length && badgePosition() === 'above-title') {
+            <div class="sirem-palette__badges sirem-palette__badges--above-title">
+              @for (badge of badges(); track badge.label + $index) {
+                <span class="sirem-palette__badge" [class]="'sirem-palette__badge--' + (badge.variant ?? 'neutral')">
+                  @if (badge.icon) {
+                    <i [class]="badge.icon" aria-hidden="true"></i>
+                  }
+                  <span>{{ badge.label }}</span>
+                </span>
+              }
+            </div>
+          }
+
+          @if (title()) {
+            <span class="sirem-palette__title-island">
+              <span>{{ title() }}</span>
+            </span>
+          }
+
+          @if (badges() && badges().length && badgePosition() === 'above-input') {
+            <div class="sirem-palette__badges sirem-palette__badges--above-input">
+              @for (badge of badges(); track badge.label + $index) {
+                <span class="sirem-palette__badge" [class]="'sirem-palette__badge--' + (badge.variant ?? 'neutral')">
+                  @if (badge.icon) {
+                    <i [class]="badge.icon" aria-hidden="true"></i>
+                  }
+                  <span>{{ badge.label }}</span>
+                </span>
+              }
+            </div>
+          }
+
           <div class="sirem-palette__bar">
             <span aria-hidden="true" class="sirem-palette__icon">⌕</span>
             <input
               type="text"
               [value]="query()"
               (input)="onQuery($event)"
+              (keydown)="onInputKeydown($event)"
+              (keyup)="onInputKeyup($event)"
               [placeholder]="placeholder()"
               aria-label="Buscar"
               class="sirem-palette__input"
+              siremAutofocus
             />
             <kbd class="sirem-palette__kbd">ESC</kbd>
           </div>
+
+          @if (badges() && badges().length && badgePosition() === 'below-input') {
+            <div class="sirem-palette__badges sirem-palette__badges--below-input">
+              @for (badge of badges(); track badge.label + $index) {
+                <span class="sirem-palette__badge" [class]="'sirem-palette__badge--' + (badge.variant ?? 'neutral')">
+                  @if (badge.icon) {
+                    <i [class]="badge.icon" aria-hidden="true"></i>
+                  }
+                  <span>{{ badge.label }}</span>
+                </span>
+              }
+            </div>
+          }
+
           <ul
             #listContainer
             role="listbox"
@@ -192,11 +259,19 @@ export class SiremSearchPalette {
   readonly placeholder = input('Buscar pacientes, facturas, placas…');
   /** Controla la visibilidad de la paleta, con enlace de dos vías. */
   readonly open = model(false);
+  /** Título opcional en la isla superior de título. */
+  readonly title = input<string>('');
+  /** Badges opcionales a mostrar. */
+  readonly badges = input<SiremPaletteBadge[]>([]);
+  /** Posición de los badges ('above-title' | 'above-input' | 'below-input'). */
+  readonly badgePosition = input<SiremPaletteBadgePosition>('above-input');
 
   /** Se emite con la entrada elegida. */
   readonly selected = output<SiremPaletteItem>();
   /** Se emite cuando se elige específicamente un sub-ítem. */
   readonly subItemSelected = output<{ item: SiremPaletteItem; subItem: SiremPaletteSubItem }>();
+  /** Se emite cada vez que se presiona o suelta una tecla en el buscador, junto con el query actual. */
+  readonly keyAction = output<{ action: 'keydown' | 'keyup'; event: KeyboardEvent; query: string }>();
 
   readonly query = signal('');
   readonly active = signal(0);
@@ -313,6 +388,14 @@ export class SiremSearchPalette {
     this.active.set(0);
     this.activeSub.set(null);
     this.scrollActiveIntoView();
+  }
+
+  onInputKeydown(event: KeyboardEvent): void {
+    this.keyAction.emit({ action: 'keydown', event, query: this.query() });
+  }
+
+  onInputKeyup(event: KeyboardEvent): void {
+    this.keyAction.emit({ action: 'keyup', event, query: this.query() });
   }
 
   setActive(index: number): void {

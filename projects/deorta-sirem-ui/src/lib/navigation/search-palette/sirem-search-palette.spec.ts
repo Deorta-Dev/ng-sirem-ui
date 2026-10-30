@@ -90,6 +90,44 @@ describe('SiremSearchPalette', () => {
     expect(c.open()).toBe(false);
   });
 
+  it('should focus the search input when the palette opens', () => {
+    const fixture = TestBed.createComponent(SiremSearchPalette);
+    fixture.detectChanges();
+
+    fixture.componentInstance.open.set(true);
+    fixture.detectChanges();
+
+    const input = fixture.nativeElement.querySelector(
+      '.sirem-palette__input',
+    ) as HTMLInputElement | null;
+    expect(input).toBeTruthy();
+    expect(document.activeElement).toBe(input);
+  });
+
+  it('should focus the search input again after closing and reopening', () => {
+    const fixture = TestBed.createComponent(SiremSearchPalette);
+    fixture.detectChanges();
+
+    const c = fixture.componentInstance;
+    c.open.set(true);
+    fixture.detectChanges();
+    c.close();
+    fixture.detectChanges();
+
+    const host = document.createElement('button');
+    document.body.appendChild(host);
+    host.focus();
+
+    c.open.set(true);
+    fixture.detectChanges();
+
+    const input = fixture.nativeElement.querySelector(
+      '.sirem-palette__input',
+    ) as HTMLInputElement | null;
+    expect(document.activeElement).toBe(input);
+    host.remove();
+  });
+
   it('should focus and scroll active item into view when setting active', () => {
     const fixture = TestBed.createComponent(SiremSearchPalette);
     const items = Array.from({ length: 20 }, (_, i) => ({ label: `Item ${i}` }));
